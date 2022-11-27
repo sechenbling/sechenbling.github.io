@@ -4,7 +4,7 @@
   <id>http://localhost:4000/</id>
   <title>Blingblogs</title>
   <subtitle>A site with blogs involve backend, big data, or other daily programming records.</subtitle>
-  <updated>2022-11-27T15:50:25+08:00</updated>
+  <updated>2022-11-27T18:11:27+08:00</updated>
   <author>
     <name>Lynn Chen</name>
     <uri>http://localhost:4000/</uri>
@@ -20,59 +20,14 @@
 
   
   <entry>
-    <title>Use markdown to blog</title>
-    <link href="http://localhost:4000/posts/Use-markdown-to-blog/" rel="alternate" type="text/html" title="Use markdown to blog" />
-    <published>2022-11-26T00:00:00+08:00</published>
-  
-    <updated>2022-11-26T20:00:00+08:00</updated>
-  
-    <id>http://localhost:4000/posts/Use-markdown-to-blog/</id>
-    <content src="http://localhost:4000/posts/Use-markdown-to-blog/" />
-    <author>
-      <name>Lynn</name>
-    </author>
-
-  
-    
-    <category term="Markdown" />
-    
-    <category term="Edit" />
-    
-  
-
-  
-    <summary>
-      
-
-
-
-
-
-      Naming and Path
-
-Create a new file named YYYY-MM-DD-TITLE.EXTENSION and put it in the _posts of the root directory. Please note that the EXTENSION must be one of md and markdown. If you want to save time of creating files, please consider using the plugin Jekyll-Compose to accomplish this.
-
-Front Matter
-
-Basically, you need to fill the Front Matter as below at the top of the post:
-
----
-title: T...
-    </summary>
-  
-
-  </entry>
-
-  
-  <entry>
-    <title>Spark Streaming</title>
-    <link href="http://localhost:4000/posts/Spark-Streaming/" rel="alternate" type="text/html" title="Spark Streaming" />
+    <title>Spark Streaming Introduction</title>
+    <link href="http://localhost:4000/posts/Spark-Streaming-Introduction/" rel="alternate" type="text/html" title="Spark Streaming Introduction" />
     <published>2022-11-25T22:45:00+08:00</published>
   
     <updated>2022-11-25T22:45:00+08:00</updated>
   
-    <id>http://localhost:4000/posts/Spark-Streaming/</id>
-    <content src="http://localhost:4000/posts/Spark-Streaming/" />
+    <id>http://localhost:4000/posts/Spark-Streaming-Introduction/</id>
+    <content src="http://localhost:4000/posts/Spark-Streaming-Introduction/" />
     <author>
       <name>Lynn</name>
     </author>
@@ -109,14 +64,14 @@ DStream
 
   
   <entry>
-    <title>Spark Sql</title>
-    <link href="http://localhost:4000/posts/Spark-Sql/" rel="alternate" type="text/html" title="Spark Sql" />
+    <title>Spark Sql Introduction</title>
+    <link href="http://localhost:4000/posts/Spark-Sql-Introduction/" rel="alternate" type="text/html" title="Spark Sql Introduction" />
     <published>2022-11-25T22:40:00+08:00</published>
   
     <updated>2022-11-25T22:40:00+08:00</updated>
   
-    <id>http://localhost:4000/posts/Spark-Sql/</id>
-    <content src="http://localhost:4000/posts/Spark-Sql/" />
+    <id>http://localhost:4000/posts/Spark-Sql-Introduction/</id>
+    <content src="http://localhost:4000/posts/Spark-Sql-Introduction/" />
     <author>
       <name>Lynn</name>
     </author>
@@ -157,14 +112,14 @@ DataSet
 
   
   <entry>
-    <title>Spark Data Structure</title>
-    <link href="http://localhost:4000/posts/Spark-Data-Structure/" rel="alternate" type="text/html" title="Spark Data Structure" />
+    <title>Spark Data Structure Introduction</title>
+    <link href="http://localhost:4000/posts/Spark-Data-Structure-Introduction/" rel="alternate" type="text/html" title="Spark Data Structure Introduction" />
     <published>2022-11-25T22:30:00+08:00</published>
   
     <updated>2022-11-25T22:30:00+08:00</updated>
   
-    <id>http://localhost:4000/posts/Spark-Data-Structure/</id>
-    <content src="http://localhost:4000/posts/Spark-Data-Structure/" />
+    <id>http://localhost:4000/posts/Spark-Data-Structure-Introduction/</id>
+    <content src="http://localhost:4000/posts/Spark-Data-Structure-Introduction/" />
     <author>
       <name>Lynn</name>
     </author>
@@ -205,11 +160,65 @@ Spark 计算框架为了能够进行高并发和高吞吐的数据处理，封�
 
   
   <entry>
+    <title>Update logs</title>
+    <link href="http://localhost:4000/posts/Update-logs/" rel="alternate" type="text/html" title="Update logs" />
+    <published>2022-11-20T20:00:00+08:00</published>
+  
+    <updated>2022-11-27T21:30:00+08:00</updated>
+  
+    <id>http://localhost:4000/posts/Update-logs/</id>
+    <content src="http://localhost:4000/posts/Update-logs/" />
+    <author>
+      <name>Lynn</name>
+    </author>
+
+  
+    
+    <category term="Logs" />
+    
+    <category term="Update" />
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      Update date: 2022-11-27
+
+界面展示
+
+
+  home:
+
+  post:
+
+
+
+Update logs
+
+
+
+  1️⃣ contact info增加了b站的联系方式, 点击右下角即可跳转到b站个人主页.修改了contact info中个人邮箱的获取逻辑, 如果电脑中有outlook会直接打开outlook并获取联系邮箱.修改了contact
+info中个人邮箱的获取逻辑, 如果电脑中有outlook会直接打开outlook并获取联系邮箱.
+2️⃣ posts sharing增加了QQ,微信,b站,微博,linkedin的sharing方式, 保留twitter; 其中qq和微信不会直接跳转到分享页面, 而是通过生成分享二维码的方式进行取代.
+3️⃣ 调整了两种颜色主题的全局表现, 现在默认界面会根据打开平台进行默认设置(比如移动端使用了暗色主题,则会自动打开...
+    </summary>
+  
+
+  </entry>
+
+  
+  <entry>
     <title>Some tips to beautify markdown</title>
     <link href="http://localhost:4000/posts/Some-tips-to-beautify-markdown/" rel="alternate" type="text/html" title="Some tips to beautify markdown" />
-    <published>2022-11-25T20:00:00+08:00</published>
+    <published>2022-11-19T20:00:00+08:00</published>
   
-    <updated>2022-11-25T21:30:00+08:00</updated>
+    <updated>2022-11-20T21:30:00+08:00</updated>
   
     <id>http://localhost:4000/posts/Some-tips-to-beautify-markdown/</id>
     <content src="http://localhost:4000/posts/Some-tips-to-beautify-markdown/" />

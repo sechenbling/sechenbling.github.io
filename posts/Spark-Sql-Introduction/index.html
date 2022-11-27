@@ -29,28 +29,28 @@
   
   <!-- Begin Jekyll SEO tag v2.8.0 -->
 <meta name="generator" content="Jekyll v3.9.2" />
-<meta property="og:title" content="Spark Sql" />
+<meta property="og:title" content="Spark Sql Introduction" />
 <meta name="author" content="Lynn Chen" />
 <meta property="og:locale" content="en" />
 <meta name="description" content="SparkSQL基本介绍 Spark Sql Spark SQL 是Spark用于结构化数据处理的Spark模块: 数据兼容方面: SparkSQL 不但兼容 Hive，还可以从 RDD、parquet 文件、JSON 文件中获取数据，未来版本甚至支持获取 RDBMS 数据以及 cassandra 等 NOSQL 数据； 性能优化方面: 除了采取 In-Memory Columnar Storage、byte-code generation 等优化技术外、将会引进 Cost Model 对查询进行动态评估、获取最佳物理计划等等； 组件扩展方面: 无论是 SQL 的语法解析器、分析器还是优化器都可以重新定义，进行扩展。" />
 <meta property="og:description" content="SparkSQL基本介绍 Spark Sql Spark SQL 是Spark用于结构化数据处理的Spark模块: 数据兼容方面: SparkSQL 不但兼容 Hive，还可以从 RDD、parquet 文件、JSON 文件中获取数据，未来版本甚至支持获取 RDBMS 数据以及 cassandra 等 NOSQL 数据； 性能优化方面: 除了采取 In-Memory Columnar Storage、byte-code generation 等优化技术外、将会引进 Cost Model 对查询进行动态评估、获取最佳物理计划等等； 组件扩展方面: 无论是 SQL 的语法解析器、分析器还是优化器都可以重新定义，进行扩展。" />
-<link rel="canonical" href="http://localhost:4000/posts/Spark-Sql/" />
-<meta property="og:url" content="http://localhost:4000/posts/Spark-Sql/" />
+<link rel="canonical" href="http://localhost:4000/posts/Spark-Sql-Introduction/" />
+<meta property="og:url" content="http://localhost:4000/posts/Spark-Sql-Introduction/" />
 <meta property="og:site_name" content="Blingblogs" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2022-11-25T22:40:00+08:00" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="Spark Sql" />
+<meta property="twitter:title" content="Spark Sql Introduction" />
 <meta name="twitter:site" content="@sechenbling" />
 <meta name="twitter:creator" content="@sechenbling" />
 <meta name="google-site-verification" content="google_meta_tag_verification" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Lynn Chen","url":"https://github.com/sechenbling/"},"dateModified":"2022-11-25T22:40:00+08:00","datePublished":"2022-11-25T22:40:00+08:00","description":"SparkSQL基本介绍 Spark Sql Spark SQL 是Spark用于结构化数据处理的Spark模块: 数据兼容方面: SparkSQL 不但兼容 Hive，还可以从 RDD、parquet 文件、JSON 文件中获取数据，未来版本甚至支持获取 RDBMS 数据以及 cassandra 等 NOSQL 数据； 性能优化方面: 除了采取 In-Memory Columnar Storage、byte-code generation 等优化技术外、将会引进 Cost Model 对查询进行动态评估、获取最佳物理计划等等； 组件扩展方面: 无论是 SQL 的语法解析器、分析器还是优化器都可以重新定义，进行扩展。","headline":"Spark Sql","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/Spark-Sql/"},"url":"http://localhost:4000/posts/Spark-Sql/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Lynn Chen","url":"https://github.com/sechenbling/"},"dateModified":"2022-11-25T22:40:00+08:00","datePublished":"2022-11-25T22:40:00+08:00","description":"SparkSQL基本介绍 Spark Sql Spark SQL 是Spark用于结构化数据处理的Spark模块: 数据兼容方面: SparkSQL 不但兼容 Hive，还可以从 RDD、parquet 文件、JSON 文件中获取数据，未来版本甚至支持获取 RDBMS 数据以及 cassandra 等 NOSQL 数据； 性能优化方面: 除了采取 In-Memory Columnar Storage、byte-code generation 等优化技术外、将会引进 Cost Model 对查询进行动态评估、获取最佳物理计划等等； 组件扩展方面: 无论是 SQL 的语法解析器、分析器还是优化器都可以重新定义，进行扩展。","headline":"Spark Sql Introduction","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/Spark-Sql-Introduction/"},"url":"http://localhost:4000/posts/Spark-Sql-Introduction/"}</script>
 <!-- End Jekyll SEO tag -->
 
   
 
-  <title>Spark Sql | Blingblogs
+  <title>Spark Sql Introduction | Blingblogs
   </title>
 
   
@@ -581,7 +581,7 @@
           
             
               
-                <span>Spark Sql</span>
+                <span>Spark Sql Introduction</span>
               
             
           
@@ -784,7 +784,7 @@
 
 
 <!-- return -->
-<h1 data-toc-skip>Spark Sql</h1>
+<h1 data-toc-skip>Spark Sql Introduction</h1>
 
 <div class="post-meta text-muted">
     <!-- published date -->
@@ -930,7 +930,7 @@
 
     
       
-        <a href="http://connect.qq.com/widget/shareqq/index.html?title=Spark Sql - Blingblogs&url=http://localhost:4000/posts/Spark-Sql/" data-toggle="tooltip" data-placement="top"
+        <a href="http://connect.qq.com/widget/shareqq/index.html?title=Spark Sql Introduction - Blingblogs&url=http://localhost:4000/posts/Spark-Sql-Introduction/" data-toggle="tooltip" data-placement="top"
           title="QQ" target="_blank" rel="noopener" aria-label="QQ">
           <i class="fa-fw fab fa-qq" style="color:#AEB6BF"></i>
         </a>
@@ -948,19 +948,19 @@
         </a>
     
       
-        <a href="http://service.weibo.com/share/share.php?title=Spark Sql - Blingblogs&url=http://localhost:4000/posts/Spark-Sql/" data-toggle="tooltip" data-placement="top"
+        <a href="http://service.weibo.com/share/share.php?title=Spark Sql Introduction - Blingblogs&url=http://localhost:4000/posts/Spark-Sql-Introduction/" data-toggle="tooltip" data-placement="top"
           title="Weibo" target="_blank" rel="noopener" aria-label="Weibo">
           <i class="fa-fw fab fa-weibo" style="color:#AEB6BF"></i>
         </a>
     
       
-        <a href="https://www.linkedin.com/sharing/share-offsite/?url=http://localhost:4000/posts/Spark-Sql/" data-toggle="tooltip" data-placement="top"
+        <a href="https://www.linkedin.com/sharing/share-offsite/?url=http://localhost:4000/posts/Spark-Sql-Introduction/" data-toggle="tooltip" data-placement="top"
           title="Linkedin" target="_blank" rel="noopener" aria-label="Linkedin">
           <i class="fa-fw fab fa-linkedin" style="color:#AEB6BF"></i>
         </a>
     
       
-        <a href="https://twitter.com/intent/tweet?text=Spark Sql - Blingblogs&url=http://localhost:4000/posts/Spark-Sql/" data-toggle="tooltip" data-placement="top"
+        <a href="https://twitter.com/intent/tweet?text=Spark Sql Introduction - Blingblogs&url=http://localhost:4000/posts/Spark-Sql-Introduction/" data-toggle="tooltip" data-placement="top"
           title="Twitter" target="_blank" rel="noopener" aria-label="Twitter">
           <i class="fa-fw fab fa-twitter" style="color:#AEB6BF"></i>
         </a>
@@ -1002,22 +1002,22 @@
       
       
       
-      <li><a href="/posts/Use-markdown-to-blog/">Use markdown to blog</a></li>
+      <li><a href="/posts/Spark-Streaming-Introduction/">Spark Streaming Introduction</a></li>
       
       
       
       
-      <li><a href="/posts/Spark-Streaming/">Spark Streaming</a></li>
+      <li><a href="/posts/Spark-Sql-Introduction/">Spark Sql Introduction</a></li>
       
       
       
       
-      <li><a href="/posts/Spark-Sql/">Spark Sql</a></li>
+      <li><a href="/posts/Spark-Data-Structure-Introduction/">Spark Data Structure Introduction</a></li>
       
       
       
       
-      <li><a href="/posts/Spark-Data-Structure/">Spark Data Structure</a></li>
+      <li><a href="/posts/Update-logs/">Update logs</a></li>
       
       
       
@@ -1053,10 +1053,55 @@
     
     
     
+  
+    
+    
+    
+    
       
         
         
 
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
   
     
     
@@ -1078,6 +1123,12 @@
     
     
     <a class="post-tag" href="/tags/markdown/">markdown</a>
+    
+    
+    <a class="post-tag" href="/tags/logs/">logs</a>
+    
+    
+    <a class="post-tag" href="/tags/update/">update</a>
     
 
   </div>
@@ -1145,19 +1196,31 @@
   
 
   
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
     
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
   
 
   
@@ -1196,6 +1259,21 @@
       
         
           
+      
+  
+    
+      
+  
+    
+      
+        
+          
+      
+  
+    
+      
+        
+          
             
             
             
@@ -1211,7 +1289,7 @@
     
     
     <div class="card">
-      <a href="/posts/Spark-Data-Structure/">
+      <a href="/posts/Spark-Data-Structure-Introduction/">
         <div class="card-body">
           
 
@@ -1223,7 +1301,7 @@
     >
     Nov 25, 2022
 </em>
-          <h3 class="pt-0 mt-1 mb-3" data-toc-skip>Spark Data Structure</h3>
+          <h3 class="pt-0 mt-1 mb-3" data-toc-skip>Spark Data Structure Introduction</h3>
           <div class="text-muted small">
             <p>
               
@@ -1251,7 +1329,7 @@ Spark 计算框架为了能够进行高并发和高吞吐的数据处理，封�
     
     
     <div class="card">
-      <a href="/posts/Spark-Streaming/">
+      <a href="/posts/Spark-Streaming-Introduction/">
         <div class="card-body">
           
 
@@ -1263,7 +1341,7 @@ Spark 计算框架为了能够进行高并发和高吞吐的数据处理，封�
     >
     Nov 25, 2022
 </em>
-          <h3 class="pt-0 mt-1 mb-3" data-toc-skip>Spark Streaming</h3>
+          <h3 class="pt-0 mt-1 mb-3" data-toc-skip>Spark Streaming Introduction</h3>
           <div class="text-muted small">
             <p>
               
@@ -1284,19 +1362,19 @@ Spark Streaming 用于流式数据的处理。Spark Streaming 支持的数据输
     
     
     <div class="card">
-      <a href="/posts/Use-markdown-to-blog/">
+      <a href="/posts/Update-logs/">
         <div class="card-body">
           
 
 
 
 <em class="small"
-    data-ts="1669392000"
+    data-ts="1668945600"
     data-df="ll"
     >
-    Nov 26, 2022
+    Nov 20, 2022
 </em>
-          <h3 class="pt-0 mt-1 mb-3" data-toc-skip>Use markdown to blog</h3>
+          <h3 class="pt-0 mt-1 mb-3" data-toc-skip>Update logs</h3>
           <div class="text-muted small">
             <p>
               
@@ -1305,9 +1383,23 @@ Spark Streaming 用于流式数据的处理。Spark Streaming 支持的数据输
 
 
 
-              Naming and Path
+              Update date: 2022-11-27
 
-Create a new file named YYYY-MM-DD-TITLE.EXTENSION and put it in the _posts of the root directory. Please note that the EXTENSION must be one of md and markdown. If you want to sav...
+界面展示
+
+
+  home:
+
+  post:
+
+
+
+Update logs
+
+
+
+  1️⃣ contact info增加了b站的联系方式, 点击右下角即可跳转到b站个人主页.修改了contact info中个人邮箱的获取逻辑, 如果电脑中有outlook会直接打开outlook并获取联系邮箱.修改了contact
+info中个人邮箱的获取...
             </p>
           </div>
         </div>
@@ -1326,16 +1418,16 @@ Create a new file named YYYY-MM-DD-TITLE.EXTENSION and put it in the _posts of t
 
 <div class="post-navigation d-flex justify-content-between">
   
-  <a href="/posts/Spark-Data-Structure/" class="btn btn-outline-primary"
+  <a href="/posts/Spark-Data-Structure-Introduction/" class="btn btn-outline-primary"
      prompt="Previous Post">
-    <p>Spark Data Structure</p>
+    <p>Spark Data Structure Introduction</p>
   </a>
   
 
   
-  <a href="/posts/Spark-Streaming/" class="btn btn-outline-primary"
+  <a href="/posts/Spark-Streaming-Introduction/" class="btn btn-outline-primary"
      prompt="Next Post">
-    <p>Spark Streaming</p>
+    <p>Spark Streaming Introduction</p>
   </a>
   
 
@@ -1378,10 +1470,55 @@ Create a new file named YYYY-MM-DD-TITLE.EXTENSION and put it in the _posts of t
     
     
     
+  
+    
+    
+    
+    
       
         
         
 
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
   
     
     
@@ -1403,6 +1540,12 @@ Create a new file named YYYY-MM-DD-TITLE.EXTENSION and put it in the _posts of t
     
     
     <a class="post-tag" href="/tags/markdown/">markdown</a>
+    
+    
+    <a class="post-tag" href="/tags/logs/">logs</a>
+    
+    
+    <a class="post-tag" href="/tags/update/">update</a>
     
 
   </div>
