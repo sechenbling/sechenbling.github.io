@@ -1,0 +1,267 @@
+
+
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>http://localhost:4000/</id>
+  <title>Blingblogs</title>
+  <subtitle>A site with blogs involve backend, big data, or other daily programming records.</subtitle>
+  <updated>2022-11-27T15:50:25+08:00</updated>
+  <author>
+    <name>Lynn Chen</name>
+    <uri>http://localhost:4000/</uri>
+  </author>
+  <link rel="self" type="application/atom+xml" href="http://localhost:4000/feed.xml"/>
+  <link rel="alternate" type="text/html" hreflang="en"
+    href="http://localhost:4000/"/>
+  <generator uri="https://jekyllrb.com/" version="3.9.2">Jekyll</generator>
+  <rights> © 2022 Lynn Chen </rights>
+  <icon>/assets/img/favicons/favicon.ico</icon>
+  <logo>/assets/img/favicons/favicon-96x96.png</logo>
+
+
+  
+  <entry>
+    <title>Use markdown to blog</title>
+    <link href="http://localhost:4000/posts/Use-markdown-to-blog/" rel="alternate" type="text/html" title="Use markdown to blog" />
+    <published>2022-11-26T00:00:00+08:00</published>
+  
+    <updated>2022-11-26T20:00:00+08:00</updated>
+  
+    <id>http://localhost:4000/posts/Use-markdown-to-blog/</id>
+    <content src="http://localhost:4000/posts/Use-markdown-to-blog/" />
+    <author>
+      <name>Lynn</name>
+    </author>
+
+  
+    
+    <category term="Markdown" />
+    
+    <category term="Edit" />
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      Naming and Path
+
+Create a new file named YYYY-MM-DD-TITLE.EXTENSION and put it in the _posts of the root directory. Please note that the EXTENSION must be one of md and markdown. If you want to save time of creating files, please consider using the plugin Jekyll-Compose to accomplish this.
+
+Front Matter
+
+Basically, you need to fill the Front Matter as below at the top of the post:
+
+---
+title: T...
+    </summary>
+  
+
+  </entry>
+
+  
+  <entry>
+    <title>Spark Streaming</title>
+    <link href="http://localhost:4000/posts/Spark-Streaming/" rel="alternate" type="text/html" title="Spark Streaming" />
+    <published>2022-11-25T22:45:00+08:00</published>
+  
+    <updated>2022-11-25T22:45:00+08:00</updated>
+  
+    <id>http://localhost:4000/posts/Spark-Streaming/</id>
+    <content src="http://localhost:4000/posts/Spark-Streaming/" />
+    <author>
+      <name>Lynn</name>
+    </author>
+
+  
+    
+    <category term="Bigdata" />
+    
+    <category term="Spark" />
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      Spark Streaming基本介绍
+Spark Streaming
+Spark Streaming 用于流式数据的处理。Spark Streaming 支持的数据输入源很多，例如：Kafka、 Flume、Twitter、ZeroMQ 和简单的 TCP 套接字等等。数据输入后可以用 Spark 的高度抽象原语,如：map、reduce、join、window 等进行运算。而结果也能保存在很多地方，如 HDFS，数据库等。
+
+Spark Streaming数据结构
+DStream
+
+  和 Spark 基于 RDD 的概念很相似，Spark Streaming 使用离散化流(discretized stream)作为抽象表示，叫作 DStream。
+  DStream 是随时间推移而收到的数据的序列。在内部，每个时间区间收到的数据都作为 RDD 存在，而 DStream 是由这些 ...
+    </summary>
+  
+
+  </entry>
+
+  
+  <entry>
+    <title>Spark Sql</title>
+    <link href="http://localhost:4000/posts/Spark-Sql/" rel="alternate" type="text/html" title="Spark Sql" />
+    <published>2022-11-25T22:40:00+08:00</published>
+  
+    <updated>2022-11-25T22:40:00+08:00</updated>
+  
+    <id>http://localhost:4000/posts/Spark-Sql/</id>
+    <content src="http://localhost:4000/posts/Spark-Sql/" />
+    <author>
+      <name>Lynn</name>
+    </author>
+
+  
+    
+    <category term="Bigdata" />
+    
+    <category term="Spark" />
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      SparkSQL基本介绍
+Spark Sql
+Spark SQL 是Spark用于结构化数据处理的Spark模块:
+
+  数据兼容方面: SparkSQL 不但兼容 Hive，还可以从 RDD、parquet 文件、JSON 文件中获取数据，未来版本甚至支持获取 RDBMS 数据以及 cassandra 等 NOSQL 数据；
+  性能优化方面: 除了采取 In-Memory Columnar Storage、byte-code generation 等优化技术外、将会引进 Cost Model 对查询进行动态评估、获取最佳物理计划等等；
+  组件扩展方面: 无论是 SQL 的语法解析器、分析器还是优化器都可以重新定义，进行扩展。
+
+
+Spark Sql数据结构
+DataSet
+
+  在 Spark 中，DataFrame 是一种以 RDD 为基础的分布式数据集，类似于传统数据库中的...
+    </summary>
+  
+
+  </entry>
+
+  
+  <entry>
+    <title>Spark Data Structure</title>
+    <link href="http://localhost:4000/posts/Spark-Data-Structure/" rel="alternate" type="text/html" title="Spark Data Structure" />
+    <published>2022-11-25T22:30:00+08:00</published>
+  
+    <updated>2022-11-25T22:30:00+08:00</updated>
+  
+    <id>http://localhost:4000/posts/Spark-Data-Structure/</id>
+    <content src="http://localhost:4000/posts/Spark-Data-Structure/" />
+    <author>
+      <name>Lynn</name>
+    </author>
+
+  
+    
+    <category term="Bigdata" />
+    
+    <category term="Spark" />
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      核心编程：
+Spark 计算框架为了能够进行高并发和高吞吐的数据处理，封装了三大数据结构，用于处理不同的应用场景。三大数据结构分别是:
+
+  累加器：分布式共享只写变量
+  广播变量：分布式共享只读变量
+  RDD : 弹性分布式数据集
+
+
+累加器:
+累加器用来把 Executor 端变量信息聚合到 Driver 端。在 Driver 程序中定义的变量，在 Executor 端的每个 Task 都会得到这个变量的一份新的副本，每个 task 更新这些副本的值后，传回 Driver 端进行 merge。
+
+广播变量:
+广播变量用来高效分发较大的对象。向所有工作节点发送一个较大的只读值，以供一个或多个 Spark 操作使用。比如，如果你的应用需要向所有节点发送一个较大的只读查询表， 广播变量用起来都很顺手。在多个并行操作中使用同一个变量，Spark 会为每个任务分别发送（闭包数据都是以T...
+    </summary>
+  
+
+  </entry>
+
+  
+  <entry>
+    <title>Some tips to beautify markdown</title>
+    <link href="http://localhost:4000/posts/Some-tips-to-beautify-markdown/" rel="alternate" type="text/html" title="Some tips to beautify markdown" />
+    <published>2022-11-25T20:00:00+08:00</published>
+  
+    <updated>2022-11-25T21:30:00+08:00</updated>
+  
+    <id>http://localhost:4000/posts/Some-tips-to-beautify-markdown/</id>
+    <content src="http://localhost:4000/posts/Some-tips-to-beautify-markdown/" />
+    <author>
+      <name>Lynn</name>
+    </author>
+
+  
+    
+    <category term="Markdown" />
+    
+    <category term="Edit" />
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      This post is to show how sites renders markdown file syntax and beatify it to beautify it to be more in line with viewing blog.
+
+Dividing line
+
+You can write --- to your md to show a dividing line and the line is as followed:
+
+
+
+Lists
+
+Ordered list
+You can use code like this to specify an ordered list
+1. Firstly
+2. Secondly
+3. Thirdly
+
+
+  Firstly
+  Secondly
+  Thirdly
+
+
+Unordered list
+You can us...
+    </summary>
+  
+
+  </entry>
+
+</feed>
+
+

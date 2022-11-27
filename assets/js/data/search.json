@@ -1,0 +1,89 @@
+[
+  
+    {
+    "title": "Use markdown to blog",
+    "url": "/posts/Use-markdown-to-blog/",
+    "categories": "Markdown, Edit",
+    "tags": "markdown",
+    "date": "2022-11-26 00:00:00 +0800",
+    
+
+
+
+
+
+    
+    "snippet": "Naming and PathCreate a new file named YYYY-MM-DD-TITLE.EXTENSION and put it in the _posts of the root directory. Please note that the EXTENSION must be one of md and markdown. If you want to save ...",
+    "content": "Naming and PathCreate a new file named YYYY-MM-DD-TITLE.EXTENSION and put it in the _posts of the root directory. Please note that the EXTENSION must be one of md and markdown. If you want to save time of creating files, please consider using the plugin Jekyll-Compose to accomplish this.Front MatterBasically, you need to fill the Front Matter as below at the top of the post:---title: TITLEdate: YYYY-MM-DD HH:MM:SS +/-TTTTcategories: [TOP_CATEGORIE, SUB_CATEGORIE]tags: [TAG]     # TAG names should always be lowercase---  The md file in ‘_post’ directory has been set to post by default, so there is no need to add the variable layout in the Front Matter block.Timezone of DateIn order to accurately record the release date of a post, you should not only set up the timezone of _config.yml but also provide the post’s timezone in variable date of its Front Matter block. Format: +/-TTTT, e.g. +0800.Categories and TagsThe categories of each post are designed to contain up to two elements, and the number of elements in tags can be zero to infinity. For instance:---categories: [Dogs, Samoyed]tags: [samoyed]---Author InformationThe author information of the post usually does not need to be filled in the Front Matter , they will be obtained from variables social.name and the first entry of social.links of the configuration file by default. But you can also override it as follows:Adding author information in _data/authors.yml.&lt;author_id&gt;:  name: &lt;full name&gt;  twitter: &lt;twitter_of_author&gt;  url: &lt;homepage_of_author&gt;And then use author to specify a single entry or authors to specify multiple entries:---author: &lt;author_id&gt;                     # for single entry# orauthors: [&lt;author1_id&gt;, &lt;author2_id&gt;]   # for multiple entries---Having said that, the key author can also identify multiple entries.  The benefit of reading the author information from the file _data/authors.yml is that the page will have the meta tag twitter:creator, which enriches the Twitter Cards and is good for SEO.Table of ContentsBy default, the Table of Contents (TOC) is displayed on the right panel of the post. If you want to turn it off globally, go to _config.yml and set the value of variable toc to false. If you want to turn off TOC for a specific post, add the following to the post’s Front Matter:---toc: false---CommentsThe global switch of comments is defined by variable comments.active in the file _config.yml. After selecting a comment system for this variable, comments will be turned on for all posts.If you want to close the comment for a specific post, add the following to the Front Matter of the post:---comments: false---MathematicsFor website performance reasons, the mathematical feature won’t be loaded by default. But it can be enabled by:---math: true---MermaidMermaid is a great diagrams generation tool. To enable it on your post, add the following to the YAML block:---mermaid: true---Then you can use it like other markdown languages: surround the graph code with ```mermaid and ```.ImagesCaptionAdd italics to the next line of an image，then it will become the caption and appear at the bottom of the image:![img-description](/path/to/image)_Image Caption_SizeIn order to prevent the page content layout from shifting when the image is loaded, we should set the width and height for each image:![Desktop View](/assets/img/sample/mockup.png){: width=\"700\" height=\"400\" }Starting from Chirpy v5.0.0, height and width support abbreviations (height → h, width → w). The following example has the same effect as the above:![Desktop View](/assets/img/sample/mockup.png){: w=\"700\" h=\"400\" }PositionBy default, the image is centered, but you can specify the position by using one of the classes normal, left, and right.  Once the position is specified, the image caption should not be added.      Normal position    Image will be left aligned in below sample:    ![Desktop View](/assets/img/sample/mockup.png){: .normal }            Float to the left    ![Desktop View](/assets/img/sample/mockup.png){: .left }            Float to the right    ![Desktop View](/assets/img/sample/mockup.png){: .right }      ShadowThe screenshots of the program window can be considered to show the shadow effect, and the shadow will be visible in the light mode:![Desktop View](/assets/img/sample/mockup.png){: .shadow }CDN URLIf you host the images on the CDN, you can save the time of repeatedly writing the CDN URL by assigning the variable img_cdn of _config.yml file:img_cdn: https://cdn.comOnce img_cdn is assigned, the CDN URL will be added to the path of all images (images of site avatar and posts) starting with /.For instance, when using images:![The flower](/path/to/flower.png)The parsing result will automatically add the CDN prefix https://cdn.com before the image path:&lt;img src=\"https://cdn.com/path/to/flower.png\" alt=\"The flower\"&gt;Image PathWhen a post contains many images, it will be a time-consuming task to repeatedly define the path of the images. To solve this, we can define this path in the YAML block of the post:---img_path: /img/path/---And then, the image source of Markdown can write the file name directly:![The flower](flower.png)The output will be:&lt;img src=\"/img/path/flower.png\" alt=\"The flower\"&gt;Preview ImageIf you want to add an image to the top of the post contents, specify the attribute path, width, height, and alt for the image:---image:  path: /path/to/image  width: 1000   # in pixels  height: 400   # in pixels  alt: image alternative text---Except for alt, all other options are necessary, especially the width and height, which are related to user experience and web page loading performance. The above section “Size” also mentions this.Starting from Chirpy v5.0.0, the attributes height and width can be abbreviated: height → h, width → w. In addition, the img_path can also be passed to the preview image, that is, when it has been set, the  attribute path only needs the image file name.For simple use, you can also just use image to define the path.image: /path/to/imagePinned PostsYou can pin one or more posts to the top of the home page, and the fixed posts are sorted in reverse order according to their release date. Enable by:---pin: true---PromptsThere are several types of prompts: tip, info, warning, and danger. They can be generated by adding the class prompt-{type} to the blockquote. For example, define a prompt of type info as follows:&gt; Example line for prompt.{: .prompt-info }SyntaxInline Code`inline code part`Filepath Hightlight`/path/to/a/file.extend`{: .filepath}Code BlockMarkdown symbols ``` can easily create a code block as follows:```This is a plaintext code snippet.```Specifying LanguageUsing ```{language} you will get a code block with syntax highlight:```yamlkey: value```  The Jekyll tag { % highlight % } is not compatible with this theme. But you should use gem 'rouge' to install dependency.Line NumberBy default, all languages except plaintext, console, and terminal will display line numbers. When you want to hide the line number of a code block, add the class nolineno to it:```shellecho 'No more line numbers!'```{: .nolineno }Specifying the FilenameYou may have noticed that the code language will be displayed at the top of the code block. If you want to replace it with the file name, you can add the attribute file to achieve this:```shell# content```{: file=\"path/to/file\" }"
+    },
+  
+    {
+    "title": "Spark Streaming",
+    "url": "/posts/Spark-Streaming/",
+    "categories": "Bigdata, Spark",
+    "tags": "spark",
+    "date": "2022-11-25 22:45:00 +0800",
+    
+
+
+
+
+
+    
+    "snippet": "Spark Streaming基本介绍Spark StreamingSpark Streaming 用于流式数据的处理。Spark Streaming 支持的数据输入源很多，例如：Kafka、 Flume、Twitter、ZeroMQ 和简单的 TCP 套接字等等。数据输入后可以用 Spark 的高度抽象原语,如：map、reduce、join、window 等进行运算。而结果也能保存在很多...",
+    "content": "Spark Streaming基本介绍Spark StreamingSpark Streaming 用于流式数据的处理。Spark Streaming 支持的数据输入源很多，例如：Kafka、 Flume、Twitter、ZeroMQ 和简单的 TCP 套接字等等。数据输入后可以用 Spark 的高度抽象原语,如：map、reduce、join、window 等进行运算。而结果也能保存在很多地方，如 HDFS，数据库等。Spark Streaming数据结构DStream  和 Spark 基于 RDD 的概念很相似，Spark Streaming 使用离散化流(discretized stream)作为抽象表示，叫作 DStream。  DStream 是随时间推移而收到的数据的序列。在内部，每个时间区间收到的数据都作为 RDD 存在，而 DStream 是由这些 RDD 所组成的序列(因此得名“离散化”)。所以简单来讲，DStream 就是对 RDD 在实时数据处理场景的一种封装。"
+    },
+  
+    {
+    "title": "Spark Sql",
+    "url": "/posts/Spark-Sql/",
+    "categories": "Bigdata, Spark",
+    "tags": "spark",
+    "date": "2022-11-25 22:40:00 +0800",
+    
+
+
+
+
+
+    
+    "snippet": "SparkSQL基本介绍Spark SqlSpark SQL 是Spark用于结构化数据处理的Spark模块:  数据兼容方面: SparkSQL 不但兼容 Hive，还可以从 RDD、parquet 文件、JSON 文件中获取数据，未来版本甚至支持获取 RDBMS 数据以及 cassandra 等 NOSQL 数据；  性能优化方面: 除了采取 In-Memory Columnar Sto...",
+    "content": "SparkSQL基本介绍Spark SqlSpark SQL 是Spark用于结构化数据处理的Spark模块:  数据兼容方面: SparkSQL 不但兼容 Hive，还可以从 RDD、parquet 文件、JSON 文件中获取数据，未来版本甚至支持获取 RDBMS 数据以及 cassandra 等 NOSQL 数据；  性能优化方面: 除了采取 In-Memory Columnar Storage、byte-code generation 等优化技术外、将会引进 Cost Model 对查询进行动态评估、获取最佳物理计划等等；  组件扩展方面: 无论是 SQL 的语法解析器、分析器还是优化器都可以重新定义，进行扩展。Spark Sql数据结构DataSet  在 Spark 中，DataFrame 是一种以 RDD 为基础的分布式数据集，类似于传统数据库中的二维表格。DataFrame 与 RDD 的主要区别在于，前者带有 schema 元信息，即 DataFrame 所表示的二维表数据集的每一列都带有名称和类型。这使得 Spark SQL 得以洞察更多的结构信息，从而对藏于 DataFrame 背后的数据源以及作用于 DataFrame 之上的变换进行了针对性 的优化，最终达到大幅提升运行时效率的目标。反观 RDD，由于无从得知所存数据元素的具体内部结构，Spark Core 只能在 stage 层面进行简单、通用的流水线优化。  与 Hive 类似，DataFrame 也支持嵌套数据类型（struct、array 和 map）。从 API 易用性的角度上看，DataFrame API 提供的是一套高层的关系操作，比函数式的 RDD API 要更加友好，门槛更低  DataFrame也是懒执行的（就是将某些逻辑延迟到使用时再计算），但是性能比RDD更高，主要原因是执行计划优化，即查询计划通过 Spark catalyst optimiser 进行优化。简而言之， 逻辑查询计划优化就是一个利用基于关系代数的等价变换，将高成本的操作替换为低成本操作的过程。DataFrame  DataSet是分布式数据集合，DataSet 是 Spark 1.6 中添加的一个新抽象，是 DataFrame 的一个扩展。它提供了 RDD 的优势（强类型，使用强大的 lambda 函数的能力）以及 Spark SQL 优化执行引擎的优点。DataSet 也可以使用功能性的转换（操作 map，flatMap，filter 等等）。  DataSet 是 DataFrame API 的一个扩展，是 SparkSQL 最新的数据抽象  用户友好的 API 风格，既具有类型安全检查也具有 DataFrame 的查询优化特性；  用样例类来对 DataSet 中定义数据的结构信息，样例类中每个属性的名称直接映射到 DataSet 中的字段名称；  DataSet 是强类型的。比如可以有 DataSet[Car]，DataSet[Person]。  DataFrame 是 DataSet 的特例，DataFrame=DataSet[Row] ，所以可以通过 as 方法将 DataFrame 转换为 DataSet。Row 是一个类型，跟Car、Person 这些的类型一样，所有的表结构信息都用 Row 来表示。获取数据时需要指定顺序。Spark Sql特点  易整合：整合SQL查询和Spark编程  统一的数据访问：使用相同的方式连接不同的数据源  兼容Hive：可以在已有的仓库上运行SQL或者HiveSQL  标准数据连接：通过JDBC/ODBC连接"
+    },
+  
+    {
+    "title": "Spark Data Structure",
+    "url": "/posts/Spark-Data-Structure/",
+    "categories": "Bigdata, Spark",
+    "tags": "spark",
+    "date": "2022-11-25 22:30:00 +0800",
+    
+
+
+
+
+
+    
+    "snippet": "核心编程：Spark 计算框架为了能够进行高并发和高吞吐的数据处理，封装了三大数据结构，用于处理不同的应用场景。三大数据结构分别是:  累加器：分布式共享只写变量  广播变量：分布式共享只读变量  RDD : 弹性分布式数据集累加器:累加器用来把 Executor 端变量信息聚合到 Driver 端。在 Driver 程序中定义的变量，在 Executor 端的每个 Task 都会得到这个变...",
+    "content": "核心编程：Spark 计算框架为了能够进行高并发和高吞吐的数据处理，封装了三大数据结构，用于处理不同的应用场景。三大数据结构分别是:  累加器：分布式共享只写变量  广播变量：分布式共享只读变量  RDD : 弹性分布式数据集累加器:累加器用来把 Executor 端变量信息聚合到 Driver 端。在 Driver 程序中定义的变量，在 Executor 端的每个 Task 都会得到这个变量的一份新的副本，每个 task 更新这些副本的值后，传回 Driver 端进行 merge。广播变量:广播变量用来高效分发较大的对象。向所有工作节点发送一个较大的只读值，以供一个或多个 Spark 操作使用。比如，如果你的应用需要向所有节点发送一个较大的只读查询表， 广播变量用起来都很顺手。在多个并行操作中使用同一个变量，Spark 会为每个任务分别发送（闭包数据都是以Task为单位发送的），会导致在Executor中包含同样的一份数据导致冗余，占用大量的内存。广播变量就是将数据放在Executor的内存当中，而不是放在每一个task中，从而达到共享的目的。这份数据只读，保证线程安全。RDD:全称为 resilient distributed dataset 弹性分布式数据集, Spark中最基本的数据处理模型。代码中是一个抽象类，它代表一个弹性的、不可变、可分区、里面的元素可并行计算的集合。每个RDD都是一个计算单元，将多个RDD进行关联组成一个完整的需求计算逻辑。"
+    },
+  
+    {
+    "title": "Some tips to beautify markdown",
+    "url": "/posts/Some-tips-to-beautify-markdown/",
+    "categories": "Markdown, Edit",
+    "tags": "markdown",
+    "date": "2022-11-25 20:00:00 +0800",
+    
+
+
+
+
+
+    
+    "snippet": "This post is to show how sites renders markdown file syntax and beatify it to beautify it to be more in line with viewing blog.Dividing lineYou can write --- to your md to show a dividing line and ...",
+    "content": "This post is to show how sites renders markdown file syntax and beatify it to beautify it to be more in line with viewing blog.Dividing lineYou can write --- to your md to show a dividing line and the line is as followed:ListsOrdered listYou can use code like this to specify an ordered list1. Firstly2. Secondly3. Thirdly  Firstly  Secondly  ThirdlyUnordered listYou can use code like this to specify an unordered list- Chapter    + Section        * Paragraph  Chapter          Section                  Paragraph                    ToDo listYou can use code like this to specify a to-do list- [ ] Job    + [x] Step 1    + [x] Step 2    + [ ] Step 3  Job          Step 1      Step 2      Step 3      Description listYou can use code like this to specify a to-do listDogs: I like samoyed~Cats: Prefer dogs, don't you?  Dogs  I like samoyed~  Cats  Prefer dogs, don’t you?Block QuoteInline block quoteThe is an example of `Inline block quote`.This is an example of Inline block quote.Simplest block quote&gt; This line shows the _block quote_.  This line shows the block quote.Prompts block quote&gt; An example showing the `type` type prompt.({: .prompt-tip }|{: .prompt-info }|{: .prompt-warning }|{: .prompt-danger })  An example showing the tip type prompt.  An example showing the info type prompt.  An example showing the warning type prompt.  An example showing the danger type prompt.Tables block quoteThe code may be a little complicated:| Primary Key                  | Color                     | Size  ||:-----------------------------|:--------------------------|------:|| Samoyed                      | White                     | Large || Golden retriever             | Golden Yellow             | Large || Border collie                | White and black combined  | Large |            Primary Key      Color      Size                  Samoyed      White      Large              Golden retriever      Golden Yellow      Large              Border collie      White and black combined      Large      Common code blockUse double \"``”` to surround your codesThis is a common code snippet, without syntax highlight and line number.Specific LanguagesSpecific the language name after the first \"``”`Java:  class Main {    public static void main(String[] args) {      System.out.println(\"hello world\");    }  }Shell:if [ $1 -ne 0 ]; then    echo \"The command was not successful.\";fi;SQL:SELECT *FROM parquet.`/PATH/TO/PARQUET_FILE.parquet`WHERE PRIMARY_KEY=\"samoyed\";FootnoteUse [^fn-nt-?] to locate a footnote, and the ? means the serial number.Click the hook will locate the first footnote1, and here is second footnote2.LinksUse &lt;&gt; to include a linkhttp://127.0.0.1:80FilepathSimple filename formatHere is the `/simple/filename/file`{: .filepath}.Here is the /simple/filename/file.Specific filename format@import  \"colors/light-typography\",  \"colors/dark-typography\"Reverse Footnote            The first footnote source &#8617;              The second footnote source &#8617;      "
+    }
+  
+]
+
