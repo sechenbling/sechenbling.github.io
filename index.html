@@ -874,6 +874,309 @@ info中个人邮箱的获取...
 
     <div class="post-preview">
         <div class="d-flex justify-content-between pr-xl-2">
+            <h1><a href="/posts/Data-Warehouse-DWS&ADS-Develop/">Data Warehouse DWS&ADS Develop</a></h1>
+            
+        </div>
+        <!-- .post-content -->
+        <div class="post-content">
+            <p>
+                
+
+
+
+
+
+                DWS层
+汇总数据层，由明细数据汇总而来的数据，基于上层的指标需求，构建公用的中间的统计结果，为了减少重复计算。
+设计过程
+
+  DWS层的设计参考指标体系。
+    
+      原子指标，派生指标，衍生指标
+    
+  
+  DWS层的数据存储格式为orc列式存储+snappy压缩。
+  DWS层表名的命名规范为dws_数据域_统计粒度_业务过程_统计周期（1d/nd/td）注：1d表...
+            </p>
+        </div>
+        <!-- .post-meta -->
+        <div class="post-meta text-muted d-flex">
+            <div class="mr-auto">
+                <!-- posted date -->
+                <i class="far fa-calendar fa-fw"></i>
+                
+
+
+
+<span class=""
+    data-ts="1674797400"
+    data-df="ll"
+    
+        data-toggle="tooltip"
+        data-placement="bottom"
+    >
+    Jan 27, 2023
+</span>
+
+                <!-- posted time ago -->
+                <i class="far fa-clock fa-fw"></i>
+                <span class="timeago "
+  
+    data-toggle="tooltip"
+    data-placement="bottom"
+    title="Asia/Shanghai"
+  >
+
+  Friday PM.
+
+  <i class="unloaded">WTZ</i>
+</span>
+
+<!-- title="2023-01-27 13:30:00 +0800"-->
+
+                <!-- posted categories -->
+                
+                <i class="far fa-folder-open fa-fw"></i>
+                <span>
+                  
+                    Bigdata,
+                    DataWarehouse
+                </span>
+                
+            </div>
+            
+        </div>
+    </div>
+
+    <div class="post-preview">
+        <div class="d-flex justify-content-between pr-xl-2">
+            <h1><a href="/posts/Data-Warehouse-DWD-Develop/">Data Warehouse DWD Develop</a></h1>
+            
+        </div>
+        <!-- .post-content -->
+        <div class="post-content">
+            <p>
+                
+
+
+
+
+
+                DWD层
+
+DWD层设计要点
+
+  DWD层的设计依据是维度建模理论，该层存储维度模型的维度表（重点）
+  DWD层的数据存储格式为orc列式存储+snappy压缩
+    
+      DWD层表名的命名规范为dwd_数据域_表名_单分区全量增量标识（full/inc）
+      数据域：对数据进行纵向的分类，方便数据管理和使用，每一类称为一个域，通常是按照业务过程来划分数据域，业务过程...
+            </p>
+        </div>
+        <!-- .post-meta -->
+        <div class="post-meta text-muted d-flex">
+            <div class="mr-auto">
+                <!-- posted date -->
+                <i class="far fa-calendar fa-fw"></i>
+                
+
+
+
+<span class=""
+    data-ts="1674790200"
+    data-df="ll"
+    
+        data-toggle="tooltip"
+        data-placement="bottom"
+    >
+    Jan 27, 2023
+</span>
+
+                <!-- posted time ago -->
+                <i class="far fa-clock fa-fw"></i>
+                <span class="timeago "
+  
+    data-toggle="tooltip"
+    data-placement="bottom"
+    title="Asia/Shanghai"
+  >
+
+  Friday AM.
+
+  <i class="unloaded">WTZ</i>
+</span>
+
+<!-- title="2023-01-27 11:30:00 +0800"-->
+
+                <!-- posted categories -->
+                
+                <i class="far fa-folder-open fa-fw"></i>
+                <span>
+                  
+                    Bigdata,
+                    DataWarehouse
+                </span>
+                
+            </div>
+            
+        </div>
+    </div>
+
+    <div class="post-preview">
+        <div class="d-flex justify-content-between pr-xl-2">
+            <h1><a href="/posts/Data-Warehouse-DIM-Develop/">Data Warehouse DIM Develop</a></h1>
+            
+        </div>
+        <!-- .post-content -->
+        <div class="post-content">
+            <p>
+                
+
+
+
+
+
+                DIM层
+DIM层设计要点
+
+  DIM层的设计一句是维度建模理论，该层存储维度模型的维度表（重点）
+  DIM层的数据存储格式为orc列式存储+snappy压缩（相较于ODS的存储格式和压缩更快）
+    
+      ODS在乎的是减少存储空间，其他层在乎的是查询更快
+    
+  
+  DIM层表名的命名规范为dim_表名_全量表或者拉链表标识（full/zip）
+    维度表设计：...
+            </p>
+        </div>
+        <!-- .post-meta -->
+        <div class="post-meta text-muted d-flex">
+            <div class="mr-auto">
+                <!-- posted date -->
+                <i class="far fa-calendar fa-fw"></i>
+                
+
+
+
+<span class=""
+    data-ts="1674786600"
+    data-df="ll"
+    
+        data-toggle="tooltip"
+        data-placement="bottom"
+    >
+    Jan 27, 2023
+</span>
+
+                <!-- posted time ago -->
+                <i class="far fa-clock fa-fw"></i>
+                <span class="timeago "
+  
+    data-toggle="tooltip"
+    data-placement="bottom"
+    title="Asia/Shanghai"
+  >
+
+  Friday AM.
+
+  <i class="unloaded">WTZ</i>
+</span>
+
+<!-- title="2023-01-27 10:30:00 +0800"-->
+
+                <!-- posted categories -->
+                
+                <i class="far fa-folder-open fa-fw"></i>
+                <span>
+                  
+                    Bigdata,
+                    DataWarehouse
+                </span>
+                
+            </div>
+            
+        </div>
+    </div>
+
+    <div class="post-preview">
+        <div class="d-flex justify-content-between pr-xl-2">
+            <h1><a href="/posts/Data-Warehouse-ODS-Develop/">Data Warehouse ODS Develop</a></h1>
+            
+        </div>
+        <!-- .post-content -->
+        <div class="post-content">
+            <p>
+                
+
+
+
+
+
+                ODS层
+
+  表结构设计依托于从业务系统同步过来的数据结构
+  ODS层要保存全部的历史数据，数据量较大，使用压缩程度较高的格式gzip
+  ODS层的命名规范为ods_表名_单分区增量全量标识(inc或者full)
+
+
+Hive数仓启动
+
+  启动Hive服务
+    nohup ./hive --service metastore &amp;amp;
+nohup ./hive --servic...
+            </p>
+        </div>
+        <!-- .post-meta -->
+        <div class="post-meta text-muted d-flex">
+            <div class="mr-auto">
+                <!-- posted date -->
+                <i class="far fa-calendar fa-fw"></i>
+                
+
+
+
+<span class=""
+    data-ts="1674783000"
+    data-df="ll"
+    
+        data-toggle="tooltip"
+        data-placement="bottom"
+    >
+    Jan 27, 2023
+</span>
+
+                <!-- posted time ago -->
+                <i class="far fa-clock fa-fw"></i>
+                <span class="timeago "
+  
+    data-toggle="tooltip"
+    data-placement="bottom"
+    title="Asia/Shanghai"
+  >
+
+  Friday AM.
+
+  <i class="unloaded">WTZ</i>
+</span>
+
+<!-- title="2023-01-27 09:30:00 +0800"-->
+
+                <!-- posted categories -->
+                
+                <i class="far fa-folder-open fa-fw"></i>
+                <span>
+                  
+                    Bigdata,
+                    DataWarehouse
+                </span>
+                
+            </div>
+            
+        </div>
+    </div>
+
+    <div class="post-preview">
+        <div class="d-flex justify-content-between pr-xl-2">
             <h1><a href="/posts/Spark-Streaming-Introduction/">Spark Streaming Introduction</a></h1>
             
         </div>
@@ -925,77 +1228,6 @@ Spark Streaming 用于流式数据的处理。Spark Streaming 支持的数据输
 </span>
 
 <!-- title="2022-11-25 22:45:00 +0800"-->
-
-                <!-- posted categories -->
-                
-                <i class="far fa-folder-open fa-fw"></i>
-                <span>
-                  
-                    Bigdata,
-                    Spark
-                </span>
-                
-            </div>
-            
-        </div>
-    </div>
-
-    <div class="post-preview">
-        <div class="d-flex justify-content-between pr-xl-2">
-            <h1><a href="/posts/Spark-Sql-Introduction/">Spark Sql Introduction</a></h1>
-            
-        </div>
-        <!-- .post-content -->
-        <div class="post-content">
-            <p>
-                
-
-
-
-
-
-                SparkSQL基本介绍
-Spark Sql
-Spark SQL 是Spark用于结构化数据处理的Spark模块:
-
-  数据兼容方面: SparkSQL 不但兼容 Hive，还可以从 RDD、parquet 文件、JSON 文件中获取数据，未来版本甚至支持获取 RDBMS 数据以及 cassandra 等 NOSQL 数据；
-  性能优化方面: 除了采取 In-Memory Columna...
-            </p>
-        </div>
-        <!-- .post-meta -->
-        <div class="post-meta text-muted d-flex">
-            <div class="mr-auto">
-                <!-- posted date -->
-                <i class="far fa-calendar fa-fw"></i>
-                
-
-
-
-<span class=""
-    data-ts="1669387200"
-    data-df="ll"
-    
-        data-toggle="tooltip"
-        data-placement="bottom"
-    >
-    Nov 25, 2022
-</span>
-
-                <!-- posted time ago -->
-                <i class="far fa-clock fa-fw"></i>
-                <span class="timeago "
-  
-    data-toggle="tooltip"
-    data-placement="bottom"
-    title="Asia/Shanghai"
-  >
-
-  Friday PM.
-
-  <i class="unloaded">WTZ</i>
-</span>
-
-<!-- title="2022-11-25 22:40:00 +0800"-->
 
                 <!-- posted categories -->
                 
@@ -1110,17 +1342,17 @@ Spark SQL 是Spark用于结构化数据处理的Spark模块:
       
       
       
-      <li><a href="/posts/Spark-Streaming-Introduction/">Spark Streaming Introduction</a></li>
+      <li><a href="/posts/Data-Warehouse-DWS&ADS-Develop/">Data Warehouse DWS&ADS Develop</a></li>
       
       
       
       
-      <li><a href="/posts/Spark-Sql-Introduction/">Spark Sql Introduction</a></li>
+      <li><a href="/posts/Data-Warehouse-DWD-Develop/">Data Warehouse DWD Develop</a></li>
       
       
       
       
-      <li><a href="/posts/Spark-Data-Structure-Introduction/">Spark Data Structure Introduction</a></li>
+      <li><a href="/posts/Data-Warehouse-DIM-Develop/">Data Warehouse DIM Develop</a></li>
       
     </ul>
   </div> <!-- #access-lastmod -->
@@ -1146,6 +1378,15 @@ Spark SQL 是Spark用于结构化数据处理的Spark模块:
     
     
     
+      
+        
+        
+
+  
+    
+    
+    
+    
   
     
     
@@ -1169,17 +1410,6 @@ Spark SQL 是Spark用于结构化数据处理的Spark模块:
     
     
     
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-      
     
   
     
@@ -1248,10 +1478,10 @@ Spark SQL 是Spark用于结构化数据处理的Spark模块:
 
     
     
-    <a class="post-tag" href="/tags/spark/">spark</a>
-    
-    
     <a class="post-tag" href="/tags/data-warehouse/">data warehouse</a>
+    
+    
+    <a class="post-tag" href="/tags/spark/">spark</a>
     
     
     <a class="post-tag" href="/tags/markdown/">markdown</a>
@@ -1303,6 +1533,15 @@ Spark SQL 是Spark用于结构化数据处理的Spark模块:
     
     
     
+      
+        
+        
+
+  
+    
+    
+    
+    
   
     
     
@@ -1326,17 +1565,6 @@ Spark SQL 是Spark用于结构化数据处理的Spark模块:
     
     
     
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-      
     
   
     
@@ -1405,10 +1633,10 @@ Spark SQL 是Spark用于结构化数据处理的Spark模块:
 
     
     
-    <a class="post-tag" href="/tags/spark/">spark</a>
-    
-    
     <a class="post-tag" href="/tags/data-warehouse/">data warehouse</a>
+    
+    
+    <a class="post-tag" href="/tags/spark/">spark</a>
     
     
     <a class="post-tag" href="/tags/markdown/">markdown</a>

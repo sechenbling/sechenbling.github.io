@@ -4,7 +4,7 @@
   <id>http://localhost:4000/</id>
   <title>Blingblogs</title>
   <subtitle>A site with blogs involve backend, big data, or other daily programming records.</subtitle>
-  <updated>2023-01-29T01:40:28+08:00</updated>
+  <updated>2023-01-29T03:01:31+08:00</updated>
   <author>
     <name>Lynn Chen</name>
     <uri>http://localhost:4000/</uri>
@@ -128,14 +128,14 @@
 
   
   <entry>
-    <title>Spark Streaming Introduction</title>
-    <link href="http://localhost:4000/posts/Spark-Streaming-Introduction/" rel="alternate" type="text/html" title="Spark Streaming Introduction" />
-    <published>2022-11-25T22:45:00+08:00</published>
+    <title>Data Warehouse DWS&amp;ADS Develop</title>
+    <link href="http://localhost:4000/posts/Data-Warehouse-DWS&amp;ADS-Develop/" rel="alternate" type="text/html" title="Data Warehouse DWS&amp;ADS Develop" />
+    <published>2023-01-27T13:30:00+08:00</published>
   
-    <updated>2022-11-25T22:45:00+08:00</updated>
+    <updated>2023-01-27T13:35:00+08:00</updated>
   
-    <id>http://localhost:4000/posts/Spark-Streaming-Introduction/</id>
-    <content src="http://localhost:4000/posts/Spark-Streaming-Introduction/" />
+    <id>http://localhost:4000/posts/Data-Warehouse-DWS&amp;ADS-Develop/</id>
+    <content src="http://localhost:4000/posts/Data-Warehouse-DWS&amp;ADS-Develop/" />
     <author>
       <name>Lynn</name>
     </author>
@@ -144,7 +144,7 @@
     
     <category term="Bigdata" />
     
-    <category term="Spark" />
+    <category term="DataWarehouse" />
     
   
 
@@ -156,15 +156,30 @@
 
 
 
-      Spark Streaming基本介绍
-Spark Streaming
-Spark Streaming 用于流式数据的处理。Spark Streaming 支持的数据输入源很多，例如：Kafka、 Flume、Twitter、ZeroMQ 和简单的 TCP 套接字等等。数据输入后可以用 Spark 的高度抽象原语,如：map、reduce、join、window 等进行运算。而结果也能保存在很多地方，如 HDFS，数据库等。
+      DWS层
+汇总数据层，由明细数据汇总而来的数据，基于上层的指标需求，构建公用的中间的统计结果，为了减少重复计算。
+设计过程
 
-Spark Streaming数据结构
-DStream
+  DWS层的设计参考指标体系。
+    
+      原子指标，派生指标，衍生指标
+    
+  
+  DWS层的数据存储格式为orc列式存储+snappy压缩。
+  DWS层表名的命名规范为dws_数据域_统计粒度_业务过程_统计周期（1d/nd/td）注：1d表示最近1日，nd表示最近n日，td表示历史至今。
+    
+      统计粒度：通俗点就是表里的用来分组的字段（字段数并不固定）
+    
+  
 
-  和 Spark 基于 RDD 的概念很相似，Spark Streaming 使用离散化流(discretized stream)作为抽象表示，叫作 DStream。
-  DStream 是随时间推移而收到的数据的序列。在内部，每个时间区间收到的数据都作为 RDD 存在，而 DStream 是由这些 ...
+
+ADS层
+根据具体业务需求来获取对应的数据，存放各项统计指标标准
+开窗函数：
+区分开窗函数和聚合函数
+
+  聚合函数：按照字段进行分组(group by)进行shuffle，将相同码的数据进行聚合，然后得到每一组的KV键值（多行聚合一行）
+  开窗...
     </summary>
   
 
@@ -172,14 +187,14 @@ DStream
 
   
   <entry>
-    <title>Spark Sql Introduction</title>
-    <link href="http://localhost:4000/posts/Spark-Sql-Introduction/" rel="alternate" type="text/html" title="Spark Sql Introduction" />
-    <published>2022-11-25T22:40:00+08:00</published>
+    <title>Data Warehouse DWD Develop</title>
+    <link href="http://localhost:4000/posts/Data-Warehouse-DWD-Develop/" rel="alternate" type="text/html" title="Data Warehouse DWD Develop" />
+    <published>2023-01-27T11:30:00+08:00</published>
   
-    <updated>2022-11-25T22:40:00+08:00</updated>
+    <updated>2023-01-27T11:35:00+08:00</updated>
   
-    <id>http://localhost:4000/posts/Spark-Sql-Introduction/</id>
-    <content src="http://localhost:4000/posts/Spark-Sql-Introduction/" />
+    <id>http://localhost:4000/posts/Data-Warehouse-DWD-Develop/</id>
+    <content src="http://localhost:4000/posts/Data-Warehouse-DWD-Develop/" />
     <author>
       <name>Lynn</name>
     </author>
@@ -188,7 +203,7 @@ DStream
     
     <category term="Bigdata" />
     
-    <category term="Spark" />
+    <category term="DataWarehouse" />
     
   
 
@@ -200,19 +215,24 @@ DStream
 
 
 
-      SparkSQL基本介绍
-Spark Sql
-Spark SQL 是Spark用于结构化数据处理的Spark模块:
+      DWD层
 
-  数据兼容方面: SparkSQL 不但兼容 Hive，还可以从 RDD、parquet 文件、JSON 文件中获取数据，未来版本甚至支持获取 RDBMS 数据以及 cassandra 等 NOSQL 数据；
-  性能优化方面: 除了采取 In-Memory Columnar Storage、byte-code generation 等优化技术外、将会引进 Cost Model 对查询进行动态评估、获取最佳物理计划等等；
-  组件扩展方面: 无论是 SQL 的语法解析器、分析器还是优化器都可以重新定义，进行扩展。
+DWD层设计要点
+
+  DWD层的设计依据是维度建模理论，该层存储维度模型的维度表（重点）
+  DWD层的数据存储格式为orc列式存储+snappy压缩
+    
+      DWD层表名的命名规范为dwd_数据域_表名_单分区全量增量标识（full/inc）
+      数据域：对数据进行纵向的分类，方便数据管理和使用，每一类称为一个域，通常是按照业务过程来划分数据域，业务过程其实就是事实表，其实就是对事实表进行划分。
+    
+  
 
 
-Spark Sql数据结构
-DataSet
+事实表设计：
 
-  在 Spark 中，DataFrame 是一种以 RDD 为基础的分布式数据集，类似于传统数据库中的...
+  根据业务总线矩阵（确认业务，声明粒度，确认维度，确认事实），明确业务过程和哪个维度有关系并不是需求决定的，而是根据数仓的具体业务逻辑决定的，维度的确定是比较灵活的，尽可能多的确定与业务过程相关的维度即可。
+  增量分区都是每天一个分区，每个分区存放当天新增的数据（增量表逻辑相同）
+  首日假设根据之前数据都是一次操...
     </summary>
   
 
@@ -220,14 +240,14 @@ DataSet
 
   
   <entry>
-    <title>Spark Data Structure Introduction</title>
-    <link href="http://localhost:4000/posts/Spark-Data-Structure-Introduction/" rel="alternate" type="text/html" title="Spark Data Structure Introduction" />
-    <published>2022-11-25T22:30:00+08:00</published>
+    <title>Data Warehouse DIM Develop</title>
+    <link href="http://localhost:4000/posts/Data-Warehouse-DIM-Develop/" rel="alternate" type="text/html" title="Data Warehouse DIM Develop" />
+    <published>2023-01-27T10:30:00+08:00</published>
   
-    <updated>2022-11-25T22:30:00+08:00</updated>
+    <updated>2023-01-27T10:35:00+08:00</updated>
   
-    <id>http://localhost:4000/posts/Spark-Data-Structure-Introduction/</id>
-    <content src="http://localhost:4000/posts/Spark-Data-Structure-Introduction/" />
+    <id>http://localhost:4000/posts/Data-Warehouse-DIM-Develop/</id>
+    <content src="http://localhost:4000/posts/Data-Warehouse-DIM-Develop/" />
     <author>
       <name>Lynn</name>
     </author>
@@ -236,7 +256,7 @@ DataSet
     
     <category term="Bigdata" />
     
-    <category term="Spark" />
+    <category term="DataWarehouse" />
     
   
 
@@ -248,19 +268,28 @@ DataSet
 
 
 
-      核心编程：
-Spark 计算框架为了能够进行高并发和高吞吐的数据处理，封装了三大数据结构，用于处理不同的应用场景。三大数据结构分别是:
+      DIM层
+DIM层设计要点
 
-  累加器：分布式共享只写变量
-  广播变量：分布式共享只读变量
-  RDD : 弹性分布式数据集
-
-
-累加器:
-累加器用来把 Executor 端变量信息聚合到 Driver 端。在 Driver 程序中定义的变量，在 Executor 端的每个 Task 都会得到这个变量的一份新的副本，每个 task 更新这些副本的值后，传回 Driver 端进行 merge。
-
-广播变量:
-广播变量用来高效分发较大的对象。向所有工作节点发送一个较大的只读值，以供一个或多个 Spark 操作使用。比如，如果你的应用需要向所有节点发送一个较大的只读查询表， 广播变量用起来都很顺手。在多个并行操作中使用同一个变量，Spark 会为每个任务分别发送（闭包数据都是以T...
+  DIM层的设计一句是维度建模理论，该层存储维度模型的维度表（重点）
+  DIM层的数据存储格式为orc列式存储+snappy压缩（相较于ODS的存储格式和压缩更快）
+    
+      ODS在乎的是减少存储空间，其他层在乎的是查询更快
+    
+  
+  DIM层表名的命名规范为dim_表名_全量表或者拉链表标识（full/zip）
+    维度表设计：
+  
+  确定维度表
+  确定主维度表和相关维度表
+  确定维度属性
+    
+      尽可能生成丰富的维度属性
+      尽量不使用编码而使用文字说明或者编码加文字说明
+      沉淀出通用的维度属性
+      商品维度表
+        
+          可以参考原始数据在MySQL中的表，找到商品MySQL表并找到与其相关联的其他MySQL表，考虑是否和维度表有关，在考虑相关...
     </summary>
   
 

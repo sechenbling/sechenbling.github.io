@@ -29,28 +29,28 @@
   
   <!-- Begin Jekyll SEO tag v2.8.0 -->
 <meta name="generator" content="Jekyll v3.9.2" />
-<meta property="og:title" content="Some tips to beautify markdown" />
+<meta property="og:title" content="Data Warehouse DIM Develop" />
 <meta name="author" content="Lynn Chen" />
 <meta property="og:locale" content="en" />
-<meta name="description" content="This post is to show how sites renders markdown file syntax and beatify it to beautify it to be more in line with viewing blog." />
-<meta property="og:description" content="This post is to show how sites renders markdown file syntax and beatify it to beautify it to be more in line with viewing blog." />
-<link rel="canonical" href="http://localhost:4000/posts/Some-tips-to-beautify-markdown/" />
-<meta property="og:url" content="http://localhost:4000/posts/Some-tips-to-beautify-markdown/" />
+<meta name="description" content="DIM层 DIM层设计要点 DIM层的设计一句是维度建模理论，该层存储维度模型的维度表（重点） DIM层的数据存储格式为orc列式存储+snappy压缩（相较于ODS的存储格式和压缩更快） ODS在乎的是减少存储空间，其他层在乎的是查询更快 DIM层表名的命名规范为dim_表名_全量表或者拉链表标识（full/zip） 维度表设计： 确定维度表 确定主维度表和相关维度表 确定维度属性 尽可能生成丰富的维度属性 尽量不使用编码而使用文字说明或者编码加文字说明 沉淀出通用的维度属性 商品维度表 可以参考原始数据在MySQL中的表，找到商品MySQL表并找到与其相关联的其他MySQL表，考虑是否和维度表有关，在考虑相关的Hive维度表如何设计。 全量表数据，数据装载从ODS的一个分区到DIM层的一个分区，时间分区要对应上" />
+<meta property="og:description" content="DIM层 DIM层设计要点 DIM层的设计一句是维度建模理论，该层存储维度模型的维度表（重点） DIM层的数据存储格式为orc列式存储+snappy压缩（相较于ODS的存储格式和压缩更快） ODS在乎的是减少存储空间，其他层在乎的是查询更快 DIM层表名的命名规范为dim_表名_全量表或者拉链表标识（full/zip） 维度表设计： 确定维度表 确定主维度表和相关维度表 确定维度属性 尽可能生成丰富的维度属性 尽量不使用编码而使用文字说明或者编码加文字说明 沉淀出通用的维度属性 商品维度表 可以参考原始数据在MySQL中的表，找到商品MySQL表并找到与其相关联的其他MySQL表，考虑是否和维度表有关，在考虑相关的Hive维度表如何设计。 全量表数据，数据装载从ODS的一个分区到DIM层的一个分区，时间分区要对应上" />
+<link rel="canonical" href="http://localhost:4000/posts/Data-Warehouse-DIM-Develop/" />
+<meta property="og:url" content="http://localhost:4000/posts/Data-Warehouse-DIM-Develop/" />
 <meta property="og:site_name" content="Blingblogs" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2022-11-19T20:00:00+08:00" />
+<meta property="article:published_time" content="2023-01-27T10:30:00+08:00" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="Some tips to beautify markdown" />
+<meta property="twitter:title" content="Data Warehouse DIM Develop" />
 <meta name="twitter:site" content="@sechenbling" />
 <meta name="twitter:creator" content="@sechenbling" />
 <meta name="google-site-verification" content="google_meta_tag_verification" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Lynn Chen","url":"https://github.com/sechenbling/"},"dateModified":"2022-11-20T21:30:00+08:00","datePublished":"2022-11-19T20:00:00+08:00","description":"This post is to show how sites renders markdown file syntax and beatify it to beautify it to be more in line with viewing blog.","headline":"Some tips to beautify markdown","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/Some-tips-to-beautify-markdown/"},"url":"http://localhost:4000/posts/Some-tips-to-beautify-markdown/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Lynn Chen","url":"https://github.com/sechenbling/"},"dateModified":"2023-01-27T10:35:00+08:00","datePublished":"2023-01-27T10:30:00+08:00","description":"DIM层 DIM层设计要点 DIM层的设计一句是维度建模理论，该层存储维度模型的维度表（重点） DIM层的数据存储格式为orc列式存储+snappy压缩（相较于ODS的存储格式和压缩更快） ODS在乎的是减少存储空间，其他层在乎的是查询更快 DIM层表名的命名规范为dim_表名_全量表或者拉链表标识（full/zip） 维度表设计： 确定维度表 确定主维度表和相关维度表 确定维度属性 尽可能生成丰富的维度属性 尽量不使用编码而使用文字说明或者编码加文字说明 沉淀出通用的维度属性 商品维度表 可以参考原始数据在MySQL中的表，找到商品MySQL表并找到与其相关联的其他MySQL表，考虑是否和维度表有关，在考虑相关的Hive维度表如何设计。 全量表数据，数据装载从ODS的一个分区到DIM层的一个分区，时间分区要对应上","headline":"Data Warehouse DIM Develop","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/Data-Warehouse-DIM-Develop/"},"url":"http://localhost:4000/posts/Data-Warehouse-DIM-Develop/"}</script>
 <!-- End Jekyll SEO tag -->
 
   
 
-  <title>Some tips to beautify markdown | Blingblogs
+  <title>Data Warehouse DIM Develop | Blingblogs
   </title>
 
   
@@ -581,7 +581,7 @@
           
             
               
-                <span>Some tips to beautify markdown</span>
+                <span>Data Warehouse DIM Develop</span>
               
             
           
@@ -695,54 +695,6 @@
       
 
     
-      
-
-      
-      
-
-      
-      
-      
-
-      
-
-    
-      
-
-      
-      
-
-      
-      
-      
-
-      
-
-    
-      
-
-      
-      
-
-      
-      
-      
-
-      
-
-    
-      
-
-      
-      
-
-      
-      
-      
-
-      
-
-    
 
     
 
@@ -807,102 +759,6 @@
       
 
     
-      
-
-      
-      
-
-      
-      
-      
-
-      
-
-    
-      
-
-      
-      
-
-      
-      
-      
-
-      
-
-    
-      
-
-      
-      
-
-      
-      
-      
-
-      
-
-    
-      
-
-      
-      
-
-      
-      
-      
-
-      
-
-    
-      
-
-      
-      
-
-      
-      
-      
-
-      
-
-    
-      
-
-      
-      
-
-      
-      
-      
-
-      
-
-    
-      
-
-      
-      
-
-      
-      
-      
-
-      
-
-    
-      
-
-      
-      
-
-      
-      
-      
-
-      
-
-    
 
     
 
@@ -910,53 +766,6 @@
 
   
   
-
-  
-    
-    
-
-    
-      
-        
-        
-      
-
-      
-      
-
-      
-      
-      
-
-      
-
-    
-      
-
-      
-      
-
-      
-      
-      
-
-      
-
-    
-      
-
-      
-      
-
-      
-      
-      
-
-      
-
-    
-
-    
 
   
 
@@ -975,113 +784,8 @@
 
 
 
-  
-  
-
-  
-
-    
-      
-      
-
-    
-
-    
-    
-
-    
-    
-    
-
-    
-      
-        
-        
-
-    
-
-    
-    
-
-    
-
-  
-
-    
-
-    
-    
-
-    
-    
-    
-
-    
-      
-        
-        
-
-    
-
-    
-    
-
-    
-
-  
-
-    
-
-    
-    
-
-    
-    
-    
-
-    
-      
-        
-        
-
-    
-
-    
-    
-
-    
-
-  
-
-    
-
-    
-    
-
-    
-    
-    
-
-    
-      
-        
-        
-
-    
-
-    
-    
-
-    
-
-  
-
-  
-
-
-
 <!-- return -->
-<h1 data-toc-skip>Some tips to beautify markdown</h1>
+<h1 data-toc-skip>Data Warehouse DIM Develop</h1>
 
 <div class="post-meta text-muted">
     <!-- published date -->
@@ -1092,13 +796,13 @@
 
 
 <span class=""
-    data-ts="1668859200"
+    data-ts="1674786600"
     data-df="ll"
     
         data-toggle="tooltip"
         data-placement="bottom"
     >
-    Nov 19, 2022
+    Jan 27, 2023
 </span>
     </span>
 
@@ -1111,13 +815,13 @@
 
 
 <span class=""
-    data-ts="1668951000"
+    data-ts="1674786900"
     data-df="ll"
     
         data-toggle="tooltip"
         data-placement="bottom"
     >
-    Nov 20, 2022
+    Jan 27, 2023
 </span>
     </span>
     
@@ -1142,275 +846,148 @@
 </div>
 
 <div class="post-content">
-    <p>This post is to show how sites renders markdown file syntax and beatify it to beautify it to be more in line with viewing blog.</p>
-
-<h2 id="dividing-line"><span class="mr-2">Dividing line</span><a href="#dividing-line" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
-
-<p>You can write <code class="language-plaintext highlighter-rouge">---</code> to your md to show a dividing line and the line is as followed:</p>
-
-<hr />
-
-<h2 id="lists"><span class="mr-2">Lists</span><a href="#lists" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
-
-<h3 id="ordered-list"><span class="mr-2">Ordered list</span><a href="#ordered-list" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
-<p>You can use code like this to specify an ordered list</p>
-<div class="language-text highlighter-rouge"><div class="code-header">
-        <span data-label-text="Text"><i class="fas fa-code small"></i></span>
-      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-</pre></td><td class="rouge-code"><pre>1. Firstly
-2. Secondly
-3. Thirdly
-</pre></td></tr></tbody></table></code></div></div>
-<ol>
-  <li>Firstly</li>
-  <li>Secondly</li>
-  <li>Thirdly</li>
-</ol>
-
-<h3 id="unordered-list"><span class="mr-2">Unordered list</span><a href="#unordered-list" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
-<p>You can use code like this to specify an unordered list</p>
-<div class="language-text highlighter-rouge"><div class="code-header">
-        <span data-label-text="Text"><i class="fas fa-code small"></i></span>
-      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-</pre></td><td class="rouge-code"><pre>- Chapter
-    + Section
-        * Paragraph
-</pre></td></tr></tbody></table></code></div></div>
+    <h2 id="dim层"><span class="mr-2">DIM层</span><a href="#dim层" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+<h3 id="dim层设计要点"><span class="mr-2">DIM层设计要点</span><a href="#dim层设计要点" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
 <ul>
-  <li>Chapter
+  <li>DIM层的设计一句是维度建模理论，该层存储维度模型的维度表（重点）</li>
+  <li>DIM层的数据存储格式为orc列式存储+snappy压缩（相较于ODS的存储格式和压缩更快）
     <ul>
-      <li>Section
+      <li>ODS在乎的是减少存储空间，其他层在乎的是查询更快</li>
+    </ul>
+  </li>
+  <li>DIM层表名的命名规范为dim_表名_全量表或者拉链表标识（full/zip）
+    <h3 id="维度表设计"><span class="mr-2">维度表设计：</span><a href="#维度表设计" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+  </li>
+  <li>确定维度表</li>
+  <li>确定主维度表和相关维度表</li>
+  <li>确定维度属性
+    <ul>
+      <li>尽可能生成丰富的维度属性</li>
+      <li>尽量不使用编码而使用文字说明或者编码加文字说明</li>
+      <li>沉淀出通用的维度属性</li>
+      <li>商品维度表
         <ul>
-          <li>Paragraph</li>
+          <li>可以参考原始数据在MySQL中的表，找到商品MySQL表并找到与其相关联的其他MySQL表，考虑是否和维度表有关，在考虑相关的Hive维度表如何设计。</li>
+          <li>全量表数据，数据装载从ODS的一个分区到DIM层的一个分区，时间分区要对应上</li>
         </ul>
       </li>
     </ul>
   </li>
 </ul>
 
-<h3 id="todo-list"><span class="mr-2">ToDo list</span><a href="#todo-list" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
-<p>You can use code like this to specify a to-do list</p>
-<div class="language-text highlighter-rouge"><div class="code-header">
-        <span data-label-text="Text"><i class="fas fa-code small"></i></span>
-      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-</pre></td><td class="rouge-code"><pre>- [ ] Job
-    + [x] Step 1
-    + [x] Step 2
-    + [ ] Step 3
-</pre></td></tr></tbody></table></code></div></div>
-<ul class="task-list">
-  <li class="task-list-item"><i class="far fa-circle fa-fw"></i>Job
-    <ul class="task-list">
-      <li class="task-list-item"><i class="fas fa-check-circle fa-fw checked"></i>Step 1</li>
-      <li class="task-list-item"><i class="fas fa-check-circle fa-fw checked"></i>Step 2</li>
-      <li class="task-list-item"><i class="far fa-circle fa-fw"></i>Step 3</li>
+<h2 id="dim层-dev-experience"><span class="mr-2">DIM层 dev experience</span><a href="#dim层-dev-experience" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+<h3 id="hive复杂数据类型构建"><span class="mr-2">Hive复杂数据类型构建</span><a href="#hive复杂数据类型构建" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+<ul>
+  <li><strong>array</strong>：
+    <ul>
+      <li>array() 一行一出: array(val1,val2…)</li>
+      <li>collect_set() 多行一出</li>
+    </ul>
+  </li>
+  <li><strong>map</strong>:
+    <ul>
+      <li>map():map(key1,val1,key2,val2…)</li>
+      <li>str_to_map(text,delimiter1,delimiter2):
+        <ul>
+          <li>delimiter1用于分割k-v键值对，默认值为 ‘,’</li>
+          <li>delimiter2用户分割k和v,默认值为’:’</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><strong>struct</strong>:
+    <ul>
+      <li>struct(val1,val2,val3…):values为表的column</li>
+      <li>named_struct(name1,val1,name2,val2…):同时给出field的name和val</li>
     </ul>
   </li>
 </ul>
 
-<h3 id="description-list"><span class="mr-2">Description list</span><a href="#description-list" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
-<p>You can use code like this to specify a to-do list</p>
-<div class="language-text highlighter-rouge"><div class="code-header">
-        <span data-label-text="Text"><i class="fas fa-code small"></i></span>
+<h3 id="cte语法"><span class="mr-2">CTE语法</span><a href="#cte语法" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+<p>common table expression公共表表达式</p>
+<ul>
+  <li>原来一个表自己join自己需要写出两遍一样的表，提前声明子查询的表只写一遍供其他公共部分使用
+语法
+    <ul>
+      <li>with table_name as(select_expression) 这就声明好了一个子查询并写出，可以重复引用这个table_name</li>
+      <li>想要一次声明多个不同的子查询，语法如下: 其中with只需要写一遍
+        <div class="language-hql highlighter-rouge"><div class="code-header">
+        <span data-label-text="Hql"><i class="fas fa-code small"></i></span>
       <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
 4
 5
-</pre></td><td class="rouge-code"><pre>Dogs
-: I like samoyed~
+</pre></td><td class="rouge-code"><pre><span class="k">WITH</span>
+    <span class="n">table_name1</span> <span class="k">as</span><span class="p">(</span><span class="n">select_expression1</span><span class="p">),</span>
+    <span class="n">table_name2</span> <span class="k">as</span><span class="p">(</span><span class="n">select_expression2</span><span class="p">),</span>
+    <span class="n">table_namen</span> <span class="k">as</span><span class="p">(</span><span class="n">select_expressionn</span><span class="p">)</span>
+<span class="k">SELECT</span> <span class="n">xxx</span>
+</pre></td></tr></tbody></table></code></div>        </div>
+      </li>
+    </ul>
+  </li>
+</ul>
 
-Cats
-: Prefer dogs, don't you?
-</pre></td></tr></tbody></table></code></div></div>
-<dl>
-  <dt>Dogs</dt>
-  <dd>I like samoyed~</dd>
-  <dt>Cats</dt>
-  <dd>Prefer dogs, don’t you?</dd>
-</dl>
-
-<h2 id="block-quote"><span class="mr-2">Block Quote</span><a href="#block-quote" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
-<h3 id="inline-block-quote"><span class="mr-2">Inline block quote</span><a href="#inline-block-quote" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
-<div class="language-text highlighter-rouge"><div class="code-header">
-        <span data-label-text="Text"><i class="fas fa-code small"></i></span>
+<h2 id="dim层-dev-question"><span class="mr-2">DIM层 dev question</span><a href="#dim层-dev-question" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+<ol>
+  <li>表信息保存
+    <ul>
+      <li>表中数据需要以orc文件形式保存，而原始数据只有txt文件或者其他类型的文件，可以先创建一个tmp的临时表（默认指定为TEXTFILE存储格式，或者指定成其他对应类型的文件），然后通过insert语句将临时表的数据写入到最终的成表内部解决因为表数据存储格式不同带来的读取问题。</li>
+      <li>例子：数据保存在txt文件当中，但是表指定stored as orc，如果直接将txt存储到表路径下，最后读取的数据会因为文件格式出错，此时可以创建一个tmp临时表，将txt数据保存到临时表路径下，然后通过insert overwrite into table select * from tmp_table，hive底层会将存储格式进行转化将文件转存为orc格式
+        <ul>
+          <li>原理：Hive底层建表时都会解析成对应的InputFormat和OutputFormat，利用TextInputFormat从临时数据表读取数据，并通过OrcOutputFormat写入到指定表中完成文件格式的转换</li>
+          <li>如何查看一个表的具体信息：
+            <div class="language-hql highlighter-rouge"><div class="code-header">
+        <span data-label-text="Hql"><i class="fas fa-code small"></i></span>
       <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>The is an example of `Inline block quote`.
-</pre></td></tr></tbody></table></code></div></div>
-<p>This is an example of <code class="language-plaintext highlighter-rouge">Inline block quote</code>.</p>
-
-<h3 id="simplest-block-quote"><span class="mr-2">Simplest block quote</span><a href="#simplest-block-quote" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
-<div class="language-text highlighter-rouge"><div class="code-header">
-        <span data-label-text="Text"><i class="fas fa-code small"></i></span>
-      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>&gt; This line shows the _block quote_.
-</pre></td></tr></tbody></table></code></div></div>
-<blockquote>
-  <p>This line shows the <em>block quote</em>.</p>
-</blockquote>
-
-<h3 id="prompts-block-quote"><span class="mr-2">Prompts block quote</span><a href="#prompts-block-quote" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
-<div class="language-text highlighter-rouge"><div class="code-header">
-        <span data-label-text="Text"><i class="fas fa-code small"></i></span>
-      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-</pre></td><td class="rouge-code"><pre>&gt; An example showing the `type` type prompt.
-({: .prompt-tip }|{: .prompt-info }|{: .prompt-warning }|{: .prompt-danger })
-</pre></td></tr></tbody></table></code></div></div>
-
-<blockquote class="prompt-tip"><div>
-  <p>An example showing the <code class="language-plaintext highlighter-rouge">tip</code> type prompt.</p>
-</div></blockquote>
-
-<blockquote class="prompt-info"><div>
-  <p>An example showing the <code class="language-plaintext highlighter-rouge">info</code> type prompt.</p>
-</div></blockquote>
-
-<blockquote class="prompt-warning"><div>
-  <p>An example showing the <code class="language-plaintext highlighter-rouge">warning</code> type prompt.</p>
-</div></blockquote>
-
-<blockquote class="prompt-danger"><div>
-  <p>An example showing the <code class="language-plaintext highlighter-rouge">danger</code> type prompt.</p>
-</div></blockquote>
-
-<h3 id="tables-block-quote"><span class="mr-2">Tables block quote</span><a href="#tables-block-quote" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
-<p>The code may be a little complicated:</p>
-<div class="language-text highlighter-rouge"><div class="code-header">
-        <span data-label-text="Text"><i class="fas fa-code small"></i></span>
-      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-</pre></td><td class="rouge-code"><pre>| Primary Key                  | Color                     | Size  |
-|:-----------------------------|:--------------------------|------:|
-| Samoyed                      | White                     | Large |
-| Golden retriever             | Golden Yellow             | Large |
-| Border collie                | White and black combined  | Large |
-</pre></td></tr></tbody></table></code></div></div>
-
-<div class="table-wrapper"><table>
-  <thead>
-    <tr>
-      <th style="text-align: left">Primary Key</th>
-      <th style="text-align: left">Color</th>
-      <th style="text-align: right">Size</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align: left">Samoyed</td>
-      <td style="text-align: left">White</td>
-      <td style="text-align: right">Large</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">Golden retriever</td>
-      <td style="text-align: left">Golden Yellow</td>
-      <td style="text-align: right">Large</td>
-    </tr>
-    <tr>
-      <td style="text-align: left">Border collie</td>
-      <td style="text-align: left">White and black combined</td>
-      <td style="text-align: right">Large</td>
-    </tr>
-  </tbody>
-</table></div>
-
-<h3 id="common-code-block"><span class="mr-2">Common code block</span><a href="#common-code-block" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
-<p>Use double <code class="language-plaintext highlighter-rouge">"</code>``”` to surround your codes</p>
-<div class="language-plaintext highlighter-rouge"><div class="code-header">
-        <span data-label-text="Plaintext"><i class="fas fa-code small"></i></span>
-      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>This is a common code snippet, without syntax highlight and line number.
-</pre></td></tr></tbody></table></code></div></div>
-
-<h3 id="specific-languages"><span class="mr-2">Specific Languages</span><a href="#specific-languages" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
-<p>Specific the language name after the first <code class="language-plaintext highlighter-rouge">"</code>``”`</p>
-<h4 id="java"><span class="mr-2">Java:</span><a href="#java" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h4>
-<div class="language-java highlighter-rouge"><div class="code-header">
-        <span data-label-text="Java"><i class="fas fa-code small"></i></span>
-      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-4
-5
-</pre></td><td class="rouge-code"><pre>  <span class="kd">class</span> <span class="nc">Main</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-      <span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"hello world"</span><span class="o">);</span>
-    <span class="o">}</span>
-  <span class="o">}</span>
-</pre></td></tr></tbody></table></code></div></div>
-
-<h4 id="shell"><span class="mr-2">Shell:</span><a href="#shell" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h4>
-<div class="language-bash highlighter-rouge"><div class="code-header">
-        <span data-label-text="Shell"><i class="fas fa-code small"></i></span>
-      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-</pre></td><td class="rouge-code"><pre><span class="k">if</span> <span class="o">[</span> <span class="nv">$1</span> <span class="nt">-ne</span> 0 <span class="o">]</span><span class="p">;</span> <span class="k">then
-    </span><span class="nb">echo</span> <span class="s2">"The command was not successful."</span><span class="p">;</span>
-<span class="k">fi</span><span class="p">;</span>
-</pre></td></tr></tbody></table></code></div></div>
-
-<h4 id="sql"><span class="mr-2">SQL:</span><a href="#sql" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h4>
-<div class="language-sql highlighter-rouge"><div class="code-header">
-        <span data-label-text="Sql"><i class="fas fa-code small"></i></span>
-      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-</pre></td><td class="rouge-code"><pre><span class="k">SELECT</span> <span class="o">*</span>
-<span class="k">FROM</span> <span class="n">parquet</span><span class="p">.</span><span class="nv">`/PATH/TO/PARQUET_FILE.parquet`</span>
-<span class="k">WHERE</span> <span class="n">PRIMARY_KEY</span><span class="o">=</span><span class="nv">"samoyed"</span><span class="p">;</span>
-</pre></td></tr></tbody></table></code></div></div>
-
-<h2 id="footnote"><span class="mr-2">Footnote</span><a href="#footnote" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
-<p>Use <code class="language-plaintext highlighter-rouge">[^fn-nt-?]</code> to locate a footnote, and the <code class="language-plaintext highlighter-rouge">?</code> means the serial number.
-Click the hook will locate the first footnote<sup id="fnref:footnote" role="doc-noteref"><a href="#fn:footnote" class="footnote" rel="footnote">1</a></sup>, and here is second footnote<sup id="fnref:fn-nth-2" role="doc-noteref"><a href="#fn:fn-nth-2" class="footnote" rel="footnote">2</a></sup>.</p>
-
-<h2 id="links"><span class="mr-2">Links</span><a href="#links" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
-<p>Use <code class="language-plaintext highlighter-rouge">&lt;&gt;</code> to include a link
-<a href="http://127.0.0.1:80">http://127.0.0.1:80</a></p>
-
-<h2 id="filepath"><span class="mr-2">Filepath</span><a href="#filepath" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
-<h3 id="simple-filename-format"><span class="mr-2">Simple filename format</span><a href="#simple-filename-format" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
-<div class="language-text highlighter-rouge"><div class="code-header">
-        <span data-label-text="Text"><i class="fas fa-code small"></i></span>
-      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre>Here is the `/simple/filename/file`{: .filepath}.
-</pre></td></tr></tbody></table></code></div></div>
-<p>Here is the <code class="language-plaintext filepath highlighter-rouge">/simple/filename/file</code>.</p>
-
-<h3 id="specific-filename-format"><span class="mr-2">Specific filename format</span><a href="#specific-filename-format" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
-<div file="_sass/main.scss" class="language-sass highlighter-rouge"><div class="code-header">
-        <span data-label-text="_sass/main.scss"><i class="far fa-file-code"></i></span>
-      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-2
-3
-</pre></td><td class="rouge-code"><pre><span class="k">@import</span>
-  <span class="s2">"colors/light-typography"</span><span class="o">,</span>
-  <span class="s2">"colors/dark-typography"</span>
-</pre></td></tr></tbody></table></code></div></div>
-
-<h2 id="reverse-footnote"><span class="mr-2">Reverse Footnote</span><a href="#reverse-footnote" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
-
-<div class="footnotes" role="doc-endnotes">
-  <ol>
-    <li id="fn:footnote" role="doc-endnote">
-      <p>The first footnote source <a href="#fnref:footnote" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
-    </li>
-    <li id="fn:fn-nth-2" role="doc-endnote">
-      <p>The second footnote source <a href="#fnref:fn-nth-2" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
-    </li>
-  </ol>
-</div>
+</pre></td><td class="rouge-code"><pre> <span class="k">SHOW</span> <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">table_name</span> 
+</pre></td></tr></tbody></table></code></div>            </div>
+          </li>
+          <li>可以查看一个表的各种具体信息，包括各类InputFormat，OutputFormat</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>处理敏感信息
+    <ul>
+      <li>表中存在部分敏感信息，比如用户具体名称和联系方式等数据，可以在数据装载的时候使用Hive内部内置的加密函数进行脱敏处理:md5(data)</li>
+    </ul>
+  </li>
+  <li>Hive动态分区
+    <ul>
+      <li>通过数据自身特性通过一个insert语句将不同的数据写到不同的分区内</li>
+      <li>将所有结果集union合并以下（不同行），然后利用动态分区将数据写到不同的分区内</li>
+    </ul>
+  </li>
+  <li>处理拉链表类型的增量表数据
+    <ul>
+      <li>首日和其他时间的处理逻辑是不一样的
+        <ul>
+          <li>首日：全量表为最初始的用户表，初始的拉链表就是最开始的全量表</li>
+          <li>其他时间：根据表的操作时间（binlog等方式）得到用户的变化表，然后再将变化表与之前的拉链表进行合并得到新的拉链表
+            <ul>
+              <li>合并：取出之前拉链表中没有变化的数据，变化的数据取出放入过期分区后将变化后的数据和变化新增的数据与没有变化的数据合并成新的分区表</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>具体操作SQL流程如下：
+        <ol>
+          <li>将昨日的旧表取出，并于今日新增的表进行全外连接，这个操作会在两个表某一字段（一般是所谓的主码概念）上进行，分为以下几种情况
+            <ul>
+              <li>旧表有的数据，而新表没有，将这部分旧表有的数据直接保留下来</li>
+              <li>旧表没有的数据，而新表有的数据，将这部分新的数据直接追加到表中</li>
+              <li>旧表和新表都有的数据，说明发生了update操作，需要根据具体的业务逻辑确认需要保留新旧表的哪些字段。</li>
+            </ul>
+          </li>
+          <li>将上一步中三种情况获取的全外连接表保留下来，供下一步insert装载数据使用，可以使用CTE语法保留这张表。</li>
+          <li>使用动态分区的手段，通过一条insert将数据分隔开，比如如果通过时间进行分区，可以在insert代码后加上partition(时间)，时间这个字段必须在全外连接的表中存在。</li>
+        </ol>
+      </li>
+    </ul>
+  </li>
+</ol>
 
 </div>
 
@@ -1421,8 +998,8 @@ Click the hook will locate the first footnote<sup id="fnref:footnote" role="doc-
     <div class="post-meta mb-3">
         <i class="far fa-folder-open fa-fw mr-1"></i>
         
-        <a href='/categories/markdown/'>Markdown</a>,
-        <a href='/categories/edit/'>Edit</a>
+        <a href='/categories/bigdata/'>Bigdata</a>,
+        <a href='/categories/datawarehouse/'>DataWarehouse</a>
     </div>
     
 
@@ -1431,8 +1008,8 @@ Click the hook will locate the first footnote<sup id="fnref:footnote" role="doc-
     <div class="post-tags">
         <i class="fa fa-tags fa-fw mr-1"></i>
         
-        <a href="/tags/markdown/"
-           class="post-tag no-text-decoration">markdown</a>
+        <a href="/tags/data-warehouse/"
+           class="post-tag no-text-decoration">data warehouse</a>
         
     </div>
     
@@ -1462,7 +1039,7 @@ Click the hook will locate the first footnote<sup id="fnref:footnote" role="doc-
 
     
       
-        <a href="http://connect.qq.com/widget/shareqq/index.html?title=Some tips to beautify markdown - Blingblogs&url=http://localhost:4000/posts/Some-tips-to-beautify-markdown/" data-toggle="tooltip" data-placement="top"
+        <a href="http://connect.qq.com/widget/shareqq/index.html?title=Data Warehouse DIM Develop - Blingblogs&url=http://localhost:4000/posts/Data-Warehouse-DIM-Develop/" data-toggle="tooltip" data-placement="top"
           title="QQ" target="_blank" rel="noopener" aria-label="QQ">
           <i class="fa-fw fab fa-qq" style="color:#AEB6BF"></i>
         </a>
@@ -1480,19 +1057,19 @@ Click the hook will locate the first footnote<sup id="fnref:footnote" role="doc-
         </a>
     
       
-        <a href="http://service.weibo.com/share/share.php?title=Some tips to beautify markdown - Blingblogs&url=http://localhost:4000/posts/Some-tips-to-beautify-markdown/" data-toggle="tooltip" data-placement="top"
+        <a href="http://service.weibo.com/share/share.php?title=Data Warehouse DIM Develop - Blingblogs&url=http://localhost:4000/posts/Data-Warehouse-DIM-Develop/" data-toggle="tooltip" data-placement="top"
           title="Weibo" target="_blank" rel="noopener" aria-label="Weibo">
           <i class="fa-fw fab fa-weibo" style="color:#AEB6BF"></i>
         </a>
     
       
-        <a href="https://www.linkedin.com/sharing/share-offsite/?url=http://localhost:4000/posts/Some-tips-to-beautify-markdown/" data-toggle="tooltip" data-placement="top"
+        <a href="https://www.linkedin.com/sharing/share-offsite/?url=http://localhost:4000/posts/Data-Warehouse-DIM-Develop/" data-toggle="tooltip" data-placement="top"
           title="Linkedin" target="_blank" rel="noopener" aria-label="Linkedin">
           <i class="fa-fw fab fa-linkedin" style="color:#AEB6BF"></i>
         </a>
     
       
-        <a href="https://twitter.com/intent/tweet?text=Some tips to beautify markdown - Blingblogs&url=http://localhost:4000/posts/Some-tips-to-beautify-markdown/" data-toggle="tooltip" data-placement="top"
+        <a href="https://twitter.com/intent/tweet?text=Data Warehouse DIM Develop - Blingblogs&url=http://localhost:4000/posts/Data-Warehouse-DIM-Develop/" data-toggle="tooltip" data-placement="top"
           title="Twitter" target="_blank" rel="noopener" aria-label="Twitter">
           <i class="fa-fw fab fa-twitter" style="color:#AEB6BF"></i>
         </a>
@@ -1796,79 +1373,79 @@ Click the hook will locate the first footnote<sup id="fnref:footnote" role="doc-
   
 
   
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
     
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
   
 
   
@@ -1890,26 +1467,6 @@ Click the hook will locate the first footnote<sup id="fnref:footnote" role="doc-
 
 
 
-  
-    
-      
-        
-          
-            
-            
-            
-        
-      
-  
-    
-      
-        
-          
-            
-            
-            
-              
-
 
 
 <div id="related-posts" class="mb-2 mb-sm-4">
@@ -1920,19 +1477,19 @@ Click the hook will locate the first footnote<sup id="fnref:footnote" role="doc-
     
     
     <div class="card">
-      <a href="/posts/Use-markdown-to-blog/">
+      <a href="/posts/Data-Warehouse-ODS-Develop/">
         <div class="card-body">
           
 
 
 
 <em class="small"
-    data-ts="1668787200"
+    data-ts="1674783000"
     data-df="ll"
     >
-    Nov 19, 2022
+    Jan 27, 2023
 </em>
-          <h3 class="pt-0 mt-1 mb-3" data-toc-skip>Use markdown to blog</h3>
+          <h3 class="pt-0 mt-1 mb-3" data-toc-skip>Data Warehouse ODS Develop</h3>
           <div class="text-muted small">
             <p>
               
@@ -1941,9 +1498,18 @@ Click the hook will locate the first footnote<sup id="fnref:footnote" role="doc-
 
 
 
-              Naming and Path
+              ODS层
 
-Create a new file named YYYY-MM-DD-TITLE.EXTENSION and put it in the _posts of the root directory. Please note that the EXTENSION must be one of md and markdown. If you want to sav...
+  表结构设计依托于从业务系统同步过来的数据结构
+  ODS层要保存全部的历史数据，数据量较大，使用压缩程度较高的格式gzip
+  ODS层的命名规范为ods_表名_单分区增量全量标识(inc或者full)
+
+
+Hive数仓启动
+
+  启动Hive服务
+    nohup ./hive --service metastore &amp;amp;
+nohup ./hive --servic...
             </p>
           </div>
         </div>
@@ -1953,19 +1519,19 @@ Create a new file named YYYY-MM-DD-TITLE.EXTENSION and put it in the _posts of t
     
     
     <div class="card">
-      <a href="/posts/Data-Warehouse-Design/">
+      <a href="/posts/Data-Warehouse-DWD-Develop/">
         <div class="card-body">
           
 
 
 
 <em class="small"
-    data-ts="1674914400"
+    data-ts="1674790200"
     data-df="ll"
     >
-    Jan 28, 2023
+    Jan 27, 2023
 </em>
-          <h3 class="pt-0 mt-1 mb-3" data-toc-skip>Data Warehouse Design</h3>
+          <h3 class="pt-0 mt-1 mb-3" data-toc-skip>Data Warehouse DWD Develop</h3>
           <div class="text-muted small">
             <p>
               
@@ -1974,15 +1540,15 @@ Create a new file named YYYY-MM-DD-TITLE.EXTENSION and put it in the _posts of t
 
 
 
-              数据仓库设计
-数据仓库分层规划
+              DWD层
 
-  使数据体系更加清洗，简单化复杂问题（one data理论分层）
-  
-  ODS:
-  operation data store:业务系统的原始数据，未经处理的数据，放在HDFS以文件形式的存储，从HDFS原路径load(底层是剪切操作)到ODS层。
-  DWD:
-  data warehouse detail:基于维度建模理论进行构建，保存各业务过程中...
+DWD层设计要点
+
+  DWD层的设计依据是维度建模理论，该层存储维度模型的维度表（重点）
+  DWD层的数据存储格式为orc列式存储+snappy压缩
+    
+      DWD层表名的命名规范为dwd_数据域_表名_单分区全量增量标识（full/inc）
+      数据域：对数据进行纵向的分类，方便数据管理和使用，每一类称为一个域，通常是按照业务过程来划分数据域，业务过程...
             </p>
           </div>
         </div>
@@ -1992,19 +1558,19 @@ Create a new file named YYYY-MM-DD-TITLE.EXTENSION and put it in the _posts of t
     
     
     <div class="card">
-      <a href="/posts/Data-Warehouse-Model/">
+      <a href="/posts/Data-Warehouse-DWS&ADS-Develop/">
         <div class="card-body">
           
 
 
 
 <em class="small"
-    data-ts="1674912600"
+    data-ts="1674797400"
     data-df="ll"
     >
-    Jan 28, 2023
+    Jan 27, 2023
 </em>
-          <h3 class="pt-0 mt-1 mb-3" data-toc-skip>Data Warehouse Model</h3>
+          <h3 class="pt-0 mt-1 mb-3" data-toc-skip>Data Warehouse DWS&ADS Develop</h3>
           <div class="text-muted small">
             <p>
               
@@ -2013,19 +1579,17 @@ Create a new file named YYYY-MM-DD-TITLE.EXTENSION and put it in the _posts of t
 
 
 
-              数据仓库介绍
-数据仓库
+              DWS层
+汇总数据层，由明细数据汇总而来的数据，基于上层的指标需求，构建公用的中间的统计结果，为了减少重复计算。
+设计过程
 
-  用于存储分析报告的数据系统
+  DWS层的设计参考指标体系。
     
-      并不产生数据（数据来自于外部系统） 也不消费数据（其结果开放给外部应用使用）
+      原子指标，派生指标，衍生指标
     
   
-  构建面向分析的集成化数据环境，分析结构提供决策
-  对比OLAP和OLTP
-    
-      各类型的数据库保存相关数据（关系型数据库是OLTP的典型应用） 但不会在数据库上直接分析数据
-      数据仓库是O...
+  DWS层的数据存储格式为orc列式存储+snappy压缩。
+  DWS层表名的命名规范为dws_数据域_统计粒度_业务过程_统计周期（1d/nd/td）注：1d表...
             </p>
           </div>
         </div>
@@ -2044,16 +1608,16 @@ Create a new file named YYYY-MM-DD-TITLE.EXTENSION and put it in the _posts of t
 
 <div class="post-navigation d-flex justify-content-between">
   
-  <a href="/posts/Use-markdown-to-blog/" class="btn btn-outline-primary"
+  <a href="/posts/Data-Warehouse-ODS-Develop/" class="btn btn-outline-primary"
      prompt="Previous Post">
-    <p>Use markdown to blog</p>
+    <p>Data Warehouse ODS Develop</p>
   </a>
   
 
   
-  <a href="/posts/Update-logs/" class="btn btn-outline-primary"
+  <a href="/posts/Data-Warehouse-DWD-Develop/" class="btn btn-outline-primary"
      prompt="Next Post">
-    <p>Update logs</p>
+    <p>Data Warehouse DWD Develop</p>
   </a>
   
 

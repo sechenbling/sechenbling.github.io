@@ -35,6 +35,74 @@
     },
   
     {
+    "title": "Data Warehouse DWS&ADS Develop",
+    "url": "/posts/Data-Warehouse-DWS&ADS-Develop/",
+    "categories": "Bigdata, DataWarehouse",
+    "tags": "data warehouse",
+    "date": "2023-01-27 13:30:00 +0800",
+    
+
+
+
+
+
+    
+    "snippet": "DWS层汇总数据层，由明细数据汇总而来的数据，基于上层的指标需求，构建公用的中间的统计结果，为了减少重复计算。设计过程  DWS层的设计参考指标体系。          原子指标，派生指标，衍生指标        DWS层的数据存储格式为orc列式存储+snappy压缩。  DWS层表名的命名规范为dws_数据域_统计粒度_业务过程_统计周期（1d/nd/td）注：1d表示最近1日，nd表示...",
+    "content": "DWS层汇总数据层，由明细数据汇总而来的数据，基于上层的指标需求，构建公用的中间的统计结果，为了减少重复计算。设计过程  DWS层的设计参考指标体系。          原子指标，派生指标，衍生指标        DWS层的数据存储格式为orc列式存储+snappy压缩。  DWS层表名的命名规范为dws_数据域_统计粒度_业务过程_统计周期（1d/nd/td）注：1d表示最近1日，nd表示最近n日，td表示历史至今。          统计粒度：通俗点就是表里的用来分组的字段（字段数并不固定）      ADS层根据具体业务需求来获取对应的数据，存放各项统计指标标准开窗函数：区分开窗函数和聚合函数  聚合函数：按照字段进行分组(group by)进行shuffle，将相同码的数据进行聚合，然后得到每一组的KV键值（多行聚合一行）  开窗函数：和聚合函数很类似，按照partition by 的字段进行shuffle，将相同key的数据都缓存起来（多行“聚合”多行），前一个多行是可以人为指定大小的，后一个多行值得是对筛选数据进行窗口后的多个结果  补充：这些窗口的划分都是在分区内部！超过分区大小就无效了，可以看到如果不指定ROWS BETWEEN,默认统计窗口为从起点到当前行;关键是理解 ROWS BETWEEN 含义,也叫做window子句：          PRECEDING：往前      FOLLOWING：往后      CURRENT ROW：当前行      UNBOUNDED：无边界      UNBOUNDED PRECEDING 表示从最前面的起点开始      UNBOUNDED FOLLOWING：表示到最后面的终点      CREATE TABLE student_scores(    id int,    studentId int,    language int,    math int,    english int,    classId string,    departmentId string);INSERT INTO table student_scores VALUES  (1,111,68,69,90,'class1','department1'),  (2,112,73,80,96,'class1','department1'),  (3,113,90,74,75,'class1','department1'),  (4,114,89,94,93,'class1','department1'),  (5,115,99,93,89,'class1','department1'),  (6,121,96,74,79,'class2','department1'),  (7,122,89,86,85,'class2','department1'),  (8,123,70,78,61,'class2','department1'),  (9,124,76,70,76,'class2','department1'),  (10,211,89,93,60,'class1','department2'),  (11,212,76,83,75,'class1','department2'),  (12,213,71,94,90,'class1','department2'),  (13,214,94,94,66,'class1','department2'),  (14,215,84,82,73,'class1','department2'),  (15,216,85,74,93,'class1','department2'),  (16,221,77,99,61,'class2','department2'),  (17,222,80,78,96,'class2','department2'),  (18,223,79,74,96,'class2','department2'),  (19,224,75,80,78,'class2','department2'),  (20,225,82,85,63,'class2','department2');SELECT studentId,math,departmentId,classId,  count(math) over() as count1,  count(math) over(partition by classId) as count2,  count(math) over(partition by classId order by math) as count3,  count(math) over(partition by classId order by math rows between 1 preceding and 2 following) as count4FROM student_scores WHERE departmentId='department1';studentid   math    departmentid    classid count1  count2  count3  count4111         69      department1     class1  9       5       1       3113         74      department1     class1  9       5       2       4112         80      department1     class1  9       5       3       4115         93      department1     class1  9       5       4       3114         94      department1     class1  9       5       5       2124         70      department1     class2  9       4       1       3121         74      department1     class2  9       4       2       4123         78      department1     class2  9       4       3       3122         86      department1     class2  9       4       4       2"
+    },
+  
+    {
+    "title": "Data Warehouse DWD Develop",
+    "url": "/posts/Data-Warehouse-DWD-Develop/",
+    "categories": "Bigdata, DataWarehouse",
+    "tags": "data warehouse",
+    "date": "2023-01-27 11:30:00 +0800",
+    
+
+
+
+
+
+    
+    "snippet": "DWD层DWD层设计要点  DWD层的设计依据是维度建模理论，该层存储维度模型的维度表（重点）  DWD层的数据存储格式为orc列式存储+snappy压缩          DWD层表名的命名规范为dwd_数据域_表名_单分区全量增量标识（full/inc）      数据域：对数据进行纵向的分类，方便数据管理和使用，每一类称为一个域，通常是按照业务过程来划分数据域，业务过程其实就是事实表，...",
+    "content": "DWD层DWD层设计要点  DWD层的设计依据是维度建模理论，该层存储维度模型的维度表（重点）  DWD层的数据存储格式为orc列式存储+snappy压缩          DWD层表名的命名规范为dwd_数据域_表名_单分区全量增量标识（full/inc）      数据域：对数据进行纵向的分类，方便数据管理和使用，每一类称为一个域，通常是按照业务过程来划分数据域，业务过程其实就是事实表，其实就是对事实表进行划分。      事实表设计：  根据业务总线矩阵（确认业务，声明粒度，确认维度，确认事实），明确业务过程和哪个维度有关系并不是需求决定的，而是根据数仓的具体业务逻辑决定的，维度的确定是比较灵活的，尽可能多的确定与业务过程相关的维度即可。  增量分区都是每天一个分区，每个分区存放当天新增的数据（增量表逻辑相同）  首日假设根据之前数据都是一次操作，根据数据中的字段进行按照数据内的字段动态分区  后续的数据按照具体当天的时间分区放即可  每个数据域的事实表总共写两个SQLHive时间戳转换  from_unixtime(bigint,time_format)，固定从unix epoch(1970-01-01)零时区计时  from_utc_timestamp(ts,时区):          东八区为’GMT+08’      ts为double时单位为秒，为int时单位为毫秒，要注意类型看是否需要进行单位转换      这个函数只是转换ts的数值，如果想要输出yyyy-MM-dd的格式，需要在外层套date_format(from_utc_timestamp,time_format)      "
+    },
+  
+    {
+    "title": "Data Warehouse DIM Develop",
+    "url": "/posts/Data-Warehouse-DIM-Develop/",
+    "categories": "Bigdata, DataWarehouse",
+    "tags": "data warehouse",
+    "date": "2023-01-27 10:30:00 +0800",
+    
+
+
+
+
+
+    
+    "snippet": "DIM层DIM层设计要点  DIM层的设计一句是维度建模理论，该层存储维度模型的维度表（重点）  DIM层的数据存储格式为orc列式存储+snappy压缩（相较于ODS的存储格式和压缩更快）          ODS在乎的是减少存储空间，其他层在乎的是查询更快        DIM层表名的命名规范为dim_表名_全量表或者拉链表标识（full/zip）    维度表设计：    确定维度表 ...",
+    "content": "DIM层DIM层设计要点  DIM层的设计一句是维度建模理论，该层存储维度模型的维度表（重点）  DIM层的数据存储格式为orc列式存储+snappy压缩（相较于ODS的存储格式和压缩更快）          ODS在乎的是减少存储空间，其他层在乎的是查询更快        DIM层表名的命名规范为dim_表名_全量表或者拉链表标识（full/zip）    维度表设计：    确定维度表  确定主维度表和相关维度表  确定维度属性          尽可能生成丰富的维度属性      尽量不使用编码而使用文字说明或者编码加文字说明      沉淀出通用的维度属性      商品维度表                  可以参考原始数据在MySQL中的表，找到商品MySQL表并找到与其相关联的其他MySQL表，考虑是否和维度表有关，在考虑相关的Hive维度表如何设计。          全量表数据，数据装载从ODS的一个分区到DIM层的一个分区，时间分区要对应上                    DIM层 dev experienceHive复杂数据类型构建  array：          array() 一行一出: array(val1,val2…)      collect_set() 多行一出        map:          map():map(key1,val1,key2,val2…)      str_to_map(text,delimiter1,delimiter2):                  delimiter1用于分割k-v键值对，默认值为 ‘,’          delimiter2用户分割k和v,默认值为’:’                      struct:          struct(val1,val2,val3…):values为表的column      named_struct(name1,val1,name2,val2…):同时给出field的name和val      CTE语法common table expression公共表表达式  原来一个表自己join自己需要写出两遍一样的表，提前声明子查询的表只写一遍供其他公共部分使用语法          with table_name as(select_expression) 这就声明好了一个子查询并写出，可以重复引用这个table_name      想要一次声明多个不同的子查询，语法如下: 其中with只需要写一遍        WITH    table_name1 as(select_expression1),    table_name2 as(select_expression2),    table_namen as(select_expressionn)SELECT xxx                    DIM层 dev question  表信息保存          表中数据需要以orc文件形式保存，而原始数据只有txt文件或者其他类型的文件，可以先创建一个tmp的临时表（默认指定为TEXTFILE存储格式，或者指定成其他对应类型的文件），然后通过insert语句将临时表的数据写入到最终的成表内部解决因为表数据存储格式不同带来的读取问题。      例子：数据保存在txt文件当中，但是表指定stored as orc，如果直接将txt存储到表路径下，最后读取的数据会因为文件格式出错，此时可以创建一个tmp临时表，将txt数据保存到临时表路径下，然后通过insert overwrite into table select * from tmp_table，hive底层会将存储格式进行转化将文件转存为orc格式                  原理：Hive底层建表时都会解析成对应的InputFormat和OutputFormat，利用TextInputFormat从临时数据表读取数据，并通过OrcOutputFormat写入到指定表中完成文件格式的转换          如何查看一个表的具体信息：             SHOW CREATE TABLE table_name                                 可以查看一个表的各种具体信息，包括各类InputFormat，OutputFormat                      处理敏感信息          表中存在部分敏感信息，比如用户具体名称和联系方式等数据，可以在数据装载的时候使用Hive内部内置的加密函数进行脱敏处理:md5(data)        Hive动态分区          通过数据自身特性通过一个insert语句将不同的数据写到不同的分区内      将所有结果集union合并以下（不同行），然后利用动态分区将数据写到不同的分区内        处理拉链表类型的增量表数据          首日和其他时间的处理逻辑是不一样的                  首日：全量表为最初始的用户表，初始的拉链表就是最开始的全量表          其他时间：根据表的操作时间（binlog等方式）得到用户的变化表，然后再将变化表与之前的拉链表进行合并得到新的拉链表                          合并：取出之前拉链表中没有变化的数据，变化的数据取出放入过期分区后将变化后的数据和变化新增的数据与没有变化的数据合并成新的分区表                                          具体操作SQL流程如下：                  将昨日的旧表取出，并于今日新增的表进行全外连接，这个操作会在两个表某一字段（一般是所谓的主码概念）上进行，分为以下几种情况                          旧表有的数据，而新表没有，将这部分旧表有的数据直接保留下来              旧表没有的数据，而新表有的数据，将这部分新的数据直接追加到表中              旧表和新表都有的数据，说明发生了update操作，需要根据具体的业务逻辑确认需要保留新旧表的哪些字段。                                将上一步中三种情况获取的全外连接表保留下来，供下一步insert装载数据使用，可以使用CTE语法保留这张表。          使用动态分区的手段，通过一条insert将数据分隔开，比如如果通过时间进行分区，可以在insert代码后加上partition(时间)，时间这个字段必须在全外连接的表中存在。                    "
+    },
+  
+    {
+    "title": "Data Warehouse ODS Develop",
+    "url": "/posts/Data-Warehouse-ODS-Develop/",
+    "categories": "Bigdata, DataWarehouse",
+    "tags": "data warehouse",
+    "date": "2023-01-27 09:30:00 +0800",
+    
+
+
+
+
+
+    
+    "snippet": "ODS层  表结构设计依托于从业务系统同步过来的数据结构  ODS层要保存全部的历史数据，数据量较大，使用压缩程度较高的格式gzip  ODS层的命名规范为ods_表名_单分区增量全量标识(inc或者full)Hive数仓启动  启动Hive服务    nohup ./hive --service metastore &amp;nohup ./hive --service hiveserve...",
+    "content": "ODS层  表结构设计依托于从业务系统同步过来的数据结构  ODS层要保存全部的历史数据，数据量较大，使用压缩程度较高的格式gzip  ODS层的命名规范为ods_表名_单分区增量全量标识(inc或者full)Hive数仓启动  启动Hive服务    nohup ./hive --service metastore &amp;nohup ./hive --service hiveserver2 &amp;        HiveServer的相关问题          OOM问题（导致连接断开或者SQL语句无法运行）：修改conf/hive-env.sh中的HADOOP_HEAPSIZE大小        Hive相关问题：          MySQL中的空值定义（null）与Hive的空值定义(\\N)不一样，且DataX并没有提供将MySQL的null值转化为空值的功能，为了保证同步的数据能够正常被Hive解析，可以在建表的时候指定将空值存为空字符串 NULL DEFINED AS’‘。但是反过来从HDFS导到MySQL可以自定义空值形式。      ODS层表  建表：          日志表：分为启动日志和具体操作日志，可以将所有日志的字段组合在一起，一条日志不存在的字段的数据可以设置为空，比如启动日志中含有’start’，却没有操作日志中的’actions’,可以将两个字段都放在同一个日志表当中。      全量表：按照时间分区，每一天全部的数据都会同步过来。      增量表：按照时间分区，增量表中每一行的数据为一次变更操作的记录，包括操作类型（insert update），变化后的数据（data字段）和原来旧的数据是什么（old字段）等。        JSON表建立（Hive中）：          语法：        CREATE TABLE table_name(FIELDS VARCHAR(10))ROW FROMAT SERDE 'org.apache.hadoop.hive.serde2.JsonSerDe'STORE AS TEXTFILE;                    SERDE为序列化器和反序列化器的缩写                  在Hive中Hive使用SerDe来读和写表的行                          HDFS files -&gt; InputFileFormat -&gt; &lt;key,value&gt; -&gt; Deserializer -&gt; RowObject              RowObject-&gt; Serializer-&gt; &lt;key,value&gt;-&gt; OutputFileFormat -&gt; HDFS files                                Hive建表底层都会解析成对应的InputFormat，OutputFormat，SerDe                    STORE AS存储格式 默认为TEXTFILE      表内的字段名要与JSON的一级键名对应上才能获取对应字段的数据，但是对应不上也不会报错~                  如果存在嵌套结构的话，可以使用Hive内置的其他复杂类型实现，比如                          STRUCT&lt;name1:type1,name2:type2,name3:type3…&gt;:sturct.name 取值              Array:通过arr[index] 取值              Map&lt;keyType,valueType&gt;:通过map[‘key’] 取值                                复杂数据类型也是可以相互嵌套的，嵌套的字段名也要和键名对应                    在Hive中gzip和bzip2压缩的文本文件可以直接作为TEXTFILE被Hive解析，其他压缩格式可以参考官网文档选用对应压缩格式的建表语句。      项目中建立的都是外部表 CREATE EXTERNAL TABLE;                  内部表由Hive自己管理，而外部表由HDFS管理          删除内部表会直接删除元数据（metadata）及存储数据；删除外部表仅仅会删除元数据，HDFS上的文件并不会被删除；                    "
+    },
+  
+    {
     "title": "Spark Streaming Introduction",
     "url": "/posts/Spark-Streaming-Introduction/",
     "categories": "Bigdata, Spark",

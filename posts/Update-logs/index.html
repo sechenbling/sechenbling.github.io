@@ -1386,17 +1386,17 @@ info中个人邮箱的获取逻辑, 如果电脑中有outlook会直接打开outl
       
       
       
-      <li><a href="/posts/Spark-Streaming-Introduction/">Spark Streaming Introduction</a></li>
+      <li><a href="/posts/Data-Warehouse-DWS&ADS-Develop/">Data Warehouse DWS&ADS Develop</a></li>
       
       
       
       
-      <li><a href="/posts/Spark-Sql-Introduction/">Spark Sql Introduction</a></li>
+      <li><a href="/posts/Data-Warehouse-DWD-Develop/">Data Warehouse DWD Develop</a></li>
       
       
       
       
-      <li><a href="/posts/Spark-Data-Structure-Introduction/">Spark Data Structure Introduction</a></li>
+      <li><a href="/posts/Data-Warehouse-DIM-Develop/">Data Warehouse DIM Develop</a></li>
       
     </ul>
   </div> <!-- #access-lastmod -->
@@ -1422,6 +1422,15 @@ info中个人邮箱的获取逻辑, 如果电脑中有outlook会直接打开outl
     
     
     
+      
+        
+        
+
+  
+    
+    
+    
+    
   
     
     
@@ -1445,17 +1454,6 @@ info中个人邮箱的获取逻辑, 如果电脑中有outlook会直接打开outl
     
     
     
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-      
     
   
     
@@ -1524,10 +1522,10 @@ info中个人邮箱的获取逻辑, 如果电脑中有outlook会直接打开outl
 
     
     
-    <a class="post-tag" href="/tags/spark/">spark</a>
-    
-    
     <a class="post-tag" href="/tags/data-warehouse/">data warehouse</a>
+    
+    
+    <a class="post-tag" href="/tags/spark/">spark</a>
     
     
     <a class="post-tag" href="/tags/markdown/">markdown</a>
@@ -1588,6 +1586,54 @@ info中个人邮箱的获取逻辑, 如果电脑中有outlook会直接打开outl
 
 
 
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
 
   
 
@@ -1808,19 +1854,19 @@ info中个人邮箱的获取逻辑, 如果电脑中有outlook会直接打开outl
     
     
     <div class="card">
-      <a href="/posts/Spark-Streaming-Introduction/">
+      <a href="/posts/Data-Warehouse-DWS&ADS-Develop/">
         <div class="card-body">
           
 
 
 
 <em class="small"
-    data-ts="1669387500"
+    data-ts="1674797400"
     data-df="ll"
     >
-    Nov 25, 2022
+    Jan 27, 2023
 </em>
-          <h3 class="pt-0 mt-1 mb-3" data-toc-skip>Spark Streaming Introduction</h3>
+          <h3 class="pt-0 mt-1 mb-3" data-toc-skip>Data Warehouse DWS&ADS Develop</h3>
           <div class="text-muted small">
             <p>
               
@@ -1829,9 +1875,17 @@ info中个人邮箱的获取逻辑, 如果电脑中有outlook会直接打开outl
 
 
 
-              Spark Streaming基本介绍
-Spark Streaming
-Spark Streaming 用于流式数据的处理。Spark Streaming 支持的数据输入源很多，例如：Kafka、 Flume、Twitter、ZeroMQ 和简单的 TCP 套接字等等。数据输入后可以用 Spark 的高度抽象原语,如：map、reduce、join、window 等进行运算。而结果也能保存在...
+              DWS层
+汇总数据层，由明细数据汇总而来的数据，基于上层的指标需求，构建公用的中间的统计结果，为了减少重复计算。
+设计过程
+
+  DWS层的设计参考指标体系。
+    
+      原子指标，派生指标，衍生指标
+    
+  
+  DWS层的数据存储格式为orc列式存储+snappy压缩。
+  DWS层表名的命名规范为dws_数据域_统计粒度_业务过程_统计周期（1d/nd/td）注：1d表...
             </p>
           </div>
         </div>
@@ -1897,6 +1951,15 @@ Spark Streaming 用于流式数据的处理。Spark Streaming 支持的数据输
     
     
     
+      
+        
+        
+
+  
+    
+    
+    
+    
   
     
     
@@ -1920,17 +1983,6 @@ Spark Streaming 用于流式数据的处理。Spark Streaming 支持的数据输
     
     
     
-    
-      
-        
-        
-
-  
-    
-    
-    
-    
-      
     
   
     
@@ -1999,10 +2051,10 @@ Spark Streaming 用于流式数据的处理。Spark Streaming 支持的数据输
 
     
     
-    <a class="post-tag" href="/tags/spark/">spark</a>
-    
-    
     <a class="post-tag" href="/tags/data-warehouse/">data warehouse</a>
+    
+    
+    <a class="post-tag" href="/tags/spark/">spark</a>
     
     
     <a class="post-tag" href="/tags/markdown/">markdown</a>
