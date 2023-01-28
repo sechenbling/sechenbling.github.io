@@ -1,0 +1,2492 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+<html lang="en" 
+    
+ xmlns="http://www.w3.org/1999/html">
+    <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  
+    
+      <meta name="pv-proxy-endpoint" content="">
+    
+    
+  
+
+  
+
+  
+
+  
+  <!-- Begin Jekyll SEO tag v2.8.0 -->
+<meta name="generator" content="Jekyll v3.9.2" />
+<meta property="og:title" content="Data Warehouse Design" />
+<meta name="author" content="Lynn Chen" />
+<meta property="og:locale" content="en" />
+<meta name="description" content="数据仓库设计 数据仓库分层规划 使数据体系更加清洗，简单化复杂问题（one data理论分层） ODS: operation data store:业务系统的原始数据，未经处理的数据，放在HDFS以文件形式的存储，从HDFS原路径load(底层是剪切操作)到ODS层。" />
+<meta property="og:description" content="数据仓库设计 数据仓库分层规划 使数据体系更加清洗，简单化复杂问题（one data理论分层） ODS: operation data store:业务系统的原始数据，未经处理的数据，放在HDFS以文件形式的存储，从HDFS原路径load(底层是剪切操作)到ODS层。" />
+<link rel="canonical" href="http://localhost:4000/posts/Data-Warehouse-Design/" />
+<meta property="og:url" content="http://localhost:4000/posts/Data-Warehouse-Design/" />
+<meta property="og:site_name" content="Blingblogs" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-01-28T22:00:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Data Warehouse Design" />
+<meta name="twitter:site" content="@sechenbling" />
+<meta name="twitter:creator" content="@sechenbling" />
+<meta name="google-site-verification" content="google_meta_tag_verification" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Lynn Chen","url":"https://github.com/sechenbling/"},"dateModified":"2023-01-28T22:00:00+08:00","datePublished":"2023-01-28T22:00:00+08:00","description":"数据仓库设计 数据仓库分层规划 使数据体系更加清洗，简单化复杂问题（one data理论分层） ODS: operation data store:业务系统的原始数据，未经处理的数据，放在HDFS以文件形式的存储，从HDFS原路径load(底层是剪切操作)到ODS层。","headline":"Data Warehouse Design","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/Data-Warehouse-Design/"},"url":"http://localhost:4000/posts/Data-Warehouse-Design/"}</script>
+<!-- End Jekyll SEO tag -->
+
+  
+
+  <title>Data Warehouse Design | Blingblogs
+  </title>
+
+  
+
+<link rel="shortcut icon" href="/assets/img/favicons/favicon.ico" type="image/x-icon">
+<link rel="icon" href="/assets/img/favicons/favicon.ico" type="image/x-icon">
+
+<link rel="apple-touch-icon" href="/assets/img/favicons/apple-icon.png">
+<link rel="apple-touch-icon" href="/assets/img/favicons/apple-icon-precomposed.png">
+<link rel="apple-touch-icon" sizes="57x57" href="/assets/img/favicons/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/assets/img/favicons/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/assets/img/favicons/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/assets/img/favicons/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/assets/img/favicons/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/assets/img/favicons/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/assets/img/favicons/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/assets/img/favicons/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicons/apple-icon-180x180.png">
+
+<link rel="icon" type="image/png" sizes="192x192"  href="/assets/img/favicons/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/assets/img/favicons/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicons/favicon-16x16.png">
+
+<link rel="manifest" href="/assets/img/favicons/manifest.json">
+<meta name='msapplication-config' content='/assets/img/favicons/browserconfig.xml'>
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/assets/img/favicons/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+
+
+  
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com" >
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" >
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" crossorigin>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com" >
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" >
+    
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" >
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" >
+    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato&family=Source+Sans+Pro:wght@400;600;700;900&display=swap">
+  
+
+  <!-- GA -->
+  
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="/assets/lib/fontawesome/css/all.min.css">
+
+  <link rel="stylesheet" href="/assets/css/style.css">
+
+  
+  <link rel="stylesheet" href="/assets/lib/bootstrap-toc-1.0.1/bootstrap-toc.min.css">
+  
+
+  
+  <!-- Manific Popup -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/magnific-popup@1/dist/magnific-popup.min.css">
+  
+
+  <!-- JavaScript -->
+
+  <script src="/assets/lib/jquery-3.6.0/jquery.min.js"></script>
+
+  
+  <!--
+  Switch the mode between dark and light.
+-->
+
+<script type="text/javascript">
+    class ModeToggle {
+        static get MODE_KEY() {
+            return "mode";
+        }
+
+        static get MODE_ATTR() {
+            return "data-mode";
+        }
+
+        static get DARK_MODE() {
+            return "dark";
+        }
+
+        static get LIGHT_MODE() {
+            return "light";
+        }
+
+        static get ID() {
+            return "mode-toggle";
+        }
+
+        constructor() {
+            if (this.hasMode) {
+                if (this.isDarkMode) {
+                    if (!this.isSysDarkPrefer) {
+                        this.setDark();
+                    }
+                } else {
+                    if (this.isSysDarkPrefer) {
+                        this.setLight();
+                    }
+                }
+            }
+
+            let self = this;
+
+            /* always follow the system prefers */
+            this.sysDarkPrefers.addEventListener("change", () => {
+                if (self.hasMode) {
+                    if (self.isDarkMode) {
+                        if (!self.isSysDarkPrefer) {
+                            self.setDark();
+                        }
+
+                    } else {
+                        if (self.isSysDarkPrefer) {
+                            self.setLight();
+                        }
+                    }
+
+                    self.clearMode();
+                }
+
+                self.notify();
+
+            });
+
+        } /* constructor() */
+
+        get sysDarkPrefers() {
+            return window.matchMedia("(prefers-color-scheme: dark)");
+        }
+
+        get isSysDarkPrefer() {
+            return this.sysDarkPrefers.matches;
+        }
+
+        get isDarkMode() {
+            return this.mode === ModeToggle.DARK_MODE;
+        }
+
+        get isLightMode() {
+            return this.mode === ModeToggle.LIGHT_MODE;
+        }
+
+        get hasMode() {
+            return this.mode != null;
+        }
+
+        get mode() {
+            return sessionStorage.getItem(ModeToggle.MODE_KEY);
+        }
+
+        /* get the current mode on screen */
+        get modeStatus() {
+            if (this.isDarkMode
+                || (!this.hasMode && this.isSysDarkPrefer)) {
+                return ModeToggle.DARK_MODE;
+            } else {
+                return ModeToggle.LIGHT_MODE;
+            }
+        }
+
+        setDark() {
+            $('html').attr(ModeToggle.MODE_ATTR, ModeToggle.DARK_MODE);
+            document.getElementById("mode-toggle-btn").setAttribute("class","fa-regular fa-moon");
+            sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.DARK_MODE);
+        }
+
+        setLight() {
+            $('html').attr(ModeToggle.MODE_ATTR, ModeToggle.LIGHT_MODE);
+            document.getElementById("mode-toggle-btn")
+                .setAttribute("class","fa-regular fa-sun");
+            sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.LIGHT_MODE);
+        }
+
+        clearMode() {
+            $('html').removeAttr(ModeToggle.MODE_ATTR);
+            document.getElementById("mode-toggle-btn")
+                .setAttribute("class","fa-regular fa-sun");
+            sessionStorage.removeItem(ModeToggle.MODE_KEY);
+        }
+
+        /* Notify another plugins that the theme mode has changed */
+        notify() {
+            window.postMessage({
+                direction: ModeToggle.ID,
+                message: this.modeStatus
+            }, "*");
+        }
+
+    } /* ModeToggle */
+
+    const toggle = new ModeToggle();
+
+    function flipMode() {
+        if (toggle.hasMode) {
+            if (toggle.isSysDarkPrefer) {
+                if (toggle.isLightMode) {
+                    toggle.clearMode();
+                } else {
+                    toggle.setLight();
+                }
+
+            } else {
+                if (toggle.isDarkMode) {
+                    toggle.clearMode();
+                } else {
+                    toggle.setDark();
+                }
+            }
+
+        } else {
+            if (toggle.isSysDarkPrefer) {
+                toggle.setLight();
+            } else {
+                toggle.setDark();
+            }
+        }
+
+        toggle.notify();
+
+    } /* flipMode() */
+
+</script>
+
+
+  
+</head>
+
+<!--  &lt;!&ndash; jsDelivr CDN &ndash;&gt;-->
+<!--  <link rel="preconnect" href="cdn.jsdelivr.net">-->
+<!--  <link rel="dns-prefetch" href="cdn.jsdelivr.net">-->
+
+<!--  &lt;!&ndash; Bootstrap &ndash;&gt;-->
+<!--  <link rel="stylesheet"-->
+<!--    href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"-->
+<!--    integrity="sha256-LA89z+k9fjgMKQ/kq4OO2Mrf8VltYml/VES+Rg0fh20=" crossorigin="anonymous">-->
+
+<!--  <link rel="stylesheet" href="/assets/css/style.css">-->
+<!--  &lt;!&ndash; Font Awesome &ndash;&gt;-->
+<!--  <link rel="stylesheet" type="text/css" href="/assets/lib/fontawesome/css/all.css">-->
+
+<!--  &lt;!&ndash; JavaScripts &ndash;&gt;-->
+
+<!--  <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>-->
+
+<!--  <script async-->
+<!--    src="https://cdn.jsdelivr.net/combine/npm/popper.js@1.15.0,npm/bootstrap@4/dist/js/bootstrap.min.js"></script>-->
+
+<!--  -->
+<!--    <!--
+  Switch the mode between dark and light.
+-->
+
+<script type="text/javascript">
+    class ModeToggle {
+        static get MODE_KEY() {
+            return "mode";
+        }
+
+        static get MODE_ATTR() {
+            return "data-mode";
+        }
+
+        static get DARK_MODE() {
+            return "dark";
+        }
+
+        static get LIGHT_MODE() {
+            return "light";
+        }
+
+        static get ID() {
+            return "mode-toggle";
+        }
+
+        constructor() {
+            if (this.hasMode) {
+                if (this.isDarkMode) {
+                    if (!this.isSysDarkPrefer) {
+                        this.setDark();
+                    }
+                } else {
+                    if (this.isSysDarkPrefer) {
+                        this.setLight();
+                    }
+                }
+            }
+
+            let self = this;
+
+            /* always follow the system prefers */
+            this.sysDarkPrefers.addEventListener("change", () => {
+                if (self.hasMode) {
+                    if (self.isDarkMode) {
+                        if (!self.isSysDarkPrefer) {
+                            self.setDark();
+                        }
+
+                    } else {
+                        if (self.isSysDarkPrefer) {
+                            self.setLight();
+                        }
+                    }
+
+                    self.clearMode();
+                }
+
+                self.notify();
+
+            });
+
+        } /* constructor() */
+
+        get sysDarkPrefers() {
+            return window.matchMedia("(prefers-color-scheme: dark)");
+        }
+
+        get isSysDarkPrefer() {
+            return this.sysDarkPrefers.matches;
+        }
+
+        get isDarkMode() {
+            return this.mode === ModeToggle.DARK_MODE;
+        }
+
+        get isLightMode() {
+            return this.mode === ModeToggle.LIGHT_MODE;
+        }
+
+        get hasMode() {
+            return this.mode != null;
+        }
+
+        get mode() {
+            return sessionStorage.getItem(ModeToggle.MODE_KEY);
+        }
+
+        /* get the current mode on screen */
+        get modeStatus() {
+            if (this.isDarkMode
+                || (!this.hasMode && this.isSysDarkPrefer)) {
+                return ModeToggle.DARK_MODE;
+            } else {
+                return ModeToggle.LIGHT_MODE;
+            }
+        }
+
+        setDark() {
+            $('html').attr(ModeToggle.MODE_ATTR, ModeToggle.DARK_MODE);
+            document.getElementById("mode-toggle-btn").setAttribute("class","fa-regular fa-moon");
+            sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.DARK_MODE);
+        }
+
+        setLight() {
+            $('html').attr(ModeToggle.MODE_ATTR, ModeToggle.LIGHT_MODE);
+            document.getElementById("mode-toggle-btn")
+                .setAttribute("class","fa-regular fa-sun");
+            sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.LIGHT_MODE);
+        }
+
+        clearMode() {
+            $('html').removeAttr(ModeToggle.MODE_ATTR);
+            document.getElementById("mode-toggle-btn")
+                .setAttribute("class","fa-regular fa-sun");
+            sessionStorage.removeItem(ModeToggle.MODE_KEY);
+        }
+
+        /* Notify another plugins that the theme mode has changed */
+        notify() {
+            window.postMessage({
+                direction: ModeToggle.ID,
+                message: this.modeStatus
+            }, "*");
+        }
+
+    } /* ModeToggle */
+
+    const toggle = new ModeToggle();
+
+    function flipMode() {
+        if (toggle.hasMode) {
+            if (toggle.isSysDarkPrefer) {
+                if (toggle.isLightMode) {
+                    toggle.clearMode();
+                } else {
+                    toggle.setLight();
+                }
+
+            } else {
+                if (toggle.isDarkMode) {
+                    toggle.clearMode();
+                } else {
+                    toggle.setDark();
+                }
+            }
+
+        } else {
+            if (toggle.isSysDarkPrefer) {
+                toggle.setLight();
+            } else {
+                toggle.setDark();
+            }
+        }
+
+        toggle.notify();
+
+    } /* flipMode() */
+
+</script>
+
+-->
+<!--  -->
+
+<!--</head>-->
+
+    <body data-spy="scroll" data-target="#toc" data-topbar-visible="true">
+        <div id="sidebar" class="d-flex flex-column align-items-end">
+    <!-- profile-wrapper -->
+    <div class="profile-wrapper text-center">
+        <!-- avatar settings -->
+        <div id="avatar">
+            <a href="/" class="mx-auto">
+                
+                
+                <img src="/assets/img/sample/avatar.png" alt="avatar" onerror="this.style.display='none'">
+                
+            </a>
+        </div>
+        <!-- site-title settings -->
+        <div class="site-title">
+            <a href="/">Blingblogs</a>
+        </div>
+        <!-- site-subtitle settings -->
+        <div class="site-subtitle">more than codes</div>
+    </div>
+
+    <ul class="w-100">
+        <!-- home -->
+        <li class="nav-item">
+        <a href="/" class="nav-link">
+            <i class="fa-fw fas fa-home ml-xl-3 mr-xl-3 unloaded"></i>
+            <span>HOME</span>
+        </a>
+        </li>
+        <!-- the real tabs -->
+        
+        <li class="nav-item">
+        <a href="/about/" class="nav-link">
+            <i class="fa-fw fas fa-info-circle ml-xl-3 mr-xl-3 unloaded"></i>
+            
+
+            <span>ABOUT</span>
+        </a>
+        </li> <!-- .nav-item -->
+        
+    </ul> <!-- ul.nav.flex-column -->
+
+    <div class="sidebar-bottom mt-auto d-flex flex-wrap justify-content-center align-items-center">
+        
+            <button class="mode-toggle btn" aria-label="Switch Mode">
+                <i id="mode-toggle-btn" class="fa-regular fa-sun"></i>
+            </button>
+            
+                <span class="icon-border"></span>
+            
+        
+
+        
+            
+        
+        <a href="https://github.com/sechenbling" aria-label="github"
+           target="_blank" rel="noopener" >
+            <i class="fab fa-github"></i>
+        </a>
+        
+        
+            
+        
+        <a href="https://space.bilibili.com/15164783" aria-label="bilibili"
+           target="_blank" rel="noopener" >
+            <i class="fa-brands fa-bilibili"></i>
+        </a>
+        
+        
+            
+        
+        <a href="https://twitter.com/sechenbling" aria-label="twitter"
+           target="_blank" rel="noopener" >
+            <i class="fab fa-twitter"></i>
+        </a>
+        
+        
+            
+        
+        <a href="
+                    javascript:location.href = 'mailto:' + ['sechenblingbling','gmail.com'].join('@')" aria-label="email"
+           >
+            <i class="fas fa-envelope"></i>
+        </a>
+        
+        
+    </div> <!-- .sidebar-bottom -->
+</div>
+        <div id="topbar-wrapper">
+    <div id="topbar" class="container d-flex align-items-center justify-content-between h-100 pl-3 pr-3 pl-md-4 pr-md-4">
+        <span id="breadcrumb">
+        
+        
+          
+            
+              <span>
+                <a href="/">
+                  Home
+                </a>
+              </span>
+            
+          
+            
+          
+            
+              
+                <span>Data Warehouse Design</span>
+              
+            
+          
+        
+        </span><!-- end of #breadcrumb -->
+
+        <i id="sidebar-trigger" class="fas fa-bars fa-fw"></i>
+
+        <div id="topbar-title">
+            Post
+        </div>
+
+        <i id="search-trigger" class="fas fa-search fa-fw"></i>
+        <span id="search-wrapper" class="align-items-center">
+            <i class="fas fa-search fa-fw"></i>
+            <input class="form-control" id="search-input" type="search"
+                 aria-label="search" autocomplete="off" placeholder="Search...">
+            <i class="fa fa-times-circle fa-fw" id="search-cleaner"></i>
+        </span>
+
+        <span id="search-cancel" >Cancel</span>
+
+    </div>
+
+</div>
+
+
+        <div id="main-wrapper" class="d-flex justify-content-center">
+            <div id="main" class="container pl-xl-4 pr-xl-4">
+                
+
+
+
+
+
+<div class="row">
+    <!-- core: use for post list -->
+    <div id="core-wrapper" class="col-12 col-lg-11 col-xl-9 pr-xl-4">
+        <div class="post pl-1 pr-1 pl-md-2 pr-md-2">
+            
+            
+                
+                
+                    
+
+
+
+
+
+  <!-- Change the icon of checkbox -->
+
+
+<!-- images -->
+
+
+
+  
+  
+
+  
+    
+      
+      
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+      
+
+      
+      
+
+      
+
+      
+    
+      
+      
+        
+      
+      
+        
+      
+      
+        
+      
+      
+        
+      
+      
+        
+      
+      
+        
+      
+      
+
+      
+      
+
+      
+
+      
+    
+
+    
+      
+
+  <!-- Add CDN URL -->
+        
+
+  <!-- Add image path -->
+        
+
+        
+        
+
+      
+
+  <!-- lazy-load images <https://github.com/ApoorvSaxena/lozad.js#usage> -->
+
+      
+
+    
+
+  <!-- Add SVG placehoder to prevent layout reflow -->
+
+    
+
+  <!-- Bypass the HTML-proofer test -->
+    
+
+    
+
+  
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+      
+
+      
+      
+
+      
+
+      
+    
+      
+      
+        
+      
+      
+        
+      
+      
+        
+      
+      
+        
+      
+      
+        
+      
+      
+        
+      
+      
+
+      
+      
+
+      
+
+      
+    
+
+    
+      
+
+  <!-- Add CDN URL -->
+        
+
+  <!-- Add image path -->
+        
+
+        
+        
+
+      
+
+  <!-- lazy-load images <https://github.com/ApoorvSaxena/lozad.js#usage> -->
+
+      
+
+    
+
+  <!-- Add SVG placehoder to prevent layout reflow -->
+
+    
+
+  <!-- Bypass the HTML-proofer test -->
+    
+
+    
+
+  
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+      
+
+      
+      
+
+      
+
+      
+    
+      
+      
+        
+      
+      
+        
+      
+      
+        
+      
+      
+        
+      
+      
+        
+      
+      
+        
+      
+      
+
+      
+      
+
+      
+
+      
+    
+
+    
+      
+
+  <!-- Add CDN URL -->
+        
+
+  <!-- Add image path -->
+        
+
+        
+        
+
+      
+
+  <!-- lazy-load images <https://github.com/ApoorvSaxena/lozad.js#usage> -->
+
+      
+
+    
+
+  <!-- Add SVG placehoder to prevent layout reflow -->
+
+    
+
+  <!-- Bypass the HTML-proofer test -->
+    
+
+    
+
+  
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+      
+
+      
+      
+
+      
+
+      
+    
+      
+      
+        
+      
+      
+        
+      
+      
+        
+      
+      
+        
+      
+      
+        
+      
+      
+        
+      
+      
+
+      
+      
+
+      
+
+      
+    
+
+    
+      
+
+  <!-- Add CDN URL -->
+        
+
+  <!-- Add image path -->
+        
+
+        
+        
+
+      
+
+  <!-- lazy-load images <https://github.com/ApoorvSaxena/lozad.js#usage> -->
+
+      
+
+    
+
+  <!-- Add SVG placehoder to prevent layout reflow -->
+
+    
+
+  <!-- Bypass the HTML-proofer test -->
+    
+
+    
+
+  
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+      
+
+      
+      
+
+      
+
+      
+    
+      
+      
+        
+      
+      
+        
+      
+      
+        
+      
+      
+        
+      
+      
+        
+      
+      
+        
+      
+      
+
+      
+      
+
+      
+
+      
+    
+
+    
+      
+
+  <!-- Add CDN URL -->
+        
+
+  <!-- Add image path -->
+        
+
+        
+        
+
+      
+
+  <!-- lazy-load images <https://github.com/ApoorvSaxena/lozad.js#usage> -->
+
+      
+
+    
+
+  <!-- Add SVG placehoder to prevent layout reflow -->
+
+    
+
+  <!-- Bypass the HTML-proofer test -->
+    
+
+    
+
+  
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+      
+
+      
+      
+
+      
+
+      
+    
+      
+      
+        
+      
+      
+        
+      
+      
+        
+      
+      
+        
+      
+      
+        
+      
+      
+        
+      
+      
+
+      
+      
+
+      
+
+      
+    
+
+    
+      
+
+  <!-- Add CDN URL -->
+        
+
+  <!-- Add image path -->
+        
+
+        
+        
+
+      
+
+  <!-- lazy-load images <https://github.com/ApoorvSaxena/lozad.js#usage> -->
+
+      
+
+    
+
+  <!-- Add SVG placehoder to prevent layout reflow -->
+
+    
+
+  <!-- Bypass the HTML-proofer test -->
+    
+
+    
+
+  
+
+  
+
+
+
+  <!-- Add header for code snippets -->
+
+
+
+<!-- Create heading anchors -->
+
+
+
+
+  
+  
+
+  
+    
+    
+
+    
+      
+        
+        
+      
+
+      
+      
+
+      
+      
+      
+
+      
+
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+
+    
+
+    
+
+  
+
+  
+  
+
+  
+    
+    
+
+    
+      
+        
+        
+      
+
+      
+      
+
+      
+      
+      
+
+      
+
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+
+    
+
+    
+
+  
+
+  
+  
+
+  
+
+  
+  
+
+  
+
+
+
+
+<!-- Wrap prompt element of blockquote with the <div> tag -->
+
+
+
+
+
+
+<!-- return -->
+<h1 data-toc-skip>Data Warehouse Design</h1>
+
+<div class="post-meta text-muted">
+    <!-- published date -->
+    <span>
+      Posted on
+      
+
+
+
+<span class=""
+    data-ts="1674914400"
+    data-df="ll"
+    
+        data-toggle="tooltip"
+        data-placement="bottom"
+    >
+    Jan 28, 2023
+</span>
+    </span>
+
+    <!-- lastmod date -->
+    
+    <span>
+      Updated on
+      
+
+
+
+<span class=""
+    data-ts="1674914400"
+    data-df="ll"
+    
+        data-toggle="tooltip"
+        data-placement="bottom"
+    >
+    Jan 28, 2023
+</span>
+    </span>
+    
+
+    
+
+    <div class="d-flex justify-content-between">
+        <span>
+          
+
+          By
+          <span>
+          
+            
+              <a href="https://github.com/sechenbling/">Lynn Chen</a>
+              
+            
+          
+          </span>
+        </span>
+    </div>
+</div>
+
+<div class="post-content">
+    <h2 id="数据仓库设计"><span class="mr-2">数据仓库设计</span><a href="#数据仓库设计" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+<h3 id="数据仓库分层规划"><span class="mr-2">数据仓库分层规划</span><a href="#数据仓库分层规划" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+<dl>
+  <dt>使数据体系更加清洗，简单化复杂问题（one data理论分层）</dt>
+  <dt><img data-src="/blog_imgs/data warehouse/theory/data warehouse design/data warehouse design img1.png" alt="img.png" data-proofer-ignore></dt>
+  <dt>ODS:</dt>
+  <dd>operation data store:业务系统的原始数据，未经处理的数据，放在HDFS以文件形式的存储，从HDFS原路径load(底层是剪切操作)到ODS层。</dd>
+  <dt>DWD:</dt>
+  <dd>data warehouse detail:基于维度建模理论进行构建，保存各业务过程中最小粒度的操作记录，存放事实表。</dd>
+  <dt>DIM:</dt>
+  <dd>dimension:基于维度建模理论进行构建，存放维度表，保存一致性维度信息。</dd>
+  <dt>DWS:</dt>
+  <dd>data warehouse summary:需求驱动来建立对应的表，以分析的主题对象作为建模驱动构建公共统计粒度（不同需求之间通用的计算结果，减少重复计算）的汇总表。</dd>
+  <dt>ADS:</dt>
+  <dd>application data service:存放各项统计指标结果。</dd>
+</dl>
+
+<h2 id="数仓构建流程"><span class="mr-2">数仓构建流程</span><a href="#数仓构建流程" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+<p><img data-src="/blog_imgs/data warehouse/theory/data warehouse design/data warehouse design img2.png" alt="img.png" data-proofer-ignore></p>
+<h3 id="数据调研"><span class="mr-2">数据调研：</span><a href="#数据调研" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+<ul>
+  <li>业务调研：熟悉业务流程，熟悉业务数据</li>
+  <li>需求分析：明确需求所需的业务过程及维度</li>
+</ul>
+
+<h3 id="明确数据域"><span class="mr-2">明确数据域</span><a href="#明确数据域" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+<p>按照特定标准对数据进行纵向切分，划分数据域便于数据的管理和应用</p>
+<ul>
+  <li>比如电商业务过程中将业务分为交易域，流量域，用户域，互动域等多个域</li>
+  <li>说白其实对应DWD层的事实表，DWS的汇总表来自事实表，其实也来自数据域</li>
+</ul>
+
+<div class="table-wrapper"><table>
+  <thead>
+    <tr>
+      <th style="text-align: center">数据域</th>
+      <th style="text-align: center">业务过程</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: center">交易域</td>
+      <td style="text-align: center">加购、下单、取消订单、支付成功、退单、退款成功</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">流量域</td>
+      <td style="text-align: center">页面浏览、启动应用、动作、曝光、错误</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">用户域</td>
+      <td style="text-align: center">注册、登录</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">互动域</td>
+      <td style="text-align: center">收藏、评价</td>
+    </tr>
+    <tr>
+      <td style="text-align: center">工具域</td>
+      <td style="text-align: center">优惠券领取、优惠券使用（下单）、优惠券使用（支付）</td>
+    </tr>
+  </tbody>
+</table></div>
+
+<h3 id="构建业务总线矩阵"><span class="mr-2">构建业务总线矩阵</span><a href="#构建业务总线矩阵" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+<p>服务于维度模型的设计</p>
+<ul>
+  <li><img data-src="/blog_imgs/data warehouse/theory/data warehouse design/data warehouse design img3.png" alt="img.png" data-proofer-ignore></li>
+  <li>总线矩阵中通常只包含事务型事实表，其他两种类型的表单独设计</li>
+</ul>
+
+<h3 id="维度模型设计"><span class="mr-2">维度模型设计</span><a href="#维度模型设计" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+<p>参照业务总线矩阵，构建事实表存储在DWD层，维度表存储在DIM层</p>
+
+<h3 id="明确统一指标"><span class="mr-2">明确统一指标</span><a href="#明确统一指标" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+<p>整理出指标体系理论，包括原子指标、派生指标、衍生指标，主要是为了指标定义标准化，遵循一套标准，避免重复定义和定义歧义问题</p>
+<ul>
+  <li>原子指标：基于某一业务过程的度量值，原子指标核心功能就是对指标的聚合逻辑进行定义
+    <ul>
+      <li>比如每个订单都有金额，订单总额就是一个原子指标</li>
+      <li>原子指标只是用来辅助下面两个定义的一个概念，通常没有实际的对应需求</li>
+    </ul>
+  </li>
+  <li>派生指标：基于原子指标，通常会对应实际的统计需求，关系图如下</li>
+  <li><img data-src="/blog_imgs/data warehouse/theory/data warehouse design/data warehouse design img4.png" alt="img.png" data-proofer-ignore></li>
+  <li>衍生指标：在多个派生指标的基础上，通过各种逻辑运算复合而来的，比如比率、比例等</li>
+  <li><img data-src="/blog_imgs/data warehouse/theory/data warehouse design/data warehouse design img5.png" alt="img.png" data-proofer-ignore></li>
+  <li>指标理论体系意义：公共的派生指标保存在DWS层，统计需求足够多的时候，会出现公共的派生指标，因此DWS层设计可以参考现有的统计需求整理出来</li>
+</ul>
+
+<h3 id="汇总模型设计"><span class="mr-2">汇总模型设计</span><a href="#汇总模型设计" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+<p>一张汇总表会包括业务过程相同，统计周期相同，统计粒度相同的多个派生指标</p>
+<ul>
+  <li><img data-src="/blog_imgs/data warehouse/theory/data warehouse design/data warehouse design img6.png" alt="img.png" data-proofer-ignore></li>
+  <li>汇总表是由一张事实表（一个业务过程）汇总而来的，汇总表却不止一张，属于一对多的关系</li>
+</ul>
+
+<h2 id="数据仓库环境配置"><span class="mr-2">数据仓库环境配置</span><a href="#数据仓库环境配置" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+<p>绝大多数与事实表的业务表都是增量同步，绝大多数与维度表相关的业务表都是全量同步（非绝对，比如需要设计成拉链表类型的维度表不需要同步所有数据，只需要同步新增变化，用增量同步即可）</p>
+<h3 id="数仓运行环境准备"><span class="mr-2"><strong>数仓运行环境准备</strong></span><a href="#数仓运行环境准备" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+<ul>
+  <li>Hive环境：引擎变更，从MR转变为使用Spark
+    <ul>
+      <li>区分
+        <ul>
+          <li>Hive on Spark（语法是Hive语法，执行引擎变为Spark）；Spark采用RDD执行。除了数仓的建模和SQL以外对数据安全和认证以及元数据管理的周边数仓任务框架支持更好，生态更好。
+            <ul>
+              <li>Spark on Hive（语法是Spark，Spark负责SQL解析，Hive作为存储元数据）；Spark采用RDD执行。效率更高但是生态较差。</li>
+              <li>两者都可以作为数仓运行环境；</li>
+            </ul>
+          </li>
+          <li>记得要重新编译Hive的源码，使其内部能够使用Spark3.0.0，在Hive部署的节点上部署Spark</li>
+          <li>Hive on spark是以一个会话作为一个资源分配，一个会话为每次开启的Hive 相较于使用MR每个mr程序一个资源分配，开启会话的时候都比较忙，但是后续操作spark引擎会快于mr引擎</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>Yarn环境：增加Application Master资源比例，虚拟机集群环境资源较少，默认只分配10%资源给一个Job会导致同一时刻只能运行一个Job的情况（资源总量太少，10%就更少了，内存资源可能只够一个任务运行），适当调大AM可以使用的资源比例使其使用更多资源
+    <div file="$HADOOP_HOME/etc/hadoop/yarn-site.xml" class="language-xml highlighter-rouge"><div class="code-header">
+        <span data-label-text="$HADOOP_HOME/etc/hadoop/yarn-site.xml"><i class="far fa-file-code"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre><span class="nt">&lt;property&gt;</span>
+  <span class="nt">&lt;name&gt;</span>yarn.scheduler.capacity.maximum-am-resource-percent<span class="nt">&lt;/name&gt;</span>
+  <span class="nt">&lt;value&gt;</span>0.1<span class="nt">&lt;/value&gt;</span> <span class="c">&lt;!-- 修改为80% --&gt;</span>
+  <span class="nt">&lt;description&gt;</span>
+      Maximum percent of resources in the cluster which can be used to run application masters i.e. controls number of concurrent running applications.
+  <span class="nt">&lt;/description&gt;</span>
+<span class="nt">&lt;/property&gt;</span>
+</pre></td></tr></tbody></table></code></div>    </div>
+  </li>
+</ul>
+
+<h3 id="数仓开发环境准备"><span class="mr-2"><strong>数仓开发环境准备</strong></span><a href="#数仓开发环境准备" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+<ul>
+  <li>使用DBeaver或者DataGrip，两者都需要使用JDBC协议连接到Hive，所以需要启动HiveServer2服务(Hiveserver2就是用于提供JDBC接口)，使用DataGrip连接到Hive即可。</li>
+</ul>
+
+
+</div>
+
+<div class="post-tail-wrapper text-muted">
+
+    <!-- categories -->
+    
+    <div class="post-meta mb-3">
+        <i class="far fa-folder-open fa-fw mr-1"></i>
+        
+        <a href='/categories/bigdata/'>Bigdata</a>,
+        <a href='/categories/datawarehouse/'>DataWarehouse</a>
+    </div>
+    
+
+    <!-- tags -->
+    
+    <div class="post-tags">
+        <i class="fa fa-tags fa-fw mr-1"></i>
+        
+        <a href="/tags/data-warehouse/"
+           class="post-tag no-text-decoration">data warehouse</a>
+        
+    </div>
+    
+
+    <div class="post-tail-bottom
+    d-flex justify-content-between align-items-center mt-3 pt-5 pb-2">
+        <div class="license-wrapper">
+
+            
+
+            
+
+            This post is licensed under 
+            <a href="https://creativecommons.org/licenses/by/4.0/">
+                CC BY 4.0
+            </a>
+             by the author.
+
+            
+        </div>
+
+        <div class="share-wrapper">
+  <span class="share-label text-muted mr-1">Share</span>
+  <span class="share-icons">
+    
+    
+
+    
+      
+        <a href="http://connect.qq.com/widget/shareqq/index.html?title=Data Warehouse Design - Blingblogs&url=http://localhost:4000/posts/Data-Warehouse-Design/" data-toggle="tooltip" data-placement="top"
+          title="QQ" target="_blank" rel="noopener" aria-label="QQ">
+          <i class="fa-fw fab fa-qq" style="color:#AEB6BF"></i>
+        </a>
+    
+      
+        <a href="https://open.weixin.qq.com/sdk/report" data-toggle="tooltip" data-placement="top"
+          title="WeChat" target="_blank" rel="noopener" aria-label="WeChat">
+          <i class="fa-fw fab fa-weixin" style="color:#AEB6BF"></i>
+        </a>
+    
+      
+        <a href="https://t.bilibili.com/" data-toggle="tooltip" data-placement="top"
+          title="Bilibili" target="_blank" rel="noopener" aria-label="Bilibili">
+          <i class="fa-fw fa-brands fa-bilibili" style="color:#AEB6BF"></i>
+        </a>
+    
+      
+        <a href="http://service.weibo.com/share/share.php?title=Data Warehouse Design - Blingblogs&url=http://localhost:4000/posts/Data-Warehouse-Design/" data-toggle="tooltip" data-placement="top"
+          title="Weibo" target="_blank" rel="noopener" aria-label="Weibo">
+          <i class="fa-fw fab fa-weibo" style="color:#AEB6BF"></i>
+        </a>
+    
+      
+        <a href="https://www.linkedin.com/sharing/share-offsite/?url=http://localhost:4000/posts/Data-Warehouse-Design/" data-toggle="tooltip" data-placement="top"
+          title="Linkedin" target="_blank" rel="noopener" aria-label="Linkedin">
+          <i class="fa-fw fab fa-linkedin" style="color:#AEB6BF"></i>
+        </a>
+    
+      
+        <a href="https://twitter.com/intent/tweet?text=Data Warehouse Design - Blingblogs&url=http://localhost:4000/posts/Data-Warehouse-Design/" data-toggle="tooltip" data-placement="top"
+          title="Twitter" target="_blank" rel="noopener" aria-label="Twitter">
+          <i class="fa-fw fab fa-twitter" style="color:#AEB6BF"></i>
+        </a>
+    
+
+    <i class="fa-fw fas fa-link small" onclick="copyLink()"
+        data-toggle="tooltip" data-placement="top" title="Copy link" style="color:#AEB6BF"></i>
+
+  </span>
+</div>
+
+
+    </div><!-- .post-tail-bottom -->
+
+</div><!-- div.post-tail-wrapper -->
+
+                
+            
+            
+        </div>
+    </div>
+
+    <!-- panel: use for update list and tags -->
+    <div id="panel-wrapper" class="col-xl-3 pl-2 text-muted">
+        <div class="access">
+            
+
+
+
+
+
+
+
+
+  <div id="access-lastmod" class="post">
+    <div class="panel-heading">Recently Updated</div>
+    <ul class="post-content pl-0 pb-1 ml-1 mt-2">
+      
+      
+      
+      
+      <li><a href="/posts/Data-Warehouse-Design/">Data Warehouse Design</a></li>
+      
+      
+      
+      
+      <li><a href="/posts/Data-Warehouse-Model/">Data Warehouse Model</a></li>
+      
+      
+      
+      
+      <li><a href="/posts/Spark-Streaming-Introduction/">Spark Streaming Introduction</a></li>
+      
+      
+      
+      
+      <li><a href="/posts/Spark-Sql-Introduction/">Spark Sql Introduction</a></li>
+      
+      
+      
+      
+      <li><a href="/posts/Spark-Data-Structure-Introduction/">Spark Data Structure Introduction</a></li>
+      
+    </ul>
+  </div> <!-- #access-lastmod -->
+
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+
+
+<div id="access-tags">
+  <div class="panel-heading">Other Trending Tags</div>
+  <div class="d-flex flex-wrap mt-3 mb-1 mr-3">
+
+    
+    
+    <a class="post-tag" href="/tags/spark/">spark</a>
+    
+    
+    <a class="post-tag" href="/tags/data-warehouse/">data warehouse</a>
+    
+    
+    <a class="post-tag" href="/tags/markdown/">markdown</a>
+    
+    
+    <a class="post-tag" href="/tags/logs/">logs</a>
+    
+    
+    <a class="post-tag" href="/tags/update/">update</a>
+    
+
+  </div>
+</div>
+
+
+        </div>
+        
+            
+            
+
+
+
+<!-- BS-toc.js will be loaded at medium priority -->
+<script src="/assets/lib/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script>
+
+<div id="toc-wrapper" class="pl-0 pr-4 mb-5">
+  <div class="panel-heading pl-3 pt-2 mb-2">Contents</div>
+  <nav id="toc" data-toggle="toc"></nav>
+</div>
+
+
+        
+    </div>
+</div>
+
+<!-- tail -->
+
+<div class="row">
+    <div id="tail-wrapper" class="col-12 col-lg-11 col-xl-9 pl-3 pr-3 pr-xl-4 mt-5">
+        
+            
+            <!--
+ Recommend the other 3 posts according to the tags and categories of the current post,
+ if the number is not enough, use the other latest posts to supplement.
+-->
+
+<!-- The total size of related posts  -->
+
+
+<!-- An random integer that bigger than 0  -->
+
+
+<!-- Equals to TAG_SCORE / {max_categories_hierarchy}  -->
+
+
+
+
+
+
+
+
+  
+
+  
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+
+<!-- Fill with the other newlest posts  -->
+
+
+
+
+
+<div id="related-posts" class="mb-2 mb-sm-4">
+  <h3 class="pt-2 mb-4 ml-1"
+      data-toc-skip>Related Reading</h3>
+  <div class="card-deck mb-4">
+    
+    
+    
+    <div class="card">
+      <a href="/posts/Data-Warehouse-Model/">
+        <div class="card-body">
+          
+
+
+
+<em class="small"
+    data-ts="1674912600"
+    data-df="ll"
+    >
+    Jan 28, 2023
+</em>
+          <h3 class="pt-0 mt-1 mb-3" data-toc-skip>Data Warehouse Model</h3>
+          <div class="text-muted small">
+            <p>
+              
+
+
+
+
+
+              数据仓库介绍
+数据仓库
+
+  用于存储分析报告的数据系统
+    
+      并不产生数据（数据来自于外部系统） 也不消费数据（其结果开放给外部应用使用）
+    
+  
+  构建面向分析的集成化数据环境，分析结构提供决策
+  对比OLAP和OLTP
+    
+      各类型的数据库保存相关数据（关系型数据库是OLTP的典型应用） 但不会在数据库上直接分析数据
+      数据仓库是O...
+            </p>
+          </div>
+        </div>
+      </a>
+    </div>
+    
+    
+    
+    <div class="card">
+      <a href="/posts/Spark-Data-Structure-Introduction/">
+        <div class="card-body">
+          
+
+
+
+<em class="small"
+    data-ts="1669386600"
+    data-df="ll"
+    >
+    Nov 25, 2022
+</em>
+          <h3 class="pt-0 mt-1 mb-3" data-toc-skip>Spark Data Structure Introduction</h3>
+          <div class="text-muted small">
+            <p>
+              
+
+
+
+
+
+              核心编程：
+Spark 计算框架为了能够进行高并发和高吞吐的数据处理，封装了三大数据结构，用于处理不同的应用场景。三大数据结构分别是:
+
+  累加器：分布式共享只写变量
+  广播变量：分布式共享只读变量
+  RDD : 弹性分布式数据集
+
+
+累加器:
+累加器用来把 Executor 端变量信息聚合到 Driver 端。在 Driver 程序中定义的变量，在 Executor 端的每个 Tas...
+            </p>
+          </div>
+        </div>
+      </a>
+    </div>
+    
+    
+    
+    <div class="card">
+      <a href="/posts/Spark-Sql-Introduction/">
+        <div class="card-body">
+          
+
+
+
+<em class="small"
+    data-ts="1669387200"
+    data-df="ll"
+    >
+    Nov 25, 2022
+</em>
+          <h3 class="pt-0 mt-1 mb-3" data-toc-skip>Spark Sql Introduction</h3>
+          <div class="text-muted small">
+            <p>
+              
+
+
+
+
+
+              SparkSQL基本介绍
+Spark Sql
+Spark SQL 是Spark用于结构化数据处理的Spark模块:
+
+  数据兼容方面: SparkSQL 不但兼容 Hive，还可以从 RDD、parquet 文件、JSON 文件中获取数据，未来版本甚至支持获取 RDBMS 数据以及 cassandra 等 NOSQL 数据；
+  性能优化方面: 除了采取 In-Memory Columna...
+            </p>
+          </div>
+        </div>
+      </a>
+    </div>
+    
+  </div> <!-- .card-deck -->
+</div> <!-- #related-posts -->
+
+
+        
+            
+            <!--
+  Navigation buttons at the bottom of the post.
+-->
+
+<div class="post-navigation d-flex justify-content-between">
+  
+  <a href="/posts/Data-Warehouse-Model/" class="btn btn-outline-primary"
+     prompt="Previous Post">
+    <p>Data Warehouse Model</p>
+  </a>
+  
+
+  
+  <div class="btn btn-outline-primary disabled"
+       prompt="Next Post">
+    <p>-</p>
+  </div>
+  
+
+</div>
+        
+    </div>
+</div>
+
+
+            </div>
+            <!--
+  The Search results
+-->
+<div id="search-result-wrapper" class="d-flex justify-content-center unloaded">
+  <div class="col-12 col-sm-11 post-content">
+    <div id="search-hints">
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+
+
+<div id="access-tags">
+  <div class="panel-heading">Other Trending Tags</div>
+  <div class="d-flex flex-wrap mt-3 mb-1 mr-3">
+
+    
+    
+    <a class="post-tag" href="/tags/spark/">spark</a>
+    
+    
+    <a class="post-tag" href="/tags/data-warehouse/">data warehouse</a>
+    
+    
+    <a class="post-tag" href="/tags/markdown/">markdown</a>
+    
+    
+    <a class="post-tag" href="/tags/logs/">logs</a>
+    
+    
+    <a class="post-tag" href="/tags/update/">update</a>
+    
+
+  </div>
+</div>
+
+
+    </div>
+    <div id="search-results" class="d-flex flex-wrap justify-content-center text-muted mt-3"></div>
+  </div>
+</div>
+
+        </div> <!-- #main-wrapper -->
+
+        <footer>
+    <div class="container pl-lg-4 pr-lg-4">
+        <div class="d-flex justify-content-between align-items-center text-muted ml-md-3 mr-md-3">
+            <div class="footer-left">
+                <p class="mb-0">
+                    © 2023
+                    <a href="https://twitter.com/sechenbling">Lynn Chen</a>.
+                    
+                    <span data-toggle="tooltip" data-placement="top"
+                          title="Except where otherwise noted, the blog posts on this site are licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0) License by the author.">Some rights reserved.</span>
+                    
+                </p>
+            </div>
+
+            <div class="footer-right">
+                <p class="mb-0">
+                    <a href="https://www.bilibili.com/video/BV1184y1i7Lv" target="_blank" rel="noopener">
+                        Wish you have a good day!
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+        
+        <div id="mask"></div>
+
+        <a id="back-to-top" href="#" aria-label="back-to-top" class="btn btn-lg btn-box-shadow" role="button">
+            <i class="fas fa-angle-up"></i>
+        </a>
+
+        
+
+        <!--
+  Jekyll Simple Search loader
+  See: <https://github.com/christian-fei/Simple-Jekyll-Search>
+-->
+
+
+
+
+
+<script src="/assets/lib/simple-jekyll-search-1.10.0/simple-jekyll-search.min.js"></script>
+
+<script>
+SimpleJekyllSearch({
+  searchInput: document.getElementById('search-input'),
+  resultsContainer: document.getElementById('search-results'),
+  json: '/assets/js/data/search.json',
+  searchResultTemplate: '<div class="pl-1 pr-1 pl-sm-2 pr-sm-2 pl-lg-4 pr-lg-4 pl-xl-0 pr-xl-0">  <a href="{url}">{title}</a>  <div class="post-meta d-flex flex-column flex-sm-row text-muted mt-1 mb-1">    {categories}    {tags}  </div>  <p>{snippet}</p></div>',
+  noResultsText: '<p class="mt-5">Oops! No results found.</p>',
+  templateMiddleware: function(prop, value, template) {
+    if (prop === 'categories') {
+      if (value === '') {
+        return `${value}`;
+      } else {
+        return `<div class="mr-sm-4"><i class="far fa-folder fa-fw"></i>${value}</div>`;
+      }
+    }
+
+    if (prop === 'tags') {
+      if (value === '') {
+        return `${value}`;
+      } else {
+        return `<div><i class="fa fa-tag fa-fw"></i>${value}</div>`;
+      }
+    }
+  }
+});
+</script>
+
+        <!-- layout specified -->
+
+    
+    <!-- pv-report needs countup.js -->
+        <script async src="https://cdn.jsdelivr.net/npm/countup.js@1.9.3/dist/countUp.min.js"></script>
+        <script defer src="/assets/js/dist/pvreport.min.js"></script>
+    
+
+
+
+    <!-- image lazy-loading & popup & clipboard -->
+    
+    
+
+
+
+
+
+
+
+  
+    
+
+    
+
+  
+
+
+
+  
+
+    <script src="/assets/lib/lozad-1.16.0/lozad.min.js"></script>
+
+  
+
+
+
+  
+
+    <script src="/assets/lib/clipboard-2.0.9/clipboard.min.js"></script>
+
+  
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/combine/npm/magnific-popup@1/dist/jquery.magnific-popup.min.js"></script>
+
+
+
+
+
+    
+    
+    
+
+
+
+
+
+
+
+  
+
+    <script src="/assets/lib/dayjs-1.10.7/dayjs.min.js"></script>
+
+  
+
+
+
+  
+
+    <script src="/assets/lib/dayjs-1.10.7/locale/en.min.js"></script>
+
+  
+
+
+
+  
+
+    <script src="/assets/lib/dayjs-1.10.7/plugin/relativeTime.min.js"></script>
+
+  
+
+
+
+  
+
+    <script src="/assets/lib/dayjs-1.10.7/plugin/localizedFormat.min.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+<script defer src="/assets/js/dist/post.min.js"></script>
+
+
+
+<!-- commons -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    </body>
+</html>
+

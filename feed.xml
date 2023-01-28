@@ -1,0 +1,271 @@
+
+
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>http://localhost:4000/</id>
+  <title>Blingblogs</title>
+  <subtitle>A site with blogs involve backend, big data, or other daily programming records.</subtitle>
+  <updated>2023-01-29T01:40:28+08:00</updated>
+  <author>
+    <name>Lynn Chen</name>
+    <uri>http://localhost:4000/</uri>
+  </author>
+  <link rel="self" type="application/atom+xml" href="http://localhost:4000/feed.xml"/>
+  <link rel="alternate" type="text/html" hreflang="en"
+    href="http://localhost:4000/"/>
+  <generator uri="https://jekyllrb.com/" version="3.9.2">Jekyll</generator>
+  <rights> © 2023 Lynn Chen </rights>
+  <icon>/assets/img/favicons/favicon.ico</icon>
+  <logo>/assets/img/favicons/favicon-96x96.png</logo>
+
+
+  
+  <entry>
+    <title>Data Warehouse Design</title>
+    <link href="http://localhost:4000/posts/Data-Warehouse-Design/" rel="alternate" type="text/html" title="Data Warehouse Design" />
+    <published>2023-01-28T22:00:00+08:00</published>
+  
+    <updated>2023-01-28T22:00:00+08:00</updated>
+  
+    <id>http://localhost:4000/posts/Data-Warehouse-Design/</id>
+    <content src="http://localhost:4000/posts/Data-Warehouse-Design/" />
+    <author>
+      <name>Lynn</name>
+    </author>
+
+  
+    
+    <category term="Bigdata" />
+    
+    <category term="DataWarehouse" />
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      数据仓库设计
+数据仓库分层规划
+
+  使数据体系更加清洗，简单化复杂问题（one data理论分层）
+  
+  ODS:
+  operation data store:业务系统的原始数据，未经处理的数据，放在HDFS以文件形式的存储，从HDFS原路径load(底层是剪切操作)到ODS层。
+  DWD:
+  data warehouse detail:基于维度建模理论进行构建，保存各业务过程中最小粒度的操作记录，存放事实表。
+  DIM:
+  dimension:基于维度建模理论进行构建，存放维度表，保存一致性维度信息。
+  DWS:
+  data warehouse summary:需求驱动来建立对应的表，以分析的主题对象作为建模驱动构建公共统计粒度（不同需求之间通用的计算结果，减少重复计算）的汇总表。
+  ADS:
+  application data service:存放各项统计...
+    </summary>
+  
+
+  </entry>
+
+  
+  <entry>
+    <title>Data Warehouse Model</title>
+    <link href="http://localhost:4000/posts/Data-Warehouse-Model/" rel="alternate" type="text/html" title="Data Warehouse Model" />
+    <published>2023-01-28T21:30:00+08:00</published>
+  
+    <updated>2023-01-28T21:35:00+08:00</updated>
+  
+    <id>http://localhost:4000/posts/Data-Warehouse-Model/</id>
+    <content src="http://localhost:4000/posts/Data-Warehouse-Model/" />
+    <author>
+      <name>Lynn</name>
+    </author>
+
+  
+    
+    <category term="Bigdata" />
+    
+    <category term="DataWarehouse" />
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      数据仓库介绍
+数据仓库
+
+  用于存储分析报告的数据系统
+    
+      并不产生数据（数据来自于外部系统） 也不消费数据（其结果开放给外部应用使用）
+    
+  
+  构建面向分析的集成化数据环境，分析结构提供决策
+  对比OLAP和OLTP
+    
+      各类型的数据库保存相关数据（关系型数据库是OLTP的典型应用） 但不会在数据库上直接分析数据
+      数据仓库是OLAP的一种实现 （OLAP 联机分析处理系统 面向分析 支持分析）
+    
+  
+
+
+数据仓库特点
+
+  面向主题subject oriented 主题抽象概念，在较高层次上数据综合、归类并分析利用的抽象
+  集成性integrated 主题相关的数据通常会分布在多个操作系统中，彼此分散独立异构，需要集成在数仓主题下
+    
+      数据进入数据仓库前需要经过统一和综合，对数据进行抽取、...
+    </summary>
+  
+
+  </entry>
+
+  
+  <entry>
+    <title>Spark Streaming Introduction</title>
+    <link href="http://localhost:4000/posts/Spark-Streaming-Introduction/" rel="alternate" type="text/html" title="Spark Streaming Introduction" />
+    <published>2022-11-25T22:45:00+08:00</published>
+  
+    <updated>2022-11-25T22:45:00+08:00</updated>
+  
+    <id>http://localhost:4000/posts/Spark-Streaming-Introduction/</id>
+    <content src="http://localhost:4000/posts/Spark-Streaming-Introduction/" />
+    <author>
+      <name>Lynn</name>
+    </author>
+
+  
+    
+    <category term="Bigdata" />
+    
+    <category term="Spark" />
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      Spark Streaming基本介绍
+Spark Streaming
+Spark Streaming 用于流式数据的处理。Spark Streaming 支持的数据输入源很多，例如：Kafka、 Flume、Twitter、ZeroMQ 和简单的 TCP 套接字等等。数据输入后可以用 Spark 的高度抽象原语,如：map、reduce、join、window 等进行运算。而结果也能保存在很多地方，如 HDFS，数据库等。
+
+Spark Streaming数据结构
+DStream
+
+  和 Spark 基于 RDD 的概念很相似，Spark Streaming 使用离散化流(discretized stream)作为抽象表示，叫作 DStream。
+  DStream 是随时间推移而收到的数据的序列。在内部，每个时间区间收到的数据都作为 RDD 存在，而 DStream 是由这些 ...
+    </summary>
+  
+
+  </entry>
+
+  
+  <entry>
+    <title>Spark Sql Introduction</title>
+    <link href="http://localhost:4000/posts/Spark-Sql-Introduction/" rel="alternate" type="text/html" title="Spark Sql Introduction" />
+    <published>2022-11-25T22:40:00+08:00</published>
+  
+    <updated>2022-11-25T22:40:00+08:00</updated>
+  
+    <id>http://localhost:4000/posts/Spark-Sql-Introduction/</id>
+    <content src="http://localhost:4000/posts/Spark-Sql-Introduction/" />
+    <author>
+      <name>Lynn</name>
+    </author>
+
+  
+    
+    <category term="Bigdata" />
+    
+    <category term="Spark" />
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      SparkSQL基本介绍
+Spark Sql
+Spark SQL 是Spark用于结构化数据处理的Spark模块:
+
+  数据兼容方面: SparkSQL 不但兼容 Hive，还可以从 RDD、parquet 文件、JSON 文件中获取数据，未来版本甚至支持获取 RDBMS 数据以及 cassandra 等 NOSQL 数据；
+  性能优化方面: 除了采取 In-Memory Columnar Storage、byte-code generation 等优化技术外、将会引进 Cost Model 对查询进行动态评估、获取最佳物理计划等等；
+  组件扩展方面: 无论是 SQL 的语法解析器、分析器还是优化器都可以重新定义，进行扩展。
+
+
+Spark Sql数据结构
+DataSet
+
+  在 Spark 中，DataFrame 是一种以 RDD 为基础的分布式数据集，类似于传统数据库中的...
+    </summary>
+  
+
+  </entry>
+
+  
+  <entry>
+    <title>Spark Data Structure Introduction</title>
+    <link href="http://localhost:4000/posts/Spark-Data-Structure-Introduction/" rel="alternate" type="text/html" title="Spark Data Structure Introduction" />
+    <published>2022-11-25T22:30:00+08:00</published>
+  
+    <updated>2022-11-25T22:30:00+08:00</updated>
+  
+    <id>http://localhost:4000/posts/Spark-Data-Structure-Introduction/</id>
+    <content src="http://localhost:4000/posts/Spark-Data-Structure-Introduction/" />
+    <author>
+      <name>Lynn</name>
+    </author>
+
+  
+    
+    <category term="Bigdata" />
+    
+    <category term="Spark" />
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      核心编程：
+Spark 计算框架为了能够进行高并发和高吞吐的数据处理，封装了三大数据结构，用于处理不同的应用场景。三大数据结构分别是:
+
+  累加器：分布式共享只写变量
+  广播变量：分布式共享只读变量
+  RDD : 弹性分布式数据集
+
+
+累加器:
+累加器用来把 Executor 端变量信息聚合到 Driver 端。在 Driver 程序中定义的变量，在 Executor 端的每个 Task 都会得到这个变量的一份新的副本，每个 task 更新这些副本的值后，传回 Driver 端进行 merge。
+
+广播变量:
+广播变量用来高效分发较大的对象。向所有工作节点发送一个较大的只读值，以供一个或多个 Spark 操作使用。比如，如果你的应用需要向所有节点发送一个较大的只读查询表， 广播变量用起来都很顺手。在多个并行操作中使用同一个变量，Spark 会为每个任务分别发送（闭包数据都是以T...
+    </summary>
+  
+
+  </entry>
+
+</feed>
+
+

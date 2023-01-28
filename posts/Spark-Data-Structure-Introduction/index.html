@@ -29,28 +29,28 @@
   
   <!-- Begin Jekyll SEO tag v2.8.0 -->
 <meta name="generator" content="Jekyll v3.9.2" />
-<meta property="og:title" content="Blingblogs" />
+<meta property="og:title" content="Spark Data Structure Introduction" />
 <meta name="author" content="Lynn Chen" />
 <meta property="og:locale" content="en" />
-<meta name="description" content="A site with blogs involve backend, big data, or other daily programming records." />
-<meta property="og:description" content="A site with blogs involve backend, big data, or other daily programming records." />
-<link rel="canonical" href="http://localhost:4000/" />
-<meta property="og:url" content="http://localhost:4000/" />
+<meta name="description" content="核心编程： Spark 计算框架为了能够进行高并发和高吞吐的数据处理，封装了三大数据结构，用于处理不同的应用场景。三大数据结构分别是: 累加器：分布式共享只写变量 广播变量：分布式共享只读变量 RDD : 弹性分布式数据集" />
+<meta property="og:description" content="核心编程： Spark 计算框架为了能够进行高并发和高吞吐的数据处理，封装了三大数据结构，用于处理不同的应用场景。三大数据结构分别是: 累加器：分布式共享只写变量 广播变量：分布式共享只读变量 RDD : 弹性分布式数据集" />
+<link rel="canonical" href="http://localhost:4000/posts/Spark-Data-Structure-Introduction/" />
+<meta property="og:url" content="http://localhost:4000/posts/Spark-Data-Structure-Introduction/" />
 <meta property="og:site_name" content="Blingblogs" />
-<meta property="og:type" content="website" />
-<link rel="next" href="http://localhost:4000/page2" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-11-25T22:30:00+08:00" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="Blingblogs" />
+<meta property="twitter:title" content="Spark Data Structure Introduction" />
 <meta name="twitter:site" content="@sechenbling" />
 <meta name="twitter:creator" content="@sechenbling" />
 <meta name="google-site-verification" content="google_meta_tag_verification" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebSite","author":{"@type":"Person","name":"Lynn Chen","url":"https://github.com/sechenbling/"},"description":"A site with blogs involve backend, big data, or other daily programming records.","headline":"Blingblogs","name":"Lynn Chen","sameAs":["https://twitter.com/sechenbling","https://github.com/sechenbling","https://www.facebook.com/sechenbling","https://space.bilibili.com/15164783"],"url":"http://localhost:4000/"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Lynn Chen","url":"https://github.com/sechenbling/"},"dateModified":"2022-11-25T22:30:00+08:00","datePublished":"2022-11-25T22:30:00+08:00","description":"核心编程： Spark 计算框架为了能够进行高并发和高吞吐的数据处理，封装了三大数据结构，用于处理不同的应用场景。三大数据结构分别是: 累加器：分布式共享只写变量 广播变量：分布式共享只读变量 RDD : 弹性分布式数据集","headline":"Spark Data Structure Introduction","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/Spark-Data-Structure-Introduction/"},"url":"http://localhost:4000/posts/Spark-Data-Structure-Introduction/"}</script>
 <!-- End Jekyll SEO tag -->
 
   
 
-  <title>Blingblogs
+  <title>Spark Data Structure Introduction | Blingblogs
   </title>
 
   
@@ -110,7 +110,12 @@
   <link rel="stylesheet" href="/assets/css/style.css">
 
   
+  <link rel="stylesheet" href="/assets/lib/bootstrap-toc-1.0.1/bootstrap-toc.min.css">
+  
 
+  
+  <!-- Manific Popup -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/magnific-popup@1/dist/magnific-popup.min.css">
   
 
   <!-- JavaScript -->
@@ -493,8 +498,7 @@
 
     <ul class="w-100">
         <!-- home -->
-        <li class="nav-item active
-        ">
+        <li class="nav-item">
         <a href="/" class="nav-link">
             <i class="fa-fw fas fa-home ml-xl-3 mr-xl-3 unloaded"></i>
             <span>HOME</span>
@@ -564,15 +568,30 @@
         <span id="breadcrumb">
         
         
-            <!-- index page -->
-          <span>Home</span>
+          
+            
+              <span>
+                <a href="/">
+                  Home
+                </a>
+              </span>
+            
+          
+            
+          
+            
+              
+                <span>Spark Data Structure Introduction</span>
+              
+            
+          
         
         </span><!-- end of #breadcrumb -->
 
         <i id="sidebar-trigger" class="fas fa-bars fa-fw"></i>
 
         <div id="topbar-title">
-            Blingblogs
+            Post
         </div>
 
         <i id="search-trigger" class="fas fa-search fa-fw"></i>
@@ -610,298 +629,127 @@
 
 
 
-<!-- Get pinned posts -->
+
+
+  <!-- Change the icon of checkbox -->
+
+
+<!-- images -->
+
+
+
+
+  <!-- Add header for code snippets -->
+
+
+
+<!-- Create heading anchors -->
+
+
+
+
+  
+  
+
+  
+    
+    
+
+    
+      
+        
+        
+      
+
+      
+      
+
+      
+      
+      
+
+      
+
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+
+    
+
+    
+
+  
+
+  
+  
+
+  
+
+  
+  
+
+  
+
+  
+  
+
+  
+
+
+
+
+<!-- Wrap prompt element of blockquote with the <div> tag -->
 
 
 
 
 
-<!-- Get default posts -->
 
+<!-- return -->
+<h1 data-toc-skip>Spark Data Structure Introduction</h1>
 
-
-
-
-
-
-
-
-<div id="post-list">
-
-    <div class="post-preview">
-        <div class="d-flex justify-content-between pr-xl-2">
-            <h1><a href="/posts/Update-logs/">Update logs</a></h1>
-            
-            <i class="fas fa-thumbtack fa-fw text-muted mt-1 ml-2 mt-xl-2" data-toggle="tooltip"
-               data-placement="right"
-               title="Pinned"></i>
-            
-        </div>
-        <!-- .post-content -->
-        <div class="post-content">
-            <p>
-                
-
-
-
-
-
-                Update date: 2022-11-27
-
-界面展示
-
-
-  home:
-
-  post:
-
-
-
-Update logs
-
-
-
-  1️⃣ contact info增加了b站的联系方式, 点击右下角即可跳转到b站个人主页.修改了contact info中个人邮箱的获取逻辑, 如果电脑中有outlook会直接打开outlook并获取联系邮箱.修改了contact
-info中个人邮箱的获取...
-            </p>
-        </div>
-        <!-- .post-meta -->
-        <div class="post-meta text-muted d-flex">
-            <div class="mr-auto">
-                <!-- posted date -->
-                <i class="far fa-calendar fa-fw"></i>
-                
+<div class="post-meta text-muted">
+    <!-- published date -->
+    <span>
+      Posted on
+      
 
 
 
 <span class=""
-    data-ts="1668945600"
-    data-df="ll"
-    
-        data-toggle="tooltip"
-        data-placement="bottom"
-    >
-    Nov 20, 2022
-</span>
-
-                <!-- posted time ago -->
-                <i class="far fa-clock fa-fw"></i>
-                <span class="timeago "
-  
-    data-toggle="tooltip"
-    data-placement="bottom"
-    title="Asia/Shanghai"
-  >
-
-  Sunday PM.
-
-  <i class="unloaded">WTZ</i>
-</span>
-
-<!-- title="2022-11-20 20:00:00 +0800"-->
-
-                <!-- posted categories -->
-                
-                <i class="far fa-folder-open fa-fw"></i>
-                <span>
-                  
-                    Logs,
-                    Update
-                </span>
-                
-            </div>
-            
-            <div class="pin">
-                <!-- posted pinned -->
-                <i class="fas fa-thumbtack fa-fw"></i>
-                <span>Pinned</span>
-            </div>
-            
-        </div>
-    </div>
-
-    <div class="post-preview">
-        <div class="d-flex justify-content-between pr-xl-2">
-            <h1><a href="/posts/Data-Warehouse-Design/">Data Warehouse Design</a></h1>
-            
-        </div>
-        <!-- .post-content -->
-        <div class="post-content">
-            <p>
-                
-
-
-
-
-
-                数据仓库设计
-数据仓库分层规划
-
-  使数据体系更加清洗，简单化复杂问题（one data理论分层）
-  
-  ODS:
-  operation data store:业务系统的原始数据，未经处理的数据，放在HDFS以文件形式的存储，从HDFS原路径load(底层是剪切操作)到ODS层。
-  DWD:
-  data warehouse detail:基于维度建模理论进行构建，保存各业务过程中...
-            </p>
-        </div>
-        <!-- .post-meta -->
-        <div class="post-meta text-muted d-flex">
-            <div class="mr-auto">
-                <!-- posted date -->
-                <i class="far fa-calendar fa-fw"></i>
-                
-
-
-
-<span class=""
-    data-ts="1674914400"
-    data-df="ll"
-    
-        data-toggle="tooltip"
-        data-placement="bottom"
-    >
-    Jan 28, 2023
-</span>
-
-                <!-- posted time ago -->
-                <i class="far fa-clock fa-fw"></i>
-                <span class="timeago "
-  
-    data-toggle="tooltip"
-    data-placement="bottom"
-    title="Asia/Shanghai"
-  >
-
-  Saturday PM.
-
-  <i class="unloaded">WTZ</i>
-</span>
-
-<!-- title="2023-01-28 22:00:00 +0800"-->
-
-                <!-- posted categories -->
-                
-                <i class="far fa-folder-open fa-fw"></i>
-                <span>
-                  
-                    Bigdata,
-                    DataWarehouse
-                </span>
-                
-            </div>
-            
-        </div>
-    </div>
-
-    <div class="post-preview">
-        <div class="d-flex justify-content-between pr-xl-2">
-            <h1><a href="/posts/Data-Warehouse-Model/">Data Warehouse Model</a></h1>
-            
-        </div>
-        <!-- .post-content -->
-        <div class="post-content">
-            <p>
-                
-
-
-
-
-
-                数据仓库介绍
-数据仓库
-
-  用于存储分析报告的数据系统
-    
-      并不产生数据（数据来自于外部系统） 也不消费数据（其结果开放给外部应用使用）
-    
-  
-  构建面向分析的集成化数据环境，分析结构提供决策
-  对比OLAP和OLTP
-    
-      各类型的数据库保存相关数据（关系型数据库是OLTP的典型应用） 但不会在数据库上直接分析数据
-      数据仓库是O...
-            </p>
-        </div>
-        <!-- .post-meta -->
-        <div class="post-meta text-muted d-flex">
-            <div class="mr-auto">
-                <!-- posted date -->
-                <i class="far fa-calendar fa-fw"></i>
-                
-
-
-
-<span class=""
-    data-ts="1674912600"
-    data-df="ll"
-    
-        data-toggle="tooltip"
-        data-placement="bottom"
-    >
-    Jan 28, 2023
-</span>
-
-                <!-- posted time ago -->
-                <i class="far fa-clock fa-fw"></i>
-                <span class="timeago "
-  
-    data-toggle="tooltip"
-    data-placement="bottom"
-    title="Asia/Shanghai"
-  >
-
-  Saturday PM.
-
-  <i class="unloaded">WTZ</i>
-</span>
-
-<!-- title="2023-01-28 21:30:00 +0800"-->
-
-                <!-- posted categories -->
-                
-                <i class="far fa-folder-open fa-fw"></i>
-                <span>
-                  
-                    Bigdata,
-                    DataWarehouse
-                </span>
-                
-            </div>
-            
-        </div>
-    </div>
-
-    <div class="post-preview">
-        <div class="d-flex justify-content-between pr-xl-2">
-            <h1><a href="/posts/Spark-Streaming-Introduction/">Spark Streaming Introduction</a></h1>
-            
-        </div>
-        <!-- .post-content -->
-        <div class="post-content">
-            <p>
-                
-
-
-
-
-
-                Spark Streaming基本介绍
-Spark Streaming
-Spark Streaming 用于流式数据的处理。Spark Streaming 支持的数据输入源很多，例如：Kafka、 Flume、Twitter、ZeroMQ 和简单的 TCP 套接字等等。数据输入后可以用 Spark 的高度抽象原语,如：map、reduce、join、window 等进行运算。而结果也能保存在...
-            </p>
-        </div>
-        <!-- .post-meta -->
-        <div class="post-meta text-muted d-flex">
-            <div class="mr-auto">
-                <!-- posted date -->
-                <i class="far fa-calendar fa-fw"></i>
-                
-
-
-
-<span class=""
-    data-ts="1669387500"
+    data-ts="1669386600"
     data-df="ll"
     
         data-toggle="tooltip"
@@ -909,70 +757,18 @@ Spark Streaming 用于流式数据的处理。Spark Streaming 支持的数据输
     >
     Nov 25, 2022
 </span>
+    </span>
 
-                <!-- posted time ago -->
-                <i class="far fa-clock fa-fw"></i>
-                <span class="timeago "
-  
-    data-toggle="tooltip"
-    data-placement="bottom"
-    title="Asia/Shanghai"
-  >
-
-  Friday PM.
-
-  <i class="unloaded">WTZ</i>
-</span>
-
-<!-- title="2022-11-25 22:45:00 +0800"-->
-
-                <!-- posted categories -->
-                
-                <i class="far fa-folder-open fa-fw"></i>
-                <span>
-                  
-                    Bigdata,
-                    Spark
-                </span>
-                
-            </div>
-            
-        </div>
-    </div>
-
-    <div class="post-preview">
-        <div class="d-flex justify-content-between pr-xl-2">
-            <h1><a href="/posts/Spark-Sql-Introduction/">Spark Sql Introduction</a></h1>
-            
-        </div>
-        <!-- .post-content -->
-        <div class="post-content">
-            <p>
-                
-
-
-
-
-
-                SparkSQL基本介绍
-Spark Sql
-Spark SQL 是Spark用于结构化数据处理的Spark模块:
-
-  数据兼容方面: SparkSQL 不但兼容 Hive，还可以从 RDD、parquet 文件、JSON 文件中获取数据，未来版本甚至支持获取 RDBMS 数据以及 cassandra 等 NOSQL 数据；
-  性能优化方面: 除了采取 In-Memory Columna...
-            </p>
-        </div>
-        <!-- .post-meta -->
-        <div class="post-meta text-muted d-flex">
-            <div class="mr-auto">
-                <!-- posted date -->
-                <i class="far fa-calendar fa-fw"></i>
-                
+    <!-- lastmod date -->
+    
+    <span>
+      Updated on
+      
 
 
 
 <span class=""
-    data-ts="1669387200"
+    data-ts="1669386600"
     data-df="ll"
     
         data-toggle="tooltip"
@@ -980,100 +776,142 @@ Spark SQL 是Spark用于结构化数据处理的Spark模块:
     >
     Nov 25, 2022
 </span>
+    </span>
+    
 
-                <!-- posted time ago -->
-                <i class="far fa-clock fa-fw"></i>
-                <span class="timeago "
-  
-    data-toggle="tooltip"
-    data-placement="bottom"
-    title="Asia/Shanghai"
-  >
+    
 
-  Friday PM.
+    <div class="d-flex justify-content-between">
+        <span>
+          
 
-  <i class="unloaded">WTZ</i>
-</span>
+          By
+          <span>
+          
+            
+              <a href="https://github.com/sechenbling/">Lynn Chen</a>
+              
+            
+          
+          </span>
+        </span>
+    </div>
+</div>
 
-<!-- title="2022-11-25 22:40:00 +0800"-->
+<div class="post-content">
+    <h2 id="核心编程"><span class="mr-2">核心编程：</span><a href="#核心编程" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+<p>Spark 计算框架为了能够进行高并发和高吞吐的数据处理，封装了三大数据结构，用于处理不同的应用场景。三大数据结构分别是:</p>
+<ul>
+  <li>累加器：分布式共享只写变量</li>
+  <li>广播变量：分布式共享只读变量</li>
+  <li>RDD : 弹性分布式数据集</li>
+</ul>
 
-                <!-- posted categories -->
-                
-                <i class="far fa-folder-open fa-fw"></i>
-                <span>
-                  
-                    Bigdata,
-                    Spark
-                </span>
-                
-            </div>
+<h2 id="累加器"><span class="mr-2">累加器:</span><a href="#累加器" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+<p>累加器用来把 Executor 端变量信息聚合到 Driver 端。在 Driver 程序中定义的变量，在 Executor 端的每个 Task 都会得到这个变量的一份新的副本，每个 task 更新这些副本的值后，传回 Driver 端进行 merge。</p>
+
+<h2 id="广播变量"><span class="mr-2">广播变量:</span><a href="#广播变量" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+<p>广播变量用来高效分发较大的对象。向所有工作节点发送一个较大的只读值，以供一个或多个 Spark 操作使用。比如，如果你的应用需要向所有节点发送一个较大的只读查询表， 广播变量用起来都很顺手。在多个并行操作中使用同一个变量，Spark 会为每个任务分别发送（闭包数据都是以Task为单位发送的），会导致在Executor中包含同样的一份数据导致冗余，占用大量的内存。广播变量就是将数据放在Executor的内存当中，而不是放在每一个task中，从而达到共享的目的。这份数据只读，保证线程安全。</p>
+
+<h2 id="rdd"><span class="mr-2">RDD:</span><a href="#rdd" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+<p>全称为 resilient distributed dataset 弹性分布式数据集, Spark中最基本的数据处理模型。代码中是一个抽象类，它代表一个弹性的、不可变、可分区、里面的元素可并行计算的集合。每个RDD都是一个计算单元，将多个RDD进行关联组成一个完整的需求计算逻辑。</p>
+
+</div>
+
+<div class="post-tail-wrapper text-muted">
+
+    <!-- categories -->
+    
+    <div class="post-meta mb-3">
+        <i class="far fa-folder-open fa-fw mr-1"></i>
+        
+        <a href='/categories/bigdata/'>Bigdata</a>,
+        <a href='/categories/spark/'>Spark</a>
+    </div>
+    
+
+    <!-- tags -->
+    
+    <div class="post-tags">
+        <i class="fa fa-tags fa-fw mr-1"></i>
+        
+        <a href="/tags/spark/"
+           class="post-tag no-text-decoration">spark</a>
+        
+    </div>
+    
+
+    <div class="post-tail-bottom
+    d-flex justify-content-between align-items-center mt-3 pt-5 pb-2">
+        <div class="license-wrapper">
+
+            
+
+            
+
+            This post is licensed under 
+            <a href="https://creativecommons.org/licenses/by/4.0/">
+                CC BY 4.0
+            </a>
+             by the author.
+
             
         </div>
-    </div>
 
-</div> <!-- #post-list -->
-
-
-    <ul class="pagination mt-4 mb-0 pl-lg-2">
-  <!-- left arrow -->
-  
-  <li class="page-item disabled">
-    <a class="page-link btn-box-shadow" href="#" aria-label="previous-page">
-      <i class="fas fa-angle-left"></i>
-    </a>
-  </li>
-
-  <!-- page numbers -->
-  
-  
-
-  
-
-    
-    
-    
+        <div class="share-wrapper">
+  <span class="share-label text-muted mr-1">Share</span>
+  <span class="share-icons">
     
     
 
     
-
+      
+        <a href="http://connect.qq.com/widget/shareqq/index.html?title=Spark Data Structure Introduction - Blingblogs&url=http://localhost:4000/posts/Spark-Data-Structure-Introduction/" data-toggle="tooltip" data-placement="top"
+          title="QQ" target="_blank" rel="noopener" aria-label="QQ">
+          <i class="fa-fw fab fa-qq" style="color:#AEB6BF"></i>
+        </a>
     
-      <!-- show number -->
-      <li class="page-item  active">
-        <a class="page-link btn-box-shadow" href="/">1</a>
-      </li>
+      
+        <a href="https://open.weixin.qq.com/sdk/report" data-toggle="tooltip" data-placement="top"
+          title="WeChat" target="_blank" rel="noopener" aria-label="WeChat">
+          <i class="fa-fw fab fa-weixin" style="color:#AEB6BF"></i>
+        </a>
+    
+      
+        <a href="https://t.bilibili.com/" data-toggle="tooltip" data-placement="top"
+          title="Bilibili" target="_blank" rel="noopener" aria-label="Bilibili">
+          <i class="fa-fw fa-brands fa-bilibili" style="color:#AEB6BF"></i>
+        </a>
+    
+      
+        <a href="http://service.weibo.com/share/share.php?title=Spark Data Structure Introduction - Blingblogs&url=http://localhost:4000/posts/Spark-Data-Structure-Introduction/" data-toggle="tooltip" data-placement="top"
+          title="Weibo" target="_blank" rel="noopener" aria-label="Weibo">
+          <i class="fa-fw fab fa-weibo" style="color:#AEB6BF"></i>
+        </a>
+    
+      
+        <a href="https://www.linkedin.com/sharing/share-offsite/?url=http://localhost:4000/posts/Spark-Data-Structure-Introduction/" data-toggle="tooltip" data-placement="top"
+          title="Linkedin" target="_blank" rel="noopener" aria-label="Linkedin">
+          <i class="fa-fw fab fa-linkedin" style="color:#AEB6BF"></i>
+        </a>
+    
+      
+        <a href="https://twitter.com/intent/tweet?text=Spark Data Structure Introduction - Blingblogs&url=http://localhost:4000/posts/Spark-Data-Structure-Introduction/" data-toggle="tooltip" data-placement="top"
+          title="Twitter" target="_blank" rel="noopener" aria-label="Twitter">
+          <i class="fa-fw fab fa-twitter" style="color:#AEB6BF"></i>
+        </a>
     
 
-  
+    <i class="fa-fw fas fa-link small" onclick="copyLink()"
+        data-toggle="tooltip" data-placement="top" title="Copy link" style="color:#AEB6BF"></i>
 
-    
-    
-    
-    
-    
-
-    
-
-    
-      <!-- show number -->
-      <li class="page-item ">
-        <a class="page-link btn-box-shadow" href="/page2/">2</a>
-      </li>
-    
-
-  
-
-  <!-- right arrow -->
-  
-  <li class="page-item ">
-    <a class="page-link btn-box-shadow" href="/page2" aria-label="next-page">
-      <i class="fas fa-angle-right"></i>
-    </a>
-  </li>
-
-</ul> <!-- .pagination -->
+  </span>
+</div>
 
 
+    </div><!-- .post-tail-bottom -->
+
+</div><!-- div.post-tail-wrapper -->
 
                 
             
@@ -1269,10 +1107,295 @@ Spark SQL 是Spark用于结构化数据处理的Spark模块:
 
         </div>
         
+            
+            
+
+
+
+<!-- BS-toc.js will be loaded at medium priority -->
+<script src="/assets/lib/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script>
+
+<div id="toc-wrapper" class="pl-0 pr-4 mb-5">
+  <div class="panel-heading pl-3 pt-2 mb-2">Contents</div>
+  <nav id="toc" data-toggle="toc"></nav>
+</div>
+
+
+        
     </div>
 </div>
 
 <!-- tail -->
+
+<div class="row">
+    <div id="tail-wrapper" class="col-12 col-lg-11 col-xl-9 pl-3 pr-3 pr-xl-4 mt-5">
+        
+            
+            <!--
+ Recommend the other 3 posts according to the tags and categories of the current post,
+ if the number is not enough, use the other latest posts to supplement.
+-->
+
+<!-- The total size of related posts  -->
+
+
+<!-- An random integer that bigger than 0  -->
+
+
+<!-- Equals to TAG_SCORE / {max_categories_hierarchy}  -->
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+
+<!-- Fill with the other newlest posts  -->
+
+
+
+
+
+<div id="related-posts" class="mb-2 mb-sm-4">
+  <h3 class="pt-2 mb-4 ml-1"
+      data-toc-skip>Related Reading</h3>
+  <div class="card-deck mb-4">
+    
+    
+    
+    <div class="card">
+      <a href="/posts/Spark-Sql-Introduction/">
+        <div class="card-body">
+          
+
+
+
+<em class="small"
+    data-ts="1669387200"
+    data-df="ll"
+    >
+    Nov 25, 2022
+</em>
+          <h3 class="pt-0 mt-1 mb-3" data-toc-skip>Spark Sql Introduction</h3>
+          <div class="text-muted small">
+            <p>
+              
+
+
+
+
+
+              SparkSQL基本介绍
+Spark Sql
+Spark SQL 是Spark用于结构化数据处理的Spark模块:
+
+  数据兼容方面: SparkSQL 不但兼容 Hive，还可以从 RDD、parquet 文件、JSON 文件中获取数据，未来版本甚至支持获取 RDBMS 数据以及 cassandra 等 NOSQL 数据；
+  性能优化方面: 除了采取 In-Memory Columna...
+            </p>
+          </div>
+        </div>
+      </a>
+    </div>
+    
+    
+    
+    <div class="card">
+      <a href="/posts/Spark-Streaming-Introduction/">
+        <div class="card-body">
+          
+
+
+
+<em class="small"
+    data-ts="1669387500"
+    data-df="ll"
+    >
+    Nov 25, 2022
+</em>
+          <h3 class="pt-0 mt-1 mb-3" data-toc-skip>Spark Streaming Introduction</h3>
+          <div class="text-muted small">
+            <p>
+              
+
+
+
+
+
+              Spark Streaming基本介绍
+Spark Streaming
+Spark Streaming 用于流式数据的处理。Spark Streaming 支持的数据输入源很多，例如：Kafka、 Flume、Twitter、ZeroMQ 和简单的 TCP 套接字等等。数据输入后可以用 Spark 的高度抽象原语,如：map、reduce、join、window 等进行运算。而结果也能保存在...
+            </p>
+          </div>
+        </div>
+      </a>
+    </div>
+    
+    
+    
+    <div class="card">
+      <a href="/posts/Data-Warehouse-Model/">
+        <div class="card-body">
+          
+
+
+
+<em class="small"
+    data-ts="1674912600"
+    data-df="ll"
+    >
+    Jan 28, 2023
+</em>
+          <h3 class="pt-0 mt-1 mb-3" data-toc-skip>Data Warehouse Model</h3>
+          <div class="text-muted small">
+            <p>
+              
+
+
+
+
+
+              数据仓库介绍
+数据仓库
+
+  用于存储分析报告的数据系统
+    
+      并不产生数据（数据来自于外部系统） 也不消费数据（其结果开放给外部应用使用）
+    
+  
+  构建面向分析的集成化数据环境，分析结构提供决策
+  对比OLAP和OLTP
+    
+      各类型的数据库保存相关数据（关系型数据库是OLTP的典型应用） 但不会在数据库上直接分析数据
+      数据仓库是O...
+            </p>
+          </div>
+        </div>
+      </a>
+    </div>
+    
+  </div> <!-- .card-deck -->
+</div> <!-- #related-posts -->
+
+
+        
+            
+            <!--
+  Navigation buttons at the bottom of the post.
+-->
+
+<div class="post-navigation d-flex justify-content-between">
+  
+  <a href="/posts/Update-logs/" class="btn btn-outline-primary"
+     prompt="Previous Post">
+    <p>Update logs</p>
+  </a>
+  
+
+  
+  <a href="/posts/Spark-Sql-Introduction/" class="btn btn-outline-primary"
+     prompt="Next Post">
+    <p>Spark Sql Introduction</p>
+  </a>
+  
+
+</div>
+        
+    </div>
+</div>
 
 
             </div>
@@ -1507,6 +1630,52 @@ SimpleJekyllSearch({
 
         <!-- layout specified -->
 
+    
+    <!-- pv-report needs countup.js -->
+        <script async src="https://cdn.jsdelivr.net/npm/countup.js@1.9.3/dist/countUp.min.js"></script>
+        <script defer src="/assets/js/dist/pvreport.min.js"></script>
+    
+
+
+
+    <!-- image lazy-loading & popup & clipboard -->
+    
+    
+
+
+
+
+
+
+
+  
+    
+
+    
+
+  
+
+
+
+  
+
+    <script src="/assets/lib/lozad-1.16.0/lozad.min.js"></script>
+
+  
+
+
+
+  
+
+    <script src="/assets/lib/clipboard-2.0.9/clipboard.min.js"></script>
+
+  
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/combine/npm/magnific-popup@1/dist/jquery.magnific-popup.min.js"></script>
+
 
 
 
@@ -1560,7 +1729,7 @@ SimpleJekyllSearch({
 
 
 
-<script defer src="/assets/js/dist/home.min.js"></script>
+<script defer src="/assets/js/dist/post.min.js"></script>
 
 
 
