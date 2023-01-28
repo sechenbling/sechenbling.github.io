@@ -5,7 +5,7 @@
     title="{{ site.timezone }}"
   {% endif %}>
 
-  {{include.date | timeago: site.time}}
+  {{ include.date |  date: "%A %p." }}
 
   <i class="unloaded">{{ include.date | date: "%Z" }}</i>
 </span>

@@ -954,11 +954,6 @@
       
       
       
-      <li><a href="/posts/Data-Warehouse-Design/">Data Warehouse Design</a></li>
-      
-      
-      
-      
       <li><a href="/posts/Data-Warehouse-Model/">Data Warehouse Model</a></li>
       
       
@@ -975,6 +970,11 @@
       
       
       <li><a href="/posts/Spark-Data-Structure-Introduction/">Spark Data Structure Introduction</a></li>
+      
+      
+      
+      
+      <li><a href="/posts/Update-logs/">Update logs</a></li>
       
     </ul>
   </div> <!-- #access-lastmod -->
@@ -1024,17 +1024,6 @@
     
     
     
-      
-        
-        
-
-  
-    
-    
-    
-    
-      
-    
   
     
     
@@ -1054,6 +1043,17 @@
     
     
     
+      
+        
+        
+
+  
+    
+    
+    
+    
+      
+    
   
     
     
@@ -1067,6 +1067,8 @@
     
     
     
+    
+      
     
   
     
@@ -1105,10 +1107,10 @@
     <a class="post-tag" href="/tags/spark/">spark</a>
     
     
-    <a class="post-tag" href="/tags/data-warehouse/">data warehouse</a>
-    
-    
     <a class="post-tag" href="/tags/markdown/">markdown</a>
+    
+    
+    <a class="post-tag" href="/tags/data-warehouse/">data warehouse</a>
     
     
     <a class="post-tag" href="/tags/logs/">logs</a>
@@ -1166,18 +1168,6 @@
 
 
 
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
 
   
 
@@ -1350,7 +1340,7 @@ Spark SQL 是Spark用于结构化数据处理的Spark模块:
     
     
     <div class="card">
-      <a href="/posts/Data-Warehouse-Design/">
+      <a href="/posts/Data-Warehouse-Model/">
         <div class="card-body">
           
 
@@ -1362,7 +1352,7 @@ Spark SQL 是Spark用于结构化数据处理的Spark模块:
     >
     Jan 28, 2023
 </em>
-          <h3 class="pt-0 mt-1 mb-3" data-toc-skip>Data Warehouse Design</h3>
+          <h3 class="pt-0 mt-1 mb-3" data-toc-skip>Data Warehouse Model</h3>
           <div class="text-muted small">
             <p>
               
@@ -1371,15 +1361,19 @@ Spark SQL 是Spark用于结构化数据处理的Spark模块:
 
 
 
-              数据仓库设计
-数据仓库分层规划
+              数据仓库介绍
+数据仓库
 
-  使数据体系更加清洗，简单化复杂问题（one data理论分层）
+  用于存储分析报告的数据系统
+    
+      并不产生数据（数据来自于外部系统） 也不消费数据（其结果开放给外部应用使用）
+    
   
-  ODS
-  operation data store:业务系统的原始数据，未经处理的数据，放在HDFS以文件形式的存储，从HDFS原路径load(底层是剪切操作)到ODS层。
-DWD
-  data warehouse detail:基于维度建模理论进行构建，保存各业务过程中最小粒度...
+  构建面向分析的集成化数据环境，分析结构提供决策
+  对比OLAP和OLTP
+    
+      各类型的数据库保存相关数据（关系型数据库是OLTP的典型应用） 但不会在数据库上直接分析数据
+      数据仓库是O...
             </p>
           </div>
         </div>
@@ -1405,9 +1399,9 @@ DWD
   
 
   
-  <a href="/posts/Data-Warehouse-Design/" class="btn btn-outline-primary"
+  <a href="/posts/Data-Warehouse-Model/" class="btn btn-outline-primary"
      prompt="Next Post">
-    <p>Data Warehouse Design</p>
+    <p>Data Warehouse Model</p>
   </a>
   
 
@@ -1469,17 +1463,6 @@ DWD
     
     
     
-      
-        
-        
-
-  
-    
-    
-    
-    
-      
-    
   
     
     
@@ -1499,6 +1482,17 @@ DWD
     
     
     
+      
+        
+        
+
+  
+    
+    
+    
+    
+      
+    
   
     
     
@@ -1512,6 +1506,8 @@ DWD
     
     
     
+    
+      
     
   
     
@@ -1550,10 +1546,10 @@ DWD
     <a class="post-tag" href="/tags/spark/">spark</a>
     
     
-    <a class="post-tag" href="/tags/data-warehouse/">data warehouse</a>
-    
-    
     <a class="post-tag" href="/tags/markdown/">markdown</a>
+    
+    
+    <a class="post-tag" href="/tags/data-warehouse/">data warehouse</a>
     
     
     <a class="post-tag" href="/tags/logs/">logs</a>

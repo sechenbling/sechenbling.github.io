@@ -4,7 +4,7 @@
   <id>http://localhost:4000/</id>
   <title>Blingblogs</title>
   <subtitle>A site with blogs involve backend, big data, or other daily programming records.</subtitle>
-  <updated>2023-01-28T23:28:39+08:00</updated>
+  <updated>2023-01-29T01:04:57+08:00</updated>
   <author>
     <name>Lynn Chen</name>
     <uri>http://localhost:4000/</uri>
@@ -71,59 +71,6 @@
   集成性integrated 主题相关的数据通常会分布在多个操作系统中，彼此分散独立异构，需要集成在数仓主题下
     
       数据进入数据仓库前需要经过统一和综合，对数据进行抽取、...
-    </summary>
-  
-
-  </entry>
-
-  
-  <entry>
-    <title>Data Warehouse Design</title>
-    <link href="http://localhost:4000/posts/Data-Warehouse-Design/" rel="alternate" type="text/html" title="Data Warehouse Design" />
-    <published>2023-01-28T21:30:00+08:00</published>
-  
-    <updated>2023-01-28T21:35:00+08:00</updated>
-  
-    <id>http://localhost:4000/posts/Data-Warehouse-Design/</id>
-    <content src="http://localhost:4000/posts/Data-Warehouse-Design/" />
-    <author>
-      <name>Lynn</name>
-    </author>
-
-  
-    
-    <category term="Bigdata" />
-    
-    <category term="DataWarehouse" />
-    
-  
-
-  
-    <summary>
-      
-
-
-
-
-
-      数据仓库设计
-数据仓库分层规划
-
-  使数据体系更加清洗，简单化复杂问题（one data理论分层）
-  
-  ODS
-  operation data store:业务系统的原始数据，未经处理的数据，放在HDFS以文件形式的存储，从HDFS原路径load(底层是剪切操作)到ODS层。
-DWD
-  data warehouse detail:基于维度建模理论进行构建，保存各业务过程中最小粒度的操作记录，存放事实表。
-DIM
-  dimension:基于维度建模理论进行构建，存放维度表，保存一致性维度信息。
-DWS
-  data warehouse summary:需求驱动来建立对应的表，以分析的主题对象作为建模驱动构建公共统计粒度（不同需求之间通用的计算结果，减少重复计算）的汇总表。
-ADS:
-  application data service:存放各项统计指标结果。
-
-
-数仓构建...
     </summary>
   
 
@@ -264,6 +211,60 @@ Spark 计算框架为了能够进行高并发和高吞吐的数据处理，封�
 
 广播变量:
 广播变量用来高效分发较大的对象。向所有工作节点发送一个较大的只读值，以供一个或多个 Spark 操作使用。比如，如果你的应用需要向所有节点发送一个较大的只读查询表， 广播变量用起来都很顺手。在多个并行操作中使用同一个变量，Spark 会为每个任务分别发送（闭包数据都是以T...
+    </summary>
+  
+
+  </entry>
+
+  
+  <entry>
+    <title>Update logs</title>
+    <link href="http://localhost:4000/posts/Update-logs/" rel="alternate" type="text/html" title="Update logs" />
+    <published>2022-11-20T20:00:00+08:00</published>
+  
+    <updated>2022-11-27T21:30:00+08:00</updated>
+  
+    <id>http://localhost:4000/posts/Update-logs/</id>
+    <content src="http://localhost:4000/posts/Update-logs/" />
+    <author>
+      <name>Lynn</name>
+    </author>
+
+  
+    
+    <category term="Logs" />
+    
+    <category term="Update" />
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      Update date: 2022-11-27
+
+界面展示
+
+
+  home:
+
+  post:
+
+
+
+Update logs
+
+
+
+  1️⃣ contact info增加了b站的联系方式, 点击右下角即可跳转到b站个人主页.修改了contact info中个人邮箱的获取逻辑, 如果电脑中有outlook会直接打开outlook并获取联系邮箱.修改了contact
+info中个人邮箱的获取逻辑, 如果电脑中有outlook会直接打开outlook并获取联系邮箱.
+2️⃣ posts sharing增加了QQ,微信,b站,微博,linkedin的sharing方式, 保留twitter; 其中qq和微信不会直接跳转到分享页面, 而是通过生成分享二维码的方式进行取代.
+3️⃣ 调整了两种颜色主题的全局表现, 现在默认界面会根据打开平台进行默认设置(比如移动端使用了暗色主题,则会自动打开...
     </summary>
   
 

@@ -1376,11 +1376,6 @@ info中个人邮箱的获取逻辑, 如果电脑中有outlook会直接打开outl
       
       
       
-      <li><a href="/posts/Data-Warehouse-Design/">Data Warehouse Design</a></li>
-      
-      
-      
-      
       <li><a href="/posts/Data-Warehouse-Model/">Data Warehouse Model</a></li>
       
       
@@ -1397,6 +1392,11 @@ info中个人邮箱的获取逻辑, 如果电脑中有outlook会直接打开outl
       
       
       <li><a href="/posts/Spark-Data-Structure-Introduction/">Spark Data Structure Introduction</a></li>
+      
+      
+      
+      
+      <li><a href="/posts/Update-logs/">Update logs</a></li>
       
     </ul>
   </div> <!-- #access-lastmod -->
@@ -1446,17 +1446,6 @@ info中个人邮箱的获取逻辑, 如果电脑中有outlook会直接打开outl
     
     
     
-      
-        
-        
-
-  
-    
-    
-    
-    
-      
-    
   
     
     
@@ -1476,6 +1465,17 @@ info中个人邮箱的获取逻辑, 如果电脑中有outlook会直接打开outl
     
     
     
+      
+        
+        
+
+  
+    
+    
+    
+    
+      
+    
   
     
     
@@ -1489,6 +1489,8 @@ info中个人邮箱的获取逻辑, 如果电脑中有outlook会直接打开outl
     
     
     
+    
+      
     
   
     
@@ -1527,10 +1529,10 @@ info中个人邮箱的获取逻辑, 如果电脑中有outlook会直接打开outl
     <a class="post-tag" href="/tags/spark/">spark</a>
     
     
-    <a class="post-tag" href="/tags/data-warehouse/">data warehouse</a>
-    
-    
     <a class="post-tag" href="/tags/markdown/">markdown</a>
+    
+    
+    <a class="post-tag" href="/tags/data-warehouse/">data warehouse</a>
     
     
     <a class="post-tag" href="/tags/logs/">logs</a>
@@ -1588,18 +1590,6 @@ info中个人邮箱的获取逻辑, 如果电脑中有outlook会直接打开outl
 
 
 
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
 
   
 
@@ -1769,45 +1759,6 @@ info中个人邮箱的获取逻辑, 如果电脑中有outlook会直接打开outl
     
     
     <div class="card">
-      <a href="/posts/Data-Warehouse-Design/">
-        <div class="card-body">
-          
-
-
-
-<em class="small"
-    data-ts="1674912600"
-    data-df="ll"
-    >
-    Jan 28, 2023
-</em>
-          <h3 class="pt-0 mt-1 mb-3" data-toc-skip>Data Warehouse Design</h3>
-          <div class="text-muted small">
-            <p>
-              
-
-
-
-
-
-              数据仓库设计
-数据仓库分层规划
-
-  使数据体系更加清洗，简单化复杂问题（one data理论分层）
-  
-  ODS
-  operation data store:业务系统的原始数据，未经处理的数据，放在HDFS以文件形式的存储，从HDFS原路径load(底层是剪切操作)到ODS层。
-DWD
-  data warehouse detail:基于维度建模理论进行构建，保存各业务过程中最小粒度...
-            </p>
-          </div>
-        </div>
-      </a>
-    </div>
-    
-    
-    
-    <div class="card">
       <a href="/posts/Spark-Streaming-Introduction/">
         <div class="card-body">
           
@@ -1832,6 +1783,42 @@ DWD
               Spark Streaming基本介绍
 Spark Streaming
 Spark Streaming 用于流式数据的处理。Spark Streaming 支持的数据输入源很多，例如：Kafka、 Flume、Twitter、ZeroMQ 和简单的 TCP 套接字等等。数据输入后可以用 Spark 的高度抽象原语,如：map、reduce、join、window 等进行运算。而结果也能保存在...
+            </p>
+          </div>
+        </div>
+      </a>
+    </div>
+    
+    
+    
+    <div class="card">
+      <a href="/posts/Spark-Sql-Introduction/">
+        <div class="card-body">
+          
+
+
+
+<em class="small"
+    data-ts="1669387200"
+    data-df="ll"
+    >
+    Nov 25, 2022
+</em>
+          <h3 class="pt-0 mt-1 mb-3" data-toc-skip>Spark Sql Introduction</h3>
+          <div class="text-muted small">
+            <p>
+              
+
+
+
+
+
+              SparkSQL基本介绍
+Spark Sql
+Spark SQL 是Spark用于结构化数据处理的Spark模块:
+
+  数据兼容方面: SparkSQL 不但兼容 Hive，还可以从 RDD、parquet 文件、JSON 文件中获取数据，未来版本甚至支持获取 RDBMS 数据以及 cassandra 等 NOSQL 数据；
+  性能优化方面: 除了采取 In-Memory Columna...
             </p>
           </div>
         </div>
@@ -1921,17 +1908,6 @@ Spark Streaming 用于流式数据的处理。Spark Streaming 支持的数据输
     
     
     
-      
-        
-        
-
-  
-    
-    
-    
-    
-      
-    
   
     
     
@@ -1951,6 +1927,17 @@ Spark Streaming 用于流式数据的处理。Spark Streaming 支持的数据输
     
     
     
+      
+        
+        
+
+  
+    
+    
+    
+    
+      
+    
   
     
     
@@ -1964,6 +1951,8 @@ Spark Streaming 用于流式数据的处理。Spark Streaming 支持的数据输
     
     
     
+    
+      
     
   
     
@@ -2002,10 +1991,10 @@ Spark Streaming 用于流式数据的处理。Spark Streaming 支持的数据输
     <a class="post-tag" href="/tags/spark/">spark</a>
     
     
-    <a class="post-tag" href="/tags/data-warehouse/">data warehouse</a>
-    
-    
     <a class="post-tag" href="/tags/markdown/">markdown</a>
+    
+    
+    <a class="post-tag" href="/tags/data-warehouse/">data warehouse</a>
     
     
     <a class="post-tag" href="/tags/logs/">logs</a>
