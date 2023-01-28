@@ -1,62 +1,44 @@
+---
+layout: compress
+
+# The list to be cached by PWA
+---
+
 const resource = [
     /* --- CSS --- */
-    '/assets/css/style.css',
+    '{{ "/assets/css/style.css" | relative_url }}',
 
     /* --- PWA --- */
-    '/app.js',
-    '/sw.js',
+    '{{ "/app.js" | relative_url }}',
+    '{{ "/sw.js" | relative_url }}',
 
     /* --- HTML --- */
-    '/index.html',
-    '/404.html',
+    '{{ "/index.html" | relative_url }}',
+    '{{ "/404.html" | relative_url }}',
 
-    
-        '/about/',
-    
+    {% for tab in site.tabs %}
+        '{{ tab.url | relative_url }}',
+    {% endfor %}
 
     /* --- Favicons & compressed JS --- */
-    
-    
-        '/assets/img/favicons/android-icon-144x144.png',
-        '/assets/img/favicons/android-icon-192x192.png',
-        '/assets/img/favicons/android-icon-36x36.png',
-        '/assets/img/favicons/android-icon-48x48.png',
-        '/assets/img/favicons/android-icon-72X72.png',
-        '/assets/img/favicons/android-icon-96x96.png',
-        '/assets/img/favicons/apple-icon-114X114.png',
-        '/assets/img/favicons/apple-icon-120X120.png',
-        '/assets/img/favicons/apple-icon-144X144.png',
-        '/assets/img/favicons/apple-icon-152X152.png',
-        '/assets/img/favicons/apple-icon-180X180.png',
-        '/assets/img/favicons/apple-icon-57x57.png',
-        '/assets/img/favicons/apple-icon-60X60.png',
-        '/assets/img/favicons/apple-icon-72X72.png',
-        '/assets/img/favicons/apple-icon-76X76.png',
-        '/assets/img/favicons/apple-icon-precomposed.png',
-        '/assets/img/favicons/apple-icon.png',
-        '/assets/img/favicons/favicon-16x16.png',
-        '/assets/img/favicons/favicon-32x32.png',
-        '/assets/img/favicons/favicon-96x96.png',
-        '/assets/img/favicons/favicon.ico',
-        '/assets/img/favicons/ms-icon-144x144.png',
-        '/assets/img/favicons/ms-icon-150x150.png',
-        '/assets/img/favicons/ms-icon-310X310.png',
-        '/assets/img/favicons/ms-icon-70x70.png',
-        '/assets/js/dist/commons.min.js',
-        '/assets/js/dist/home.min.js',
-        '/assets/js/dist/misc.min.js',
-        '/assets/js/dist/page.min.js',
-        '/assets/js/dist/post.min.js',
-        '/assets/js/dist/pvreport.min.js'
+    {% assign cache_list = site.static_files | where: 'swcache', true  %}
+    {% for file in cache_list %}
+        '{{ file.path | relative_url }}'{%- unless forloop.last -%},{%- endunless -%}
+    {% endfor %}
 ];
 
 /* The request url with below domain will be cached */
 const allowedDomains = [
-    
+    {% if site.google_analytics.id != empty and site.google_analytics.id %}
+        'www.googletagmanager.com',
+        'www.google-analytics.com',
+    {% endif %}
 
-    'localhost:4000',
+    '{{ site.url | split: "//" | last }}',
 
-    
+    {% if site.img_cdn contains '//' and site.img_cdn %}
+        '{{ site.img_cdn | split: '//' | last | split: '/' | first }}',
+    {% endif %}
 
     'fonts.gstatic.com',
     'fonts.googleapis.com',
@@ -66,6 +48,7 @@ const allowedDomains = [
 
 /* Requests that include the following path will be banned */
 const denyUrls = [
-    
+    {% if site.google_analytics.pv.cache_path %}
+        '{{ site.google_analytics.pv.cache_path | absolute_url }}'
+    {% endif %}
 ];
-
