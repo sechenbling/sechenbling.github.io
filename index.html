@@ -27,8 +27,8 @@
   
 
   
-  <!-- Begin Jekyll SEO tag v2.8.0 -->
-<meta name="generator" content="Jekyll v3.9.2" />
+  <!-- Begin Jekyll SEO tag v2.6.1 -->
+<meta name="generator" content="Jekyll v3.9.0" />
 <meta property="og:title" content="Blingblogs" />
 <meta name="author" content="Lynn Chen" />
 <meta property="og:locale" content="en" />
@@ -37,7 +37,6 @@
 <link rel="canonical" href="http://localhost:4000/" />
 <meta property="og:url" content="http://localhost:4000/" />
 <meta property="og:site_name" content="Blingblogs" />
-<meta property="og:type" content="website" />
 <link rel="next" href="http://localhost:4000/page2" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Blingblogs" />
@@ -45,7 +44,7 @@
 <meta name="twitter:creator" content="@sechenbling" />
 <meta name="google-site-verification" content="google_meta_tag_verification" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"WebSite","author":{"@type":"Person","name":"Lynn Chen","url":"https://github.com/sechenbling/"},"description":"A site with blogs involve backend, big data, or other daily programming records.","headline":"Blingblogs","name":"Lynn Chen","sameAs":["https://twitter.com/sechenbling","https://github.com/sechenbling","https://www.facebook.com/sechenbling","https://space.bilibili.com/15164783"],"url":"http://localhost:4000/"}</script>
+{"name":"Lynn Chen","author":{"@type":"Person","name":"Lynn Chen"},"@type":"WebSite","url":"http://localhost:4000/","headline":"Blingblogs","sameAs":["https://twitter.com/sechenbling","https://github.com/sechenbling","https://www.facebook.com/sechenbling","https://space.bilibili.com/15164783"],"description":"A site with blogs involve backend, big data, or other daily programming records.","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   
@@ -502,8 +501,45 @@
         </li>
         <!-- the real tabs -->
         
+        
         <li class="nav-item">
-        <a href="/about/" class="nav-link">
+        <a href="/tabs/timeline.html" class="nav-link">
+            <i class="fa-fw fas fa-timeline ml-xl-3 mr-xl-3 unloaded"></i>
+            
+
+            <span>TIMELINE</span>
+        </a>
+        </li> <!-- .nav-item -->
+        
+        <li class="nav-item">
+        <a href="/tabs/categories.html" class="nav-link">
+            <i class="fa-fw fas fa-folder-open ml-xl-3 mr-xl-3 unloaded"></i>
+            
+
+            <span>CATEGORIES</span>
+        </a>
+        </li> <!-- .nav-item -->
+        
+        <li class="nav-item">
+        <a href="/tabs/tags.html" class="nav-link">
+            <i class="fa-fw fas fa-tag ml-xl-3 mr-xl-3 unloaded"></i>
+            
+
+            <span>TAGS</span>
+        </a>
+        </li> <!-- .nav-item -->
+        
+        <li class="nav-item">
+        <a href="/tabs/plans.html" class="nav-link">
+            <i class="fa-fw fas fa-paper-plane ml-xl-3 mr-xl-3 unloaded"></i>
+            
+
+            <span>PLANS</span>
+        </a>
+        </li> <!-- .nav-item -->
+        
+        <li class="nav-item">
+        <a href="/tabs/about.html" class="nav-link">
             <i class="fa-fw fas fa-info-circle ml-xl-3 mr-xl-3 unloaded"></i>
             
 
@@ -646,23 +682,18 @@
 
 
 
-                Update date: 2022-11-27
+                Update date: 2023-01-29
 
 界面展示
 
 
   home:
 
-  post:
+    Update logs
+    
 
-
-
-Update logs
-
-
-
-  1️⃣ contact info增加了b站的联系方式, 点击右下角即可跳转到b站个人主页.修改了contact info中个人邮箱的获取逻辑, 如果电脑中有outlook会直接打开outlook并获取联系邮箱.修改了contact
-info中个人邮箱的获取...
+      1️⃣ 启用根据post类别和标签进行跳转和分类查询的功能, 包括根据归档和标签进行检索的查询方式.
+2️⃣ 区分post time和modified time; 增加了timeline的tabs, 可以使用timeline以post time作为顺序查看...
             </p>
         </div>
         <!-- .post-meta -->

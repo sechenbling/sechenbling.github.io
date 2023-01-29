@@ -27,8 +27,8 @@
   
 
   
-  <!-- Begin Jekyll SEO tag v2.8.0 -->
-<meta name="generator" content="Jekyll v3.9.2" />
+  <!-- Begin Jekyll SEO tag v2.6.1 -->
+<meta name="generator" content="Jekyll v3.9.0" />
 <meta property="og:title" content="Data Warehouse DWS&amp;ADS Develop" />
 <meta name="author" content="Lynn Chen" />
 <meta property="og:locale" content="en" />
@@ -45,7 +45,7 @@
 <meta name="twitter:creator" content="@sechenbling" />
 <meta name="google-site-verification" content="google_meta_tag_verification" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Lynn Chen","url":"https://github.com/sechenbling/"},"dateModified":"2023-01-27T13:35:00+08:00","datePublished":"2023-01-27T13:30:00+08:00","description":"DWS层 汇总数据层，由明细数据汇总而来的数据，基于上层的指标需求，构建公用的中间的统计结果，为了减少重复计算。 设计过程 DWS层的设计参考指标体系。 原子指标，派生指标，衍生指标 DWS层的数据存储格式为orc列式存储+snappy压缩。 DWS层表名的命名规范为dws_数据域_统计粒度_业务过程_统计周期（1d/nd/td）注：1d表示最近1日，nd表示最近n日，td表示历史至今。 统计粒度：通俗点就是表里的用来分组的字段（字段数并不固定） ADS层 根据具体业务需求来获取对应的数据，存放各项统计指标标准 开窗函数： 区分开窗函数和聚合函数 聚合函数：按照字段进行分组(group by)进行shuffle，将相同码的数据进行聚合，然后得到每一组的KV键值（多行聚合一行） 开窗函数：和聚合函数很类似，按照partition by 的字段进行shuffle，将相同key的数据都缓存起来（多行“聚合”多行），前一个多行是可以人为指定大小的，后一个多行值得是对筛选数据进行窗口后的多个结果 补充：这些窗口的划分都是在分区内部！超过分区大小就无效了，可以看到如果不指定ROWS BETWEEN,默认统计窗口为从起点到当前行;关键是理解 ROWS BETWEEN 含义,也叫做window子句： PRECEDING：往前 FOLLOWING：往后 CURRENT ROW：当前行 UNBOUNDED：无边界 UNBOUNDED PRECEDING 表示从最前面的起点开始 UNBOUNDED FOLLOWING：表示到最后面的终点","headline":"Data Warehouse DWS&amp;ADS Develop","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/Data-Warehouse-DWS&ADS-Develop/"},"url":"http://localhost:4000/posts/Data-Warehouse-DWS&ADS-Develop/"}</script>
+{"author":{"@type":"Person","name":"Lynn Chen"},"@type":"BlogPosting","url":"http://localhost:4000/posts/Data-Warehouse-DWS&ADS-Develop/","headline":"Data Warehouse DWS&amp;ADS Develop","dateModified":"2023-01-27T13:35:00+08:00","datePublished":"2023-01-27T13:30:00+08:00","description":"DWS层 汇总数据层，由明细数据汇总而来的数据，基于上层的指标需求，构建公用的中间的统计结果，为了减少重复计算。 设计过程 DWS层的设计参考指标体系。 原子指标，派生指标，衍生指标 DWS层的数据存储格式为orc列式存储+snappy压缩。 DWS层表名的命名规范为dws_数据域_统计粒度_业务过程_统计周期（1d/nd/td）注：1d表示最近1日，nd表示最近n日，td表示历史至今。 统计粒度：通俗点就是表里的用来分组的字段（字段数并不固定） ADS层 根据具体业务需求来获取对应的数据，存放各项统计指标标准 开窗函数： 区分开窗函数和聚合函数 聚合函数：按照字段进行分组(group by)进行shuffle，将相同码的数据进行聚合，然后得到每一组的KV键值（多行聚合一行） 开窗函数：和聚合函数很类似，按照partition by 的字段进行shuffle，将相同key的数据都缓存起来（多行“聚合”多行），前一个多行是可以人为指定大小的，后一个多行值得是对筛选数据进行窗口后的多个结果 补充：这些窗口的划分都是在分区内部！超过分区大小就无效了，可以看到如果不指定ROWS BETWEEN,默认统计窗口为从起点到当前行;关键是理解 ROWS BETWEEN 含义,也叫做window子句： PRECEDING：往前 FOLLOWING：往后 CURRENT ROW：当前行 UNBOUNDED：无边界 UNBOUNDED PRECEDING 表示从最前面的起点开始 UNBOUNDED FOLLOWING：表示到最后面的终点","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/Data-Warehouse-DWS&ADS-Develop/"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   
@@ -506,8 +506,45 @@
         </li>
         <!-- the real tabs -->
         
+        
         <li class="nav-item">
-        <a href="/about/" class="nav-link">
+        <a href="/tabs/timeline.html" class="nav-link">
+            <i class="fa-fw fas fa-timeline ml-xl-3 mr-xl-3 unloaded"></i>
+            
+
+            <span>TIMELINE</span>
+        </a>
+        </li> <!-- .nav-item -->
+        
+        <li class="nav-item">
+        <a href="/tabs/categories.html" class="nav-link">
+            <i class="fa-fw fas fa-folder-open ml-xl-3 mr-xl-3 unloaded"></i>
+            
+
+            <span>CATEGORIES</span>
+        </a>
+        </li> <!-- .nav-item -->
+        
+        <li class="nav-item">
+        <a href="/tabs/tags.html" class="nav-link">
+            <i class="fa-fw fas fa-tag ml-xl-3 mr-xl-3 unloaded"></i>
+            
+
+            <span>TAGS</span>
+        </a>
+        </li> <!-- .nav-item -->
+        
+        <li class="nav-item">
+        <a href="/tabs/plans.html" class="nav-link">
+            <i class="fa-fw fas fa-paper-plane ml-xl-3 mr-xl-3 unloaded"></i>
+            
+
+            <span>PLANS</span>
+        </a>
+        </li> <!-- .nav-item -->
+        
+        <li class="nav-item">
+        <a href="/tabs/about.html" class="nav-link">
             <i class="fa-fw fas fa-info-circle ml-xl-3 mr-xl-3 unloaded"></i>
             
 

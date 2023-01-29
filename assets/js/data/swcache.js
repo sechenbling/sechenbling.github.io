@@ -11,7 +11,15 @@ const resource = [
     '/404.html',
 
     
-        '/about/',
+        '/tabs/about.html',
+    
+        '/tabs/categories.html',
+    
+        '/tabs/plans.html',
+    
+        '/tabs/tags.html',
+    
+        '/tabs/timeline.html',
     
 
     /* --- Favicons & compressed JS --- */
@@ -42,6 +50,7 @@ const resource = [
         '/assets/img/favicons/ms-icon-150x150.png',
         '/assets/img/favicons/ms-icon-310X310.png',
         '/assets/img/favicons/ms-icon-70x70.png',
+        '/assets/js/dist/categories.min.js',
         '/assets/js/dist/commons.min.js',
         '/assets/js/dist/home.min.js',
         '/assets/js/dist/misc.min.js',
