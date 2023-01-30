@@ -493,7 +493,7 @@
             <a href="/">Blingblogs</a>
         </div>
         <!-- site-subtitle settings -->
-        <div class="site-subtitle">more than codes</div>
+        <div class="site-subtitle">life can also be multi-threaded</div>
     </div>
 
     <ul class="w-100">
@@ -1456,7 +1456,7 @@
 <h3 id="数据仓库分层规划"><span class="mr-2">数据仓库分层规划</span><a href="#数据仓库分层规划" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
 <dl>
   <dt>使数据体系更加清洗，简单化复杂问题（one data理论分层）</dt>
-  <dt><img data-src="/blog_imgs/data warehouse/theory/data warehouse design/data warehouse design img1.png" alt="img.png" data-proofer-ignore></dt>
+  <dt><img data-src="/blog_imgs/bigdata/data warehouse/theory/data warehouse design/data warehouse design img1.png" alt="img.png" data-proofer-ignore></dt>
   <dt>ODS:</dt>
   <dd>operation data store:业务系统的原始数据，未经处理的数据，放在HDFS以文件形式的存储，从HDFS原路径load(底层是剪切操作)到ODS层。</dd>
   <dt>DWD:</dt>
@@ -1470,7 +1470,7 @@
 </dl>
 
 <h2 id="数仓构建流程"><span class="mr-2">数仓构建流程</span><a href="#数仓构建流程" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
-<p><img data-src="/blog_imgs/data warehouse/theory/data warehouse design/data warehouse design img2.png" alt="img.png" data-proofer-ignore></p>
+<p><img data-src="/blog_imgs/bigdata/data warehouse/theory/data warehouse design/data warehouse design img2.png" alt="img.png" data-proofer-ignore></p>
 <h3 id="数据调研"><span class="mr-2">数据调研：</span><a href="#数据调研" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
 <ul>
   <li>业务调研：熟悉业务流程，熟悉业务数据</li>
@@ -1518,7 +1518,7 @@
 <h3 id="构建业务总线矩阵"><span class="mr-2">构建业务总线矩阵</span><a href="#构建业务总线矩阵" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
 <p>服务于维度模型的设计</p>
 <ul>
-  <li><img data-src="/blog_imgs/data warehouse/theory/data warehouse design/data warehouse design img3.png" alt="img.png" data-proofer-ignore></li>
+  <li><img data-src="/blog_imgs/bigdata/data warehouse/theory/data warehouse design/data warehouse design img3.png" alt="img.png" data-proofer-ignore></li>
   <li>总线矩阵中通常只包含事务型事实表，其他两种类型的表单独设计</li>
 </ul>
 
@@ -1535,16 +1535,16 @@
     </ul>
   </li>
   <li>派生指标：基于原子指标，通常会对应实际的统计需求，关系图如下</li>
-  <li><img data-src="/blog_imgs/data warehouse/theory/data warehouse design/data warehouse design img4.png" alt="img.png" data-proofer-ignore></li>
+  <li><img data-src="/blog_imgs/bigdata/data warehouse/theory/data warehouse design/data warehouse design img4.png" alt="img.png" data-proofer-ignore></li>
   <li>衍生指标：在多个派生指标的基础上，通过各种逻辑运算复合而来的，比如比率、比例等</li>
-  <li><img data-src="/blog_imgs/data warehouse/theory/data warehouse design/data warehouse design img5.png" alt="img.png" data-proofer-ignore></li>
+  <li><img data-src="/blog_imgs/bigdata/data warehouse/theory/data warehouse design/data warehouse design img5.png" alt="img.png" data-proofer-ignore></li>
   <li>指标理论体系意义：公共的派生指标保存在DWS层，统计需求足够多的时候，会出现公共的派生指标，因此DWS层设计可以参考现有的统计需求整理出来</li>
 </ul>
 
 <h3 id="汇总模型设计"><span class="mr-2">汇总模型设计</span><a href="#汇总模型设计" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
 <p>一张汇总表会包括业务过程相同，统计周期相同，统计粒度相同的多个派生指标</p>
 <ul>
-  <li><img data-src="/blog_imgs/data warehouse/theory/data warehouse design/data warehouse design img6.png" alt="img.png" data-proofer-ignore></li>
+  <li><img data-src="/blog_imgs/bigdata/data warehouse/theory/data warehouse design/data warehouse design img6.png" alt="img.png" data-proofer-ignore></li>
   <li>汇总表是由一张事实表（一个业务过程）汇总而来的，汇总表却不止一张，属于一对多的关系</li>
 </ul>
 
@@ -1717,6 +1717,11 @@
       
       
       
+      <li><a href="/posts/Spark-Deployment-Structure-Introduction/">Spark Deployment Structure Introduction</a></li>
+      
+      
+      
+      
       <li><a href="/posts/Data-Warehouse-Design/">Data Warehouse Design</a></li>
       
       
@@ -1733,11 +1738,6 @@
       
       
       <li><a href="/posts/Data-Warehouse-DWD-Develop/">Data Warehouse DWD Develop</a></li>
-      
-      
-      
-      
-      <li><a href="/posts/Data-Warehouse-DIM-Develop/">Data Warehouse DIM Develop</a></li>
       
     </ul>
   </div> <!-- #access-lastmod -->
@@ -1927,6 +1927,18 @@
 
 
 
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
 
   
 
@@ -2221,10 +2233,10 @@ DWD层设计要点
   
 
   
-  <div class="btn btn-outline-primary disabled"
-       prompt="Next Post">
-    <p>-</p>
-  </div>
+  <a href="/posts/Spark-Deployment-Structure-Introduction/" class="btn btn-outline-primary"
+     prompt="Next Post">
+    <p>Spark Deployment Structure Introduction</p>
+  </a>
   
 
 </div>

@@ -493,7 +493,7 @@
             <a href="/">Blingblogs</a>
         </div>
         <!-- site-subtitle settings -->
-        <div class="site-subtitle">more than codes</div>
+        <div class="site-subtitle">life can also be multi-threaded</div>
     </div>
 
     <ul class="w-100">
@@ -1778,6 +1778,11 @@
       
       
       
+      <li><a href="/posts/Spark-Deployment-Structure-Introduction/">Spark Deployment Structure Introduction</a></li>
+      
+      
+      
+      
       <li><a href="/posts/Data-Warehouse-Design/">Data Warehouse Design</a></li>
       
       
@@ -1794,11 +1799,6 @@
       
       
       <li><a href="/posts/Data-Warehouse-DWD-Develop/">Data Warehouse DWD Develop</a></li>
-      
-      
-      
-      
-      <li><a href="/posts/Data-Warehouse-DIM-Develop/">Data Warehouse DIM Develop</a></li>
       
     </ul>
   </div> <!-- #access-lastmod -->
@@ -2124,6 +2124,18 @@
   
 
   
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
     
 
 
@@ -2199,6 +2211,42 @@ You can write --- to your md to show a dividing line ...
     
     
     <div class="card">
+      <a href="/posts/Spark-Deployment-Structure-Introduction/">
+        <div class="card-body">
+          
+
+
+
+<em class="small"
+    data-ts="1675089000"
+    data-df="ll"
+    >
+    Jan 30, 2023
+</em>
+          <h3 class="pt-0 mt-1 mb-3" data-toc-skip>Spark Deployment Structure Introduction</h3>
+          <div class="text-muted small">
+            <p>
+              
+
+
+
+
+
+              Spark Introduction
+Spark Summary
+
+  Spark 是一种由 Scala 语言开发的快速、通用、可扩展的大数据分析引擎
+  Spark Core 中提供了 Spark 最基础与最核心的功能
+  Spark SQL 是 Spark 用来操作结构化数据的组件。通过 Spark SQL，用户可以使用 SQL 或者 Apache Hive 版本的 SQL 方言（HQL...
+            </p>
+          </div>
+        </div>
+      </a>
+    </div>
+    
+    
+    
+    <div class="card">
       <a href="/posts/Data-Warehouse-Design/">
         <div class="card-body">
           
@@ -2229,49 +2277,6 @@ You can write --- to your md to show a dividing line ...
   operation data store:业务系统的原始数据，未经处理的数据，放在HDFS以文件形式的存储，从HDFS原路径load(底层是剪切操作)到ODS层。
   DWD:
   data warehouse detail:基于维度建模理论进行构建，保存各业务过程中...
-            </p>
-          </div>
-        </div>
-      </a>
-    </div>
-    
-    
-    
-    <div class="card">
-      <a href="/posts/Data-Warehouse-Model/">
-        <div class="card-body">
-          
-
-
-
-<em class="small"
-    data-ts="1674912600"
-    data-df="ll"
-    >
-    Jan 28, 2023
-</em>
-          <h3 class="pt-0 mt-1 mb-3" data-toc-skip>Data Warehouse Model</h3>
-          <div class="text-muted small">
-            <p>
-              
-
-
-
-
-
-              数据仓库介绍
-数据仓库
-
-  用于存储分析报告的数据系统
-    
-      并不产生数据（数据来自于外部系统） 也不消费数据（其结果开放给外部应用使用）
-    
-  
-  构建面向分析的集成化数据环境，分析结构提供决策
-  对比OLAP和OLTP
-    
-      各类型的数据库保存相关数据（关系型数据库是OLTP的典型应用） 但不会在数据库上直接分析数据
-      数据仓库是O...
             </p>
           </div>
         </div>

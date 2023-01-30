@@ -493,7 +493,7 @@
             <a href="/">Blingblogs</a>
         </div>
         <!-- site-subtitle settings -->
-        <div class="site-subtitle">more than codes</div>
+        <div class="site-subtitle">life can also be multi-threaded</div>
     </div>
 
     <ul class="w-100">
@@ -1556,6 +1556,11 @@ info中个人邮箱的获取逻辑, 如果电脑中有outlook会直接打开outl
       
       
       
+      <li><a href="/posts/Spark-Deployment-Structure-Introduction/">Spark Deployment Structure Introduction</a></li>
+      
+      
+      
+      
       <li><a href="/posts/Data-Warehouse-Design/">Data Warehouse Design</a></li>
       
       
@@ -1572,11 +1577,6 @@ info中个人邮箱的获取逻辑, 如果电脑中有outlook会直接打开outl
       
       
       <li><a href="/posts/Data-Warehouse-DWD-Develop/">Data Warehouse DWD Develop</a></li>
-      
-      
-      
-      
-      <li><a href="/posts/Data-Warehouse-DIM-Develop/">Data Warehouse DIM Develop</a></li>
       
     </ul>
   </div> <!-- #access-lastmod -->
@@ -1878,6 +1878,18 @@ info中个人邮箱的获取逻辑, 如果电脑中有outlook会直接打开outl
   
 
   
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
     
   
 
@@ -1948,6 +1960,42 @@ info中个人邮箱的获取逻辑, 如果电脑中有outlook会直接打开outl
   <h3 class="pt-2 mb-4 ml-1"
       data-toc-skip>Related Reading</h3>
   <div class="card-deck mb-4">
+    
+    
+    
+    <div class="card">
+      <a href="/posts/Spark-Deployment-Structure-Introduction/">
+        <div class="card-body">
+          
+
+
+
+<em class="small"
+    data-ts="1675089000"
+    data-df="ll"
+    >
+    Jan 30, 2023
+</em>
+          <h3 class="pt-0 mt-1 mb-3" data-toc-skip>Spark Deployment Structure Introduction</h3>
+          <div class="text-muted small">
+            <p>
+              
+
+
+
+
+
+              Spark Introduction
+Spark Summary
+
+  Spark 是一种由 Scala 语言开发的快速、通用、可扩展的大数据分析引擎
+  Spark Core 中提供了 Spark 最基础与最核心的功能
+  Spark SQL 是 Spark 用来操作结构化数据的组件。通过 Spark SQL，用户可以使用 SQL 或者 Apache Hive 版本的 SQL 方言（HQL...
+            </p>
+          </div>
+        </div>
+      </a>
+    </div>
     
     
     
@@ -2025,47 +2073,6 @@ info中个人邮箱的获取逻辑, 如果电脑中有outlook会直接打开outl
     
       各类型的数据库保存相关数据（关系型数据库是OLTP的典型应用） 但不会在数据库上直接分析数据
       数据仓库是O...
-            </p>
-          </div>
-        </div>
-      </a>
-    </div>
-    
-    
-    
-    <div class="card">
-      <a href="/posts/Data-Warehouse-DWS&ADS-Develop/">
-        <div class="card-body">
-          
-
-
-
-<em class="small"
-    data-ts="1674797400"
-    data-df="ll"
-    >
-    Jan 27, 2023
-</em>
-          <h3 class="pt-0 mt-1 mb-3" data-toc-skip>Data Warehouse DWS&ADS Develop</h3>
-          <div class="text-muted small">
-            <p>
-              
-
-
-
-
-
-              DWS层
-汇总数据层，由明细数据汇总而来的数据，基于上层的指标需求，构建公用的中间的统计结果，为了减少重复计算。
-设计过程
-
-  DWS层的设计参考指标体系。
-    
-      原子指标，派生指标，衍生指标
-    
-  
-  DWS层的数据存储格式为orc列式存储+snappy压缩。
-  DWS层表名的命名规范为dws_数据域_统计粒度_业务过程_统计周期（1d/nd/td）注：1d表...
             </p>
           </div>
         </div>

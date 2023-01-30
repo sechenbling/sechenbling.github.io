@@ -1,0 +1,2804 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+<html lang="en" 
+    
+ xmlns="http://www.w3.org/1999/html">
+    <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  
+    
+      <meta name="pv-proxy-endpoint" content="">
+    
+    
+  
+
+  
+
+  
+
+  
+  <!-- Begin Jekyll SEO tag v2.6.1 -->
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="Spark Deployment Structure Introduction" />
+<meta name="author" content="Lynn Chen" />
+<meta property="og:locale" content="en" />
+<meta name="description" content="Spark Introduction Spark Summary Spark 是一种由 Scala 语言开发的快速、通用、可扩展的大数据分析引擎 Spark Core 中提供了 Spark 最基础与最核心的功能 Spark SQL 是 Spark 用来操作结构化数据的组件。通过 Spark SQL，用户可以使用 SQL 或者 Apache Hive 版本的 SQL 方言（HQL）来查询数据。 Spark Streaming 是 Spark 平台上针对实时数据进行流式计算的组件，提供了丰富的 处理数据流的 API。 Spark 出现的时间相对较晚，并且主要功能主要是用于数据计算， 所以其实 Spark 一直被认为是 Hadoop 框架的升级版。" />
+<meta property="og:description" content="Spark Introduction Spark Summary Spark 是一种由 Scala 语言开发的快速、通用、可扩展的大数据分析引擎 Spark Core 中提供了 Spark 最基础与最核心的功能 Spark SQL 是 Spark 用来操作结构化数据的组件。通过 Spark SQL，用户可以使用 SQL 或者 Apache Hive 版本的 SQL 方言（HQL）来查询数据。 Spark Streaming 是 Spark 平台上针对实时数据进行流式计算的组件，提供了丰富的 处理数据流的 API。 Spark 出现的时间相对较晚，并且主要功能主要是用于数据计算， 所以其实 Spark 一直被认为是 Hadoop 框架的升级版。" />
+<link rel="canonical" href="http://localhost:4000/posts/Spark-Deployment-Structure-Introduction/" />
+<meta property="og:url" content="http://localhost:4000/posts/Spark-Deployment-Structure-Introduction/" />
+<meta property="og:site_name" content="Blingblogs" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-01-30T22:30:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Spark Deployment Structure Introduction" />
+<meta name="twitter:site" content="@sechenbling" />
+<meta name="twitter:creator" content="@sechenbling" />
+<meta name="google-site-verification" content="google_meta_tag_verification" />
+<script type="application/ld+json">
+{"author":{"@type":"Person","name":"Lynn Chen"},"@type":"BlogPosting","url":"http://localhost:4000/posts/Spark-Deployment-Structure-Introduction/","headline":"Spark Deployment Structure Introduction","dateModified":"2023-01-30T22:30:00+08:00","datePublished":"2023-01-30T22:30:00+08:00","description":"Spark Introduction Spark Summary Spark 是一种由 Scala 语言开发的快速、通用、可扩展的大数据分析引擎 Spark Core 中提供了 Spark 最基础与最核心的功能 Spark SQL 是 Spark 用来操作结构化数据的组件。通过 Spark SQL，用户可以使用 SQL 或者 Apache Hive 版本的 SQL 方言（HQL）来查询数据。 Spark Streaming 是 Spark 平台上针对实时数据进行流式计算的组件，提供了丰富的 处理数据流的 API。 Spark 出现的时间相对较晚，并且主要功能主要是用于数据计算， 所以其实 Spark 一直被认为是 Hadoop 框架的升级版。","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/Spark-Deployment-Structure-Introduction/"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+  
+
+  <title>Spark Deployment Structure Introduction | Blingblogs
+  </title>
+
+  
+
+<link rel="shortcut icon" href="/assets/img/favicons/favicon.ico" type="image/x-icon">
+<link rel="icon" href="/assets/img/favicons/favicon.ico" type="image/x-icon">
+
+<link rel="apple-touch-icon" href="/assets/img/favicons/apple-icon.png">
+<link rel="apple-touch-icon" href="/assets/img/favicons/apple-icon-precomposed.png">
+<link rel="apple-touch-icon" sizes="57x57" href="/assets/img/favicons/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/assets/img/favicons/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/assets/img/favicons/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/assets/img/favicons/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/assets/img/favicons/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/assets/img/favicons/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/assets/img/favicons/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/assets/img/favicons/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicons/apple-icon-180x180.png">
+
+<link rel="icon" type="image/png" sizes="192x192"  href="/assets/img/favicons/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/assets/img/favicons/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicons/favicon-16x16.png">
+
+<link rel="manifest" href="/assets/img/favicons/manifest.json">
+<meta name='msapplication-config' content='/assets/img/favicons/browserconfig.xml'>
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/assets/img/favicons/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+
+
+  
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com" >
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" >
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" crossorigin>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com" >
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" >
+    
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" >
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" >
+    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato&family=Source+Sans+Pro:wght@400;600;700;900&display=swap">
+  
+
+  <!-- GA -->
+  
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="/assets/lib/fontawesome/css/all.min.css">
+
+  <link rel="stylesheet" href="/assets/css/style.css">
+
+  
+  <link rel="stylesheet" href="/assets/lib/bootstrap-toc-1.0.1/bootstrap-toc.min.css">
+  
+
+  
+  <!-- Manific Popup -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/magnific-popup@1/dist/magnific-popup.min.css">
+  
+
+  <!-- JavaScript -->
+
+  <script src="/assets/lib/jquery-3.6.0/jquery.min.js"></script>
+
+  
+  <!--
+  Switch the mode between dark and light.
+-->
+
+<script type="text/javascript">
+    class ModeToggle {
+        static get MODE_KEY() {
+            return "mode";
+        }
+
+        static get MODE_ATTR() {
+            return "data-mode";
+        }
+
+        static get DARK_MODE() {
+            return "dark";
+        }
+
+        static get LIGHT_MODE() {
+            return "light";
+        }
+
+        static get ID() {
+            return "mode-toggle";
+        }
+
+        constructor() {
+            if (this.hasMode) {
+                if (this.isDarkMode) {
+                    if (!this.isSysDarkPrefer) {
+                        this.setDark();
+                    }
+                } else {
+                    if (this.isSysDarkPrefer) {
+                        this.setLight();
+                    }
+                }
+            }
+
+            let self = this;
+
+            /* always follow the system prefers */
+            this.sysDarkPrefers.addEventListener("change", () => {
+                if (self.hasMode) {
+                    if (self.isDarkMode) {
+                        if (!self.isSysDarkPrefer) {
+                            self.setDark();
+                        }
+
+                    } else {
+                        if (self.isSysDarkPrefer) {
+                            self.setLight();
+                        }
+                    }
+
+                    self.clearMode();
+                }
+
+                self.notify();
+
+            });
+
+        } /* constructor() */
+
+        get sysDarkPrefers() {
+            return window.matchMedia("(prefers-color-scheme: dark)");
+        }
+
+        get isSysDarkPrefer() {
+            return this.sysDarkPrefers.matches;
+        }
+
+        get isDarkMode() {
+            return this.mode === ModeToggle.DARK_MODE;
+        }
+
+        get isLightMode() {
+            return this.mode === ModeToggle.LIGHT_MODE;
+        }
+
+        get hasMode() {
+            return this.mode != null;
+        }
+
+        get mode() {
+            return sessionStorage.getItem(ModeToggle.MODE_KEY);
+        }
+
+        /* get the current mode on screen */
+        get modeStatus() {
+            if (this.isDarkMode
+                || (!this.hasMode && this.isSysDarkPrefer)) {
+                return ModeToggle.DARK_MODE;
+            } else {
+                return ModeToggle.LIGHT_MODE;
+            }
+        }
+
+        setDark() {
+            $('html').attr(ModeToggle.MODE_ATTR, ModeToggle.DARK_MODE);
+            document.getElementById("mode-toggle-btn").setAttribute("class","fa-regular fa-moon");
+            sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.DARK_MODE);
+        }
+
+        setLight() {
+            $('html').attr(ModeToggle.MODE_ATTR, ModeToggle.LIGHT_MODE);
+            document.getElementById("mode-toggle-btn")
+                .setAttribute("class","fa-regular fa-sun");
+            sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.LIGHT_MODE);
+        }
+
+        clearMode() {
+            $('html').removeAttr(ModeToggle.MODE_ATTR);
+            document.getElementById("mode-toggle-btn")
+                .setAttribute("class","fa-regular fa-sun");
+            sessionStorage.removeItem(ModeToggle.MODE_KEY);
+        }
+
+        /* Notify another plugins that the theme mode has changed */
+        notify() {
+            window.postMessage({
+                direction: ModeToggle.ID,
+                message: this.modeStatus
+            }, "*");
+        }
+
+    } /* ModeToggle */
+
+    const toggle = new ModeToggle();
+
+    function flipMode() {
+        if (toggle.hasMode) {
+            if (toggle.isSysDarkPrefer) {
+                if (toggle.isLightMode) {
+                    toggle.clearMode();
+                } else {
+                    toggle.setLight();
+                }
+
+            } else {
+                if (toggle.isDarkMode) {
+                    toggle.clearMode();
+                } else {
+                    toggle.setDark();
+                }
+            }
+
+        } else {
+            if (toggle.isSysDarkPrefer) {
+                toggle.setLight();
+            } else {
+                toggle.setDark();
+            }
+        }
+
+        toggle.notify();
+
+    } /* flipMode() */
+
+</script>
+
+
+  
+</head>
+
+<!--  &lt;!&ndash; jsDelivr CDN &ndash;&gt;-->
+<!--  <link rel="preconnect" href="cdn.jsdelivr.net">-->
+<!--  <link rel="dns-prefetch" href="cdn.jsdelivr.net">-->
+
+<!--  &lt;!&ndash; Bootstrap &ndash;&gt;-->
+<!--  <link rel="stylesheet"-->
+<!--    href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"-->
+<!--    integrity="sha256-LA89z+k9fjgMKQ/kq4OO2Mrf8VltYml/VES+Rg0fh20=" crossorigin="anonymous">-->
+
+<!--  <link rel="stylesheet" href="/assets/css/style.css">-->
+<!--  &lt;!&ndash; Font Awesome &ndash;&gt;-->
+<!--  <link rel="stylesheet" type="text/css" href="/assets/lib/fontawesome/css/all.css">-->
+
+<!--  &lt;!&ndash; JavaScripts &ndash;&gt;-->
+
+<!--  <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>-->
+
+<!--  <script async-->
+<!--    src="https://cdn.jsdelivr.net/combine/npm/popper.js@1.15.0,npm/bootstrap@4/dist/js/bootstrap.min.js"></script>-->
+
+<!--  -->
+<!--    <!--
+  Switch the mode between dark and light.
+-->
+
+<script type="text/javascript">
+    class ModeToggle {
+        static get MODE_KEY() {
+            return "mode";
+        }
+
+        static get MODE_ATTR() {
+            return "data-mode";
+        }
+
+        static get DARK_MODE() {
+            return "dark";
+        }
+
+        static get LIGHT_MODE() {
+            return "light";
+        }
+
+        static get ID() {
+            return "mode-toggle";
+        }
+
+        constructor() {
+            if (this.hasMode) {
+                if (this.isDarkMode) {
+                    if (!this.isSysDarkPrefer) {
+                        this.setDark();
+                    }
+                } else {
+                    if (this.isSysDarkPrefer) {
+                        this.setLight();
+                    }
+                }
+            }
+
+            let self = this;
+
+            /* always follow the system prefers */
+            this.sysDarkPrefers.addEventListener("change", () => {
+                if (self.hasMode) {
+                    if (self.isDarkMode) {
+                        if (!self.isSysDarkPrefer) {
+                            self.setDark();
+                        }
+
+                    } else {
+                        if (self.isSysDarkPrefer) {
+                            self.setLight();
+                        }
+                    }
+
+                    self.clearMode();
+                }
+
+                self.notify();
+
+            });
+
+        } /* constructor() */
+
+        get sysDarkPrefers() {
+            return window.matchMedia("(prefers-color-scheme: dark)");
+        }
+
+        get isSysDarkPrefer() {
+            return this.sysDarkPrefers.matches;
+        }
+
+        get isDarkMode() {
+            return this.mode === ModeToggle.DARK_MODE;
+        }
+
+        get isLightMode() {
+            return this.mode === ModeToggle.LIGHT_MODE;
+        }
+
+        get hasMode() {
+            return this.mode != null;
+        }
+
+        get mode() {
+            return sessionStorage.getItem(ModeToggle.MODE_KEY);
+        }
+
+        /* get the current mode on screen */
+        get modeStatus() {
+            if (this.isDarkMode
+                || (!this.hasMode && this.isSysDarkPrefer)) {
+                return ModeToggle.DARK_MODE;
+            } else {
+                return ModeToggle.LIGHT_MODE;
+            }
+        }
+
+        setDark() {
+            $('html').attr(ModeToggle.MODE_ATTR, ModeToggle.DARK_MODE);
+            document.getElementById("mode-toggle-btn").setAttribute("class","fa-regular fa-moon");
+            sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.DARK_MODE);
+        }
+
+        setLight() {
+            $('html').attr(ModeToggle.MODE_ATTR, ModeToggle.LIGHT_MODE);
+            document.getElementById("mode-toggle-btn")
+                .setAttribute("class","fa-regular fa-sun");
+            sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.LIGHT_MODE);
+        }
+
+        clearMode() {
+            $('html').removeAttr(ModeToggle.MODE_ATTR);
+            document.getElementById("mode-toggle-btn")
+                .setAttribute("class","fa-regular fa-sun");
+            sessionStorage.removeItem(ModeToggle.MODE_KEY);
+        }
+
+        /* Notify another plugins that the theme mode has changed */
+        notify() {
+            window.postMessage({
+                direction: ModeToggle.ID,
+                message: this.modeStatus
+            }, "*");
+        }
+
+    } /* ModeToggle */
+
+    const toggle = new ModeToggle();
+
+    function flipMode() {
+        if (toggle.hasMode) {
+            if (toggle.isSysDarkPrefer) {
+                if (toggle.isLightMode) {
+                    toggle.clearMode();
+                } else {
+                    toggle.setLight();
+                }
+
+            } else {
+                if (toggle.isDarkMode) {
+                    toggle.clearMode();
+                } else {
+                    toggle.setDark();
+                }
+            }
+
+        } else {
+            if (toggle.isSysDarkPrefer) {
+                toggle.setLight();
+            } else {
+                toggle.setDark();
+            }
+        }
+
+        toggle.notify();
+
+    } /* flipMode() */
+
+</script>
+
+-->
+<!--  -->
+
+<!--</head>-->
+
+    <body data-spy="scroll" data-target="#toc" data-topbar-visible="true">
+        <div id="sidebar" class="d-flex flex-column align-items-end">
+    <!-- profile-wrapper -->
+    <div class="profile-wrapper text-center">
+        <!-- avatar settings -->
+        <div id="avatar">
+            <a href="/" class="mx-auto">
+                
+                
+                <img src="/assets/img/sample/avatar.png" alt="avatar" onerror="this.style.display='none'">
+                
+            </a>
+        </div>
+        <!-- site-title settings -->
+        <div class="site-title">
+            <a href="/">Blingblogs</a>
+        </div>
+        <!-- site-subtitle settings -->
+        <div class="site-subtitle">life can also be multi-threaded</div>
+    </div>
+
+    <ul class="w-100">
+        <!-- home -->
+        <li class="nav-item">
+        <a href="/" class="nav-link">
+            <i class="fa-fw fas fa-home ml-xl-3 mr-xl-3 unloaded"></i>
+            <span>HOME</span>
+        </a>
+        </li>
+        <!-- the real tabs -->
+        
+        
+        <li class="nav-item">
+        <a href="/tabs/timeline.html" class="nav-link">
+            <i class="fa-fw fas fa-timeline ml-xl-3 mr-xl-3 unloaded"></i>
+            
+
+            <span>TIMELINE</span>
+        </a>
+        </li> <!-- .nav-item -->
+        
+        <li class="nav-item">
+        <a href="/tabs/categories.html" class="nav-link">
+            <i class="fa-fw fas fa-folder-open ml-xl-3 mr-xl-3 unloaded"></i>
+            
+
+            <span>CATEGORIES</span>
+        </a>
+        </li> <!-- .nav-item -->
+        
+        <li class="nav-item">
+        <a href="/tabs/tags.html" class="nav-link">
+            <i class="fa-fw fas fa-tag ml-xl-3 mr-xl-3 unloaded"></i>
+            
+
+            <span>TAGS</span>
+        </a>
+        </li> <!-- .nav-item -->
+        
+        <li class="nav-item">
+        <a href="/tabs/plans.html" class="nav-link">
+            <i class="fa-fw fas fa-paper-plane ml-xl-3 mr-xl-3 unloaded"></i>
+            
+
+            <span>PLANS</span>
+        </a>
+        </li> <!-- .nav-item -->
+        
+        <li class="nav-item">
+        <a href="/tabs/about.html" class="nav-link">
+            <i class="fa-fw fas fa-info-circle ml-xl-3 mr-xl-3 unloaded"></i>
+            
+
+            <span>ABOUT</span>
+        </a>
+        </li> <!-- .nav-item -->
+        
+    </ul> <!-- ul.nav.flex-column -->
+
+    <div class="sidebar-bottom mt-auto d-flex flex-wrap justify-content-center align-items-center">
+        
+            <button class="mode-toggle btn" aria-label="Switch Mode">
+                <i id="mode-toggle-btn" class="fa-regular fa-sun"></i>
+            </button>
+            
+                <span class="icon-border"></span>
+            
+        
+
+        
+            
+        
+        <a href="https://github.com/sechenbling" aria-label="github"
+           target="_blank" rel="noopener" >
+            <i class="fab fa-github"></i>
+        </a>
+        
+        
+            
+        
+        <a href="https://space.bilibili.com/15164783" aria-label="bilibili"
+           target="_blank" rel="noopener" >
+            <i class="fa-brands fa-bilibili"></i>
+        </a>
+        
+        
+            
+        
+        <a href="https://twitter.com/sechenbling" aria-label="twitter"
+           target="_blank" rel="noopener" >
+            <i class="fab fa-twitter"></i>
+        </a>
+        
+        
+            
+        
+        <a href="
+                    javascript:location.href = 'mailto:' + ['sechenblingbling','gmail.com'].join('@')" aria-label="email"
+           >
+            <i class="fas fa-envelope"></i>
+        </a>
+        
+        
+    </div> <!-- .sidebar-bottom -->
+</div>
+        <div id="topbar-wrapper">
+    <div id="topbar" class="container d-flex align-items-center justify-content-between h-100 pl-3 pr-3 pl-md-4 pr-md-4">
+        <span id="breadcrumb">
+        
+        
+          
+            
+              <span>
+                <a href="/">
+                  Home
+                </a>
+              </span>
+            
+          
+            
+          
+            
+              
+                <span>Spark Deployment Structure Introduction</span>
+              
+            
+          
+        
+        </span><!-- end of #breadcrumb -->
+
+        <i id="sidebar-trigger" class="fas fa-bars fa-fw"></i>
+
+        <div id="topbar-title">
+            Post
+        </div>
+
+        <i id="search-trigger" class="fas fa-search fa-fw"></i>
+        <span id="search-wrapper" class="align-items-center">
+            <i class="fas fa-search fa-fw"></i>
+            <input class="form-control" id="search-input" type="search"
+                 aria-label="search" autocomplete="off" placeholder="Search...">
+            <i class="fa fa-times-circle fa-fw" id="search-cleaner"></i>
+        </span>
+
+        <span id="search-cancel" >Cancel</span>
+
+    </div>
+
+</div>
+
+
+        <div id="main-wrapper" class="d-flex justify-content-center">
+            <div id="main" class="container pl-xl-4 pr-xl-4">
+                
+
+
+
+
+
+<div class="row">
+    <!-- core: use for post list -->
+    <div id="core-wrapper" class="col-12 col-lg-11 col-xl-9 pr-xl-4">
+        <div class="post pl-1 pr-1 pl-md-2 pr-md-2">
+            
+            
+                
+                
+                    
+
+
+
+
+
+  <!-- Change the icon of checkbox -->
+
+
+<!-- images -->
+
+
+
+  
+  
+
+  
+    
+      
+      
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+      
+
+      
+      
+
+      
+
+      
+    
+      
+      
+        
+      
+      
+        
+      
+      
+        
+      
+      
+
+      
+      
+
+      
+
+      
+    
+
+    
+      
+
+  <!-- Add CDN URL -->
+        
+
+  <!-- Add image path -->
+        
+
+        
+        
+
+      
+
+  <!-- lazy-load images <https://github.com/ApoorvSaxena/lozad.js#usage> -->
+
+      
+
+    
+
+  <!-- Add SVG placehoder to prevent layout reflow -->
+
+    
+
+  <!-- Bypass the HTML-proofer test -->
+    
+
+    
+
+  
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+      
+
+      
+      
+
+      
+
+      
+    
+      
+      
+        
+      
+      
+        
+      
+      
+        
+      
+      
+
+      
+      
+
+      
+
+      
+    
+
+    
+      
+
+  <!-- Add CDN URL -->
+        
+
+  <!-- Add image path -->
+        
+
+        
+        
+
+      
+
+  <!-- lazy-load images <https://github.com/ApoorvSaxena/lozad.js#usage> -->
+
+      
+
+    
+
+  <!-- Add SVG placehoder to prevent layout reflow -->
+
+    
+
+  <!-- Bypass the HTML-proofer test -->
+    
+
+    
+
+  
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+      
+
+      
+      
+
+      
+
+      
+    
+      
+      
+        
+      
+      
+        
+      
+      
+        
+      
+      
+
+      
+      
+
+      
+
+      
+    
+
+    
+      
+
+  <!-- Add CDN URL -->
+        
+
+  <!-- Add image path -->
+        
+
+        
+        
+
+      
+
+  <!-- lazy-load images <https://github.com/ApoorvSaxena/lozad.js#usage> -->
+
+      
+
+    
+
+  <!-- Add SVG placehoder to prevent layout reflow -->
+
+    
+
+  <!-- Bypass the HTML-proofer test -->
+    
+
+    
+
+  
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+      
+
+      
+      
+
+      
+
+      
+    
+      
+      
+        
+      
+      
+        
+      
+      
+        
+      
+      
+
+      
+      
+
+      
+
+      
+    
+
+    
+      
+
+  <!-- Add CDN URL -->
+        
+
+  <!-- Add image path -->
+        
+
+        
+        
+
+      
+
+  <!-- lazy-load images <https://github.com/ApoorvSaxena/lozad.js#usage> -->
+
+      
+
+    
+
+  <!-- Add SVG placehoder to prevent layout reflow -->
+
+    
+
+  <!-- Bypass the HTML-proofer test -->
+    
+
+    
+
+  
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+      
+
+      
+      
+
+      
+
+      
+    
+      
+      
+        
+      
+      
+        
+      
+      
+        
+      
+      
+
+      
+      
+
+      
+
+      
+    
+
+    
+      
+
+  <!-- Add CDN URL -->
+        
+
+  <!-- Add image path -->
+        
+
+        
+        
+
+      
+
+  <!-- lazy-load images <https://github.com/ApoorvSaxena/lozad.js#usage> -->
+
+      
+
+    
+
+  <!-- Add SVG placehoder to prevent layout reflow -->
+
+    
+
+  <!-- Bypass the HTML-proofer test -->
+    
+
+    
+
+  
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+      
+
+      
+      
+
+      
+
+      
+    
+      
+      
+        
+      
+      
+        
+      
+      
+        
+      
+      
+
+      
+      
+
+      
+
+      
+    
+
+    
+      
+
+  <!-- Add CDN URL -->
+        
+
+  <!-- Add image path -->
+        
+
+        
+        
+
+      
+
+  <!-- lazy-load images <https://github.com/ApoorvSaxena/lozad.js#usage> -->
+
+      
+
+    
+
+  <!-- Add SVG placehoder to prevent layout reflow -->
+
+    
+
+  <!-- Bypass the HTML-proofer test -->
+    
+
+    
+
+  
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+      
+
+      
+      
+
+      
+
+      
+    
+      
+      
+        
+      
+      
+        
+      
+      
+        
+      
+      
+
+      
+      
+
+      
+
+      
+    
+
+    
+      
+
+  <!-- Add CDN URL -->
+        
+
+  <!-- Add image path -->
+        
+
+        
+        
+
+      
+
+  <!-- lazy-load images <https://github.com/ApoorvSaxena/lozad.js#usage> -->
+
+      
+
+    
+
+  <!-- Add SVG placehoder to prevent layout reflow -->
+
+    
+
+  <!-- Bypass the HTML-proofer test -->
+    
+
+    
+
+  
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+      
+
+      
+      
+
+      
+
+      
+    
+      
+      
+        
+      
+      
+        
+      
+      
+        
+      
+      
+
+      
+      
+
+      
+
+      
+    
+
+    
+      
+
+  <!-- Add CDN URL -->
+        
+
+  <!-- Add image path -->
+        
+
+        
+        
+
+      
+
+  <!-- lazy-load images <https://github.com/ApoorvSaxena/lozad.js#usage> -->
+
+      
+
+    
+
+  <!-- Add SVG placehoder to prevent layout reflow -->
+
+    
+
+  <!-- Bypass the HTML-proofer test -->
+    
+
+    
+
+  
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+      
+
+      
+      
+
+      
+
+      
+    
+      
+      
+        
+      
+      
+        
+      
+      
+        
+      
+      
+
+      
+      
+
+      
+
+      
+    
+
+    
+      
+
+  <!-- Add CDN URL -->
+        
+
+  <!-- Add image path -->
+        
+
+        
+        
+
+      
+
+  <!-- lazy-load images <https://github.com/ApoorvSaxena/lozad.js#usage> -->
+
+      
+
+    
+
+  <!-- Add SVG placehoder to prevent layout reflow -->
+
+    
+
+  <!-- Bypass the HTML-proofer test -->
+    
+
+    
+
+  
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+      
+
+      
+      
+
+      
+
+      
+    
+      
+      
+        
+      
+      
+        
+      
+      
+        
+      
+      
+
+      
+      
+
+      
+
+      
+    
+
+    
+      
+
+  <!-- Add CDN URL -->
+        
+
+  <!-- Add image path -->
+        
+
+        
+        
+
+      
+
+  <!-- lazy-load images <https://github.com/ApoorvSaxena/lozad.js#usage> -->
+
+      
+
+    
+
+  <!-- Add SVG placehoder to prevent layout reflow -->
+
+    
+
+  <!-- Bypass the HTML-proofer test -->
+    
+
+    
+
+  
+
+  
+
+
+
+  <!-- Add header for code snippets -->
+
+
+
+<!-- Create heading anchors -->
+
+
+
+
+  
+  
+
+  
+    
+    
+
+    
+      
+        
+        
+      
+
+      
+      
+
+      
+      
+      
+
+      
+
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+
+    
+
+    
+
+  
+
+  
+  
+
+  
+    
+    
+
+    
+      
+        
+        
+      
+
+      
+      
+
+      
+      
+      
+
+      
+
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+
+    
+
+    
+
+  
+
+  
+  
+
+  
+
+  
+  
+
+  
+
+
+
+
+<!-- Wrap prompt element of blockquote with the <div> tag -->
+
+
+
+
+
+
+<!-- return -->
+<h1 data-toc-skip>Spark Deployment Structure Introduction</h1>
+
+<div class="post-meta text-muted">
+    <!-- published date -->
+    <span>
+      Posted on
+      
+
+
+
+<span class=""
+    data-ts="1675089000"
+    data-df="ll"
+    
+        data-toggle="tooltip"
+        data-placement="bottom"
+    >
+    Jan 30, 2023
+</span>
+    </span>
+
+    <!-- lastmod date -->
+    
+    <span>
+      Updated on
+      
+
+
+
+<span class=""
+    data-ts="1675089000"
+    data-df="ll"
+    
+        data-toggle="tooltip"
+        data-placement="bottom"
+    >
+    Jan 30, 2023
+</span>
+    </span>
+    
+
+    
+
+    <div class="d-flex justify-content-between">
+        <span>
+          
+
+          By
+          <span>
+          
+            
+              <a href="https://github.com/sechenbling/">Lynn Chen</a>
+              
+            
+          
+          </span>
+        </span>
+    </div>
+</div>
+
+<div class="post-content">
+    <h2 id="spark-introduction"><span class="mr-2">Spark Introduction</span><a href="#spark-introduction" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+<h3 id="spark-summary"><span class="mr-2">Spark Summary</span><a href="#spark-summary" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+<ol>
+  <li>Spark 是一种由 Scala 语言开发的快速、通用、可扩展的大数据分析引擎</li>
+  <li>Spark Core 中提供了 Spark 最基础与最核心的功能</li>
+  <li>Spark SQL 是 Spark 用来操作结构化数据的组件。通过 Spark SQL，用户可以使用 SQL 或者 Apache Hive 版本的 SQL 方言（HQL）来查询数据。</li>
+  <li>Spark Streaming 是 Spark 平台上针对实时数据进行流式计算的组件，提供了丰富的 处理数据流的 API。</li>
+  <li>Spark 出现的时间相对较晚，并且主要功能主要是用于数据计算， 所以其实 Spark 一直被认为是 Hadoop 框架的升级版。</li>
+</ol>
+
+<h3 id="spark-on-hadoop"><span class="mr-2">Spark on Hadoop</span><a href="#spark-on-hadoop" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+<ul>
+  <li>Spark 就是在传统的 MapReduce 计算框架的基础上，利用其计算过程的优化，从而大大加快了数据分析、挖掘的运行和读写速度，并将计算单元缩小到更适合并行计算和重复使用的 RDD 计算模型。</li>
+  <li>Spark 和Hadoop 的根本差异是多个作业之间的数据通信问题 : Spark 多个作业之间数据 通信是基于内存，而 Hadoop 是基于磁盘。</li>
+  <li>Spark Task 的启动时间快。Spark 采用 fork 线程的方式，而 Hadoop 采用创建新的进程 的方式。</li>
+  <li>Spark 只有在shuffle 的时候将数据写入磁盘，而 Hadoop 中多个 MR 作业之间的数据交 互都要依赖于磁盘交互</li>
+  <li>Spark 的缓存机制比 HDFS 的缓存机制高效。</li>
+  <li>但是 Spark 是基于内存的，所以在实际的生产环境中，由于内存的限制，可能会 由于内存资源不够导致 Job 执行失败，此时，MapReduce 其实是一个更好的选择，所以 Spark 并不能完全替代 MR。</li>
+</ul>
+
+<h3 id="spark-core"><span class="mr-2">Spark Core</span><a href="#spark-core" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+<ul>
+  <li>Spark Core 中提供了 Spark 最基础与最核心的功能，Spark 其他的功能如：Spark SQL， Spark Streaming，GraphX, MLlib 都是在 Spark Core的基础上进行扩展的</li>
+  <li>Spark SQL：Spark SQL 是 Spark 用来操作结构化数据的组件。通过 Spark SQL，用户可以使用 SQL 或者 Apache Hive 版本的 SQL 方言（HQL）来查询数据。</li>
+  <li>Spark Streaming：Spark Streaming 是 Spark 平台上针对实时数据进行流式计算的组件，提供了丰富的处理 数据流的 API。</li>
+  <li>Spark MLlib：MLlib 是 Spark 提供的一个机器学习算法库。MLlib 不仅提供了模型评估、数据导入等额外的功能，还提供了一些更底层的机器学习原语。</li>
+  <li>Spark GraphX：GraphX 是 Spark 面向图计算提供的框架与算法库。</li>
+</ul>
+
+<h2 id="spark-environment"><span class="mr-2">Spark Environment</span><a href="#spark-environment" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+<h3 id="spark-部署运行环境"><span class="mr-2">Spark 部署运行环境</span><a href="#spark-部署运行环境" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+<p><strong>不同模式最主要的区别还是在指定–master时的运行环境和模式</strong>
+<img data-src="/blog_imgs/spark/base/spark deployment structure introduction/img0.png" alt="img.png" data-proofer-ignore></p>
+<ol>
+  <li>Local模式：本地环境：不需要其他任何节点资源就可以在本地执行 Spark 代码的环境
+    <ul>
+      <li>提交jar包到本地环境下运行的命令（官方案例中的计算pi）：
+        <ul>
+          <li>
+            <div class="language-shell highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre>   bin/spark-submit <span class="se">\</span>
+   <span class="nt">--class</span> org.apache.spark.examples.SparkPi <span class="se">\</span>
+   <span class="nt">--master</span> <span class="nb">local</span><span class="o">[</span>2] <span class="se">\</span>
+   ./examples/jars/spark-examples2.12-3.0.0.jar
+</pre></td></tr></tbody></table></code></div>            </div>
+          </li>
+          <li>应用参数提交说明：
+            <div class="language-text highlighter-rouge"><div class="code-header">
+        <span data-label-text="Text"><i class="fas fa-code small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre> bin/spark-submit \ 
+ --class \
+ --master \ ... 
+ # other options \ 
+ [application-arguments] 
+</pre></td></tr></tbody></table></code></div>            </div>
+          </li>
+        </ul>
+      </li>
+    </ul>
+    <ol>
+      <li>–class	Spark 程序中包含主函数的类</li>
+      <li>–master	Spark 程序运行的模式(环境)	模式：local[*]、spark://linux1:7077、 Yarn</li>
+      <li>–executor-memory 1G	指定每个 executor 可用内存为 1G</li>
+      <li>–total-executor-cores 2	指定所有executor使用的cpu核数。 为 2 个</li>
+      <li>–executor-cores	指定每个executor使用的cpu核数</li>
+      <li>application-jar	打包好的应用 jar，包含依赖。这 个 URL 在集群中全局可见。 比如 hdfs:// 共享存储系统，如果是file://path，那么所有的节点的 path 都包含同样的 jar</li>
+      <li>application-arguments 	传给 main()方法的参数</li>
+    </ol>
+  </li>
+  <li>Standalone模式：经典的master-slave模式
+    <ul>
+      <li>配置历史服务  history-server</li>
+      <li><img data-src="/blog_imgs/spark/base/spark deployment structure introduction/img2.png" alt="img.png" data-proofer-ignore></li>
+      <li>配置高可用HA（多个master）
+        <ol>
+          <li>停止集群 sbin/stop-all.sh</li>
+          <li>启动 Zookeeper xstart zk</li>
+          <li>修改 spark-env.sh 文件添加如下配置
+            <ul>
+              <li>注释如下内容：
+                <div class="language-shell highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre> <span class="c">#SPARK_MASTER_HOST=linux1 </span>
+  <span class="c">#SPARK_MASTER_PORT=7077 </span>
+</pre></td></tr></tbody></table></code></div>                </div>
+              </li>
+              <li>添加如下内容:
+                <div class="language-shell highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+</pre></td><td class="rouge-code"><pre> <span class="nv">SPARK_MASTER_WEBUI_PORT</span><span class="o">=</span>8989 
+ <span class="nb">export </span><span class="nv">SPARK_DAEMON_JAVA_OPTS</span><span class="o">=</span><span class="s2">" 
+ -Dspark.deploy.recoveryMode=ZOOKEEPER 
+ -Dspark.deploy.zookeeper.url=hadoop102,hadoop103,hadoop104 
+ -Dspark.deploy.zookeeper.dir=/spark"</span> 
+</pre></td></tr></tbody></table></code></div>                </div>
+              </li>
+            </ul>
+          </li>
+        </ol>
+      </li>
+    </ul>
+  </li>
+  <li>Yarn模式：
+standalone模式有spark自身提提供计算资源，无需其他框架提供资源，这样降低了和其他第三方框架的耦合性，但是spark本身最主要用途是计算框架，而不是资源调度框架，所以还是用其他更专业的资源调度框架更靠谱。采用yarn进行资源调度。
+    <ol>
+      <li><img data-src="/blog_imgs/spark/base/spark deployment structure introduction/img3.png" alt="img.png" data-proofer-ignore></li>
+      <li><img data-src="/blog_imgs/spark/base/spark deployment structure introduction/img4.png" alt="img.png" data-proofer-ignore></li>
+      <li><img data-src="/blog_imgs/spark/base/spark deployment structure introduction/img5.png" alt="img.png" data-proofer-ignore></li>
+      <li><img data-src="/blog_imgs/spark/base/spark deployment structure introduction/img6.png" alt="img.png" data-proofer-ignore></li>
+      <li>提交应用的时候指定–master参数为yarn</li>
+    </ol>
+  </li>
+  <li>
+    <p>k8s&amp;mesos模式
+容器化部署：容器管理工具中最为流行的就是 Kubernetes（k8s），而 Spark 也在最近的版本中支持了 k8s 部署模式。</p>
+  </li>
+  <li>windows模式：不用启用虚拟机直接使用</li>
+</ol>
+
+<h3 id="spark运行架构"><span class="mr-2">Spark运行架构</span><a href="#spark运行架构" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+<p><strong>采用标准的主从结构master-slave</strong><br />
+<img data-src="/blog_imgs/spark/base/spark deployment structure introduction/img7.png" alt="img.png" data-proofer-ignore></p>
+<ul>
+  <li>Driver：用于执行Spark中的main方法</li>
+  <li>Executor：Spark Executor 是集群中运行在工作节点（Worker）中的一个 JVM 进程，是整个集群中 的专门用于计算的节点。资源一般指的是工作节点 Executor 的内存大小和使用的虚拟 CPU 核（Core）数量。
+    <ul>
+      <li><img data-src="/blog_imgs/spark/base/spark deployment structure introduction/img8.png" alt="img.png" data-proofer-ignore></li>
+      <li>并行和并发：并行为真的含有多个核同时运行，并发为一个核一直切换任务看起来像执行多个任务</li>
+      <li>Spark 为代表的第三代的计算引擎。第三代计算引擎的特点主要是 Job 内部的 DAG 支持（不跨越 Job），以及实时计算。 第一代为MR引擎要拆分算法，第二代为Tez等支持DAG的框架</li>
+      <li><img data-src="/blog_imgs/spark/base/spark deployment structure introduction/img9.png" alt="img.png" data-proofer-ignore></li>
+    </ul>
+  </li>
+  <li>Matser&amp;Worker</li>
+  <li>ApplicationMaster
+    <h3 id="任务提交流程"><span class="mr-2">任务提交流程</span><a href="#任务提交流程" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+  </li>
+  <li><img data-src="/blog_imgs/spark/base/spark deployment structure introduction/img10.png" alt="img.png" data-proofer-ignore></li>
+  <li>Yarn Client模式：
+    <ol>
+      <li>Client 模式将用于监控和调度的 Driver 模块在客户端执行，而不是在 Yarn 中，所以一般用于测试。</li>
+      <li>Driver 在任务提交的本地机器上运行</li>
+      <li>Driver 启动后会和 ResourceManager 通讯申请启动 ApplicationMaster</li>
+      <li>ResourceManager 分配 container，在合适的 NodeManager 上启动 ApplicationMaster，负 责向 ResourceManager 申请 Executor 内存</li>
+      <li>ResourceManager 接到 ApplicationMaster 的资源申请后会分配 container，然后 ApplicationMaster 在资源分配指定的 NodeManager 上启动 Executor 进程</li>
+      <li>Executor 进程启动后会向 Driver 反向注册，Executor 全部注册完成后 Driver 开始执行 main 函数</li>
+      <li>之后执行到 Action 算子时，触发一个 Job，并根据宽依赖开始划分 stage，每个 stage 生 成对应的 TaskSet，之后将 task 分发到各个 Executor 上执行。</li>
+    </ol>
+  </li>
+  <li>Yarn Cluster模式 
+1.Cluster 模式将用于监控和调度的 Driver 模块启动在 Yarn 集群资源中执行。一般应用于 实际生产环境。
+    <ol>
+      <li>在 YARN Cluster 模式下，任务提交后会和 ResourceManager 通讯申请启动 ApplicationMaster</li>
+      <li>随后 ResourceManager 分配 container，在合适的 NodeManager 上启动 ApplicationMaster， 此时的 ApplicationMaster 就是 Driver。</li>
+      <li>Driver 启动后向 ResourceManager 申请 Executor 内存，ResourceManager 接到 ApplicationMaster 的资源申请后会分配 container，然后在合适的 NodeManager 上启动 Executor 进程</li>
+      <li>Executor进程启动后会向 Driver 反向注册，Executor 全部注册完成后 Driver 开始执行 main函数</li>
+      <li>之后执行到 Action 算子时，触发一个 Job，并根据宽依赖开始划分 stage，每个 stage 生 成对应的 TaskSet，之后将 task 分发到各个 Executor 上执行。</li>
+    </ol>
+  </li>
+</ul>
+
+
+</div>
+
+<div class="post-tail-wrapper text-muted">
+
+    <!-- categories -->
+    
+    <div class="post-meta mb-3">
+        <i class="far fa-folder-open fa-fw mr-1"></i>
+        
+        <a href='/categories/bigdata/'>Bigdata</a>,
+        <a href='/categories/spark/'>Spark</a>
+    </div>
+    
+
+    <!-- tags -->
+    
+    <div class="post-tags">
+        <i class="fa fa-tags fa-fw mr-1"></i>
+        
+        <a href="/tags/spark/"
+           class="post-tag no-text-decoration">spark</a>
+        
+    </div>
+    
+
+    <div class="post-tail-bottom
+    d-flex justify-content-between align-items-center mt-3 pt-5 pb-2">
+        <div class="license-wrapper">
+
+            
+
+            
+
+            This post is licensed under 
+            <a href="https://creativecommons.org/licenses/by/4.0/">
+                CC BY 4.0
+            </a>
+             by the author.
+
+            
+        </div>
+
+        <div class="share-wrapper">
+  <span class="share-label text-muted mr-1">Share</span>
+  <span class="share-icons">
+    
+    
+
+    
+      
+        <a href="http://connect.qq.com/widget/shareqq/index.html?title=Spark Deployment Structure Introduction - Blingblogs&url=http://localhost:4000/posts/Spark-Deployment-Structure-Introduction/" data-toggle="tooltip" data-placement="top"
+          title="QQ" target="_blank" rel="noopener" aria-label="QQ">
+          <i class="fa-fw fab fa-qq" style="color:#AEB6BF"></i>
+        </a>
+    
+      
+        <a href="https://open.weixin.qq.com/sdk/report" data-toggle="tooltip" data-placement="top"
+          title="WeChat" target="_blank" rel="noopener" aria-label="WeChat">
+          <i class="fa-fw fab fa-weixin" style="color:#AEB6BF"></i>
+        </a>
+    
+      
+        <a href="https://t.bilibili.com/" data-toggle="tooltip" data-placement="top"
+          title="Bilibili" target="_blank" rel="noopener" aria-label="Bilibili">
+          <i class="fa-fw fa-brands fa-bilibili" style="color:#AEB6BF"></i>
+        </a>
+    
+      
+        <a href="http://service.weibo.com/share/share.php?title=Spark Deployment Structure Introduction - Blingblogs&url=http://localhost:4000/posts/Spark-Deployment-Structure-Introduction/" data-toggle="tooltip" data-placement="top"
+          title="Weibo" target="_blank" rel="noopener" aria-label="Weibo">
+          <i class="fa-fw fab fa-weibo" style="color:#AEB6BF"></i>
+        </a>
+    
+      
+        <a href="https://www.linkedin.com/sharing/share-offsite/?url=http://localhost:4000/posts/Spark-Deployment-Structure-Introduction/" data-toggle="tooltip" data-placement="top"
+          title="Linkedin" target="_blank" rel="noopener" aria-label="Linkedin">
+          <i class="fa-fw fab fa-linkedin" style="color:#AEB6BF"></i>
+        </a>
+    
+      
+        <a href="https://twitter.com/intent/tweet?text=Spark Deployment Structure Introduction - Blingblogs&url=http://localhost:4000/posts/Spark-Deployment-Structure-Introduction/" data-toggle="tooltip" data-placement="top"
+          title="Twitter" target="_blank" rel="noopener" aria-label="Twitter">
+          <i class="fa-fw fab fa-twitter" style="color:#AEB6BF"></i>
+        </a>
+    
+
+    <i class="fa-fw fas fa-link small" onclick="copyLink()"
+        data-toggle="tooltip" data-placement="top" title="Copy link" style="color:#AEB6BF"></i>
+
+  </span>
+</div>
+
+
+    </div><!-- .post-tail-bottom -->
+
+</div><!-- div.post-tail-wrapper -->
+
+                
+            
+            
+        </div>
+    </div>
+
+    <!-- panel: use for update list and tags -->
+    <div id="panel-wrapper" class="col-xl-3 pl-2 text-muted">
+        <div class="access">
+            
+
+
+
+
+
+
+
+
+  <div id="access-lastmod" class="post">
+    <div class="panel-heading">Recently Updated</div>
+    <ul class="post-content pl-0 pb-1 ml-1 mt-2">
+      
+      
+      
+      
+      <li><a href="/posts/Spark-Deployment-Structure-Introduction/">Spark Deployment Structure Introduction</a></li>
+      
+      
+      
+      
+      <li><a href="/posts/Data-Warehouse-Design/">Data Warehouse Design</a></li>
+      
+      
+      
+      
+      <li><a href="/posts/Data-Warehouse-Model/">Data Warehouse Model</a></li>
+      
+      
+      
+      
+      <li><a href="/posts/Data-Warehouse-DWS&ADS-Develop/">Data Warehouse DWS&ADS Develop</a></li>
+      
+      
+      
+      
+      <li><a href="/posts/Data-Warehouse-DWD-Develop/">Data Warehouse DWD Develop</a></li>
+      
+    </ul>
+  </div> <!-- #access-lastmod -->
+
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+
+
+<div id="access-tags">
+  <div class="panel-heading">Other Trending Tags</div>
+  <div class="d-flex flex-wrap mt-3 mb-1 mr-3">
+
+    
+    
+    <a class="post-tag" href="/tags/data-warehouse/">data warehouse</a>
+    
+    
+    <a class="post-tag" href="/tags/spark/">spark</a>
+    
+    
+    <a class="post-tag" href="/tags/markdown/">markdown</a>
+    
+    
+    <a class="post-tag" href="/tags/logs/">logs</a>
+    
+    
+    <a class="post-tag" href="/tags/update/">update</a>
+    
+
+  </div>
+</div>
+
+
+        </div>
+        
+            
+            
+
+
+
+<!-- BS-toc.js will be loaded at medium priority -->
+<script src="/assets/lib/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script>
+
+<div id="toc-wrapper" class="pl-0 pr-4 mb-5">
+  <div class="panel-heading pl-3 pt-2 mb-2">Contents</div>
+  <nav id="toc" data-toggle="toc"></nav>
+</div>
+
+
+        
+    </div>
+</div>
+
+<!-- tail -->
+
+<div class="row">
+    <div id="tail-wrapper" class="col-12 col-lg-11 col-xl-9 pl-3 pr-3 pr-xl-4 mt-5">
+        
+            
+            <!--
+ Recommend the other 3 posts according to the tags and categories of the current post,
+ if the number is not enough, use the other latest posts to supplement.
+-->
+
+<!-- The total size of related posts  -->
+
+
+<!-- An random integer that bigger than 0  -->
+
+
+<!-- Equals to TAG_SCORE / {max_categories_hierarchy}  -->
+
+
+
+
+
+
+
+
+  
+
+  
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+
+<!-- Fill with the other newlest posts  -->
+
+
+
+
+
+<div id="related-posts" class="mb-2 mb-sm-4">
+  <h3 class="pt-2 mb-4 ml-1"
+      data-toc-skip>Related Reading</h3>
+  <div class="card-deck mb-4">
+    
+    
+    
+    <div class="card">
+      <a href="/posts/Spark-Data-Structure-Introduction/">
+        <div class="card-body">
+          
+
+
+
+<em class="small"
+    data-ts="1669386600"
+    data-df="ll"
+    >
+    Nov 25, 2022
+</em>
+          <h3 class="pt-0 mt-1 mb-3" data-toc-skip>Spark Data Structure Introduction</h3>
+          <div class="text-muted small">
+            <p>
+              
+
+
+
+
+
+              核心编程：
+Spark 计算框架为了能够进行高并发和高吞吐的数据处理，封装了三大数据结构，用于处理不同的应用场景。三大数据结构分别是:
+
+  累加器：分布式共享只写变量
+  广播变量：分布式共享只读变量
+  RDD : 弹性分布式数据集
+
+
+累加器:
+累加器用来把 Executor 端变量信息聚合到 Driver 端。在 Driver 程序中定义的变量，在 Executor 端的每个 Tas...
+            </p>
+          </div>
+        </div>
+      </a>
+    </div>
+    
+    
+    
+    <div class="card">
+      <a href="/posts/Spark-Sql-Introduction/">
+        <div class="card-body">
+          
+
+
+
+<em class="small"
+    data-ts="1669387200"
+    data-df="ll"
+    >
+    Nov 25, 2022
+</em>
+          <h3 class="pt-0 mt-1 mb-3" data-toc-skip>Spark Sql Introduction</h3>
+          <div class="text-muted small">
+            <p>
+              
+
+
+
+
+
+              SparkSQL基本介绍
+Spark Sql
+Spark SQL 是Spark用于结构化数据处理的Spark模块:
+
+  数据兼容方面: SparkSQL 不但兼容 Hive，还可以从 RDD、parquet 文件、JSON 文件中获取数据，未来版本甚至支持获取 RDBMS 数据以及 cassandra 等 NOSQL 数据；
+  性能优化方面: 除了采取 In-Memory Columna...
+            </p>
+          </div>
+        </div>
+      </a>
+    </div>
+    
+    
+    
+    <div class="card">
+      <a href="/posts/Spark-Streaming-Introduction/">
+        <div class="card-body">
+          
+
+
+
+<em class="small"
+    data-ts="1669387500"
+    data-df="ll"
+    >
+    Nov 25, 2022
+</em>
+          <h3 class="pt-0 mt-1 mb-3" data-toc-skip>Spark Streaming Introduction</h3>
+          <div class="text-muted small">
+            <p>
+              
+
+
+
+
+
+              Spark Streaming基本介绍
+Spark Streaming
+Spark Streaming 用于流式数据的处理。Spark Streaming 支持的数据输入源很多，例如：Kafka、 Flume、Twitter、ZeroMQ 和简单的 TCP 套接字等等。数据输入后可以用 Spark 的高度抽象原语,如：map、reduce、join、window 等进行运算。而结果也能保存在...
+            </p>
+          </div>
+        </div>
+      </a>
+    </div>
+    
+  </div> <!-- .card-deck -->
+</div> <!-- #related-posts -->
+
+
+        
+            
+            <!--
+  Navigation buttons at the bottom of the post.
+-->
+
+<div class="post-navigation d-flex justify-content-between">
+  
+  <a href="/posts/Data-Warehouse-Design/" class="btn btn-outline-primary"
+     prompt="Previous Post">
+    <p>Data Warehouse Design</p>
+  </a>
+  
+
+  
+  <div class="btn btn-outline-primary disabled"
+       prompt="Next Post">
+    <p>-</p>
+  </div>
+  
+
+</div>
+        
+    </div>
+</div>
+
+
+            </div>
+            <!--
+  The Search results
+-->
+<div id="search-result-wrapper" class="d-flex justify-content-center unloaded">
+  <div class="col-12 col-sm-11 post-content">
+    <div id="search-hints">
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+
+
+<div id="access-tags">
+  <div class="panel-heading">Other Trending Tags</div>
+  <div class="d-flex flex-wrap mt-3 mb-1 mr-3">
+
+    
+    
+    <a class="post-tag" href="/tags/data-warehouse/">data warehouse</a>
+    
+    
+    <a class="post-tag" href="/tags/spark/">spark</a>
+    
+    
+    <a class="post-tag" href="/tags/markdown/">markdown</a>
+    
+    
+    <a class="post-tag" href="/tags/logs/">logs</a>
+    
+    
+    <a class="post-tag" href="/tags/update/">update</a>
+    
+
+  </div>
+</div>
+
+
+    </div>
+    <div id="search-results" class="d-flex flex-wrap justify-content-center text-muted mt-3"></div>
+  </div>
+</div>
+
+        </div> <!-- #main-wrapper -->
+
+        <footer>
+    <div class="container pl-lg-4 pr-lg-4">
+        <div class="d-flex justify-content-between align-items-center text-muted ml-md-3 mr-md-3">
+            <div class="footer-left">
+                <p class="mb-0">
+                    © 2023
+                    <a href="https://twitter.com/sechenbling">Lynn Chen</a>.
+                    
+                    <span data-toggle="tooltip" data-placement="top"
+                          title="Except where otherwise noted, the blog posts on this site are licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0) License by the author.">Some rights reserved.</span>
+                    
+                </p>
+            </div>
+
+            <div class="footer-right">
+                <p class="mb-0">
+                    <a href="https://www.bilibili.com/video/BV1184y1i7Lv" target="_blank" rel="noopener">
+                        Wish you have a good day!
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+        
+        <div id="mask"></div>
+
+        <a id="back-to-top" href="#" aria-label="back-to-top" class="btn btn-lg btn-box-shadow" role="button">
+            <i class="fas fa-angle-up"></i>
+        </a>
+
+        
+
+        <!--
+  Jekyll Simple Search loader
+  See: <https://github.com/christian-fei/Simple-Jekyll-Search>
+-->
+
+
+
+
+
+<script src="/assets/lib/simple-jekyll-search-1.10.0/simple-jekyll-search.min.js"></script>
+
+<script>
+SimpleJekyllSearch({
+  searchInput: document.getElementById('search-input'),
+  resultsContainer: document.getElementById('search-results'),
+  json: '/assets/js/data/search.json',
+  searchResultTemplate: '<div class="pl-1 pr-1 pl-sm-2 pr-sm-2 pl-lg-4 pr-lg-4 pl-xl-0 pr-xl-0">  <a href="{url}">{title}</a>  <div class="post-meta d-flex flex-column flex-sm-row text-muted mt-1 mb-1">    {categories}    {tags}  </div>  <p>{snippet}</p></div>',
+  noResultsText: '<p class="mt-5">Oops! No results found.</p>',
+  templateMiddleware: function(prop, value, template) {
+    if (prop === 'categories') {
+      if (value === '') {
+        return `${value}`;
+      } else {
+        return `<div class="mr-sm-4"><i class="far fa-folder fa-fw"></i>${value}</div>`;
+      }
+    }
+
+    if (prop === 'tags') {
+      if (value === '') {
+        return `${value}`;
+      } else {
+        return `<div><i class="fa fa-tag fa-fw"></i>${value}</div>`;
+      }
+    }
+  }
+});
+</script>
+
+        <!-- layout specified -->
+
+    
+    <!-- pv-report needs countup.js -->
+        <script async src="https://cdn.jsdelivr.net/npm/countup.js@1.9.3/dist/countUp.min.js"></script>
+        <script defer src="/assets/js/dist/pvreport.min.js"></script>
+    
+
+
+
+    <!-- image lazy-loading & popup & clipboard -->
+    
+    
+
+
+
+
+
+
+
+  
+    
+
+    
+
+  
+
+
+
+  
+
+    <script src="/assets/lib/lozad-1.16.0/lozad.min.js"></script>
+
+  
+
+
+
+  
+
+    <script src="/assets/lib/clipboard-2.0.9/clipboard.min.js"></script>
+
+  
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/combine/npm/magnific-popup@1/dist/jquery.magnific-popup.min.js"></script>
+
+
+
+
+
+    
+    
+    
+
+
+
+
+
+
+
+  
+
+    <script src="/assets/lib/dayjs-1.10.7/dayjs.min.js"></script>
+
+  
+
+
+
+  
+
+    <script src="/assets/lib/dayjs-1.10.7/locale/en.min.js"></script>
+
+  
+
+
+
+  
+
+    <script src="/assets/lib/dayjs-1.10.7/plugin/relativeTime.min.js"></script>
+
+  
+
+
+
+  
+
+    <script src="/assets/lib/dayjs-1.10.7/plugin/localizedFormat.min.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+<script defer src="/assets/js/dist/post.min.js"></script>
+
+
+
+<!-- commons -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    </body>
+</html>
+

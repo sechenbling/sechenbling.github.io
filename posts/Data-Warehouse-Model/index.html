@@ -493,7 +493,7 @@
             <a href="/">Blingblogs</a>
         </div>
         <!-- site-subtitle settings -->
-        <div class="site-subtitle">more than codes</div>
+        <div class="site-subtitle">life can also be multi-threaded</div>
     </div>
 
     <ul class="w-100">
@@ -1252,7 +1252,7 @@
 
 <h2 id="数据仓库建模"><span class="mr-2">数据仓库建模</span><a href="#数据仓库建模" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
 <h3 id="仓库流程图"><span class="mr-2">仓库流程图</span><a href="#仓库流程图" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
-<p><img data-src="/blog_imgs/data warehouse/theory/data warehouse model/data warehouse model img1.png" alt="img.png" data-proofer-ignore></p>
+<p><img data-src="/blog_imgs/bigdata/data warehouse/theory/data warehouse model/data warehouse model img1.png" alt="img.png" data-proofer-ignore></p>
 <h3 id="数据建模"><span class="mr-2">数据建模</span><a href="#数据建模" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
 <p>数据组织和存储方法与数据的处理（建表+写SQL）</p>
 <ul>
@@ -1285,7 +1285,7 @@
         </ul>
       </li>
       <li>对简单的需求可能需要跨越大量的表进行join操作才能获取到相应的数据，比较影响性能，并不适合直接用于分析统计操作。<br />
-<img data-src="/blog_imgs/data warehouse/theory/data warehouse model/data warehouse model img2.png" alt="img.png" data-proofer-ignore></li>
+<img data-src="/blog_imgs/bigdata/data warehouse/theory/data warehouse model/data warehouse model img2.png" alt="img.png" data-proofer-ignore></li>
     </ul>
   </li>
   <li>维度模型
@@ -1293,7 +1293,7 @@
       <li>维度模型将业务通过事实和维度两个概念进行呈现，事实对应业务过程，而维度通常对应业务过程发生时所处的环境。抽象为事实表和维度表。关注于数据分析，如何更快完成需求分析和大规模复杂查询的相应性能。只需要通过一个事实表和其他维度表进行关联即可，使用维度表里的字段进行过滤。</li>
       <li>缺点在于数据冗余，比如Date中的年分，同一年中多天都是一个年份，但是放在大数据集群中对存储空间并不考虑，效率更重要（HDFS无限扩展）；此外更改数据时会出现数据一致性问题，不过数仓不会针对一条或几条数据进行更改，而是批量大规模更改。</li>
       <li>业务过程可以概括为一个个不可拆分的行为事件，比如商品下单等。
-<img data-src="/blog_imgs/data warehouse/theory/data warehouse model/data warehouse model img3.png" alt="img.png" data-proofer-ignore></li>
+<img data-src="/blog_imgs/bigdata/data warehouse/theory/data warehouse model/data warehouse model img3.png" alt="img.png" data-proofer-ignore></li>
     </ul>
   </li>
 </ul>
@@ -1536,6 +1536,11 @@
       
       
       
+      <li><a href="/posts/Spark-Deployment-Structure-Introduction/">Spark Deployment Structure Introduction</a></li>
+      
+      
+      
+      
       <li><a href="/posts/Data-Warehouse-Design/">Data Warehouse Design</a></li>
       
       
@@ -1552,11 +1557,6 @@
       
       
       <li><a href="/posts/Data-Warehouse-DWD-Develop/">Data Warehouse DWD Develop</a></li>
-      
-      
-      
-      
-      <li><a href="/posts/Data-Warehouse-DIM-Develop/">Data Warehouse DIM Develop</a></li>
       
     </ul>
   </div> <!-- #access-lastmod -->
@@ -1746,6 +1746,18 @@
 
 
 
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
 
   
 

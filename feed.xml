@@ -4,7 +4,7 @@
   <id>http://localhost:4000/</id>
   <title>Blingblogs</title>
   <subtitle>A site with blogs involve backend, big data, or other daily programming records.</subtitle>
-  <updated>2023-01-29T18:16:19+08:00</updated>
+  <updated>2023-01-31T00:27:35+08:00</updated>
   <author>
     <name>Lynn Chen</name>
     <uri>http://localhost:4000/</uri>
@@ -17,6 +17,54 @@
   <icon>/assets/img/favicons/favicon.ico</icon>
   <logo>/assets/img/favicons/favicon-96x96.png</logo>
 
+
+  
+  <entry>
+    <title>Spark Deployment Structure Introduction</title>
+    <link href="http://localhost:4000/posts/Spark-Deployment-Structure-Introduction/" rel="alternate" type="text/html" title="Spark Deployment Structure Introduction" />
+    <published>2023-01-30T22:30:00+08:00</published>
+  
+    <updated>2023-01-30T22:30:00+08:00</updated>
+  
+    <id>http://localhost:4000/posts/Spark-Deployment-Structure-Introduction/</id>
+    <content src="http://localhost:4000/posts/Spark-Deployment-Structure-Introduction/" />
+    <author>
+      <name>Lynn</name>
+    </author>
+
+  
+    
+    <category term="Bigdata" />
+    
+    <category term="Spark" />
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      Spark Introduction
+Spark Summary
+
+  Spark 是一种由 Scala 语言开发的快速、通用、可扩展的大数据分析引擎
+  Spark Core 中提供了 Spark 最基础与最核心的功能
+  Spark SQL 是 Spark 用来操作结构化数据的组件。通过 Spark SQL，用户可以使用 SQL 或者 Apache Hive 版本的 SQL 方言（HQL）来查询数据。
+  Spark Streaming 是 Spark 平台上针对实时数据进行流式计算的组件，提供了丰富的 处理数据流的 API。
+  Spark 出现的时间相对较晚，并且主要功能主要是用于数据计算， 所以其实 Spark 一直被认为是 Hadoop 框架的升级版。
+
+
+Spark on Hadoop
+
+  Spark 就是在传统的 MapReduce 计算框架的基础上，利用其计算过程...
+    </summary>
+  
+
+  </entry>
 
   
   <entry>
@@ -233,63 +281,6 @@ DWD层设计要点
   根据业务总线矩阵（确认业务，声明粒度，确认维度，确认事实），明确业务过程和哪个维度有关系并不是需求决定的，而是根据数仓的具体业务逻辑决定的，维度的确定是比较灵活的，尽可能多的确定与业务过程相关的维度即可。
   增量分区都是每天一个分区，每个分区存放当天新增的数据（增量表逻辑相同）
   首日假设根据之前数据都是一次操...
-    </summary>
-  
-
-  </entry>
-
-  
-  <entry>
-    <title>Data Warehouse DIM Develop</title>
-    <link href="http://localhost:4000/posts/Data-Warehouse-DIM-Develop/" rel="alternate" type="text/html" title="Data Warehouse DIM Develop" />
-    <published>2023-01-27T10:30:00+08:00</published>
-  
-    <updated>2023-01-27T10:35:00+08:00</updated>
-  
-    <id>http://localhost:4000/posts/Data-Warehouse-DIM-Develop/</id>
-    <content src="http://localhost:4000/posts/Data-Warehouse-DIM-Develop/" />
-    <author>
-      <name>Lynn</name>
-    </author>
-
-  
-    
-    <category term="Bigdata" />
-    
-    <category term="DataWarehouse" />
-    
-  
-
-  
-    <summary>
-      
-
-
-
-
-
-      DIM层
-DIM层设计要点
-
-  DIM层的设计一句是维度建模理论，该层存储维度模型的维度表（重点）
-  DIM层的数据存储格式为orc列式存储+snappy压缩（相较于ODS的存储格式和压缩更快）
-    
-      ODS在乎的是减少存储空间，其他层在乎的是查询更快
-    
-  
-  DIM层表名的命名规范为dim_表名_全量表或者拉链表标识（full/zip）
-    维度表设计：
-  
-  确定维度表
-  确定主维度表和相关维度表
-  确定维度属性
-    
-      尽可能生成丰富的维度属性
-      尽量不使用编码而使用文字说明或者编码加文字说明
-      沉淀出通用的维度属性
-      商品维度表
-        
-          可以参考原始数据在MySQL中的表，找到商品MySQL表并找到与其相关联的其他MySQL表，考虑是否和维度表有关，在考虑相关...
     </summary>
   
 

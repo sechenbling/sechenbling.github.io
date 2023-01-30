@@ -45,7 +45,7 @@
 <meta name="twitter:creator" content="@sechenbling" />
 <meta name="google-site-verification" content="google_meta_tag_verification" />
 <script type="application/ld+json">
-{"author":{"@type":"Person","name":"Lynn Chen"},"@type":"BlogPosting","url":"http://localhost:4000/posts/Spark-Data-Structure-Introduction/","headline":"Spark Data Structure Introduction","dateModified":"2022-11-25T22:30:00+08:00","datePublished":"2022-11-25T22:30:00+08:00","description":"核心编程： Spark 计算框架为了能够进行高并发和高吞吐的数据处理，封装了三大数据结构，用于处理不同的应用场景。三大数据结构分别是: 累加器：分布式共享只写变量 广播变量：分布式共享只读变量 RDD : 弹性分布式数据集","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/Spark-Data-Structure-Introduction/"},"@context":"https://schema.org"}</script>
+{"author":{"@type":"Person","name":"Lynn Chen"},"@type":"BlogPosting","url":"http://localhost:4000/posts/Spark-Data-Structure-Introduction/","headline":"Spark Data Structure Introduction","dateModified":"2023-01-30T22:30:00+08:00","datePublished":"2022-11-25T22:30:00+08:00","description":"核心编程： Spark 计算框架为了能够进行高并发和高吞吐的数据处理，封装了三大数据结构，用于处理不同的应用场景。三大数据结构分别是: 累加器：分布式共享只写变量 广播变量：分布式共享只读变量 RDD : 弹性分布式数据集","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/Spark-Data-Structure-Introduction/"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   
@@ -493,7 +493,7 @@
             <a href="/">Blingblogs</a>
         </div>
         <!-- site-subtitle settings -->
-        <div class="site-subtitle">more than codes</div>
+        <div class="site-subtitle">life can also be multi-threaded</div>
     </div>
 
     <ul class="w-100">
@@ -805,13 +805,13 @@
 
 
 <span class=""
-    data-ts="1669386600"
+    data-ts="1675089000"
     data-df="ll"
     
         data-toggle="tooltip"
         data-placement="bottom"
     >
-    Nov 25, 2022
+    Jan 30, 2023
 </span>
     </span>
     
@@ -975,6 +975,11 @@
       
       
       
+      <li><a href="/posts/Spark-Deployment-Structure-Introduction/">Spark Deployment Structure Introduction</a></li>
+      
+      
+      
+      
       <li><a href="/posts/Data-Warehouse-Design/">Data Warehouse Design</a></li>
       
       
@@ -991,11 +996,6 @@
       
       
       <li><a href="/posts/Data-Warehouse-DWD-Develop/">Data Warehouse DWD Develop</a></li>
-      
-      
-      
-      
-      <li><a href="/posts/Data-Warehouse-DIM-Develop/">Data Warehouse DIM Develop</a></li>
       
     </ul>
   </div> <!-- #access-lastmod -->
@@ -1285,6 +1285,18 @@
   
 
   
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
     
   
 
@@ -1410,19 +1422,19 @@ Spark Streaming 用于流式数据的处理。Spark Streaming 支持的数据输
     
     
     <div class="card">
-      <a href="/posts/Data-Warehouse-ODS-Develop/">
+      <a href="/posts/Spark-Deployment-Structure-Introduction/">
         <div class="card-body">
           
 
 
 
 <em class="small"
-    data-ts="1674783000"
+    data-ts="1675089000"
     data-df="ll"
     >
-    Jan 27, 2023
+    Jan 30, 2023
 </em>
-          <h3 class="pt-0 mt-1 mb-3" data-toc-skip>Data Warehouse ODS Develop</h3>
+          <h3 class="pt-0 mt-1 mb-3" data-toc-skip>Spark Deployment Structure Introduction</h3>
           <div class="text-muted small">
             <p>
               
@@ -1431,20 +1443,12 @@ Spark Streaming 用于流式数据的处理。Spark Streaming 支持的数据输
 
 
 
-              ODS层
+              Spark Introduction
+Spark Summary
 
-  表结构设计依托于从业务系统同步过来的数据结构
-  ODS层要保存全部的历史数据，数据量较大，使用压缩程度较高的格式gzip
-  ODS层的命名规范为ods_表名_单分区增量全量标识(inc或者full)
-
-
-Hive数仓启动
-
-  启动Hive服务
-    1
-2
-nohup ./hive --service metastore &amp;amp;
-nohup ./hive --se...
+  Spark 是一种由 Scala 语言开发的快速、通用、可扩展的大数据分析引擎
+  Spark Core 中提供了 Spark 最基础与最核心的功能
+  Spark SQL 是 Spark 用来操作结构化数据的组件。通过 Spark SQL，用户可以使用 SQL 或者 Apache Hive 版本的 SQL 方言（HQL...
             </p>
           </div>
         </div>
