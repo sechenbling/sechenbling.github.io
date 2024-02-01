@@ -32,8 +32,8 @@
 <meta property="og:title" content="Data Warehouse Model" />
 <meta name="author" content="Lynn Chen" />
 <meta property="og:locale" content="en" />
-<meta name="description" content="数据仓库介绍 数据仓库 用于存储分析报告的数据系统 并不产生数据（数据来自于外部系统） 也不消费数据（其结果开放给外部应用使用） 构建面向分析的集成化数据环境，分析结构提供决策 对比OLAP和OLTP 各类型的数据库保存相关数据（关系型数据库是OLTP的典型应用） 但不会在数据库上直接分析数据 数据仓库是OLAP的一种实现 （OLAP 联机分析处理系统 面向分析 支持分析）" />
-<meta property="og:description" content="数据仓库介绍 数据仓库 用于存储分析报告的数据系统 并不产生数据（数据来自于外部系统） 也不消费数据（其结果开放给外部应用使用） 构建面向分析的集成化数据环境，分析结构提供决策 对比OLAP和OLTP 各类型的数据库保存相关数据（关系型数据库是OLTP的典型应用） 但不会在数据库上直接分析数据 数据仓库是OLAP的一种实现 （OLAP 联机分析处理系统 面向分析 支持分析）" />
+<meta name="description" content="数据仓库介绍" />
+<meta property="og:description" content="数据仓库介绍" />
 <link rel="canonical" href="http://localhost:4000/posts/Data-Warehouse-Model/" />
 <meta property="og:url" content="http://localhost:4000/posts/Data-Warehouse-Model/" />
 <meta property="og:site_name" content="Blingblogs" />
@@ -41,11 +41,11 @@
 <meta property="article:published_time" content="2023-01-28T21:30:00+08:00" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Data Warehouse Model" />
-<meta name="twitter:site" content="@sechenbling" />
+<meta name="twitter:site" content="@invalid" />
 <meta name="twitter:creator" content="@sechenbling" />
 <meta name="google-site-verification" content="google_meta_tag_verification" />
 <script type="application/ld+json">
-{"author":{"@type":"Person","name":"Lynn Chen"},"@type":"BlogPosting","url":"http://localhost:4000/posts/Data-Warehouse-Model/","headline":"Data Warehouse Model","dateModified":"2023-01-28T21:35:00+08:00","datePublished":"2023-01-28T21:30:00+08:00","description":"数据仓库介绍 数据仓库 用于存储分析报告的数据系统 并不产生数据（数据来自于外部系统） 也不消费数据（其结果开放给外部应用使用） 构建面向分析的集成化数据环境，分析结构提供决策 对比OLAP和OLTP 各类型的数据库保存相关数据（关系型数据库是OLTP的典型应用） 但不会在数据库上直接分析数据 数据仓库是OLAP的一种实现 （OLAP 联机分析处理系统 面向分析 支持分析）","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/Data-Warehouse-Model/"},"@context":"https://schema.org"}</script>
+{"author":{"@type":"Person","name":"Lynn Chen"},"@type":"BlogPosting","url":"http://localhost:4000/posts/Data-Warehouse-Model/","headline":"Data Warehouse Model","dateModified":"2023-01-28T21:35:00+08:00","datePublished":"2023-01-28T21:30:00+08:00","description":"数据仓库介绍","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/Data-Warehouse-Model/"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   
@@ -493,7 +493,7 @@
             <a href="/">Blingblogs</a>
         </div>
         <!-- site-subtitle settings -->
-        <div class="site-subtitle">life can also be multi-threaded</div>
+        <div class="site-subtitle">Happy Everyday</div>
     </div>
 
     <ul class="w-100">
@@ -575,7 +575,7 @@
         
             
         
-        <a href="https://space.bilibili.com/15164783" aria-label="bilibili"
+        <a href="https://space.bilibili.com/1" aria-label="bilibili"
            target="_blank" rel="noopener" >
             <i class="fa-brands fa-bilibili"></i>
         </a>
@@ -583,7 +583,7 @@
         
             
         
-        <a href="https://twitter.com/sechenbling" aria-label="twitter"
+        <a href="https://twitter.com/invalid" aria-label="twitter"
            target="_blank" rel="noopener" >
             <i class="fab fa-twitter"></i>
         </a>
@@ -1204,6 +1204,7 @@
 
 <div class="post-content">
     <h2 id="数据仓库介绍"><span class="mr-2">数据仓库介绍</span><a href="#数据仓库介绍" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
 <h3 id="数据仓库"><span class="mr-2">数据仓库</span><a href="#数据仓库" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
 <ul>
   <li>用于存储分析报告的数据系统
@@ -1251,8 +1252,10 @@
 <p>结构化查询语言：分析领域主流开发语言，SQL本身是针对数据库软件设计的，但是在大数据数仓领域，很多数仓都会支持SQL语法</p>
 
 <h2 id="数据仓库建模"><span class="mr-2">数据仓库建模</span><a href="#数据仓库建模" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
 <h3 id="仓库流程图"><span class="mr-2">仓库流程图</span><a href="#仓库流程图" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
 <p><img data-src="/blog_imgs/bigdata/data warehouse/theory/data warehouse model/data warehouse model img1.png" alt="img.png" data-proofer-ignore></p>
+
 <h3 id="数据建模"><span class="mr-2">数据建模</span><a href="#数据建模" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
 <p>数据组织和存储方法与数据的处理（建表+写SQL）</p>
 <ul>
@@ -1536,7 +1539,7 @@
       
       
       
-      <li><a href="/posts/Spark-Deployment-Structure-Introduction/">Spark Deployment Structure Introduction</a></li>
+      <li><a href="/posts/Git/">Git</a></li>
       
       
       
@@ -1606,20 +1609,6 @@
     
     
     
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
   
     
     
@@ -1639,6 +1628,16 @@
     
     
     
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
       
         
         
@@ -1647,6 +1646,48 @@
     
     
     
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
     
   
     
@@ -1689,6 +1730,9 @@
     
     
     <a class="post-tag" href="/tags/markdown/">markdown</a>
+    
+    
+    <a class="post-tag" href="/tags/java/">Java</a>
     
     
     <a class="post-tag" href="/tags/logs/">logs</a>
@@ -1895,6 +1939,18 @@
 
   
 
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
 
 
 
@@ -1978,6 +2034,7 @@ nohup ./hive --servic...
 
 
               DIM层
+
 DIM层设计要点
 
   DIM层的设计一句是维度建模理论，该层存储维度模型的维度表（重点）
@@ -1987,7 +2044,10 @@ DIM层设计要点
     
   
   DIM层表名的命名规范为dim_表名_全量表或者拉链表标识（full/zip）
-    维度表设计：...
+
+
+维度表设计：
+...
             </p>
           </div>
         </div>
@@ -2116,20 +2176,6 @@ DWD层设计要点
     
     
     
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
   
     
     
@@ -2149,6 +2195,16 @@ DWD层设计要点
     
     
     
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
       
         
         
@@ -2157,6 +2213,48 @@ DWD层设计要点
     
     
     
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
     
   
     
@@ -2201,6 +2299,9 @@ DWD层设计要点
     <a class="post-tag" href="/tags/markdown/">markdown</a>
     
     
+    <a class="post-tag" href="/tags/java/">Java</a>
+    
+    
     <a class="post-tag" href="/tags/logs/">logs</a>
     
     
@@ -2223,7 +2324,7 @@ DWD层设计要点
         <div class="d-flex justify-content-between align-items-center text-muted ml-md-3 mr-md-3">
             <div class="footer-left">
                 <p class="mb-0">
-                    © 2023
+                    © 2024
                     <a href="https://twitter.com/sechenbling">Lynn Chen</a>.
                     
                     <span data-toggle="tooltip" data-placement="top"

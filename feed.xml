@@ -4,7 +4,7 @@
   <id>http://localhost:4000/</id>
   <title>Blingblogs</title>
   <subtitle>A site with blogs involve backend, big data, or other daily programming records.</subtitle>
-  <updated>2023-01-31T00:37:17+08:00</updated>
+  <updated>2024-02-01T23:43:47+08:00</updated>
   <author>
     <name>Lynn Chen</name>
     <uri>http://localhost:4000/</uri>
@@ -13,30 +13,30 @@
   <link rel="alternate" type="text/html" hreflang="en"
     href="http://localhost:4000/"/>
   <generator uri="https://jekyllrb.com/" version="3.9.0">Jekyll</generator>
-  <rights> © 2023 Lynn Chen </rights>
+  <rights> © 2024 Lynn Chen </rights>
   <icon>/assets/img/favicons/favicon.ico</icon>
   <logo>/assets/img/favicons/favicon-96x96.png</logo>
 
 
   
   <entry>
-    <title>Spark Deployment Structure Introduction</title>
-    <link href="http://localhost:4000/posts/Spark-Deployment-Structure-Introduction/" rel="alternate" type="text/html" title="Spark Deployment Structure Introduction" />
-    <published>2023-01-30T22:30:00+08:00</published>
+    <title>Git</title>
+    <link href="http://localhost:4000/posts/Git/" rel="alternate" type="text/html" title="Git" />
+    <published>2023-04-22T22:30:00+08:00</published>
   
-    <updated>2023-01-30T22:30:00+08:00</updated>
+    <updated>2023-04-22T22:30:00+08:00</updated>
   
-    <id>http://localhost:4000/posts/Spark-Deployment-Structure-Introduction/</id>
-    <content src="http://localhost:4000/posts/Spark-Deployment-Structure-Introduction/" />
+    <id>http://localhost:4000/posts/Git/</id>
+    <content src="http://localhost:4000/posts/Git/" />
     <author>
       <name>Lynn</name>
     </author>
 
   
     
-    <category term="Bigdata" />
+    <category term="HuaweiNEO" />
     
-    <category term="Spark" />
+    <category term="Java" />
     
   
 
@@ -48,19 +48,31 @@
 
 
 
-      Spark Introduction
-Spark Summary
+      Git安装
 
-  Spark 是一种由 Scala 语言开发的快速、通用、可扩展的大数据分析引擎
-  Spark Core 中提供了 Spark 最基础与最核心的功能
-  Spark SQL 是 Spark 用来操作结构化数据的组件。通过 Spark SQL，用户可以使用 SQL 或者 Apache Hive 版本的 SQL 方言（HQL）来查询数据。
-  Spark Streaming 是 Spark 平台上针对实时数据进行流式计算的组件，提供了丰富的 处理数据流的 API。
-  Spark 出现的时间相对较晚，并且主要功能主要是用于数据计算， 所以其实 Spark 一直被认为是 Hadoop 框架的升级版。
+Linux
 
-
-Spark on Hadoop
-
-  Spark 就是在传统的 MapReduce 计算框架的基础上，利用其计算过程...
+  包管理器安装
+    # Ubuntu 10.10 or upper
+sudo aptitude install git
+sudo aptitude install git-doc git-svn git-email gitk
+  
+# RHEL CentOs
+yum install git
+yum install git-svn git-email gitk
+    
+  
+  源码安装
+    # decompress git pkg
+tar -jxvf git-xxxx
+cd git-xxxx
+  
+# install git to /usr/local/bin
+make prefix = /usr/local all
+sudo make prefix = /usr/local install
+  
+# install git docs
+make...
     </summary>
   
 
@@ -97,6 +109,7 @@ Spark on Hadoop
 
 
       数据仓库设计
+
 数据仓库分层规划
 
   使数据体系更加清洗，简单化复杂问题（one data理论分层）
@@ -110,7 +123,7 @@ Spark on Hadoop
   DWS:
   data warehouse summary:需求驱动来建立对应的表，以分析的主题对象作为建模驱动构建公共统计粒度（不同需求之间通用的计算结果，减少重复计算）的汇总表。
   ADS:
-  application data service:存放各项统计...
+  application data service:存放各项统...
     </summary>
   
 
@@ -147,6 +160,7 @@ Spark on Hadoop
 
 
       数据仓库介绍
+
 数据仓库
 
   用于存储分析报告的数据系统
@@ -168,7 +182,7 @@ Spark on Hadoop
   面向主题subject oriented 主题抽象概念，在较高层次上数据综合、归类并分析利用的抽象
   集成性integrated 主题相关的数据通常会分布在多个操作系统中，彼此分散独立异构，需要集成在数仓主题下
     
-      数据进入数据仓库前需要经过统一和综合，对数据进行抽取、...
+      数据进入数据仓库前需要经过统一和综合，对数据进行抽取...
     </summary>
   
 
@@ -206,6 +220,7 @@ Spark on Hadoop
 
       DWS层
 汇总数据层，由明细数据汇总而来的数据，基于上层的指标需求，构建公用的中间的统计结果，为了减少重复计算。
+
 设计过程
 
   DWS层的设计参考指标体系。
@@ -223,11 +238,12 @@ Spark on Hadoop
 
 ADS层
 根据具体业务需求来获取对应的数据，存放各项统计指标标准
+
 开窗函数：
 区分开窗函数和聚合函数
 
   聚合函数：按照字段进行分组(group by)进行shuffle，将相同码的数据进行聚合，然后得到每一组的KV键值（多行聚合一行）
-  开窗...
+  ...
     </summary>
   
 

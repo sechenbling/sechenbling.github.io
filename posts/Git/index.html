@@ -29,28 +29,28 @@
   
   <!-- Begin Jekyll SEO tag v2.6.1 -->
 <meta name="generator" content="Jekyll v3.9.0" />
-<meta property="og:title" content="Data Warehouse DIM Develop" />
+<meta property="og:title" content="Git" />
 <meta name="author" content="Lynn Chen" />
 <meta property="og:locale" content="en" />
-<meta name="description" content="DIM层" />
-<meta property="og:description" content="DIM层" />
-<link rel="canonical" href="http://localhost:4000/posts/Data-Warehouse-DIM-Develop/" />
-<meta property="og:url" content="http://localhost:4000/posts/Data-Warehouse-DIM-Develop/" />
+<meta name="description" content="Git安装" />
+<meta property="og:description" content="Git安装" />
+<link rel="canonical" href="http://localhost:4000/posts/Git/" />
+<meta property="og:url" content="http://localhost:4000/posts/Git/" />
 <meta property="og:site_name" content="Blingblogs" />
 <meta property="og:type" content="article" />
-<meta property="article:published_time" content="2023-01-27T10:30:00+08:00" />
+<meta property="article:published_time" content="2023-04-22T22:30:00+08:00" />
 <meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="Data Warehouse DIM Develop" />
+<meta property="twitter:title" content="Git" />
 <meta name="twitter:site" content="@invalid" />
 <meta name="twitter:creator" content="@sechenbling" />
 <meta name="google-site-verification" content="google_meta_tag_verification" />
 <script type="application/ld+json">
-{"author":{"@type":"Person","name":"Lynn Chen"},"@type":"BlogPosting","url":"http://localhost:4000/posts/Data-Warehouse-DIM-Develop/","headline":"Data Warehouse DIM Develop","dateModified":"2023-01-27T10:35:00+08:00","datePublished":"2023-01-27T10:30:00+08:00","description":"DIM层","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/Data-Warehouse-DIM-Develop/"},"@context":"https://schema.org"}</script>
+{"author":{"@type":"Person","name":"Lynn Chen"},"@type":"BlogPosting","url":"http://localhost:4000/posts/Git/","headline":"Git","dateModified":"2023-04-22T22:30:00+08:00","datePublished":"2023-04-22T22:30:00+08:00","description":"Git安装","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/Git/"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   
 
-  <title>Data Warehouse DIM Develop | Blingblogs
+  <title>Git | Blingblogs
   </title>
 
   
@@ -618,7 +618,7 @@
           
             
               
-                <span>Data Warehouse DIM Develop</span>
+                <span>Git</span>
               
             
           
@@ -822,7 +822,7 @@
 
 
 <!-- return -->
-<h1 data-toc-skip>Data Warehouse DIM Develop</h1>
+<h1 data-toc-skip>Git</h1>
 
 <div class="post-meta text-muted">
     <!-- published date -->
@@ -833,13 +833,13 @@
 
 
 <span class=""
-    data-ts="1674786600"
+    data-ts="1682173800"
     data-df="ll"
     
         data-toggle="tooltip"
         data-placement="bottom"
     >
-    Jan 27, 2023
+    Apr 22, 2023
 </span>
     </span>
 
@@ -852,13 +852,13 @@
 
 
 <span class=""
-    data-ts="1674786900"
+    data-ts="1682173800"
     data-df="ll"
     
         data-toggle="tooltip"
         data-placement="bottom"
     >
-    Jan 27, 2023
+    Apr 22, 2023
 </span>
     </span>
     
@@ -883,152 +883,204 @@
 </div>
 
 <div class="post-content">
-    <h2 id="dim层"><span class="mr-2">DIM层</span><a href="#dim层" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+    <h2 id="git安装"><span class="mr-2">Git安装</span><a href="#git安装" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
 
-<h3 id="dim层设计要点"><span class="mr-2">DIM层设计要点</span><a href="#dim层设计要点" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+<h3 id="linux"><span class="mr-2">Linux</span><a href="#linux" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
 <ul>
-  <li>DIM层的设计一句是维度建模理论，该层存储维度模型的维度表（重点）</li>
-  <li>DIM层的数据存储格式为orc列式存储+snappy压缩（相较于ODS的存储格式和压缩更快）
-    <ul>
-      <li>ODS在乎的是减少存储空间，其他层在乎的是查询更快</li>
-    </ul>
-  </li>
-  <li>DIM层表名的命名规范为dim_表名_全量表或者拉链表标识（full/zip）</li>
-</ul>
-
-<h3 id="维度表设计"><span class="mr-2">维度表设计：</span><a href="#维度表设计" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
-<ul>
-  <li>确定维度表</li>
-  <li>确定主维度表和相关维度表</li>
-  <li>确定维度属性
-    <ul>
-      <li>尽可能生成丰富的维度属性</li>
-      <li>尽量不使用编码而使用文字说明或者编码加文字说明</li>
-      <li>沉淀出通用的维度属性</li>
-      <li>商品维度表
-        <ul>
-          <li>可以参考原始数据在MySQL中的表，找到商品MySQL表并找到与其相关联的其他MySQL表，考虑是否和维度表有关，在考虑相关的Hive维度表如何设计。</li>
-          <li>全量表数据，数据装载从ODS的一个分区到DIM层的一个分区，时间分区要对应上</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-</ul>
-
-<h2 id="dim层-dev-experience"><span class="mr-2">DIM层 dev experience</span><a href="#dim层-dev-experience" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
-
-<h3 id="hive复杂数据类型构建"><span class="mr-2">Hive复杂数据类型构建</span><a href="#hive复杂数据类型构建" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
-<ul>
-  <li><strong>array</strong>：
-    <ul>
-      <li>array() 一行一出: array(val1,val2…)</li>
-      <li>collect_set() 多行一出</li>
-    </ul>
-  </li>
-  <li><strong>map</strong>:
-    <ul>
-      <li>map():map(key1,val1,key2,val2…)</li>
-      <li>str_to_map(text,delimiter1,delimiter2):
-        <ul>
-          <li>delimiter1用于分割k-v键值对，默认值为 ‘,’</li>
-          <li>delimiter2用户分割k和v,默认值为’:’</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-  <li><strong>struct</strong>:
-    <ul>
-      <li>struct(val1,val2,val3…):values为表的column</li>
-      <li>named_struct(name1,val1,name2,val2…):同时给出field的name和val</li>
-    </ul>
-  </li>
-</ul>
-
-<h3 id="cte语法"><span class="mr-2">CTE语法</span><a href="#cte语法" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
-<p>common table expression公共表表达式</p>
-<ul>
-  <li>原来一个表自己join自己需要写出两遍一样的表，提前声明子查询的表只写一遍供其他公共部分使用
-语法
-    <ul>
-      <li>with table_name as(select_expression) 这就声明好了一个子查询并写出，可以重复引用这个table_name</li>
-      <li>想要一次声明多个不同的子查询，语法如下: 其中with只需要写一遍
-        <div class="language-hql highlighter-rouge"><div class="code-header">
-        <span data-label-text="Hql"><i class="fas fa-code small"></i></span>
+  <li>包管理器安装
+    <div class="language-shell highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code small"></i></span>
       <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
 2
 3
 4
 5
-</pre></td><td class="rouge-code"><pre><span class="k">WITH</span>
-    <span class="n">table_name1</span> <span class="k">as</span><span class="p">(</span><span class="n">select_expression1</span><span class="p">),</span>
-    <span class="n">table_name2</span> <span class="k">as</span><span class="p">(</span><span class="n">select_expression2</span><span class="p">),</span>
-    <span class="n">table_namen</span> <span class="k">as</span><span class="p">(</span><span class="n">select_expressionn</span><span class="p">)</span>
-<span class="k">SELECT</span> <span class="n">xxx</span>
+6
+7
+</pre></td><td class="rouge-code"><pre><span class="c"># Ubuntu 10.10 or upper</span>
+<span class="nb">sudo </span>aptitude <span class="nb">install </span>git
+<span class="nb">sudo </span>aptitude <span class="nb">install </span>git-doc git-svn git-email gitk
+  
+<span class="c"># RHEL CentOs</span>
+yum <span class="nb">install </span>git
+yum <span class="nb">install </span>git-svn git-email gitk
+</pre></td></tr></tbody></table></code></div>    </div>
+  </li>
+  <li>源码安装
+    <div class="language-shell highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="rouge-code"><pre><span class="c"># decompress git pkg</span>
+<span class="nb">tar</span> <span class="nt">-jxvf</span> git-xxxx
+<span class="nb">cd </span>git-xxxx
+  
+<span class="c"># install git to /usr/local/bin</span>
+make prefix <span class="o">=</span> /usr/local all
+<span class="nb">sudo </span>make prefix <span class="o">=</span> /usr/local <span class="nb">install</span>
+  
+<span class="c"># install git docs</span>
+make prefix <span class="o">=</span> /usr/local doc info
+<span class="nb">sudo </span>make prefix <span class="o">=</span> /usr/local install-doc install-html install-info
+</pre></td></tr></tbody></table></code></div>    </div>
+  </li>
+  <li>命令补全
+    <div class="language-shell highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></td><td class="rouge-code"><pre><span class="nb">cp </span>contrib/completion/git-completion.bash /etc/bash_completion.d/
+<span class="c"># current shell is valid</span>
+<span class="nb">.</span> /etc/bash_completion
+  
+<span class="c"># auto load bash_completion</span>
+<span class="c"># add lines following to "~/.bash_profile" or "/etc/bashrc"</span>
+<span class="k">if</span> <span class="o">[</span> <span class="nt">-f</span> /etc/bash_completion]<span class="p">;</span> <span class="k">then</span>
+  <span class="nb">.</span> /etc/bash_completion
+<span class="k">fi</span>
+</pre></td></tr></tbody></table></code></div>    </div>
+  </li>
+</ul>
+
+<h3 id="windows"><span class="mr-2">Windows</span><a href="#windows" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+<ul>
+  <li>
+    <p>下载安装包解压即可</p>
+  </li>
+  <li>
+    <p>GIT UI: TortoiseGit</p>
+  </li>
+</ul>
+
+<h2 id="git基础配置"><span class="mr-2">Git基础配置</span><a href="#git基础配置" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+
+<h3 id="配置级别"><span class="mr-2">配置级别</span><a href="#配置级别" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+<p>优先级：  项目配置 &gt; 用户配置 &gt; 系统配置</p>
+<ul>
+  <li>系统配置：
+    <div class="language-shell highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="c"># 存放在git安装目录下 %Git%/etc/gitconfig</span>
+git config <span class="nt">--system</span> core.autocrlf xxx
+</pre></td></tr></tbody></table></code></div>    </div>
+  </li>
+  <li>用户配置
+    <div class="language-shell highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="c"># 存放在用户目录下 ~/.gitconfig</span>
+git config <span class="nt">--global</span> user.name xxx
+</pre></td></tr></tbody></table></code></div>    </div>
+  </li>
+  <li>项目配置
+    <div class="language-shell highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="c"># 当前仓库配置文件 .git/config</span>
+git config <span class="nt">--local</span> remote.origin.url xxx
+</pre></td></tr></tbody></table></code></div>    </div>
+  </li>
+</ul>
+
+<h3 id="基本配置"><span class="mr-2">基本配置</span><a href="#基本配置" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3>
+<ul>
+  <li>配置个人身份，作为用户配置
+    <div class="language-shell highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre>git config <span class="nt">--global</span> user.name <span class="s2">"breelynn"</span>
+git config <span class="nt">--global</span> user.email <span class="s2">"breelynn@xxx.com"</span>
+</pre></td></tr></tbody></table></code></div>    </div>
+  </li>
+  <li>文本换行符
+    <div class="language-shell highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+</pre></td><td class="rouge-code"><pre><span class="c"># Git 提交会将行结束换行符CRLF转换为LF，如果在windows系统下打开core.autocrlf</span>
+git config <span class="nt">--global</span> core.autocrlf <span class="nb">true</span>
+  
+<span class="c"># Linux/Mac使用LF作为行结束符，当CRLF引入时进行修正，可以将core.autocrlf设置为input使Git将CRLF转换为LF</span>
+git config <span class="nt">--global</span> core.autocrlf input
+  
+<span class="c"># windows开发且不涉及其他跨平台可以关闭该功能，把回车符记录在repo中</span>
+git config <span class="nt">--global</span> core.autocrlf <span class="nb">false</span>
+</pre></td></tr></tbody></table></code></div>    </div>
+  </li>
+  <li>文本编码配置
+    <div class="language-shell highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre><span class="c"># 中文编码支持</span>
+git config <span class="nt">--global</span> gui.encoding utf-8
+git config <span class="nt">--global</span> i18n.commitencoding utf-8
+git config <span class="nt">--global</span> i18n.logoutputencoding utf-8
+  
+<span class="c"># 显示中文路径</span>
+git config <span class="nt">--global</span> core.quotepath <span class="nb">false</span>
+</pre></td></tr></tbody></table></code></div>    </div>
+  </li>
+  <li>与服务器的认证配置
+    <ul>
+      <li>http / https 协议认证
+        <div class="language-shell highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+</pre></td><td class="rouge-code"><pre>  <span class="c"># 设置口令缓存</span>
+    git config <span class="nt">--global</span> credential.helpe store
+  <span class="c"># 添加HTTPS证书</span>
+    git config http.sslverify <span class="nb">false</span>
 </pre></td></tr></tbody></table></code></div>        </div>
+      </li>
+      <li>ssh 协议认证
+        <div class="language-shell highlighter-rouge"><div class="code-header">
+        <span data-label-text="Shell"><i class="fas fa-code small"></i></span>
+      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre>  <span class="c"># Git Bash生成公钥后保存在代码平台中</span>
+    ssh-keygen <span class="nt">-t</span> rsa <span class="nt">-C</span> <span class="s2">"breelynn@xxx.com"</span>
+</pre></td></tr></tbody></table></code></div>        </div>
+        <h2 id="git基本命令"><span class="mr-2">Git基本命令</span><a href="#git基本命令" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
       </li>
     </ul>
   </li>
 </ul>
-
-<h2 id="dim层-dev-question"><span class="mr-2">DIM层 dev question</span><a href="#dim层-dev-question" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
-<ol>
-  <li>表信息保存
-    <ul>
-      <li>表中数据需要以orc文件形式保存，而原始数据只有txt文件或者其他类型的文件，可以先创建一个tmp的临时表（默认指定为TEXTFILE存储格式，或者指定成其他对应类型的文件），然后通过insert语句将临时表的数据写入到最终的成表内部解决因为表数据存储格式不同带来的读取问题。</li>
-      <li>例子：数据保存在txt文件当中，但是表指定stored as orc，如果直接将txt存储到表路径下，最后读取的数据会因为文件格式出错，此时可以创建一个tmp临时表，将txt数据保存到临时表路径下，然后通过insert overwrite into table select * from tmp_table，hive底层会将存储格式进行转化将文件转存为orc格式
-        <ul>
-          <li>原理：Hive底层建表时都会解析成对应的InputFormat和OutputFormat，利用TextInputFormat从临时数据表读取数据，并通过OrcOutputFormat写入到指定表中完成文件格式的转换</li>
-          <li>如何查看一个表的具体信息：
-            <div class="language-hql highlighter-rouge"><div class="code-header">
-        <span data-label-text="Hql"><i class="fas fa-code small"></i></span>
-      <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
-</pre></td><td class="rouge-code"><pre> <span class="k">SHOW</span> <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">table_name</span> 
-</pre></td></tr></tbody></table></code></div>            </div>
-          </li>
-          <li>可以查看一个表的各种具体信息，包括各类InputFormat，OutputFormat</li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-  <li>处理敏感信息
-    <ul>
-      <li>表中存在部分敏感信息，比如用户具体名称和联系方式等数据，可以在数据装载的时候使用Hive内部内置的加密函数进行脱敏处理:md5(data)</li>
-    </ul>
-  </li>
-  <li>Hive动态分区
-    <ul>
-      <li>通过数据自身特性通过一个insert语句将不同的数据写到不同的分区内</li>
-      <li>将所有结果集union合并以下（不同行），然后利用动态分区将数据写到不同的分区内</li>
-    </ul>
-  </li>
-  <li>处理拉链表类型的增量表数据
-    <ul>
-      <li>首日和其他时间的处理逻辑是不一样的
-        <ul>
-          <li>首日：全量表为最初始的用户表，初始的拉链表就是最开始的全量表</li>
-          <li>其他时间：根据表的操作时间（binlog等方式）得到用户的变化表，然后再将变化表与之前的拉链表进行合并得到新的拉链表
-            <ul>
-              <li>合并：取出之前拉链表中没有变化的数据，变化的数据取出放入过期分区后将变化后的数据和变化新增的数据与没有变化的数据合并成新的分区表</li>
-            </ul>
-          </li>
-        </ul>
-      </li>
-      <li>具体操作SQL流程如下：
-        <ol>
-          <li>将昨日的旧表取出，并于今日新增的表进行全外连接，这个操作会在两个表某一字段（一般是所谓的主码概念）上进行，分为以下几种情况
-            <ul>
-              <li>旧表有的数据，而新表没有，将这部分旧表有的数据直接保留下来</li>
-              <li>旧表没有的数据，而新表有的数据，将这部分新的数据直接追加到表中</li>
-              <li>旧表和新表都有的数据，说明发生了update操作，需要根据具体的业务逻辑确认需要保留新旧表的哪些字段。</li>
-            </ul>
-          </li>
-          <li>将上一步中三种情况获取的全外连接表保留下来，供下一步insert装载数据使用，可以使用CTE语法保留这张表。</li>
-          <li>使用动态分区的手段，通过一条insert将数据分隔开，比如如果通过时间进行分区，可以在insert代码后加上partition(时间)，时间这个字段必须在全外连接的表中存在。</li>
-        </ol>
-      </li>
-    </ul>
-  </li>
-</ol>
 
 </div>
 
@@ -1039,8 +1091,8 @@
     <div class="post-meta mb-3">
         <i class="far fa-folder-open fa-fw mr-1"></i>
         
-        <a href='/categories/bigdata/'>Bigdata</a>,
-        <a href='/categories/datawarehouse/'>DataWarehouse</a>
+        <a href='/categories/huaweineo/'>HuaweiNEO</a>,
+        <a href='/categories/java/'>Java</a>
     </div>
     
 
@@ -1049,8 +1101,8 @@
     <div class="post-tags">
         <i class="fa fa-tags fa-fw mr-1"></i>
         
-        <a href="/tags/data-warehouse/"
-           class="post-tag no-text-decoration">data warehouse</a>
+        <a href="/tags/java/"
+           class="post-tag no-text-decoration">Java</a>
         
     </div>
     
@@ -1080,7 +1132,7 @@
 
     
       
-        <a href="http://connect.qq.com/widget/shareqq/index.html?title=Data Warehouse DIM Develop - Blingblogs&url=http://localhost:4000/posts/Data-Warehouse-DIM-Develop/" data-toggle="tooltip" data-placement="top"
+        <a href="http://connect.qq.com/widget/shareqq/index.html?title=Git - Blingblogs&url=http://localhost:4000/posts/Git/" data-toggle="tooltip" data-placement="top"
           title="QQ" target="_blank" rel="noopener" aria-label="QQ">
           <i class="fa-fw fab fa-qq" style="color:#AEB6BF"></i>
         </a>
@@ -1098,19 +1150,19 @@
         </a>
     
       
-        <a href="http://service.weibo.com/share/share.php?title=Data Warehouse DIM Develop - Blingblogs&url=http://localhost:4000/posts/Data-Warehouse-DIM-Develop/" data-toggle="tooltip" data-placement="top"
+        <a href="http://service.weibo.com/share/share.php?title=Git - Blingblogs&url=http://localhost:4000/posts/Git/" data-toggle="tooltip" data-placement="top"
           title="Weibo" target="_blank" rel="noopener" aria-label="Weibo">
           <i class="fa-fw fab fa-weibo" style="color:#AEB6BF"></i>
         </a>
     
       
-        <a href="https://www.linkedin.com/sharing/share-offsite/?url=http://localhost:4000/posts/Data-Warehouse-DIM-Develop/" data-toggle="tooltip" data-placement="top"
+        <a href="https://www.linkedin.com/sharing/share-offsite/?url=http://localhost:4000/posts/Git/" data-toggle="tooltip" data-placement="top"
           title="Linkedin" target="_blank" rel="noopener" aria-label="Linkedin">
           <i class="fa-fw fab fa-linkedin" style="color:#AEB6BF"></i>
         </a>
     
       
-        <a href="https://twitter.com/intent/tweet?text=Data Warehouse DIM Develop - Blingblogs&url=http://localhost:4000/posts/Data-Warehouse-DIM-Develop/" data-toggle="tooltip" data-placement="top"
+        <a href="https://twitter.com/intent/tweet?text=Git - Blingblogs&url=http://localhost:4000/posts/Git/" data-toggle="tooltip" data-placement="top"
           title="Twitter" target="_blank" rel="noopener" aria-label="Twitter">
           <i class="fa-fw fab fa-twitter" style="color:#AEB6BF"></i>
         </a>
@@ -1407,67 +1459,67 @@
   
 
   
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
     
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
   
 
   
@@ -1573,6 +1625,39 @@
 
 
 
+  
+    
+      
+  
+    
+      
+        
+          
+            
+            
+            
+        
+      
+  
+    
+      
+        
+          
+            
+            
+            
+        
+      
+  
+    
+      
+        
+          
+            
+            
+            
+              
+
 
 
 <div id="related-posts" class="mb-2 mb-sm-4">
@@ -1583,19 +1668,19 @@
     
     
     <div class="card">
-      <a href="/posts/Data-Warehouse-ODS-Develop/">
+      <a href="/posts/Data-Warehouse-Design/">
         <div class="card-body">
           
 
 
 
 <em class="small"
-    data-ts="1674783000"
+    data-ts="1674914400"
     data-df="ll"
     >
-    Jan 27, 2023
+    Jan 28, 2023
 </em>
-          <h3 class="pt-0 mt-1 mb-3" data-toc-skip>Data Warehouse ODS Develop</h3>
+          <h3 class="pt-0 mt-1 mb-3" data-toc-skip>Data Warehouse Design</h3>
           <div class="text-muted small">
             <p>
               
@@ -1604,18 +1689,16 @@
 
 
 
-              ODS层
+              数据仓库设计
 
-  表结构设计依托于从业务系统同步过来的数据结构
-  ODS层要保存全部的历史数据，数据量较大，使用压缩程度较高的格式gzip
-  ODS层的命名规范为ods_表名_单分区增量全量标识(inc或者full)
+数据仓库分层规划
 
-
-Hive数仓启动
-
-  启动Hive服务
-    nohup ./hive --service metastore &amp;amp;
-nohup ./hive --servic...
+  使数据体系更加清洗，简单化复杂问题（one data理论分层）
+  
+  ODS:
+  operation data store:业务系统的原始数据，未经处理的数据，放在HDFS以文件形式的存储，从HDFS原路径load(底层是剪切操作)到ODS层。
+  DWD:
+  data warehouse detail:基于维度建模理论进行构建，保存各业务过程...
             </p>
           </div>
         </div>
@@ -1625,19 +1708,19 @@ nohup ./hive --servic...
     
     
     <div class="card">
-      <a href="/posts/Data-Warehouse-DWD-Develop/">
+      <a href="/posts/Data-Warehouse-Model/">
         <div class="card-body">
           
 
 
 
 <em class="small"
-    data-ts="1674790200"
+    data-ts="1674912600"
     data-df="ll"
     >
-    Jan 27, 2023
+    Jan 28, 2023
 </em>
-          <h3 class="pt-0 mt-1 mb-3" data-toc-skip>Data Warehouse DWD Develop</h3>
+          <h3 class="pt-0 mt-1 mb-3" data-toc-skip>Data Warehouse Model</h3>
           <div class="text-muted small">
             <p>
               
@@ -1646,15 +1729,20 @@ nohup ./hive --servic...
 
 
 
-              DWD层
+              数据仓库介绍
 
-DWD层设计要点
+数据仓库
 
-  DWD层的设计依据是维度建模理论，该层存储维度模型的维度表（重点）
-  DWD层的数据存储格式为orc列式存储+snappy压缩
+  用于存储分析报告的数据系统
     
-      DWD层表名的命名规范为dwd_数据域_表名_单分区全量增量标识（full/inc）
-      数据域：对数据进行纵向的分类，方便数据管理和使用，每一类称为一个域，通常是按照业务过程来划分数据域，业务过程...
+      并不产生数据（数据来自于外部系统） 也不消费数据（其结果开放给外部应用使用）
+    
+  
+  构建面向分析的集成化数据环境，分析结构提供决策
+  对比OLAP和OLTP
+    
+      各类型的数据库保存相关数据（关系型数据库是OLTP的典型应用） 但不会在数据库上直接分析数据
+      数据仓库是...
             </p>
           </div>
         </div>
@@ -1715,17 +1803,17 @@ DWD层设计要点
 
 <div class="post-navigation d-flex justify-content-between">
   
-  <a href="/posts/Data-Warehouse-ODS-Develop/" class="btn btn-outline-primary"
+  <a href="/posts/Data-Warehouse-Design/" class="btn btn-outline-primary"
      prompt="Previous Post">
-    <p>Data Warehouse ODS Develop</p>
+    <p>Data Warehouse Design</p>
   </a>
   
 
   
-  <a href="/posts/Data-Warehouse-DWD-Develop/" class="btn btn-outline-primary"
-     prompt="Next Post">
-    <p>Data Warehouse DWD Develop</p>
-  </a>
+  <div class="btn btn-outline-primary disabled"
+       prompt="Next Post">
+    <p>-</p>
+  </div>
   
 
 </div>

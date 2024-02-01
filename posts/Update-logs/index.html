@@ -41,7 +41,7 @@
 <meta property="article:published_time" content="2022-11-20T20:00:00+08:00" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Update logs" />
-<meta name="twitter:site" content="@sechenbling" />
+<meta name="twitter:site" content="@invalid" />
 <meta name="twitter:creator" content="@sechenbling" />
 <meta name="google-site-verification" content="google_meta_tag_verification" />
 <script type="application/ld+json">
@@ -493,7 +493,7 @@
             <a href="/">Blingblogs</a>
         </div>
         <!-- site-subtitle settings -->
-        <div class="site-subtitle">life can also be multi-threaded</div>
+        <div class="site-subtitle">Happy Everyday</div>
     </div>
 
     <ul class="w-100">
@@ -575,7 +575,7 @@
         
             
         
-        <a href="https://space.bilibili.com/15164783" aria-label="bilibili"
+        <a href="https://space.bilibili.com/1" aria-label="bilibili"
            target="_blank" rel="noopener" >
             <i class="fa-brands fa-bilibili"></i>
         </a>
@@ -583,7 +583,7 @@
         
             
         
-        <a href="https://twitter.com/sechenbling" aria-label="twitter"
+        <a href="https://twitter.com/invalid" aria-label="twitter"
            target="_blank" rel="noopener" >
             <i class="fab fa-twitter"></i>
         </a>
@@ -1556,7 +1556,7 @@ info中个人邮箱的获取逻辑, 如果电脑中有outlook会直接打开outl
       
       
       
-      <li><a href="/posts/Spark-Deployment-Structure-Introduction/">Spark Deployment Structure Introduction</a></li>
+      <li><a href="/posts/Git/">Git</a></li>
       
       
       
@@ -1626,20 +1626,6 @@ info中个人邮箱的获取逻辑, 如果电脑中有outlook会直接打开outl
     
     
     
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
   
     
     
@@ -1659,6 +1645,16 @@ info中个人邮箱的获取逻辑, 如果电脑中有outlook会直接打开outl
     
     
     
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
       
         
         
@@ -1667,6 +1663,48 @@ info中个人邮箱的获取逻辑, 如果电脑中有outlook会直接打开outl
     
     
     
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
     
   
     
@@ -1709,6 +1747,9 @@ info中个人邮箱的获取逻辑, 如果电脑中有outlook会直接打开outl
     
     
     <a class="post-tag" href="/tags/markdown/">markdown</a>
+    
+    
+    <a class="post-tag" href="/tags/java/">Java</a>
     
     
     <a class="post-tag" href="/tags/logs/">logs</a>
@@ -1766,6 +1807,18 @@ info中个人邮箱的获取逻辑, 如果电脑中有outlook会直接打开outl
 
 
 
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
 
   
 
@@ -1964,19 +2017,19 @@ info中个人邮箱的获取逻辑, 如果电脑中有outlook会直接打开outl
     
     
     <div class="card">
-      <a href="/posts/Spark-Deployment-Structure-Introduction/">
+      <a href="/posts/Git/">
         <div class="card-body">
           
 
 
 
 <em class="small"
-    data-ts="1675089000"
+    data-ts="1682173800"
     data-df="ll"
     >
-    Jan 30, 2023
+    Apr 22, 2023
 </em>
-          <h3 class="pt-0 mt-1 mb-3" data-toc-skip>Spark Deployment Structure Introduction</h3>
+          <h3 class="pt-0 mt-1 mb-3" data-toc-skip>Git</h3>
           <div class="text-muted small">
             <p>
               
@@ -1985,12 +2038,25 @@ info中个人邮箱的获取逻辑, 如果电脑中有outlook会直接打开outl
 
 
 
-              Spark Introduction
-Spark Summary
+              Git安装
 
-  Spark 是一种由 Scala 语言开发的快速、通用、可扩展的大数据分析引擎
-  Spark Core 中提供了 Spark 最基础与最核心的功能
-  Spark SQL 是 Spark 用来操作结构化数据的组件。通过 Spark SQL，用户可以使用 SQL 或者 Apache Hive 版本的 SQL 方言（HQL...
+Linux
+
+  包管理器安装
+    1
+2
+3
+4
+5
+6
+7
+# Ubuntu 10.10 or upper
+sudo aptitude install git
+sudo aptitude install git-doc git-svn git-email gitk
+  
+# RHEL CentOs
+yum install git
+yum install git-svn ...
             </p>
           </div>
         </div>
@@ -2022,6 +2088,7 @@ Spark Summary
 
 
               数据仓库设计
+
 数据仓库分层规划
 
   使数据体系更加清洗，简单化复杂问题（one data理论分层）
@@ -2029,7 +2096,7 @@ Spark Summary
   ODS:
   operation data store:业务系统的原始数据，未经处理的数据，放在HDFS以文件形式的存储，从HDFS原路径load(底层是剪切操作)到ODS层。
   DWD:
-  data warehouse detail:基于维度建模理论进行构建，保存各业务过程中...
+  data warehouse detail:基于维度建模理论进行构建，保存各业务过程...
             </p>
           </div>
         </div>
@@ -2061,6 +2128,7 @@ Spark Summary
 
 
               数据仓库介绍
+
 数据仓库
 
   用于存储分析报告的数据系统
@@ -2072,7 +2140,7 @@ Spark Summary
   对比OLAP和OLTP
     
       各类型的数据库保存相关数据（关系型数据库是OLTP的典型应用） 但不会在数据库上直接分析数据
-      数据仓库是O...
+      数据仓库是...
             </p>
           </div>
         </div>
@@ -2162,20 +2230,6 @@ Spark Summary
     
     
     
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
   
     
     
@@ -2195,6 +2249,16 @@ Spark Summary
     
     
     
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
       
         
         
@@ -2203,6 +2267,48 @@ Spark Summary
     
     
     
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
     
   
     
@@ -2247,6 +2353,9 @@ Spark Summary
     <a class="post-tag" href="/tags/markdown/">markdown</a>
     
     
+    <a class="post-tag" href="/tags/java/">Java</a>
+    
+    
     <a class="post-tag" href="/tags/logs/">logs</a>
     
     
@@ -2269,7 +2378,7 @@ Spark Summary
         <div class="d-flex justify-content-between align-items-center text-muted ml-md-3 mr-md-3">
             <div class="footer-left">
                 <p class="mb-0">
-                    © 2023
+                    © 2024
                     <a href="https://twitter.com/sechenbling">Lynn Chen</a>.
                     
                     <span data-toggle="tooltip" data-placement="top"

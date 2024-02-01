@@ -41,11 +41,11 @@
 <meta property="article:published_time" content="2022-11-25T22:45:00+08:00" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Spark Streaming Introduction" />
-<meta name="twitter:site" content="@sechenbling" />
+<meta name="twitter:site" content="@invalid" />
 <meta name="twitter:creator" content="@sechenbling" />
 <meta name="google-site-verification" content="google_meta_tag_verification" />
 <script type="application/ld+json">
-{"author":{"@type":"Person","name":"Lynn Chen"},"@type":"BlogPosting","url":"http://localhost:4000/posts/Spark-Streaming-Introduction/","headline":"Spark Streaming Introduction","dateModified":"2023-01-30T22:45:00+08:00","datePublished":"2022-11-25T22:45:00+08:00","description":"Spark Streaming基本介绍 Spark Streaming Spark Streaming 用于流式数据的处理。Spark Streaming 支持的数据输入源很多，例如：Kafka、 Flume、Twitter、ZeroMQ 和简单的 TCP 套接字等等。数据输入后可以用 Spark 的高度抽象原语,如：map、reduce、join、window 等进行运算。而结果也能保存在很多地方，如 HDFS，数据库等。","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/Spark-Streaming-Introduction/"},"@context":"https://schema.org"}</script>
+{"author":{"@type":"Person","name":"Lynn Chen"},"@type":"BlogPosting","url":"http://localhost:4000/posts/Spark-Streaming-Introduction/","headline":"Spark Streaming Introduction","dateModified":"2022-11-25T22:45:00+08:00","datePublished":"2022-11-25T22:45:00+08:00","description":"Spark Streaming基本介绍 Spark Streaming Spark Streaming 用于流式数据的处理。Spark Streaming 支持的数据输入源很多，例如：Kafka、 Flume、Twitter、ZeroMQ 和简单的 TCP 套接字等等。数据输入后可以用 Spark 的高度抽象原语,如：map、reduce、join、window 等进行运算。而结果也能保存在很多地方，如 HDFS，数据库等。","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/Spark-Streaming-Introduction/"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
   
@@ -493,7 +493,7 @@
             <a href="/">Blingblogs</a>
         </div>
         <!-- site-subtitle settings -->
-        <div class="site-subtitle">life can also be multi-threaded</div>
+        <div class="site-subtitle">Happy Everyday</div>
     </div>
 
     <ul class="w-100">
@@ -575,7 +575,7 @@
         
             
         
-        <a href="https://space.bilibili.com/15164783" aria-label="bilibili"
+        <a href="https://space.bilibili.com/1" aria-label="bilibili"
            target="_blank" rel="noopener" >
             <i class="fa-brands fa-bilibili"></i>
         </a>
@@ -583,7 +583,7 @@
         
             
         
-        <a href="https://twitter.com/sechenbling" aria-label="twitter"
+        <a href="https://twitter.com/invalid" aria-label="twitter"
            target="_blank" rel="noopener" >
             <i class="fab fa-twitter"></i>
         </a>
@@ -827,13 +827,13 @@
 
 
 <span class=""
-    data-ts="1675089900"
+    data-ts="1669387500"
     data-df="ll"
     
         data-toggle="tooltip"
         data-placement="bottom"
     >
-    Jan 30, 2023
+    Nov 25, 2022
 </span>
     </span>
     
@@ -991,7 +991,7 @@
       
       
       
-      <li><a href="/posts/Spark-Deployment-Structure-Introduction/">Spark Deployment Structure Introduction</a></li>
+      <li><a href="/posts/Git/">Git</a></li>
       
       
       
@@ -1061,20 +1061,6 @@
     
     
     
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
   
     
     
@@ -1094,6 +1080,16 @@
     
     
     
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
       
         
         
@@ -1102,6 +1098,48 @@
     
     
     
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
     
   
     
@@ -1144,6 +1182,9 @@
     
     
     <a class="post-tag" href="/tags/markdown/">markdown</a>
+    
+    
+    <a class="post-tag" href="/tags/java/">Java</a>
     
     
     <a class="post-tag" href="/tags/logs/">logs</a>
@@ -1350,6 +1391,18 @@
 
   
 
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
 
 
 
@@ -1369,7 +1422,7 @@
     
     
     <div class="card">
-      <a href="/posts/Spark-Data-Structure-Introduction/">
+      <a href="/posts/Spark-Deployment-Structure-Introduction/">
         <div class="card-body">
           
 
@@ -1381,7 +1434,7 @@
     >
     Nov 25, 2022
 </em>
-          <h3 class="pt-0 mt-1 mb-3" data-toc-skip>Spark Data Structure Introduction</h3>
+          <h3 class="pt-0 mt-1 mb-3" data-toc-skip>Spark Deployment Structure Introduction</h3>
           <div class="text-muted small">
             <p>
               
@@ -1390,16 +1443,13 @@
 
 
 
-              核心编程：
-Spark 计算框架为了能够进行高并发和高吞吐的数据处理，封装了三大数据结构，用于处理不同的应用场景。三大数据结构分别是:
+              Spark Introduction
 
-  累加器：分布式共享只写变量
-  广播变量：分布式共享只读变量
-  RDD : 弹性分布式数据集
+Spark Summary
 
-
-累加器:
-累加器用来把 Executor 端变量信息聚合到 Driver 端。在 Driver 程序中定义的变量，在 Executor 端的每个 Tas...
+  Spark 是一种由 Scala 语言开发的快速、通用、可扩展的大数据分析引擎
+  Spark Core 中提供了 Spark 最基础与最核心的功能
+  Spark SQL 是 Spark 用来操作结构化数据的组件。通过 Spark SQL，用户可以使用 SQL 或者 Apache Hive 版本的 SQL 方言（HQ...
             </p>
           </div>
         </div>
@@ -1445,19 +1495,19 @@ Spark SQL 是Spark用于结构化数据处理的Spark模块:
     
     
     <div class="card">
-      <a href="/posts/Spark-Deployment-Structure-Introduction/">
+      <a href="/posts/Spark-Data-Structure-Introduction/">
         <div class="card-body">
           
 
 
 
 <em class="small"
-    data-ts="1675089000"
+    data-ts="1669386600"
     data-df="ll"
     >
-    Jan 30, 2023
+    Nov 25, 2022
 </em>
-          <h3 class="pt-0 mt-1 mb-3" data-toc-skip>Spark Deployment Structure Introduction</h3>
+          <h3 class="pt-0 mt-1 mb-3" data-toc-skip>Spark Data Structure Introduction</h3>
           <div class="text-muted small">
             <p>
               
@@ -1466,12 +1516,19 @@ Spark SQL 是Spark用于结构化数据处理的Spark模块:
 
 
 
-              Spark Introduction
-Spark Summary
+              核心编程：
 
-  Spark 是一种由 Scala 语言开发的快速、通用、可扩展的大数据分析引擎
-  Spark Core 中提供了 Spark 最基础与最核心的功能
-  Spark SQL 是 Spark 用来操作结构化数据的组件。通过 Spark SQL，用户可以使用 SQL 或者 Apache Hive 版本的 SQL 方言（HQL...
+Spark 计算框架为了能够进行高并发和高吞吐的数据处理，封装了三大数据结构，用于处理不同的应用场景。三大数据结构分别是:
+
+
+  累加器：分布式共享只写变量
+  广播变量：分布式共享只读变量
+  RDD : 弹性分布式数据集
+
+
+累加器:
+
+累加器用来把 Executor 端变量信息聚合到 Driver 端。在 Driver 程序中定义的变量，在 Executor 端的每个 ...
             </p>
           </div>
         </div>
@@ -1561,20 +1618,6 @@ Spark Summary
     
     
     
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
   
     
     
@@ -1594,6 +1637,16 @@ Spark Summary
     
     
     
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
       
         
         
@@ -1602,6 +1655,48 @@ Spark Summary
     
     
     
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
     
   
     
@@ -1646,6 +1741,9 @@ Spark Summary
     <a class="post-tag" href="/tags/markdown/">markdown</a>
     
     
+    <a class="post-tag" href="/tags/java/">Java</a>
+    
+    
     <a class="post-tag" href="/tags/logs/">logs</a>
     
     
@@ -1668,7 +1766,7 @@ Spark Summary
         <div class="d-flex justify-content-between align-items-center text-muted ml-md-3 mr-md-3">
             <div class="footer-left">
                 <p class="mb-0">
-                    © 2023
+                    © 2024
                     <a href="https://twitter.com/sechenbling">Lynn Chen</a>.
                     
                     <span data-toggle="tooltip" data-placement="top"

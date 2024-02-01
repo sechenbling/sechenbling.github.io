@@ -40,7 +40,7 @@
 <link rel="prev" href="http://localhost:4000/" />
 <meta name="twitter:card" content="summary" />
 <meta property="twitter:title" content="Blingblogs" />
-<meta name="twitter:site" content="@sechenbling" />
+<meta name="twitter:site" content="@invalid" />
 <meta name="twitter:creator" content="@BreeLynn Chen" />
 <meta name="google-site-verification" content="google_meta_tag_verification" />
 <script type="application/ld+json">
@@ -487,7 +487,7 @@
             <a href="/">Blingblogs</a>
         </div>
         <!-- site-subtitle settings -->
-        <div class="site-subtitle">life can also be multi-threaded</div>
+        <div class="site-subtitle">Happy Everyday</div>
     </div>
 
     <ul class="w-100">
@@ -570,7 +570,7 @@
         
             
         
-        <a href="https://space.bilibili.com/15164783" aria-label="bilibili"
+        <a href="https://space.bilibili.com/1" aria-label="bilibili"
            target="_blank" rel="noopener" >
             <i class="fa-brands fa-bilibili"></i>
         </a>
@@ -578,7 +578,7 @@
         
             
         
-        <a href="https://twitter.com/sechenbling" aria-label="twitter"
+        <a href="https://twitter.com/invalid" aria-label="twitter"
            target="_blank" rel="noopener" >
             <i class="fab fa-twitter"></i>
         </a>
@@ -646,6 +646,7 @@
 
 
 
+
 <!-- Get pinned posts -->
 
 
@@ -663,6 +664,161 @@
 
 
 <div id="post-list">
+
+    <div class="post-preview">
+        <div class="d-flex justify-content-between pr-xl-2">
+            <h1><a href="/posts/Data-Warehouse-DIM-Develop/">Data Warehouse DIM Develop</a></h1>
+            
+        </div>
+        <!-- .post-content -->
+        <div class="post-content">
+            <p>
+                
+
+
+
+
+
+                DIM层
+
+DIM层设计要点
+
+  DIM层的设计一句是维度建模理论，该层存储维度模型的维度表（重点）
+  DIM层的数据存储格式为orc列式存储+snappy压缩（相较于ODS的存储格式和压缩更快）
+    
+      ODS在乎的是减少存储空间，其他层在乎的是查询更快
+    
+  
+  DIM层表名的命名规范为dim_表名_全量表或者拉链表标识（full/zip）
+
+
+维度表设计：
+...
+            </p>
+        </div>
+        <!-- .post-meta -->
+        <div class="post-meta text-muted d-flex">
+            <div class="mr-auto">
+                <!-- posted date -->
+                <i class="far fa-calendar fa-fw"></i>
+                
+
+
+
+<span class=""
+    data-ts="1674786900"
+    data-df="ll"
+    
+        data-toggle="tooltip"
+        data-placement="bottom"
+    >
+    Jan 27, 2023
+</span>
+
+                <!-- posted time ago -->
+                <i class="far fa-clock fa-fw"></i>
+                <span class="timeago "
+      
+      data-toggle="tooltip"
+      data-placement="bottom"
+      title="Asia/Shanghai"
+      >
+
+      Friday AM.
+  <i class="unloaded"></i>
+</span>
+
+<!-- title="2023-01-27 10:35:00 +0800"-->
+
+                <!-- posted categories -->
+                
+                <i class="far fa-folder-open fa-fw"></i>
+                <span>
+                  
+                    Bigdata,
+                    DataWarehouse
+                </span>
+                
+            </div>
+            
+        </div>
+    </div>
+
+    <div class="post-preview">
+        <div class="d-flex justify-content-between pr-xl-2">
+            <h1><a href="/posts/Data-Warehouse-ODS-Develop/">Data Warehouse ODS Develop</a></h1>
+            
+        </div>
+        <!-- .post-content -->
+        <div class="post-content">
+            <p>
+                
+
+
+
+
+
+                ODS层
+
+  表结构设计依托于从业务系统同步过来的数据结构
+  ODS层要保存全部的历史数据，数据量较大，使用压缩程度较高的格式gzip
+  ODS层的命名规范为ods_表名_单分区增量全量标识(inc或者full)
+
+
+Hive数仓启动
+
+  启动Hive服务
+    nohup ./hive --service metastore &amp;amp;
+nohup ./hive --servic...
+            </p>
+        </div>
+        <!-- .post-meta -->
+        <div class="post-meta text-muted d-flex">
+            <div class="mr-auto">
+                <!-- posted date -->
+                <i class="far fa-calendar fa-fw"></i>
+                
+
+
+
+<span class=""
+    data-ts="1674783300"
+    data-df="ll"
+    
+        data-toggle="tooltip"
+        data-placement="bottom"
+    >
+    Jan 27, 2023
+</span>
+
+                <!-- posted time ago -->
+                <i class="far fa-clock fa-fw"></i>
+                <span class="timeago "
+      
+      data-toggle="tooltip"
+      data-placement="bottom"
+      title="Asia/Shanghai"
+      >
+
+      Friday AM.
+  <i class="unloaded"></i>
+</span>
+
+<!-- title="2023-01-27 09:35:00 +0800"-->
+
+                <!-- posted categories -->
+                
+                <i class="far fa-folder-open fa-fw"></i>
+                <span>
+                  
+                    Bigdata,
+                    DataWarehouse
+                </span>
+                
+            </div>
+            
+        </div>
+    </div>
 
     <div class="post-preview">
         <div class="d-flex justify-content-between pr-xl-2">
@@ -705,15 +861,14 @@ Spark Streaming 用于流式数据的处理。Spark Streaming 支持的数据输
                 <!-- posted time ago -->
                 <i class="far fa-clock fa-fw"></i>
                 <span class="timeago "
-  
-    data-toggle="tooltip"
-    data-placement="bottom"
-    title="Asia/Shanghai"
-  >
+      
+      data-toggle="tooltip"
+      data-placement="bottom"
+      title="Asia/Shanghai"
+      >
 
-  Friday PM.
-
-  <i class="unloaded">WTZ</i>
+      Friday PM.
+  <i class="unloaded"></i>
 </span>
 
 <!-- title="2022-11-25 22:45:00 +0800"-->
@@ -776,93 +931,17 @@ Spark SQL 是Spark用于结构化数据处理的Spark模块:
                 <!-- posted time ago -->
                 <i class="far fa-clock fa-fw"></i>
                 <span class="timeago "
-  
-    data-toggle="tooltip"
-    data-placement="bottom"
-    title="Asia/Shanghai"
-  >
+      
+      data-toggle="tooltip"
+      data-placement="bottom"
+      title="Asia/Shanghai"
+      >
 
-  Friday PM.
-
-  <i class="unloaded">WTZ</i>
+      Friday PM.
+  <i class="unloaded"></i>
 </span>
 
 <!-- title="2022-11-25 22:40:00 +0800"-->
-
-                <!-- posted categories -->
-                
-                <i class="far fa-folder-open fa-fw"></i>
-                <span>
-                  
-                    Bigdata,
-                    Spark
-                </span>
-                
-            </div>
-            
-        </div>
-    </div>
-
-    <div class="post-preview">
-        <div class="d-flex justify-content-between pr-xl-2">
-            <h1><a href="/posts/Spark-Data-Structure-Introduction/">Spark Data Structure Introduction</a></h1>
-            
-        </div>
-        <!-- .post-content -->
-        <div class="post-content">
-            <p>
-                
-
-
-
-
-
-                核心编程：
-Spark 计算框架为了能够进行高并发和高吞吐的数据处理，封装了三大数据结构，用于处理不同的应用场景。三大数据结构分别是:
-
-  累加器：分布式共享只写变量
-  广播变量：分布式共享只读变量
-  RDD : 弹性分布式数据集
-
-
-累加器:
-累加器用来把 Executor 端变量信息聚合到 Driver 端。在 Driver 程序中定义的变量，在 Executor 端的每个 Tas...
-            </p>
-        </div>
-        <!-- .post-meta -->
-        <div class="post-meta text-muted d-flex">
-            <div class="mr-auto">
-                <!-- posted date -->
-                <i class="far fa-calendar fa-fw"></i>
-                
-
-
-
-<span class=""
-    data-ts="1669386600"
-    data-df="ll"
-    
-        data-toggle="tooltip"
-        data-placement="bottom"
-    >
-    Nov 25, 2022
-</span>
-
-                <!-- posted time ago -->
-                <i class="far fa-clock fa-fw"></i>
-                <span class="timeago "
-  
-    data-toggle="tooltip"
-    data-placement="bottom"
-    title="Asia/Shanghai"
-  >
-
-  Friday PM.
-
-  <i class="unloaded">WTZ</i>
-</span>
-
-<!-- title="2022-11-25 22:30:00 +0800"-->
 
                 <!-- posted categories -->
                 
@@ -909,30 +988,29 @@ You can write --- to your md to show a dividing line ...
 
 
 <span class=""
-    data-ts="1668859200"
+    data-ts="1668951000"
     data-df="ll"
     
         data-toggle="tooltip"
         data-placement="bottom"
     >
-    Nov 19, 2022
+    Nov 20, 2022
 </span>
 
                 <!-- posted time ago -->
                 <i class="far fa-clock fa-fw"></i>
                 <span class="timeago "
-  
-    data-toggle="tooltip"
-    data-placement="bottom"
-    title="Asia/Shanghai"
-  >
+      
+      data-toggle="tooltip"
+      data-placement="bottom"
+      title="Asia/Shanghai"
+      >
 
-  Saturday PM.
-
-  <i class="unloaded">WTZ</i>
+      Sunday PM.
+  <i class="unloaded"></i>
 </span>
 
-<!-- title="2022-11-19 20:00:00 +0800"-->
+<!-- title="2022-11-20 21:30:00 +0800"-->
 
                 <!-- posted categories -->
                 
@@ -977,7 +1055,7 @@ Create a new file named YYYY-MM-DD-TITLE.EXTENSION and put it in the _posts of t
 
 
 <span class=""
-    data-ts="1668787200"
+    data-ts="1668859200"
     data-df="ll"
     
         data-toggle="tooltip"
@@ -989,18 +1067,17 @@ Create a new file named YYYY-MM-DD-TITLE.EXTENSION and put it in the _posts of t
                 <!-- posted time ago -->
                 <i class="far fa-clock fa-fw"></i>
                 <span class="timeago "
-  
-    data-toggle="tooltip"
-    data-placement="bottom"
-    title="Asia/Shanghai"
-  >
+      
+      data-toggle="tooltip"
+      data-placement="bottom"
+      title="Asia/Shanghai"
+      >
 
-  Saturday AM.
-
-  <i class="unloaded">WTZ</i>
+      Saturday PM.
+  <i class="unloaded"></i>
 </span>
 
-<!-- title="2022-11-19 00:00:00 +0800"-->
+<!-- title="2022-11-19 20:00:00 +0800"-->
 
                 <!-- posted categories -->
                 
@@ -1105,7 +1182,7 @@ Create a new file named YYYY-MM-DD-TITLE.EXTENSION and put it in the _posts of t
       
       
       
-      <li><a href="/posts/Spark-Deployment-Structure-Introduction/">Spark Deployment Structure Introduction</a></li>
+      <li><a href="/posts/Git/">Git</a></li>
       
       
       
@@ -1175,20 +1252,6 @@ Create a new file named YYYY-MM-DD-TITLE.EXTENSION and put it in the _posts of t
     
     
     
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
   
     
     
@@ -1208,6 +1271,16 @@ Create a new file named YYYY-MM-DD-TITLE.EXTENSION and put it in the _posts of t
     
     
     
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
       
         
         
@@ -1216,6 +1289,48 @@ Create a new file named YYYY-MM-DD-TITLE.EXTENSION and put it in the _posts of t
     
     
     
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
     
   
     
@@ -1258,6 +1373,9 @@ Create a new file named YYYY-MM-DD-TITLE.EXTENSION and put it in the _posts of t
     
     
     <a class="post-tag" href="/tags/markdown/">markdown</a>
+    
+    
+    <a class="post-tag" href="/tags/java/">Java</a>
     
     
     <a class="post-tag" href="/tags/logs/">logs</a>
@@ -1330,20 +1448,6 @@ Create a new file named YYYY-MM-DD-TITLE.EXTENSION and put it in the _posts of t
     
     
     
-      
-        
-        
-
-  
-    
-    
-    
-    
-  
-    
-    
-    
-    
   
     
     
@@ -1363,6 +1467,16 @@ Create a new file named YYYY-MM-DD-TITLE.EXTENSION and put it in the _posts of t
     
     
     
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
       
         
         
@@ -1371,6 +1485,48 @@ Create a new file named YYYY-MM-DD-TITLE.EXTENSION and put it in the _posts of t
     
     
     
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
     
   
     
@@ -1415,6 +1571,9 @@ Create a new file named YYYY-MM-DD-TITLE.EXTENSION and put it in the _posts of t
     <a class="post-tag" href="/tags/markdown/">markdown</a>
     
     
+    <a class="post-tag" href="/tags/java/">Java</a>
+    
+    
     <a class="post-tag" href="/tags/logs/">logs</a>
     
     
@@ -1437,7 +1596,7 @@ Create a new file named YYYY-MM-DD-TITLE.EXTENSION and put it in the _posts of t
         <div class="d-flex justify-content-between align-items-center text-muted ml-md-3 mr-md-3">
             <div class="footer-left">
                 <p class="mb-0">
-                    © 2023
+                    © 2024
                     <a href="https://twitter.com/sechenbling">Lynn Chen</a>.
                     
                     <span data-toggle="tooltip" data-placement="top"
