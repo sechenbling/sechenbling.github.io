@@ -1571,27 +1571,27 @@ Click the hook will locate the first footnote<sup id="fnref:footnote" role="doc-
       
       
       
-      <li><a href="/posts/Git/">Git</a></li>
+      <li><a href="/posts/HDFS-ShellCmd&API/">HDFS ShellCmd&API</a></li>
       
       
       
       
-      <li><a href="/posts/Data-Warehouse-Design/">Data Warehouse Design</a></li>
+      <li><a href="/posts/HDFS-DataNode/">HDFS DataNode</a></li>
       
       
       
       
-      <li><a href="/posts/Data-Warehouse-Model/">Data Warehouse Model</a></li>
+      <li><a href="/posts/HDFS-NameNode&SecondaryNameNode/">HDFS NameNode&SecondaryNameNode</a></li>
       
       
       
       
-      <li><a href="/posts/Data-Warehouse-DWS&ADS-Develop/">Data Warehouse DWS&ADS Develop</a></li>
+      <li><a href="/posts/HDFS-Read&Write-Process/">Read&Write Process</a></li>
       
       
       
       
-      <li><a href="/posts/Data-Warehouse-DWD-Develop/">Data Warehouse DWD Develop</a></li>
+      <li><a href="/posts/HDFS-Structure/">Hadoop HDFS Structure</a></li>
       
     </ul>
   </div> <!-- #access-lastmod -->
@@ -1636,6 +1636,35 @@ Click the hook will locate the first footnote<sup id="fnref:footnote" role="doc-
     
     
     
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
   
     
     
@@ -1670,10 +1699,6 @@ Click the hook will locate the first footnote<sup id="fnref:footnote" role="doc-
     
     
     
-      
-        
-        
-
   
     
     
@@ -1699,6 +1724,25 @@ Click the hook will locate the first footnote<sup id="fnref:footnote" role="doc-
     
     
       
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
     
   
     
@@ -1709,6 +1753,51 @@ Click the hook will locate the first footnote<sup id="fnref:footnote" role="doc-
         
         
 
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
   
     
     
@@ -1758,10 +1847,16 @@ Click the hook will locate the first footnote<sup id="fnref:footnote" role="doc-
     <a class="post-tag" href="/tags/data-warehouse/">data warehouse</a>
     
     
+    <a class="post-tag" href="/tags/hdfs/">hdfs</a>
+    
+    
     <a class="post-tag" href="/tags/spark/">spark</a>
     
     
     <a class="post-tag" href="/tags/markdown/">markdown</a>
+    
+    
+    <a class="post-tag" href="/tags/hadoop/">hadoop</a>
     
     
     <a class="post-tag" href="/tags/java/">Java</a>
@@ -1822,6 +1917,78 @@ Click the hook will locate the first footnote<sup id="fnref:footnote" role="doc-
 
 
 
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
 
   
 
@@ -2055,19 +2222,19 @@ Create a new file named YYYY-MM-DD-TITLE.EXTENSION and put it in the _posts of t
     
     
     <div class="card">
-      <a href="/posts/Git/">
+      <a href="/posts/HDFS-ShellCmd&API/">
         <div class="card-body">
           
 
 
 
 <em class="small"
-    data-ts="1682173800"
+    data-ts="1706798100"
     data-df="ll"
     >
-    Apr 22, 2023
+    Feb  1, 2024
 </em>
-          <h3 class="pt-0 mt-1 mb-3" data-toc-skip>Git</h3>
+          <h3 class="pt-0 mt-1 mb-3" data-toc-skip>HDFS ShellCmd&API</h3>
           <div class="text-muted small">
             <p>
               
@@ -2076,25 +2243,33 @@ Create a new file named YYYY-MM-DD-TITLE.EXTENSION and put it in the _posts of t
 
 
 
-              Git安装
+              HDFS 命令
 
-Linux
+hadoop fs -xxx和hdfs dfs -xxx 最终效果和命令都是一样的 两个都可以使用
 
-  包管理器安装
-    1
+1
 2
 3
 4
 5
 6
 7
-# Ubuntu 10.10 or upper
-sudo aptitude install git
-sudo aptitude install git-doc git-svn git-email gitk
-  
-# RHEL CentOs
-yum install git
-yum install git-svn ...
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+hadoop fs -moveFromLocal /local /remote	从本地剪切粘贴到 HDFS
+hadoop fs -copyFromLocal /loc...
             </p>
           </div>
         </div>
@@ -2104,19 +2279,19 @@ yum install git-svn ...
     
     
     <div class="card">
-      <a href="/posts/Data-Warehouse-Design/">
+      <a href="/posts/HDFS-DataNode/">
         <div class="card-body">
           
 
 
 
 <em class="small"
-    data-ts="1674914400"
+    data-ts="1706798040"
     data-df="ll"
     >
-    Jan 28, 2023
+    Feb  1, 2024
 </em>
-          <h3 class="pt-0 mt-1 mb-3" data-toc-skip>Data Warehouse Design</h3>
+          <h3 class="pt-0 mt-1 mb-3" data-toc-skip>HDFS DataNode</h3>
           <div class="text-muted small">
             <p>
               
@@ -2125,16 +2300,11 @@ yum install git-svn ...
 
 
 
-              数据仓库设计
+              DataNode
 
-数据仓库分层规划
 
-  使数据体系更加清洗，简单化复杂问题（one data理论分层）
-  
-  ODS:
-  operation data store:业务系统的原始数据，未经处理的数据，放在HDFS以文件形式的存储，从HDFS原路径load(底层是剪切操作)到ODS层。
-  DWD:
-  data warehouse detail:基于维度建模理论进行构建，保存各业务过程...
+
+
             </p>
           </div>
         </div>
@@ -2219,6 +2389,35 @@ yum install git-svn ...
     
     
     
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
   
     
     
@@ -2253,10 +2452,6 @@ yum install git-svn ...
     
     
     
-      
-        
-        
-
   
     
     
@@ -2282,6 +2477,25 @@ yum install git-svn ...
     
     
       
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
     
   
     
@@ -2292,6 +2506,51 @@ yum install git-svn ...
         
         
 
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
   
     
     
@@ -2341,10 +2600,16 @@ yum install git-svn ...
     <a class="post-tag" href="/tags/data-warehouse/">data warehouse</a>
     
     
+    <a class="post-tag" href="/tags/hdfs/">hdfs</a>
+    
+    
     <a class="post-tag" href="/tags/spark/">spark</a>
     
     
     <a class="post-tag" href="/tags/markdown/">markdown</a>
+    
+    
+    <a class="post-tag" href="/tags/hadoop/">hadoop</a>
     
     
     <a class="post-tag" href="/tags/java/">Java</a>

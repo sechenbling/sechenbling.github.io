@@ -1,11 +1,11 @@
 [
   
     {
-    "title": "Git",
-    "url": "/posts/Git/",
-    "categories": "HuaweiNEO, Java",
-    "tags": "Java",
-    "date": "2023-04-22 22:30:00 +0800",
+    "title": "HDFS ShellCmd&API",
+    "url": "/posts/HDFS-ShellCmd&API/",
+    "categories": "Bigdata, Hadoop",
+    "tags": "hdfs",
+    "date": "2024-02-01 22:35:00 +0800",
     
 
 
@@ -13,8 +13,93 @@
 
 
     
-    "snippet": "Git安装Linux  包管理器安装    # Ubuntu 10.10 or uppersudo aptitude install gitsudo aptitude install git-doc git-svn git-email gitk  # RHEL CentOsyum install gityum install git-svn git-email gitk        源码安...",
-    "content": "Git安装Linux  包管理器安装    # Ubuntu 10.10 or uppersudo aptitude install gitsudo aptitude install git-doc git-svn git-email gitk  # RHEL CentOsyum install gityum install git-svn git-email gitk        源码安装    # decompress git pkgtar -jxvf git-xxxxcd git-xxxx  # install git to /usr/local/binmake prefix = /usr/local allsudo make prefix = /usr/local install  # install git docsmake prefix = /usr/local doc infosudo make prefix = /usr/local install-doc install-html install-info        命令补全    cp contrib/completion/git-completion.bash /etc/bash_completion.d/# current shell is valid. /etc/bash_completion  # auto load bash_completion# add lines following to \"~/.bash_profile\" or \"/etc/bashrc\"if [ -f /etc/bash_completion]; then  . /etc/bash_completionfi      Windows      下载安装包解压即可        GIT UI: TortoiseGit  Git基础配置配置级别优先级：  项目配置 &gt; 用户配置 &gt; 系统配置  系统配置：    # 存放在git安装目录下 %Git%/etc/gitconfiggit config --system core.autocrlf xxx        用户配置    # 存放在用户目录下 ~/.gitconfiggit config --global user.name xxx        项目配置    # 当前仓库配置文件 .git/configgit config --local remote.origin.url xxx      基本配置  配置个人身份，作为用户配置    git config --global user.name \"breelynn\"git config --global user.email \"breelynn@xxx.com\"        文本换行符    # Git 提交会将行结束换行符CRLF转换为LF，如果在windows系统下打开core.autocrlfgit config --global core.autocrlf true  # Linux/Mac使用LF作为行结束符，当CRLF引入时进行修正，可以将core.autocrlf设置为input使Git将CRLF转换为LFgit config --global core.autocrlf input  # windows开发且不涉及其他跨平台可以关闭该功能，把回车符记录在repo中git config --global core.autocrlf false        文本编码配置    # 中文编码支持git config --global gui.encoding utf-8git config --global i18n.commitencoding utf-8git config --global i18n.logoutputencoding utf-8  # 显示中文路径git config --global core.quotepath false        与服务器的认证配置          http / https 协议认证          # 设置口令缓存    git config --global credential.helpe store  # 添加HTTPS证书    git config http.sslverify false                    ssh 协议认证          # Git Bash生成公钥后保存在代码平台中    ssh-keygen -t rsa -C \"breelynn@xxx.com\"                Git基本命令            "
+    "snippet": "HDFS 命令hadoop fs -xxx和hdfs dfs -xxx 最终效果和命令都是一样的 两个都可以使用hadoop fs -moveFromLocal /local /remote\t从本地剪切粘贴到 HDFShadoop fs -copyFromLocal /local /remote \t从本地文件系统中拷贝文件到 HDFS 路径去hadoop fs -put /local /re...",
+    "content": "HDFS 命令hadoop fs -xxx和hdfs dfs -xxx 最终效果和命令都是一样的 两个都可以使用hadoop fs -moveFromLocal /local /remote\t从本地剪切粘贴到 HDFShadoop fs -copyFromLocal /local /remote \t从本地文件系统中拷贝文件到 HDFS 路径去hadoop fs -put /local /remote\t-put：等同于 -copyFromLocalhadoop fs -appendToFile /local /remote\t追加一个文件到已经存在的文件末尾hadoop fs -copyToLocal /remote\t从 HDFS 拷贝到本地hadoop fs -get /remote\t等同于 copyToLocalhadoop fs -ls /remote\t显示目录信息hadoop fs -cat /remote\t显示文件内容hadoop fs -mkdir /remote\t创建路径hadoop fs -cp /remote1 /remote2\t从 HDFS 的一个路径拷贝到 HDFS 的另一个路径hadoop fs -mv /remote1 /remote2\t在 HDFS 目录中移动文件hadoop fs -tail /remote\t显示一个文件的末尾 1kb 的数据hadoop fs -rm /remote\t删除文件hadoop fs -rm -r /remote\t递归删除目录及目录里面内容（文件夹hadoop fs -du\t统计文件夹下每个目录或文件的大小信息hadoop fs -du -s\t统计该文件夹整体大小hadoop fs -du -h\t统计文件夹下每个目录或文件的大小信息 (存在单位换算 B to KB MB GB…)hadoop fs -du -s -h\t统计该文件夹整体大小(存在大小换算hadoop fs -chgrp\thadoop fs -chgrp group 修改组hadoop fs -chmod\thadoop fs -chmod 777 修改三类用户权限hadoop fs -chown\thadoop fs -chown chen:chen 修改用户HDFS 命令@Beforepublic void init() throws IOException, URISyntaxException, InterruptedException{    //连接集群NameNode的地址    URIuri=newURI(\"hdfs://hadoop102:8020\");    //创建一个配置文件    Configurationconfiguration=newConfiguration();    //获取用户信息    Stringuser=\"chen\";    //获取客户端对象    fs=FileSystem.get(uri,configuration,user);    //创建一个文件夹操作    fs.mkdirs(newPath(\"/xiyou/huaguoshan\"));}@Afterpublic void close() throws IOException{    //关闭资源    fs.close();}配置文件中的dfs.replication参数为上传后的副本数，这个参数的生效优先级为代码中的configuration.set(“dfs.replication”,xx) &gt; 项目resource目录下的hdfs-site.xml文件（文件内部增加dfs.replication参数）  &gt;  服务器上的hdfs-site.xml(修改文件内的dfs.replication参数)  &gt; 服务器上的hdfs-default.xml(默认无法修改)"
+    },
+  
+    {
+    "title": "HDFS DataNode",
+    "url": "/posts/HDFS-DataNode/",
+    "categories": "Bigdata, Hadoop",
+    "tags": "hdfs",
+    "date": "2024-02-01 22:34:00 +0800",
+    
+
+
+
+
+
+    
+    "snippet": "DataNode",
+    "content": "DataNode"
+    },
+  
+    {
+    "title": "Read&Write Process",
+    "url": "/posts/HDFS-Read&Write-Process/",
+    "categories": "Bigdata, Hadoop",
+    "tags": "hdfs",
+    "date": "2024-02-01 22:33:00 +0800",
+    
+
+
+
+
+
+    
+    "snippet": "写入数据的流程：  客户端创建分布式文件系统DistributedFileSystem  向NameNode请求上传文件          NameNode检查权限      NameNode检查目录结构（目录是否存在）        NameNode响应可以上传文件  客户端请求上传第一个Block(0-128M)，请求NameNode返回DataNode  NameNode返回多个Dat...",
+    "content": "写入数据的流程：  客户端创建分布式文件系统DistributedFileSystem  向NameNode请求上传文件          NameNode检查权限      NameNode检查目录结构（目录是否存在）        NameNode响应可以上传文件  客户端请求上传第一个Block(0-128M)，请求NameNode返回DataNode  NameNode返回多个DataNode表示这三个节点存储数据          选择策略(节点距离最近，负载均衡)：                  本地节点          其他机架的一个节点          其他机架的另一个节点                      客户端创建FSDataOutputStream上传数据，向一个DN请求建立Block传输通道，之后再由DN向其他的DN请求建立通道（DN边存储边传输给其他DN），等数据传输完毕进行应答          流的传输单位为packet(64K)                  packet由512B(chunk)+4B(校验位)的chunk累计到64K后形成的          ack队列来接收应答                    网络拓扑-节点距离计算节点之间到共同祖先的距离之和为节点的距离机架感知：副本存储节点的选择假如由三个副本，其中一个副本存储在客户端所在集群 节点上，如果客户端在集群外，则随机选择一个；其他两个副本：一个在另一个机架的随机一个节点，一个在第二个副本所在机架的随机节点。读取数据的流程  客户端创建分布式文件系统对象向NameNode请求下载数据  NameNode判断权限和文件是否存在，如果都满足就将目标文件的元数据信息反馈回去  客户端创建FSDataInputStream选择节点距离最近的节点(首要原则)进行读取（此外还会考虑节点的负载均衡（次要原则）          如果还有其他的块，但当前节点的负债能力已经达到极限了就选择其他的节点进行读取      读取是串行读，先读取第一块，再读取第二块进行拼接      "
+    },
+  
+    {
+    "title": "HDFS NameNode&SecondaryNameNode",
+    "url": "/posts/HDFS-NameNode&SecondaryNameNode/",
+    "categories": "Bigdata, Hadoop",
+    "tags": "hdfs",
+    "date": "2024-02-01 22:33:00 +0800",
+    
+
+
+
+
+
+    
+    "snippet": "      fslmage 镜像文件：存储数据HDFS文件系统元数据的一个永久性的检查点，其中包含HDFS文件系统的所有目录和文件inode的序列化信息。        Edits 记录变化的步骤存放HDFS文件系统的所有更新操作的路径，文件系统客户端执行的所有写操作首先会被记录到Edits文件当中          seen_txid:记录当前最新的Edits(即最后一个Edits的数字 ...",
+    "content": "      fslmage 镜像文件：存储数据HDFS文件系统元数据的一个永久性的检查点，其中包含HDFS文件系统的所有目录和文件inode的序列化信息。        Edits 记录变化的步骤存放HDFS文件系统的所有更新操作的路径，文件系统客户端执行的所有写操作首先会被记录到Edits文件当中          seen_txid:记录当前最新的Edits(即最后一个Edits的数字      VERSION：记录集群ID      每次NameNode启动的时候都会将Fsimage文件读入内存，加载Edits的更新操作，保证数据是最新的同步的，可以看作NameNode启动的时候就将Fsimage和Edits文件进行了合并  上线后内存的中出现的是fslmage和执行完Edits后的结果          差别在inprogress这个文件 2NN在更新的时候如果有新的操作，会记录在inprogress文件当中      NN 和 2NN 工作机制 思考：NameNode 中的元数据是存储在哪里的？ 首先，我们做个假设，如果存储在 NameNode 节点的磁盘中，因为经常需要进行随机访 问，还有响应客户请求，必然是效率过低。因此，元数据需要存放在内存中。但如果只存在 内存中，一旦断电，元数据丢失，整个集群就无法工作了。因此产生在磁盘中备份元数据的 FsImage。 这样又会带来新的问题，当在内存中的元数据更新时，如果同时更新 FsImage，就会导 致效率过低，但如果不更新，就会发生一致性问题，一旦 NameNode 节点断电，就会产生数 据丢失。因此，引入 Edits 文件（只进行追加操作，效率很高）。每当元数据有更新或者添 加元数据时，修改内存中的元数据并追加到 Edits 中。这样，一旦 NameNode 节点断电，可 以通过 FsImage 和 Edits 的合并，合成元数据。 但是，如果长时间添加数据到 Edits 中，会导致该文件数据过大，效率降低，而且一旦 断电，恢复元数据需要的时间过长。因此，需要定期进行 FsImage 和 Edits 的合并，如果这 个操作由NameNode节点完成，又会效率过低。因此，引入一个新的节点SecondaryNamenode， 专门用于 FsImage 和 Edits 的合并。        第一阶段：NameNode 启动 第一次启动:          NameNode 格式化后，创建 Fsimage 和 Edits 文件。如果不是第一次启动，直接加载编辑日志和镜像文件到内存。      客户端对元数据进行增删改的请求。      NameNode 记录操作日志，更新滚动日志。      NameNode 在内存中对元数据进行增删改。        第二阶段：Secondary NameNode 工作          Secondary NameNode 询问 NameNode 是否需要 CheckPoint。直接带回 NameNode 是否检查结果。      Secondary NameNode 请求执行 CheckPoint。      NameNode 滚动正在写的 Edits 日志。      将滚动前的编辑日志和镜像文件拷贝到 Secondary NameNode。      Secondary NameNode 加载编辑日志和镜像文件到内存，并合并。      生成新的镜像文件 fsimage.chkpoint。      拷贝 fsimage.chkpoint 到 NameNode。      NameNode 将 fsimage.chkpoint 重新命名成 fsimage。      "
+    },
+  
+    {
+    "title": "Hadoop HDFS Structure",
+    "url": "/posts/HDFS-Structure/",
+    "categories": "Bigdata, Hadoop",
+    "tags": "hdfs",
+    "date": "2024-02-01 22:31:00 +0800",
+    
+
+
+
+
+
+    
+    "snippet": "NameNode：master 主管管理者  管理HDFS的名称空间（原数据）  配置副本策略          设置不同数据的副本的数量        管理数据块的映射信息          比较大的文件分块存储，而且块和块之间的存储没有关系        处理客户端的读写请求DataNode就是slave worker，NameNode下达命令由DataNode执行实际的操作  存储实际...",
+    "content": "NameNode：master 主管管理者  管理HDFS的名称空间（原数据）  配置副本策略          设置不同数据的副本的数量        管理数据块的映射信息          比较大的文件分块存储，而且块和块之间的存储没有关系        处理客户端的读写请求DataNode就是slave worker，NameNode下达命令由DataNode执行实际的操作  存储实际的数据块  执行数据块的读写操作SecondaryNameNode 2NN  并非NameNode的热备，当NN挂掉的时候它并不能马上替换NN提供服务  辅助NN分担工作：比如定期合并镜像文件和编辑日志(Fsimage&amp;Edits)并推送给NN  紧急情况下可以恢复部分数据（不是所有数据都给了2NN）Client 客户端  文件切分：文件上传HDFS时，Client将文件切分成一个一个的Block后上传  与NN交互获取文件位置  与DN交互读写数据  提供一些命令来管理HDFS：比如NN格式化  通过一些命令来访问HDFS：进行增删改查文件块大小：只是指占用上限，如果一个文件小于128M其占用磁盘就是其本身  Hadoop2，3是128M  Hadoop1是64M  找到块的时间是传输块时间的1%最佳  块大小设置          块太小，会增加寻址时间，程序一直在找块的开始位置（块数量多了）      块太大，从磁盘的传输时间会明显大于定位这个块开始位置所需的时间，在处理这块数据时会非常慢      块大小设置:主要取决于磁盘传输速率      "
+    },
+  
+    {
+    "title": "Hadoop Command",
+    "url": "/posts/Hadoop-Command/",
+    "categories": "Bigdata, Hadoop",
+    "tags": "hadoop",
+    "date": "2024-02-01 22:30:00 +0800",
+    
+
+
+
+
+
+    
+    "snippet": "hadoop的常用命令启动hadoop所有进程start-all.sh 等价于 start-dfs.sh + start-yarn.sh但是一般不推荐使用start-all.sh(因为开源框架中内部命令启动有很多问题)。单进程启动。sbin/start-dfs.shsbin/hadoop-daemons.sh --config .. --hostname .. start namenode ...",
+    "content": "hadoop的常用命令启动hadoop所有进程start-all.sh 等价于 start-dfs.sh + start-yarn.sh但是一般不推荐使用start-all.sh(因为开源框架中内部命令启动有很多问题)。单进程启动。sbin/start-dfs.shsbin/hadoop-daemons.sh --config .. --hostname .. start namenode ...sbin/hadoop-daemons.sh --config .. --hostname .. start datanode ...sbin/hadoop-daemons.sh --config .. --hostname .. start sescondarynamenode ...sbin/hadoop-daemons.sh --config .. --hostname .. start zkfc ...         //sbin/start-yarn.shlibexec/yarn-config.shsbin/yarn-daemon.sh --config $YARN_CONF_DIR  start resourcemanagersbin/yarn-daemons.sh  --config $YARN_CONF_DIR  start nodemanager常用命令查看指定目录下内容hdfs dfs –ls [文件目录]hdfs dfs -ls -R   //显式目录结构eg:hdfs dfs –ls /user/lynn/打开某个已存在文件hdfs dfs –cat [file_path]eg:hdfs dfs -cat /user/wangkai.pt/data.txt将本地文件存储至hadoophdfs dfs –put [本地地址] [hadoop目录]hdfs dfs –put /home/t/file.txt  /user/t将本地文件夹存储至hadoophdfs dfs –put [本地目录] [hadoop目录]hdfs dfs –put /home/t/dir_name /user/t将hadoop上某个文件down至本地已有目录下hadoop dfs -get [文件目录] [本地目录]hadoop dfs –get /user/t/ok.txt /home/t删除hadoop上指定文件hdfs  dfs –rm [文件地址]hdfs dfs –rm /user/t/ok.txt删除hadoop上指定文件夹(包含子目录等)hdfs dfs –rm [目录地址]hdfs dfs –rmr /user/t在hadoop指定目录内创建新目录hdfs dfs –mkdir /user/thdfs  dfs -mkdir - p /user/centos/hadoop在hadoop指定目录下新建一个空文件hdfs dfs  -touchz  /user/new.txt将hadoop上某个文件重命名\thdfs dfs –mv  /user/test.txt  /user/ok.txt  (将test.txt重命名为ok.txt)将hadoop指定目录下所有内容保存为一个文件，同时down至本地hdfs dfs –getmerge /user /home/t将正在运行的hadoop作业kill掉hadoop job –kill  [job-id]查看帮助hdfs dfs -help安全模式退出安全模式NameNode在启动时会自动进入安全模式。安全模式是NameNode的一种状态，在这个阶段，文件系统不允许有任何修改。系统显示Name node in safe mode，说明系统正处于安全模式，这时只需要等待十几秒即可，也可通过下面的命令退出安全模式：/usr/local/hadoop$bin/hadoop dfsadmin -safemode leave进入安全模式在必要情况下，可以通过以下命令把HDFS置于安全模式：/usr/local/hadoop$bin/hadoop dfsadmin -safemode enter节点添加添加一个新的DataNode节点，先在新加节点上安装好Hadoop，要和NameNode使用相同的配置(可以直接从NameNode复制)，修改HADOOPHOME/conf/master文件，加入NameNode主机名。然后在NameNode节点上修改HADOOPHOME/conf/master文件，加入NameNode主机名。然后在NameNode节点上修改HADOOP_HOME/conf/slaves文件，加入新节点名，再建立新加节点无密码的SSH连接，运行启动命令为：/usr/local/hadoop$bin/start-all.sh负载均衡HDFS的数据在各个DataNode中的分布可能很不均匀，尤其是在DataNode节点出现故障或新增DataNode节点时。新增数据块时NameNode对DataNode节点的选择策略也有可能导致数据块分布不均匀。用户可以使用命令重新平衡DataNode上的数据块的分布：/usr/local/hadoop$bin/start-balancer.sh快速查询补充hadoop常用命令：hdfs dfs  查看Hadoop HDFS支持的所有命令hdfs dfs –ls  列出目录及文件信息hdfs dfs –lsr  循环列出目录、子目录及文件信息hdfs dfs –put test.txt /user/sunlightcs  将本地文件系统的test.txt复制到HDFS文件系统的/user/sunlightcs目录下hdfs dfs –get /user/sunlightcs/test.txt .  将HDFS中的test.txt复制到本地文件系统中，与-put命令相反hdfs dfs –cat /user/sunlightcs/test.txt  查看HDFS文件系统里test.txt的内容hdfs dfs –tail /user/sunlightcs/test.txt  查看最后1KB的内容hdfs dfs –rm /user/sunlightcs/test.txt  从HDFS文件系统删除test.txt文件，rm命令也可以删除空目录hdfs dfs –rmr /user/sunlightcs  删除/user/sunlightcs目录以及所有子目录hdfs dfs –copyFromLocal test.txt /user/sunlightcs/test.txt  从本地文件系统复制文件到HDFS文件系统，等同于put命令hdfs dfs –copyToLocal /user/sunlightcs/test.txt test.txt  从HDFS文件系统复制文件到本地文件系统，等同于get命令hdfs dfs –chgrp [-R] /user/sunlightcs  修改HDFS系统中/user/sunlightcs目录所属群组，选项-R递归执行，跟linux命令一样hdfs dfs –chown [-R] /user/sunlightcs  修改HDFS系统中/user/sunlightcs目录拥有者，选项-R递归执行hdfs dfs –chmod [-R] MODE /user/sunlightcs  修改HDFS系统中/user/sunlightcs目录权限，MODE可以为相应权限的3位数或+/-{rwx}，选项-R递归执行hdfs dfs –count [-q] PATH  查看PATH目录下，子目录数、文件数、文件大小、文件名/目录名hdfs dfs –cp SRC [SRC …] DST       将文件从SRC复制到DST，如果指定了多个SRC，则DST必须为一个目录hdfs dfs –du PATH  显示该目录中每个文件或目录的大小hdfs dfs –dus PATH  类似于du，PATH为目录时，会显示该目录的总大小hdfs dfs –expunge  清空回收站，文件被删除时，它首先会移到临时目录.Trash/中，当超过延迟时间之后，文件才会被永久删除hdfs dfs –getmerge SRC [SRC …] LOCALDST [addnl]      获取由SRC指定的所有文件，将它们合并为单个文件，并写入本地文件系统中的LOCALDST，选项addnl将在每个文件的末尾处加上一个换行符hdfs dfs –touchz PATH   创建长度为0的空文件hdfs dfs –test –[ezd] PATH     对PATH进行如下类型的检查：  -e PATH是否存在，如果PATH存在，返回0，否则返回1  -z 文件是否为空，如果长度为0，返回0，否则返回1  -d 是否为目录，如果PATH为目录，返回0，否则返回1hdfs dfs –text PATH  显示文件的内容，当文件为文本文件时，等同于cat，文件为压缩格式(gzip以及hadoop的二进制序列文件格式)时，会先解压缩    hdfs dfs –help ls  查看某个[ls]命令的帮助文档"
     },
   
     {
@@ -185,6 +270,23 @@
     
     "snippet": "核心编程：Spark 计算框架为了能够进行高并发和高吞吐的数据处理，封装了三大数据结构，用于处理不同的应用场景。三大数据结构分别是:  累加器：分布式共享只写变量  广播变量：分布式共享只读变量  RDD : 弹性分布式数据集累加器:累加器用来把 Executor 端变量信息聚合到 Driver 端。在 Driver 程序中定义的变量，在 Executor 端的每个 Task 都会得到这个变...",
     "content": "核心编程：Spark 计算框架为了能够进行高并发和高吞吐的数据处理，封装了三大数据结构，用于处理不同的应用场景。三大数据结构分别是:  累加器：分布式共享只写变量  广播变量：分布式共享只读变量  RDD : 弹性分布式数据集累加器:累加器用来把 Executor 端变量信息聚合到 Driver 端。在 Driver 程序中定义的变量，在 Executor 端的每个 Task 都会得到这个变量的一份新的副本，每个 task 更新这些副本的值后，传回 Driver 端进行merge。  merge的原因: spark的分布式计算，会将数据分到不同的Executor上计算完  分布式共享的只写变量          分布式：累加器的值是分布式统计执行的      共享：累加器被多个Executor共享      只写：说明Executor之间累加器是不同互相访问，是读不到的，只有Driver可以读取每个Executor上的累加器        累加器中会出现少加和多加的情况          少加：转换算子中调用了累加器，但是没有执行行动算子，那么累加器不会执行生效      多家：多次调用了行动算子，累加器会多次执行      为了防止少加和多加的情况，一般会把累加器放在行动算子中使用，而不会放在转换算子中      累加器类别  系统累加器：          通过sparkContext获取        var acc1 = sc.longAccumulator(\"acc_name\")sc.doubleAccumulator(\"acc_name\")sc.collectionAccumulator(\"acc_name\")                    使用累加器实例代码:        rdd.foreach(num=&gt;{acc1.sum(num)})                      自定义累加器：          继承AccumulatorV2接口，定义泛型，定义IN累加器输入的数据类型，定义OUT累加器输出的类型                  class MyAccumulator extends AccumulatorV2[IN,OUT]                    重写实现累加器接口中的方法: add      向sc注册累加器          val acc = new MyAccumulator()  sc.register(acc,\"acc_name\")                    使用累加器打印结果          rdd.foreach(num=&gt;{acc.add(num)})  print(acc.value)                    广播变量:广播变量用来高效分发较大的对象。向所有工作节点发送一个较大的只读值，以供一个或多个 Spark 操作使用。比如，如果你的应用需要向所有节点发送一个较大的只读查询表， 广播变量用起来都很顺手。在多个并行操作中使用同一个变量，Spark会为每个任务分别发送（闭包数据都是以Task为单位发送的），会导致在Executor中包含同样的一份数据导致冗余，占用大量的内存。广播变量就是将数据放在Executor的内存当中，而不是放在每一个task中，从而达到共享的目的。这份数据只读，保证线程安全。  分布式共享只读变量  声明广播变量    val broadcast = sc.broadcast(list)      RDD:全称为 resilient distributed dataset 弹性分布式数据集, Spark中最基本的数据处理模型。代码中是一个抽象类，它代表一个弹性的、不可变、可分区、里面的元素可并行计算的集合。每个RDD都是一个计算单元，将多个RDD进行关联组成一个完整的需求计算逻辑。弹性分布式数据集  弹性          存储的弹性：内存与磁盘的自动切换；      容错的弹性：数据丢失可以自动恢复；      计算的弹性：计算出错重试机制；      分片的弹性：可根据需要重新分片。        分布式：数据存储在大数据集群不同节点上  数据集：RDD 封装了计算逻辑，并不保存数据  数据抽象：RDD 是一个抽象类，需要子类具体实现  不可变：RDD 封装了计算逻辑，是不可以改变的，想要改变，只能产生新的 RDD，在新的 RDD 里面封装计算逻辑  可分区、并行计算核心属性  分区列表:list of partitions          RDD数据结构中存在分区列表，用于执行任务时并行计算，是实现分布式计算的重要属性        分区计算函数:function for computing each split          compute()      Spark计算的时候使用分区函数对每一个分区进行计算      一个分区都会有一个task，但是所有分区的计算逻辑和方式相同        RDD之间的依赖关系:dependencies on each RDD          getDependencies()      RDD是计算模型的封装，当需求当中需要将多个计算模型进行组合时，需要将多个RDD建立依赖关系        分区器(可选):a partitioner for key-value RDDs          partitioner:Option[Partitioner]      将数据进行分区处理，逻辑可以自己定义（要求数据为KV类型数据）        首选位置(可选 ):preferred locations 计算数据时，可以根据计算节点的状态选择不同的节点位置进行计算（比如选择节点距离最近的服务器来运行计算服务等）          getPreferredLocations      判断计算发送哪个节点效率最优，移动数据不如移动计算      "
+    },
+  
+    {
+    "title": "Git",
+    "url": "/posts/Git/",
+    "categories": "Program, Java",
+    "tags": "Java",
+    "date": "2022-11-22 22:30:00 +0800",
+    
+
+
+
+
+
+    
+    "snippet": "Git安装Linux  包管理器安装    # Ubuntu 10.10 or uppersudo aptitude install gitsudo aptitude install git-doc git-svn git-email gitk  # RHEL CentOsyum install gityum install git-svn git-email gitk        源码安...",
+    "content": "Git安装Linux  包管理器安装    # Ubuntu 10.10 or uppersudo aptitude install gitsudo aptitude install git-doc git-svn git-email gitk  # RHEL CentOsyum install gityum install git-svn git-email gitk        源码安装    # decompress git pkgtar -jxvf git-xxxxcd git-xxxx  # install git to /usr/local/binmake prefix = /usr/local allsudo make prefix = /usr/local install  # install git docsmake prefix = /usr/local doc infosudo make prefix = /usr/local install-doc install-html install-info        命令补全    cp contrib/completion/git-completion.bash /etc/bash_completion.d/# current shell is valid. /etc/bash_completion  # auto load bash_completion# add lines following to \"~/.bash_profile\" or \"/etc/bashrc\"if [ -f /etc/bash_completion]; then  . /etc/bash_completionfi      Windows      下载安装包解压即可        GIT UI: TortoiseGit  Git基础配置配置级别优先级：  项目配置 &gt; 用户配置 &gt; 系统配置  系统配置：    # 存放在git安装目录下 %Git%/etc/gitconfiggit config --system core.autocrlf xxx        用户配置    # 存放在用户目录下 ~/.gitconfiggit config --global user.name xxx        项目配置    # 当前仓库配置文件 .git/configgit config --local remote.origin.url xxx      基本配置  配置个人身份，作为用户配置    git config --global user.name \"breelynn\"git config --global user.email \"breelynn@xxx.com\"        文本换行符    # Git 提交会将行结束换行符CRLF转换为LF，如果在windows系统下打开core.autocrlfgit config --global core.autocrlf true  # Linux/Mac使用LF作为行结束符，当CRLF引入时进行修正，可以将core.autocrlf设置为input使Git将CRLF转换为LFgit config --global core.autocrlf input  # windows开发且不涉及其他跨平台可以关闭该功能，把回车符记录在repo中git config --global core.autocrlf false        文本编码配置    # 中文编码支持git config --global gui.encoding utf-8git config --global i18n.commitencoding utf-8git config --global i18n.logoutputencoding utf-8  # 显示中文路径git config --global core.quotepath false        与服务器的认证配置          http / https 协议认证          # 设置口令缓存    git config --global credential.helpe store  # 添加HTTPS证书    git config http.sslverify false                    ssh 协议认证          # Git Bash生成公钥后保存在代码平台中    ssh-keygen -t rsa -C \"breelynn@xxx.com\"                Git基本命令            "
     },
   
     {

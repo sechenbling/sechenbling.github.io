@@ -756,7 +756,7 @@
 
     <div class="post-preview">
         <div class="d-flex justify-content-between pr-xl-2">
-            <h1><a href="/posts/Git/">Git</a></h1>
+            <h1><a href="/posts/HDFS-ShellCmd&API/">HDFS ShellCmd&API</a></h1>
             
         </div>
         <!-- .post-content -->
@@ -768,18 +768,13 @@
 
 
 
-                Git安装
+                HDFS 命令
 
-Linux
+hadoop fs -xxx和hdfs dfs -xxx 最终效果和命令都是一样的 两个都可以使用
 
-  包管理器安装
-    # Ubuntu 10.10 or upper
-sudo aptitude install git
-sudo aptitude install git-doc git-svn git-email gitk
-  
-# RHEL CentOs
-yum install git
-yum install git-svn git-email gitk...
+hadoop fs -moveFromLocal /local /remote	从本地剪切粘贴到 HDFS
+hadoop fs -copyFromLocal /local /remote 	从本地文件系统中拷贝文件到 HDFS 路径去
+hadoop fs -put /loc...
             </p>
         </div>
         <!-- .post-meta -->
@@ -792,13 +787,13 @@ yum install git-svn git-email gitk...
 
 
 <span class=""
-    data-ts="1682173800"
+    data-ts="1706798100"
     data-df="ll"
     
         data-toggle="tooltip"
         data-placement="bottom"
     >
-    Apr 22, 2023
+    Feb  1, 2024
 </span>
 
                 <!-- posted time ago -->
@@ -810,19 +805,399 @@ yum install git-svn git-email gitk...
       title="Asia/Shanghai"
       >
 
-      Saturday PM.
+      Thursday PM.
   <i class="unloaded"></i>
 </span>
 
-<!-- title="2023-04-22 22:30:00 +0800"-->
+<!-- title="2024-02-01 22:35:00 +0800"-->
 
                 <!-- posted categories -->
                 
                 <i class="far fa-folder-open fa-fw"></i>
                 <span>
                   
-                    HuaweiNEO,
-                    Java
+                    Bigdata,
+                    Hadoop
+                </span>
+                
+            </div>
+            
+        </div>
+    </div>
+
+    <div class="post-preview">
+        <div class="d-flex justify-content-between pr-xl-2">
+            <h1><a href="/posts/HDFS-DataNode/">HDFS DataNode</a></h1>
+            
+        </div>
+        <!-- .post-content -->
+        <div class="post-content">
+            <p>
+                
+
+
+
+
+
+                DataNode
+
+
+
+
+            </p>
+        </div>
+        <!-- .post-meta -->
+        <div class="post-meta text-muted d-flex">
+            <div class="mr-auto">
+                <!-- posted date -->
+                <i class="far fa-calendar fa-fw"></i>
+                
+
+
+
+<span class=""
+    data-ts="1706798040"
+    data-df="ll"
+    
+        data-toggle="tooltip"
+        data-placement="bottom"
+    >
+    Feb  1, 2024
+</span>
+
+                <!-- posted time ago -->
+                <i class="far fa-clock fa-fw"></i>
+                <span class="timeago "
+      
+      data-toggle="tooltip"
+      data-placement="bottom"
+      title="Asia/Shanghai"
+      >
+
+      Thursday PM.
+  <i class="unloaded"></i>
+</span>
+
+<!-- title="2024-02-01 22:34:00 +0800"-->
+
+                <!-- posted categories -->
+                
+                <i class="far fa-folder-open fa-fw"></i>
+                <span>
+                  
+                    Bigdata,
+                    Hadoop
+                </span>
+                
+            </div>
+            
+        </div>
+    </div>
+
+    <div class="post-preview">
+        <div class="d-flex justify-content-between pr-xl-2">
+            <h1><a href="/posts/HDFS-NameNode&SecondaryNameNode/">HDFS NameNode&SecondaryNameNode</a></h1>
+            
+        </div>
+        <!-- .post-content -->
+        <div class="post-content">
+            <p>
+                
+
+
+
+
+
+                
+  
+    fslmage 镜像文件：存储数据
+HDFS文件系统元数据的一个永久性的检查点，其中包含HDFS文件系统的所有目录和文件inode的序列化信息。
+  
+  
+    Edits 记录变化的步骤
+存放HDFS文件系统的所有更新操作的路径，文件系统客户端执行的所有写操作首先会被记录到Edits文件当中
+    
+      seen_txid:记录当前最新的Edits(即最后一个...
+            </p>
+        </div>
+        <!-- .post-meta -->
+        <div class="post-meta text-muted d-flex">
+            <div class="mr-auto">
+                <!-- posted date -->
+                <i class="far fa-calendar fa-fw"></i>
+                
+
+
+
+<span class=""
+    data-ts="1706797980"
+    data-df="ll"
+    
+        data-toggle="tooltip"
+        data-placement="bottom"
+    >
+    Feb  1, 2024
+</span>
+
+                <!-- posted time ago -->
+                <i class="far fa-clock fa-fw"></i>
+                <span class="timeago "
+      
+      data-toggle="tooltip"
+      data-placement="bottom"
+      title="Asia/Shanghai"
+      >
+
+      Thursday PM.
+  <i class="unloaded"></i>
+</span>
+
+<!-- title="2024-02-01 22:33:00 +0800"-->
+
+                <!-- posted categories -->
+                
+                <i class="far fa-folder-open fa-fw"></i>
+                <span>
+                  
+                    Bigdata,
+                    Hadoop
+                </span>
+                
+            </div>
+            
+        </div>
+    </div>
+
+    <div class="post-preview">
+        <div class="d-flex justify-content-between pr-xl-2">
+            <h1><a href="/posts/HDFS-Read&Write-Process/">Read&Write Process</a></h1>
+            
+        </div>
+        <!-- .post-content -->
+        <div class="post-content">
+            <p>
+                
+
+
+
+
+
+                写入数据的流程：
+
+  客户端创建分布式文件系统DistributedFileSystem
+  向NameNode请求上传文件
+    
+      NameNode检查权限
+      NameNode检查目录结构（目录是否存在）
+    
+  
+  NameNode响应可以上传文件
+  客户端请求上传第一个Block(0-128M)，请求NameNode返回DataNode
+  Name...
+            </p>
+        </div>
+        <!-- .post-meta -->
+        <div class="post-meta text-muted d-flex">
+            <div class="mr-auto">
+                <!-- posted date -->
+                <i class="far fa-calendar fa-fw"></i>
+                
+
+
+
+<span class=""
+    data-ts="1706797980"
+    data-df="ll"
+    
+        data-toggle="tooltip"
+        data-placement="bottom"
+    >
+    Feb  1, 2024
+</span>
+
+                <!-- posted time ago -->
+                <i class="far fa-clock fa-fw"></i>
+                <span class="timeago "
+      
+      data-toggle="tooltip"
+      data-placement="bottom"
+      title="Asia/Shanghai"
+      >
+
+      Thursday PM.
+  <i class="unloaded"></i>
+</span>
+
+<!-- title="2024-02-01 22:33:00 +0800"-->
+
+                <!-- posted categories -->
+                
+                <i class="far fa-folder-open fa-fw"></i>
+                <span>
+                  
+                    Bigdata,
+                    Hadoop
+                </span>
+                
+            </div>
+            
+        </div>
+    </div>
+
+    <div class="post-preview">
+        <div class="d-flex justify-content-between pr-xl-2">
+            <h1><a href="/posts/HDFS-Structure/">Hadoop HDFS Structure</a></h1>
+            
+        </div>
+        <!-- .post-content -->
+        <div class="post-content">
+            <p>
+                
+
+
+
+
+
+                NameNode：master 主管管理者
+
+  管理HDFS的名称空间（原数据）
+  配置副本策略
+    
+      设置不同数据的副本的数量
+    
+  
+  管理数据块的映射信息
+    
+      比较大的文件分块存储，而且块和块之间的存储没有关系
+    
+  
+  处理客户端的读写请求
+
+
+DataNode
+就是slave worker，NameNode下达命令由Data...
+            </p>
+        </div>
+        <!-- .post-meta -->
+        <div class="post-meta text-muted d-flex">
+            <div class="mr-auto">
+                <!-- posted date -->
+                <i class="far fa-calendar fa-fw"></i>
+                
+
+
+
+<span class=""
+    data-ts="1706797860"
+    data-df="ll"
+    
+        data-toggle="tooltip"
+        data-placement="bottom"
+    >
+    Feb  1, 2024
+</span>
+
+                <!-- posted time ago -->
+                <i class="far fa-clock fa-fw"></i>
+                <span class="timeago "
+      
+      data-toggle="tooltip"
+      data-placement="bottom"
+      title="Asia/Shanghai"
+      >
+
+      Thursday PM.
+  <i class="unloaded"></i>
+</span>
+
+<!-- title="2024-02-01 22:31:00 +0800"-->
+
+                <!-- posted categories -->
+                
+                <i class="far fa-folder-open fa-fw"></i>
+                <span>
+                  
+                    Bigdata,
+                    Hadoop
+                </span>
+                
+            </div>
+            
+        </div>
+    </div>
+
+    <div class="post-preview">
+        <div class="d-flex justify-content-between pr-xl-2">
+            <h1><a href="/posts/Hadoop-Command/">Hadoop Command</a></h1>
+            
+        </div>
+        <!-- .post-content -->
+        <div class="post-content">
+            <p>
+                
+
+
+
+
+
+                hadoop的常用命令
+
+启动hadoop所有进程
+
+start-all.sh 
+
+
+等价于 start-dfs.sh + start-yarn.sh
+
+但是一般不推荐使用start-all.sh(因为开源框架中内部命令启动有很多问题)。
+
+单进程启动。
+sbin/start-dfs.sh
+
+sbin/hadoop-daemons.sh --config .. --hostname .. s...
+            </p>
+        </div>
+        <!-- .post-meta -->
+        <div class="post-meta text-muted d-flex">
+            <div class="mr-auto">
+                <!-- posted date -->
+                <i class="far fa-calendar fa-fw"></i>
+                
+
+
+
+<span class=""
+    data-ts="1706797800"
+    data-df="ll"
+    
+        data-toggle="tooltip"
+        data-placement="bottom"
+    >
+    Feb  1, 2024
+</span>
+
+                <!-- posted time ago -->
+                <i class="far fa-clock fa-fw"></i>
+                <span class="timeago "
+      
+      data-toggle="tooltip"
+      data-placement="bottom"
+      title="Asia/Shanghai"
+      >
+
+      Thursday PM.
+  <i class="unloaded"></i>
+</span>
+
+<!-- title="2024-02-01 22:30:00 +0800"-->
+
+                <!-- posted categories -->
+                
+                <i class="far fa-folder-open fa-fw"></i>
+                <span>
+                  
+                    Bigdata,
+                    Hadoop
                 </span>
                 
             </div>
@@ -907,378 +1282,6 @@ Spark 计算框架为了能够进行高并发和高吞吐的数据处理，封�
         </div>
     </div>
 
-    <div class="post-preview">
-        <div class="d-flex justify-content-between pr-xl-2">
-            <h1><a href="/posts/Spark-Deployment-Structure-Introduction/">Spark Deployment Structure Introduction</a></h1>
-            
-        </div>
-        <!-- .post-content -->
-        <div class="post-content">
-            <p>
-                
-
-
-
-
-
-                Spark Introduction
-
-Spark Summary
-
-  Spark 是一种由 Scala 语言开发的快速、通用、可扩展的大数据分析引擎
-  Spark Core 中提供了 Spark 最基础与最核心的功能
-  Spark SQL 是 Spark 用来操作结构化数据的组件。通过 Spark SQL，用户可以使用 SQL 或者 Apache Hive 版本的 SQL 方言（HQ...
-            </p>
-        </div>
-        <!-- .post-meta -->
-        <div class="post-meta text-muted d-flex">
-            <div class="mr-auto">
-                <!-- posted date -->
-                <i class="far fa-calendar fa-fw"></i>
-                
-
-
-
-<span class=""
-    data-ts="1675089000"
-    data-df="ll"
-    
-        data-toggle="tooltip"
-        data-placement="bottom"
-    >
-    Jan 30, 2023
-</span>
-
-                <!-- posted time ago -->
-                <i class="far fa-clock fa-fw"></i>
-                <span class="timeago "
-      
-      data-toggle="tooltip"
-      data-placement="bottom"
-      title="Asia/Shanghai"
-      >
-
-      Monday PM.
-  <i class="unloaded"></i>
-</span>
-
-<!-- title="2023-01-30 22:30:00 +0800"-->
-
-                <!-- posted categories -->
-                
-                <i class="far fa-folder-open fa-fw"></i>
-                <span>
-                  
-                    Bigdata,
-                    Spark
-                </span>
-                
-            </div>
-            
-        </div>
-    </div>
-
-    <div class="post-preview">
-        <div class="d-flex justify-content-between pr-xl-2">
-            <h1><a href="/posts/Data-Warehouse-Design/">Data Warehouse Design</a></h1>
-            
-        </div>
-        <!-- .post-content -->
-        <div class="post-content">
-            <p>
-                
-
-
-
-
-
-                数据仓库设计
-
-数据仓库分层规划
-
-  使数据体系更加清洗，简单化复杂问题（one data理论分层）
-  
-  ODS:
-  operation data store:业务系统的原始数据，未经处理的数据，放在HDFS以文件形式的存储，从HDFS原路径load(底层是剪切操作)到ODS层。
-  DWD:
-  data warehouse detail:基于维度建模理论进行构建，保存各业务过程...
-            </p>
-        </div>
-        <!-- .post-meta -->
-        <div class="post-meta text-muted d-flex">
-            <div class="mr-auto">
-                <!-- posted date -->
-                <i class="far fa-calendar fa-fw"></i>
-                
-
-
-
-<span class=""
-    data-ts="1674914400"
-    data-df="ll"
-    
-        data-toggle="tooltip"
-        data-placement="bottom"
-    >
-    Jan 28, 2023
-</span>
-
-                <!-- posted time ago -->
-                <i class="far fa-clock fa-fw"></i>
-                <span class="timeago "
-      
-      data-toggle="tooltip"
-      data-placement="bottom"
-      title="Asia/Shanghai"
-      >
-
-      Saturday PM.
-  <i class="unloaded"></i>
-</span>
-
-<!-- title="2023-01-28 22:00:00 +0800"-->
-
-                <!-- posted categories -->
-                
-                <i class="far fa-folder-open fa-fw"></i>
-                <span>
-                  
-                    Bigdata,
-                    DataWarehouse
-                </span>
-                
-            </div>
-            
-        </div>
-    </div>
-
-    <div class="post-preview">
-        <div class="d-flex justify-content-between pr-xl-2">
-            <h1><a href="/posts/Data-Warehouse-Model/">Data Warehouse Model</a></h1>
-            
-        </div>
-        <!-- .post-content -->
-        <div class="post-content">
-            <p>
-                
-
-
-
-
-
-                数据仓库介绍
-
-数据仓库
-
-  用于存储分析报告的数据系统
-    
-      并不产生数据（数据来自于外部系统） 也不消费数据（其结果开放给外部应用使用）
-    
-  
-  构建面向分析的集成化数据环境，分析结构提供决策
-  对比OLAP和OLTP
-    
-      各类型的数据库保存相关数据（关系型数据库是OLTP的典型应用） 但不会在数据库上直接分析数据
-      数据仓库是...
-            </p>
-        </div>
-        <!-- .post-meta -->
-        <div class="post-meta text-muted d-flex">
-            <div class="mr-auto">
-                <!-- posted date -->
-                <i class="far fa-calendar fa-fw"></i>
-                
-
-
-
-<span class=""
-    data-ts="1674912900"
-    data-df="ll"
-    
-        data-toggle="tooltip"
-        data-placement="bottom"
-    >
-    Jan 28, 2023
-</span>
-
-                <!-- posted time ago -->
-                <i class="far fa-clock fa-fw"></i>
-                <span class="timeago "
-      
-      data-toggle="tooltip"
-      data-placement="bottom"
-      title="Asia/Shanghai"
-      >
-
-      Saturday PM.
-  <i class="unloaded"></i>
-</span>
-
-<!-- title="2023-01-28 21:35:00 +0800"-->
-
-                <!-- posted categories -->
-                
-                <i class="far fa-folder-open fa-fw"></i>
-                <span>
-                  
-                    Bigdata,
-                    DataWarehouse
-                </span>
-                
-            </div>
-            
-        </div>
-    </div>
-
-    <div class="post-preview">
-        <div class="d-flex justify-content-between pr-xl-2">
-            <h1><a href="/posts/Data-Warehouse-DWS&ADS-Develop/">Data Warehouse DWS&ADS Develop</a></h1>
-            
-        </div>
-        <!-- .post-content -->
-        <div class="post-content">
-            <p>
-                
-
-
-
-
-
-                DWS层
-汇总数据层，由明细数据汇总而来的数据，基于上层的指标需求，构建公用的中间的统计结果，为了减少重复计算。
-
-设计过程
-
-  DWS层的设计参考指标体系。
-    
-      原子指标，派生指标，衍生指标
-    
-  
-  DWS层的数据存储格式为orc列式存储+snappy压缩。
-  DWS层表名的命名规范为dws_数据域_统计粒度_业务过程_统计周期（1d/nd/td）注：1d...
-            </p>
-        </div>
-        <!-- .post-meta -->
-        <div class="post-meta text-muted d-flex">
-            <div class="mr-auto">
-                <!-- posted date -->
-                <i class="far fa-calendar fa-fw"></i>
-                
-
-
-
-<span class=""
-    data-ts="1674797700"
-    data-df="ll"
-    
-        data-toggle="tooltip"
-        data-placement="bottom"
-    >
-    Jan 27, 2023
-</span>
-
-                <!-- posted time ago -->
-                <i class="far fa-clock fa-fw"></i>
-                <span class="timeago "
-      
-      data-toggle="tooltip"
-      data-placement="bottom"
-      title="Asia/Shanghai"
-      >
-
-      Friday PM.
-  <i class="unloaded"></i>
-</span>
-
-<!-- title="2023-01-27 13:35:00 +0800"-->
-
-                <!-- posted categories -->
-                
-                <i class="far fa-folder-open fa-fw"></i>
-                <span>
-                  
-                    Bigdata,
-                    DataWarehouse
-                </span>
-                
-            </div>
-            
-        </div>
-    </div>
-
-    <div class="post-preview">
-        <div class="d-flex justify-content-between pr-xl-2">
-            <h1><a href="/posts/Data-Warehouse-DWD-Develop/">Data Warehouse DWD Develop</a></h1>
-            
-        </div>
-        <!-- .post-content -->
-        <div class="post-content">
-            <p>
-                
-
-
-
-
-
-                DWD层
-
-DWD层设计要点
-
-  DWD层的设计依据是维度建模理论，该层存储维度模型的维度表（重点）
-  DWD层的数据存储格式为orc列式存储+snappy压缩
-    
-      DWD层表名的命名规范为dwd_数据域_表名_单分区全量增量标识（full/inc）
-      数据域：对数据进行纵向的分类，方便数据管理和使用，每一类称为一个域，通常是按照业务过程来划分数据域，业务过程...
-            </p>
-        </div>
-        <!-- .post-meta -->
-        <div class="post-meta text-muted d-flex">
-            <div class="mr-auto">
-                <!-- posted date -->
-                <i class="far fa-calendar fa-fw"></i>
-                
-
-
-
-<span class=""
-    data-ts="1674790500"
-    data-df="ll"
-    
-        data-toggle="tooltip"
-        data-placement="bottom"
-    >
-    Jan 27, 2023
-</span>
-
-                <!-- posted time ago -->
-                <i class="far fa-clock fa-fw"></i>
-                <span class="timeago "
-      
-      data-toggle="tooltip"
-      data-placement="bottom"
-      title="Asia/Shanghai"
-      >
-
-      Friday AM.
-  <i class="unloaded"></i>
-</span>
-
-<!-- title="2023-01-27 11:35:00 +0800"-->
-
-                <!-- posted categories -->
-                
-                <i class="far fa-folder-open fa-fw"></i>
-                <span>
-                  
-                    Bigdata,
-                    DataWarehouse
-                </span>
-                
-            </div>
-            
-        </div>
-    </div>
-
 </div> <!-- #post-list -->
 
 
@@ -1331,6 +1334,23 @@ DWD层设计要点
 
   
 
+    
+    
+    
+    
+    
+
+    
+
+    
+      <!-- show number -->
+      <li class="page-item ">
+        <a class="page-link btn-box-shadow" href="/page3/">3</a>
+      </li>
+    
+
+  
+
   <!-- right arrow -->
   
   <li class="page-item ">
@@ -1368,27 +1388,27 @@ DWD层设计要点
       
       
       
-      <li><a href="/posts/Git/">Git</a></li>
+      <li><a href="/posts/HDFS-ShellCmd&API/">HDFS ShellCmd&API</a></li>
       
       
       
       
-      <li><a href="/posts/Data-Warehouse-Design/">Data Warehouse Design</a></li>
+      <li><a href="/posts/HDFS-DataNode/">HDFS DataNode</a></li>
       
       
       
       
-      <li><a href="/posts/Data-Warehouse-Model/">Data Warehouse Model</a></li>
+      <li><a href="/posts/HDFS-NameNode&SecondaryNameNode/">HDFS NameNode&SecondaryNameNode</a></li>
       
       
       
       
-      <li><a href="/posts/Data-Warehouse-DWS&ADS-Develop/">Data Warehouse DWS&ADS Develop</a></li>
+      <li><a href="/posts/HDFS-Read&Write-Process/">Read&Write Process</a></li>
       
       
       
       
-      <li><a href="/posts/Data-Warehouse-DWD-Develop/">Data Warehouse DWD Develop</a></li>
+      <li><a href="/posts/HDFS-Structure/">Hadoop HDFS Structure</a></li>
       
     </ul>
   </div> <!-- #access-lastmod -->
@@ -1433,6 +1453,35 @@ DWD层设计要点
     
     
     
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
   
     
     
@@ -1467,10 +1516,6 @@ DWD层设计要点
     
     
     
-      
-        
-        
-
   
     
     
@@ -1496,6 +1541,25 @@ DWD层设计要点
     
     
       
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
     
   
     
@@ -1506,6 +1570,51 @@ DWD层设计要点
         
         
 
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
   
     
     
@@ -1555,10 +1664,16 @@ DWD层设计要点
     <a class="post-tag" href="/tags/data-warehouse/">data warehouse</a>
     
     
+    <a class="post-tag" href="/tags/hdfs/">hdfs</a>
+    
+    
     <a class="post-tag" href="/tags/spark/">spark</a>
     
     
     <a class="post-tag" href="/tags/markdown/">markdown</a>
+    
+    
+    <a class="post-tag" href="/tags/hadoop/">hadoop</a>
     
     
     <a class="post-tag" href="/tags/java/">Java</a>
@@ -1629,6 +1744,35 @@ DWD层设计要点
     
     
     
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
   
     
     
@@ -1663,10 +1807,6 @@ DWD层设计要点
     
     
     
-      
-        
-        
-
   
     
     
@@ -1692,6 +1832,25 @@ DWD层设计要点
     
     
       
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
     
   
     
@@ -1702,6 +1861,51 @@ DWD层设计要点
         
         
 
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
   
     
     
@@ -1751,10 +1955,16 @@ DWD层设计要点
     <a class="post-tag" href="/tags/data-warehouse/">data warehouse</a>
     
     
+    <a class="post-tag" href="/tags/hdfs/">hdfs</a>
+    
+    
     <a class="post-tag" href="/tags/spark/">spark</a>
     
     
     <a class="post-tag" href="/tags/markdown/">markdown</a>
+    
+    
+    <a class="post-tag" href="/tags/hadoop/">hadoop</a>
     
     
     <a class="post-tag" href="/tags/java/">Java</a>

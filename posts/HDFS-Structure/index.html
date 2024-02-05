@@ -1,0 +1,2325 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+<html lang="en" 
+    
+ xmlns="http://www.w3.org/1999/html">
+    <head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  
+    
+      <meta name="pv-proxy-endpoint" content="">
+    
+    
+  
+
+  
+
+  
+
+  
+  <!-- Begin Jekyll SEO tag v2.6.1 -->
+<meta name="generator" content="Jekyll v3.9.0" />
+<meta property="og:title" content="Hadoop HDFS Structure" />
+<meta name="author" content="Lynn Chen" />
+<meta property="og:locale" content="en" />
+<meta name="description" content="NameNode：master 主管管理者 管理HDFS的名称空间（原数据） 配置副本策略 设置不同数据的副本的数量 管理数据块的映射信息 比较大的文件分块存储，而且块和块之间的存储没有关系 处理客户端的读写请求" />
+<meta property="og:description" content="NameNode：master 主管管理者 管理HDFS的名称空间（原数据） 配置副本策略 设置不同数据的副本的数量 管理数据块的映射信息 比较大的文件分块存储，而且块和块之间的存储没有关系 处理客户端的读写请求" />
+<link rel="canonical" href="http://localhost:4000/posts/HDFS-Structure/" />
+<meta property="og:url" content="http://localhost:4000/posts/HDFS-Structure/" />
+<meta property="og:site_name" content="Blingblogs" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2024-02-01T22:31:00+08:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Hadoop HDFS Structure" />
+<meta name="twitter:site" content="@invalid" />
+<meta name="twitter:creator" content="@sechenbling" />
+<meta name="google-site-verification" content="google_meta_tag_verification" />
+<script type="application/ld+json">
+{"author":{"@type":"Person","name":"Lynn Chen"},"@type":"BlogPosting","url":"http://localhost:4000/posts/HDFS-Structure/","headline":"Hadoop HDFS Structure","dateModified":"2024-02-01T22:31:00+08:00","datePublished":"2024-02-01T22:31:00+08:00","description":"NameNode：master 主管管理者 管理HDFS的名称空间（原数据） 配置副本策略 设置不同数据的副本的数量 管理数据块的映射信息 比较大的文件分块存储，而且块和块之间的存储没有关系 处理客户端的读写请求","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/HDFS-Structure/"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+  
+
+  <title>Hadoop HDFS Structure | Blingblogs
+  </title>
+
+  
+
+<link rel="shortcut icon" href="/assets/img/favicons/favicon.ico" type="image/x-icon">
+<link rel="icon" href="/assets/img/favicons/favicon.ico" type="image/x-icon">
+
+<link rel="apple-touch-icon" href="/assets/img/favicons/apple-icon.png">
+<link rel="apple-touch-icon" href="/assets/img/favicons/apple-icon-precomposed.png">
+<link rel="apple-touch-icon" sizes="57x57" href="/assets/img/favicons/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/assets/img/favicons/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/assets/img/favicons/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/assets/img/favicons/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/assets/img/favicons/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/assets/img/favicons/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/assets/img/favicons/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/assets/img/favicons/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicons/apple-icon-180x180.png">
+
+<link rel="icon" type="image/png" sizes="192x192"  href="/assets/img/favicons/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/img/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/assets/img/favicons/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/assets/img/favicons/favicon-16x16.png">
+
+<link rel="manifest" href="/assets/img/favicons/manifest.json">
+<meta name='msapplication-config' content='/assets/img/favicons/browserconfig.xml'>
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/assets/img/favicons/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+
+
+  
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com" >
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" >
+    
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" crossorigin>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com" >
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" >
+    
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" >
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" >
+    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato&family=Source+Sans+Pro:wght@400;600;700;900&display=swap">
+  
+
+  <!-- GA -->
+  
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/css/bootstrap.min.css">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="/assets/lib/fontawesome/css/all.min.css">
+
+  <link rel="stylesheet" href="/assets/css/style.css">
+
+  
+  <link rel="stylesheet" href="/assets/lib/bootstrap-toc-1.0.1/bootstrap-toc.min.css">
+  
+
+  
+  <!-- Manific Popup -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/magnific-popup@1/dist/magnific-popup.min.css">
+  
+
+  <!-- JavaScript -->
+
+  <script src="/assets/lib/jquery-3.6.0/jquery.min.js"></script>
+
+  
+  <!--
+  Switch the mode between dark and light.
+-->
+
+<script type="text/javascript">
+    class ModeToggle {
+        static get MODE_KEY() {
+            return "mode";
+        }
+
+        static get MODE_ATTR() {
+            return "data-mode";
+        }
+
+        static get DARK_MODE() {
+            return "dark";
+        }
+
+        static get LIGHT_MODE() {
+            return "light";
+        }
+
+        static get ID() {
+            return "mode-toggle";
+        }
+
+        constructor() {
+            if (this.hasMode) {
+                if (this.isDarkMode) {
+                    if (!this.isSysDarkPrefer) {
+                        this.setDark();
+                    }
+                } else {
+                    if (this.isSysDarkPrefer) {
+                        this.setLight();
+                    }
+                }
+            }
+
+            let self = this;
+
+            /* always follow the system prefers */
+            this.sysDarkPrefers.addEventListener("change", () => {
+                if (self.hasMode) {
+                    if (self.isDarkMode) {
+                        if (!self.isSysDarkPrefer) {
+                            self.setDark();
+                        }
+
+                    } else {
+                        if (self.isSysDarkPrefer) {
+                            self.setLight();
+                        }
+                    }
+
+                    self.clearMode();
+                }
+
+                self.notify();
+
+            });
+
+        } /* constructor() */
+
+        get sysDarkPrefers() {
+            return window.matchMedia("(prefers-color-scheme: dark)");
+        }
+
+        get isSysDarkPrefer() {
+            return this.sysDarkPrefers.matches;
+        }
+
+        get isDarkMode() {
+            return this.mode === ModeToggle.DARK_MODE;
+        }
+
+        get isLightMode() {
+            return this.mode === ModeToggle.LIGHT_MODE;
+        }
+
+        get hasMode() {
+            return this.mode != null;
+        }
+
+        get mode() {
+            return sessionStorage.getItem(ModeToggle.MODE_KEY);
+        }
+
+        /* get the current mode on screen */
+        get modeStatus() {
+            if (this.isDarkMode
+                || (!this.hasMode && this.isSysDarkPrefer)) {
+                return ModeToggle.DARK_MODE;
+            } else {
+                return ModeToggle.LIGHT_MODE;
+            }
+        }
+
+        setDark() {
+            $('html').attr(ModeToggle.MODE_ATTR, ModeToggle.DARK_MODE);
+            document.getElementById("mode-toggle-btn").setAttribute("class","fa-regular fa-moon");
+            sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.DARK_MODE);
+        }
+
+        setLight() {
+            $('html').attr(ModeToggle.MODE_ATTR, ModeToggle.LIGHT_MODE);
+            document.getElementById("mode-toggle-btn")
+                .setAttribute("class","fa-regular fa-sun");
+            sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.LIGHT_MODE);
+        }
+
+        clearMode() {
+            $('html').removeAttr(ModeToggle.MODE_ATTR);
+            document.getElementById("mode-toggle-btn")
+                .setAttribute("class","fa-regular fa-sun");
+            sessionStorage.removeItem(ModeToggle.MODE_KEY);
+        }
+
+        /* Notify another plugins that the theme mode has changed */
+        notify() {
+            window.postMessage({
+                direction: ModeToggle.ID,
+                message: this.modeStatus
+            }, "*");
+        }
+
+    } /* ModeToggle */
+
+    const toggle = new ModeToggle();
+
+    function flipMode() {
+        if (toggle.hasMode) {
+            if (toggle.isSysDarkPrefer) {
+                if (toggle.isLightMode) {
+                    toggle.clearMode();
+                } else {
+                    toggle.setLight();
+                }
+
+            } else {
+                if (toggle.isDarkMode) {
+                    toggle.clearMode();
+                } else {
+                    toggle.setDark();
+                }
+            }
+
+        } else {
+            if (toggle.isSysDarkPrefer) {
+                toggle.setLight();
+            } else {
+                toggle.setDark();
+            }
+        }
+
+        toggle.notify();
+
+    } /* flipMode() */
+
+</script>
+
+
+  
+</head>
+
+<!--  &lt;!&ndash; jsDelivr CDN &ndash;&gt;-->
+<!--  <link rel="preconnect" href="cdn.jsdelivr.net">-->
+<!--  <link rel="dns-prefetch" href="cdn.jsdelivr.net">-->
+
+<!--  &lt;!&ndash; Bootstrap &ndash;&gt;-->
+<!--  <link rel="stylesheet"-->
+<!--    href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"-->
+<!--    integrity="sha256-LA89z+k9fjgMKQ/kq4OO2Mrf8VltYml/VES+Rg0fh20=" crossorigin="anonymous">-->
+
+<!--  <link rel="stylesheet" href="/assets/css/style.css">-->
+<!--  &lt;!&ndash; Font Awesome &ndash;&gt;-->
+<!--  <link rel="stylesheet" type="text/css" href="/assets/lib/fontawesome/css/all.css">-->
+
+<!--  &lt;!&ndash; JavaScripts &ndash;&gt;-->
+
+<!--  <script src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>-->
+
+<!--  <script async-->
+<!--    src="https://cdn.jsdelivr.net/combine/npm/popper.js@1.15.0,npm/bootstrap@4/dist/js/bootstrap.min.js"></script>-->
+
+<!--  -->
+<!--    <!--
+  Switch the mode between dark and light.
+-->
+
+<script type="text/javascript">
+    class ModeToggle {
+        static get MODE_KEY() {
+            return "mode";
+        }
+
+        static get MODE_ATTR() {
+            return "data-mode";
+        }
+
+        static get DARK_MODE() {
+            return "dark";
+        }
+
+        static get LIGHT_MODE() {
+            return "light";
+        }
+
+        static get ID() {
+            return "mode-toggle";
+        }
+
+        constructor() {
+            if (this.hasMode) {
+                if (this.isDarkMode) {
+                    if (!this.isSysDarkPrefer) {
+                        this.setDark();
+                    }
+                } else {
+                    if (this.isSysDarkPrefer) {
+                        this.setLight();
+                    }
+                }
+            }
+
+            let self = this;
+
+            /* always follow the system prefers */
+            this.sysDarkPrefers.addEventListener("change", () => {
+                if (self.hasMode) {
+                    if (self.isDarkMode) {
+                        if (!self.isSysDarkPrefer) {
+                            self.setDark();
+                        }
+
+                    } else {
+                        if (self.isSysDarkPrefer) {
+                            self.setLight();
+                        }
+                    }
+
+                    self.clearMode();
+                }
+
+                self.notify();
+
+            });
+
+        } /* constructor() */
+
+        get sysDarkPrefers() {
+            return window.matchMedia("(prefers-color-scheme: dark)");
+        }
+
+        get isSysDarkPrefer() {
+            return this.sysDarkPrefers.matches;
+        }
+
+        get isDarkMode() {
+            return this.mode === ModeToggle.DARK_MODE;
+        }
+
+        get isLightMode() {
+            return this.mode === ModeToggle.LIGHT_MODE;
+        }
+
+        get hasMode() {
+            return this.mode != null;
+        }
+
+        get mode() {
+            return sessionStorage.getItem(ModeToggle.MODE_KEY);
+        }
+
+        /* get the current mode on screen */
+        get modeStatus() {
+            if (this.isDarkMode
+                || (!this.hasMode && this.isSysDarkPrefer)) {
+                return ModeToggle.DARK_MODE;
+            } else {
+                return ModeToggle.LIGHT_MODE;
+            }
+        }
+
+        setDark() {
+            $('html').attr(ModeToggle.MODE_ATTR, ModeToggle.DARK_MODE);
+            document.getElementById("mode-toggle-btn").setAttribute("class","fa-regular fa-moon");
+            sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.DARK_MODE);
+        }
+
+        setLight() {
+            $('html').attr(ModeToggle.MODE_ATTR, ModeToggle.LIGHT_MODE);
+            document.getElementById("mode-toggle-btn")
+                .setAttribute("class","fa-regular fa-sun");
+            sessionStorage.setItem(ModeToggle.MODE_KEY, ModeToggle.LIGHT_MODE);
+        }
+
+        clearMode() {
+            $('html').removeAttr(ModeToggle.MODE_ATTR);
+            document.getElementById("mode-toggle-btn")
+                .setAttribute("class","fa-regular fa-sun");
+            sessionStorage.removeItem(ModeToggle.MODE_KEY);
+        }
+
+        /* Notify another plugins that the theme mode has changed */
+        notify() {
+            window.postMessage({
+                direction: ModeToggle.ID,
+                message: this.modeStatus
+            }, "*");
+        }
+
+    } /* ModeToggle */
+
+    const toggle = new ModeToggle();
+
+    function flipMode() {
+        if (toggle.hasMode) {
+            if (toggle.isSysDarkPrefer) {
+                if (toggle.isLightMode) {
+                    toggle.clearMode();
+                } else {
+                    toggle.setLight();
+                }
+
+            } else {
+                if (toggle.isDarkMode) {
+                    toggle.clearMode();
+                } else {
+                    toggle.setDark();
+                }
+            }
+
+        } else {
+            if (toggle.isSysDarkPrefer) {
+                toggle.setLight();
+            } else {
+                toggle.setDark();
+            }
+        }
+
+        toggle.notify();
+
+    } /* flipMode() */
+
+</script>
+
+-->
+<!--  -->
+
+<!--</head>-->
+
+    <body data-spy="scroll" data-target="#toc" data-topbar-visible="true">
+        <div id="sidebar" class="d-flex flex-column align-items-end">
+    <!-- profile-wrapper -->
+    <div class="profile-wrapper text-center">
+        <!-- avatar settings -->
+        <div id="avatar">
+            <a href="/" class="mx-auto">
+                
+                
+                <img src="/assets/img/sample/avatar.png" alt="avatar" onerror="this.style.display='none'">
+                
+            </a>
+        </div>
+        <!-- site-title settings -->
+        <div class="site-title">
+            <a href="/">Blingblogs</a>
+        </div>
+        <!-- site-subtitle settings -->
+        <div class="site-subtitle">Happy Everyday</div>
+    </div>
+
+    <ul class="w-100">
+        <!-- home -->
+        <li class="nav-item">
+        <a href="/" class="nav-link">
+            <i class="fa-fw fas fa-home ml-xl-3 mr-xl-3 unloaded"></i>
+            <span>HOME</span>
+        </a>
+        </li>
+        <!-- the real tabs -->
+        
+        
+        <li class="nav-item">
+        <a href="/tabs/timeline.html" class="nav-link">
+            <i class="fa-fw fas fa-timeline ml-xl-3 mr-xl-3 unloaded"></i>
+            
+
+            <span>TIMELINE</span>
+        </a>
+        </li> <!-- .nav-item -->
+        
+        <li class="nav-item">
+        <a href="/tabs/categories.html" class="nav-link">
+            <i class="fa-fw fas fa-folder-open ml-xl-3 mr-xl-3 unloaded"></i>
+            
+
+            <span>CATEGORIES</span>
+        </a>
+        </li> <!-- .nav-item -->
+        
+        <li class="nav-item">
+        <a href="/tabs/tags.html" class="nav-link">
+            <i class="fa-fw fas fa-tag ml-xl-3 mr-xl-3 unloaded"></i>
+            
+
+            <span>TAGS</span>
+        </a>
+        </li> <!-- .nav-item -->
+        
+        <li class="nav-item">
+        <a href="/tabs/plans.html" class="nav-link">
+            <i class="fa-fw fas fa-paper-plane ml-xl-3 mr-xl-3 unloaded"></i>
+            
+
+            <span>PLANS</span>
+        </a>
+        </li> <!-- .nav-item -->
+        
+        <li class="nav-item">
+        <a href="/tabs/about.html" class="nav-link">
+            <i class="fa-fw fas fa-info-circle ml-xl-3 mr-xl-3 unloaded"></i>
+            
+
+            <span>ABOUT</span>
+        </a>
+        </li> <!-- .nav-item -->
+        
+    </ul> <!-- ul.nav.flex-column -->
+
+    <div class="sidebar-bottom mt-auto d-flex flex-wrap justify-content-center align-items-center">
+        
+            <button class="mode-toggle btn" aria-label="Switch Mode">
+                <i id="mode-toggle-btn" class="fa-regular fa-sun"></i>
+            </button>
+            
+                <span class="icon-border"></span>
+            
+        
+
+        
+            
+        
+        <a href="https://github.com/sechenbling" aria-label="github"
+           target="_blank" rel="noopener" >
+            <i class="fab fa-github"></i>
+        </a>
+        
+        
+            
+        
+        <a href="https://space.bilibili.com/1" aria-label="bilibili"
+           target="_blank" rel="noopener" >
+            <i class="fa-brands fa-bilibili"></i>
+        </a>
+        
+        
+            
+        
+        <a href="https://twitter.com/invalid" aria-label="twitter"
+           target="_blank" rel="noopener" >
+            <i class="fab fa-twitter"></i>
+        </a>
+        
+        
+            
+        
+        <a href="
+                    javascript:location.href = 'mailto:' + ['sechenblingbling','gmail.com'].join('@')" aria-label="email"
+           >
+            <i class="fas fa-envelope"></i>
+        </a>
+        
+        
+    </div> <!-- .sidebar-bottom -->
+</div>
+        <div id="topbar-wrapper">
+    <div id="topbar" class="container d-flex align-items-center justify-content-between h-100 pl-3 pr-3 pl-md-4 pr-md-4">
+        <span id="breadcrumb">
+        
+        
+          
+            
+              <span>
+                <a href="/">
+                  Home
+                </a>
+              </span>
+            
+          
+            
+          
+            
+              
+                <span>Hadoop HDFS Structure</span>
+              
+            
+          
+        
+        </span><!-- end of #breadcrumb -->
+
+        <i id="sidebar-trigger" class="fas fa-bars fa-fw"></i>
+
+        <div id="topbar-title">
+            Post
+        </div>
+
+        <i id="search-trigger" class="fas fa-search fa-fw"></i>
+        <span id="search-wrapper" class="align-items-center">
+            <i class="fas fa-search fa-fw"></i>
+            <input class="form-control" id="search-input" type="search"
+                 aria-label="search" autocomplete="off" placeholder="Search...">
+            <i class="fa fa-times-circle fa-fw" id="search-cleaner"></i>
+        </span>
+
+        <span id="search-cancel" >Cancel</span>
+
+    </div>
+
+</div>
+
+
+        <div id="main-wrapper" class="d-flex justify-content-center">
+            <div id="main" class="container pl-xl-4 pr-xl-4">
+                
+
+
+
+
+
+<div class="row">
+    <!-- core: use for post list -->
+    <div id="core-wrapper" class="col-12 col-lg-11 col-xl-9 pr-xl-4">
+        <div class="post pl-1 pr-1 pl-md-2 pr-md-2">
+            
+            
+                
+                
+                    
+
+
+
+
+
+  <!-- Change the icon of checkbox -->
+
+
+<!-- images -->
+
+
+
+  
+  
+
+  
+    
+      
+      
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+    
+
+    
+      
+      
+
+      
+      
+
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+
+      
+    
+
+    
+      
+
+  <!-- Add CDN URL -->
+        
+
+  <!-- Add image path -->
+        
+
+        
+        
+
+      
+
+  <!-- lazy-load images <https://github.com/ApoorvSaxena/lozad.js#usage> -->
+
+      
+
+    
+
+  <!-- Add SVG placehoder to prevent layout reflow -->
+
+    
+
+  <!-- Bypass the HTML-proofer test -->
+    
+
+    
+
+  
+
+  
+
+
+
+  <!-- Add header for code snippets -->
+
+
+
+<!-- Create heading anchors -->
+
+
+
+
+  
+  
+
+  
+    
+    
+
+    
+      
+        
+        
+      
+
+      
+      
+
+      
+      
+      
+
+      
+
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+
+    
+      
+
+      
+      
+
+      
+      
+      
+
+      
+
+    
+
+    
+
+  
+
+  
+  
+
+  
+
+  
+  
+
+  
+
+  
+  
+
+  
+
+
+
+
+<!-- Wrap prompt element of blockquote with the <div> tag -->
+
+
+
+
+
+
+<!-- return -->
+<h1 data-toc-skip>Hadoop HDFS Structure</h1>
+
+<div class="post-meta text-muted">
+    <!-- published date -->
+    <span>
+      Posted on
+      
+
+
+
+<span class=""
+    data-ts="1706797860"
+    data-df="ll"
+    
+        data-toggle="tooltip"
+        data-placement="bottom"
+    >
+    Feb  1, 2024
+</span>
+    </span>
+
+    <!-- lastmod date -->
+    
+    <span>
+      Updated on
+      
+
+
+
+<span class=""
+    data-ts="1706797860"
+    data-df="ll"
+    
+        data-toggle="tooltip"
+        data-placement="bottom"
+    >
+    Feb  1, 2024
+</span>
+    </span>
+    
+
+    
+
+    <div class="d-flex justify-content-between">
+        <span>
+          
+
+          By
+          <span>
+          
+            
+              <a href="https://github.com/sechenbling/">Lynn Chen</a>
+              
+            
+          
+          </span>
+        </span>
+    </div>
+</div>
+
+<div class="post-content">
+    <h2 id="namenodemaster-主管管理者"><span class="mr-2">NameNode：master 主管管理者</span><a href="#namenodemaster-主管管理者" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+<ul>
+  <li>管理HDFS的名称空间（原数据）</li>
+  <li>配置副本策略
+    <ul>
+      <li>设置不同数据的副本的数量</li>
+    </ul>
+  </li>
+  <li>管理数据块的映射信息
+    <ul>
+      <li>比较大的文件分块存储，而且块和块之间的存储没有关系</li>
+    </ul>
+  </li>
+  <li>处理客户端的读写请求</li>
+</ul>
+
+<h2 id="datanode"><span class="mr-2">DataNode</span><a href="#datanode" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+<p>就是slave worker，NameNode下达命令由DataNode执行实际的操作</p>
+<ul>
+  <li>存储实际的数据块</li>
+  <li>执行数据块的读写操作</li>
+</ul>
+
+<p><img data-src="/blog_imgs/hadoop/hdfs/img.png" alt="img.png" data-proofer-ignore></p>
+
+<h2 id="secondarynamenode-2nn"><span class="mr-2">SecondaryNameNode 2NN</span><a href="#secondarynamenode-2nn" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+<ul>
+  <li>并非NameNode的热备，当NN挂掉的时候它并不能马上替换NN提供服务</li>
+  <li>辅助NN分担工作：比如定期合并镜像文件和编辑日志(Fsimage&amp;Edits)并推送给NN</li>
+  <li>紧急情况下可以恢复部分数据（不是所有数据都给了2NN）</li>
+</ul>
+
+<h2 id="client-客户端"><span class="mr-2">Client 客户端</span><a href="#client-客户端" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+<ul>
+  <li>文件切分：文件上传HDFS时，Client将文件切分成一个一个的Block后上传</li>
+  <li>与NN交互获取文件位置</li>
+  <li>与DN交互读写数据</li>
+  <li>提供一些命令来管理HDFS：比如NN格式化</li>
+  <li>通过一些命令来访问HDFS：进行增删改查</li>
+</ul>
+
+<h2 id="文件块大小"><span class="mr-2">文件块大小：</span><a href="#文件块大小" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2>
+<p>只是指占用上限，如果一个文件小于128M其占用磁盘就是其本身</p>
+<ul>
+  <li>Hadoop2，3是128M</li>
+  <li>Hadoop1是64M</li>
+  <li>找到块的时间是传输块时间的1%最佳</li>
+  <li>块大小设置
+    <ul>
+      <li>块太小，会增加寻址时间，程序一直在找块的开始位置（块数量多了）</li>
+      <li>块太大，从磁盘的传输时间会明显大于定位这个块开始位置所需的时间，在处理这块数据时会非常慢</li>
+      <li>块大小设置:主要取决于磁盘传输速率</li>
+    </ul>
+  </li>
+</ul>
+
+
+</div>
+
+<div class="post-tail-wrapper text-muted">
+
+    <!-- categories -->
+    
+    <div class="post-meta mb-3">
+        <i class="far fa-folder-open fa-fw mr-1"></i>
+        
+        <a href='/categories/bigdata/'>Bigdata</a>,
+        <a href='/categories/hadoop/'>Hadoop</a>
+    </div>
+    
+
+    <!-- tags -->
+    
+    <div class="post-tags">
+        <i class="fa fa-tags fa-fw mr-1"></i>
+        
+        <a href="/tags/hdfs/"
+           class="post-tag no-text-decoration">hdfs</a>
+        
+    </div>
+    
+
+    <div class="post-tail-bottom
+    d-flex justify-content-between align-items-center mt-3 pt-5 pb-2">
+        <div class="license-wrapper">
+
+            
+
+            
+
+            This post is licensed under 
+            <a href="https://creativecommons.org/licenses/by/4.0/">
+                CC BY 4.0
+            </a>
+             by the author.
+
+            
+        </div>
+
+        <div class="share-wrapper">
+  <span class="share-label text-muted mr-1">Share</span>
+  <span class="share-icons">
+    
+    
+
+    
+      
+        <a href="http://connect.qq.com/widget/shareqq/index.html?title=Hadoop HDFS Structure - Blingblogs&url=http://localhost:4000/posts/HDFS-Structure/" data-toggle="tooltip" data-placement="top"
+          title="QQ" target="_blank" rel="noopener" aria-label="QQ">
+          <i class="fa-fw fab fa-qq" style="color:#AEB6BF"></i>
+        </a>
+    
+      
+        <a href="https://open.weixin.qq.com/sdk/report" data-toggle="tooltip" data-placement="top"
+          title="WeChat" target="_blank" rel="noopener" aria-label="WeChat">
+          <i class="fa-fw fab fa-weixin" style="color:#AEB6BF"></i>
+        </a>
+    
+      
+        <a href="https://t.bilibili.com/" data-toggle="tooltip" data-placement="top"
+          title="Bilibili" target="_blank" rel="noopener" aria-label="Bilibili">
+          <i class="fa-fw fa-brands fa-bilibili" style="color:#AEB6BF"></i>
+        </a>
+    
+      
+        <a href="http://service.weibo.com/share/share.php?title=Hadoop HDFS Structure - Blingblogs&url=http://localhost:4000/posts/HDFS-Structure/" data-toggle="tooltip" data-placement="top"
+          title="Weibo" target="_blank" rel="noopener" aria-label="Weibo">
+          <i class="fa-fw fab fa-weibo" style="color:#AEB6BF"></i>
+        </a>
+    
+      
+        <a href="https://www.linkedin.com/sharing/share-offsite/?url=http://localhost:4000/posts/HDFS-Structure/" data-toggle="tooltip" data-placement="top"
+          title="Linkedin" target="_blank" rel="noopener" aria-label="Linkedin">
+          <i class="fa-fw fab fa-linkedin" style="color:#AEB6BF"></i>
+        </a>
+    
+      
+        <a href="https://twitter.com/intent/tweet?text=Hadoop HDFS Structure - Blingblogs&url=http://localhost:4000/posts/HDFS-Structure/" data-toggle="tooltip" data-placement="top"
+          title="Twitter" target="_blank" rel="noopener" aria-label="Twitter">
+          <i class="fa-fw fab fa-twitter" style="color:#AEB6BF"></i>
+        </a>
+    
+
+    <i class="fa-fw fas fa-link small" onclick="copyLink()"
+        data-toggle="tooltip" data-placement="top" title="Copy link" style="color:#AEB6BF"></i>
+
+  </span>
+</div>
+
+
+    </div><!-- .post-tail-bottom -->
+
+</div><!-- div.post-tail-wrapper -->
+
+                
+            
+            
+        </div>
+    </div>
+
+    <!-- panel: use for update list and tags -->
+    <div id="panel-wrapper" class="col-xl-3 pl-2 text-muted">
+        <div class="access">
+            
+
+
+
+
+
+
+
+
+  <div id="access-lastmod" class="post">
+    <div class="panel-heading">Recently Updated</div>
+    <ul class="post-content pl-0 pb-1 ml-1 mt-2">
+      
+      
+      
+      
+      <li><a href="/posts/HDFS-ShellCmd&API/">HDFS ShellCmd&API</a></li>
+      
+      
+      
+      
+      <li><a href="/posts/HDFS-DataNode/">HDFS DataNode</a></li>
+      
+      
+      
+      
+      <li><a href="/posts/HDFS-NameNode&SecondaryNameNode/">HDFS NameNode&SecondaryNameNode</a></li>
+      
+      
+      
+      
+      <li><a href="/posts/HDFS-Read&Write-Process/">Read&Write Process</a></li>
+      
+      
+      
+      
+      <li><a href="/posts/HDFS-Structure/">Hadoop HDFS Structure</a></li>
+      
+    </ul>
+  </div> <!-- #access-lastmod -->
+
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+
+
+<div id="access-tags">
+  <div class="panel-heading">Other Trending Tags</div>
+  <div class="d-flex flex-wrap mt-3 mb-1 mr-3">
+
+    
+    
+    <a class="post-tag" href="/tags/data-warehouse/">data warehouse</a>
+    
+    
+    <a class="post-tag" href="/tags/hdfs/">hdfs</a>
+    
+    
+    <a class="post-tag" href="/tags/spark/">spark</a>
+    
+    
+    <a class="post-tag" href="/tags/markdown/">markdown</a>
+    
+    
+    <a class="post-tag" href="/tags/hadoop/">hadoop</a>
+    
+    
+    <a class="post-tag" href="/tags/java/">Java</a>
+    
+    
+    <a class="post-tag" href="/tags/logs/">logs</a>
+    
+    
+    <a class="post-tag" href="/tags/update/">update</a>
+    
+
+  </div>
+</div>
+
+
+        </div>
+        
+            
+            
+
+
+
+<!-- BS-toc.js will be loaded at medium priority -->
+<script src="/assets/lib/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script>
+
+<div id="toc-wrapper" class="pl-0 pr-4 mb-5">
+  <div class="panel-heading pl-3 pt-2 mb-2">Contents</div>
+  <nav id="toc" data-toggle="toc"></nav>
+</div>
+
+
+        
+    </div>
+</div>
+
+<!-- tail -->
+
+<div class="row">
+    <div id="tail-wrapper" class="col-12 col-lg-11 col-xl-9 pl-3 pr-3 pr-xl-4 mt-5">
+        
+            
+            <!--
+ Recommend the other 3 posts according to the tags and categories of the current post,
+ if the number is not enough, use the other latest posts to supplement.
+-->
+
+<!-- The total size of related posts  -->
+
+
+<!-- An random integer that bigger than 0  -->
+
+
+<!-- Equals to TAG_SCORE / {max_categories_hierarchy}  -->
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+
+<!-- Fill with the other newlest posts  -->
+
+
+
+
+
+<div id="related-posts" class="mb-2 mb-sm-4">
+  <h3 class="pt-2 mb-4 ml-1"
+      data-toc-skip>Related Reading</h3>
+  <div class="card-deck mb-4">
+    
+    
+    
+    <div class="card">
+      <a href="/posts/HDFS-NameNode&SecondaryNameNode/">
+        <div class="card-body">
+          
+
+
+
+<em class="small"
+    data-ts="1706797980"
+    data-df="ll"
+    >
+    Feb  1, 2024
+</em>
+          <h3 class="pt-0 mt-1 mb-3" data-toc-skip>HDFS NameNode&SecondaryNameNode</h3>
+          <div class="text-muted small">
+            <p>
+              
+
+
+
+
+
+              
+  
+    fslmage 镜像文件：存储数据
+HDFS文件系统元数据的一个永久性的检查点，其中包含HDFS文件系统的所有目录和文件inode的序列化信息。
+  
+  
+    Edits 记录变化的步骤
+存放HDFS文件系统的所有更新操作的路径，文件系统客户端执行的所有写操作首先会被记录到Edits文件当中
+    
+      seen_txid:记录当前最新的Edits(即最后一个...
+            </p>
+          </div>
+        </div>
+      </a>
+    </div>
+    
+    
+    
+    <div class="card">
+      <a href="/posts/HDFS-Read&Write-Process/">
+        <div class="card-body">
+          
+
+
+
+<em class="small"
+    data-ts="1706797980"
+    data-df="ll"
+    >
+    Feb  1, 2024
+</em>
+          <h3 class="pt-0 mt-1 mb-3" data-toc-skip>Read&Write Process</h3>
+          <div class="text-muted small">
+            <p>
+              
+
+
+
+
+
+              写入数据的流程：
+
+  客户端创建分布式文件系统DistributedFileSystem
+  向NameNode请求上传文件
+    
+      NameNode检查权限
+      NameNode检查目录结构（目录是否存在）
+    
+  
+  NameNode响应可以上传文件
+  客户端请求上传第一个Block(0-128M)，请求NameNode返回DataNode
+  Name...
+            </p>
+          </div>
+        </div>
+      </a>
+    </div>
+    
+    
+    
+    <div class="card">
+      <a href="/posts/HDFS-DataNode/">
+        <div class="card-body">
+          
+
+
+
+<em class="small"
+    data-ts="1706798040"
+    data-df="ll"
+    >
+    Feb  1, 2024
+</em>
+          <h3 class="pt-0 mt-1 mb-3" data-toc-skip>HDFS DataNode</h3>
+          <div class="text-muted small">
+            <p>
+              
+
+
+
+
+
+              DataNode
+
+
+
+
+            </p>
+          </div>
+        </div>
+      </a>
+    </div>
+    
+  </div> <!-- .card-deck -->
+</div> <!-- #related-posts -->
+
+
+        
+            
+            <!--
+  Navigation buttons at the bottom of the post.
+-->
+
+<div class="post-navigation d-flex justify-content-between">
+  
+  <a href="/posts/Hadoop-Command/" class="btn btn-outline-primary"
+     prompt="Previous Post">
+    <p>Hadoop Command</p>
+  </a>
+  
+
+  
+  <a href="/posts/HDFS-NameNode&SecondaryNameNode/" class="btn btn-outline-primary"
+     prompt="Next Post">
+    <p>HDFS NameNode&SecondaryNameNode</p>
+  </a>
+  
+
+</div>
+        
+    </div>
+</div>
+
+
+            </div>
+            <!--
+  The Search results
+-->
+<div id="search-result-wrapper" class="d-flex justify-content-center unloaded">
+  <div class="col-12 col-sm-11 post-content">
+    <div id="search-hints">
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+
+
+<div id="access-tags">
+  <div class="panel-heading">Other Trending Tags</div>
+  <div class="d-flex flex-wrap mt-3 mb-1 mr-3">
+
+    
+    
+    <a class="post-tag" href="/tags/data-warehouse/">data warehouse</a>
+    
+    
+    <a class="post-tag" href="/tags/hdfs/">hdfs</a>
+    
+    
+    <a class="post-tag" href="/tags/spark/">spark</a>
+    
+    
+    <a class="post-tag" href="/tags/markdown/">markdown</a>
+    
+    
+    <a class="post-tag" href="/tags/hadoop/">hadoop</a>
+    
+    
+    <a class="post-tag" href="/tags/java/">Java</a>
+    
+    
+    <a class="post-tag" href="/tags/logs/">logs</a>
+    
+    
+    <a class="post-tag" href="/tags/update/">update</a>
+    
+
+  </div>
+</div>
+
+
+    </div>
+    <div id="search-results" class="d-flex flex-wrap justify-content-center text-muted mt-3"></div>
+  </div>
+</div>
+
+        </div> <!-- #main-wrapper -->
+
+        <footer>
+    <div class="container pl-lg-4 pr-lg-4">
+        <div class="d-flex justify-content-between align-items-center text-muted ml-md-3 mr-md-3">
+            <div class="footer-left">
+                <p class="mb-0">
+                    © 2024
+                    <a href="https://twitter.com/sechenbling">Lynn Chen</a>.
+                    
+                    <span data-toggle="tooltip" data-placement="top"
+                          title="Except where otherwise noted, the blog posts on this site are licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0) License by the author.">Some rights reserved.</span>
+                    
+                </p>
+            </div>
+
+            <div class="footer-right">
+                <p class="mb-0">
+                    <a href="https://www.bilibili.com/video/BV1184y1i7Lv" target="_blank" rel="noopener">
+                        Wish you have a good day!
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+        
+        <div id="mask"></div>
+
+        <a id="back-to-top" href="#" aria-label="back-to-top" class="btn btn-lg btn-box-shadow" role="button">
+            <i class="fas fa-angle-up"></i>
+        </a>
+
+        
+
+        <!--
+  Jekyll Simple Search loader
+  See: <https://github.com/christian-fei/Simple-Jekyll-Search>
+-->
+
+
+
+
+
+<script src="/assets/lib/simple-jekyll-search-1.10.0/simple-jekyll-search.min.js"></script>
+
+<script>
+SimpleJekyllSearch({
+  searchInput: document.getElementById('search-input'),
+  resultsContainer: document.getElementById('search-results'),
+  json: '/assets/js/data/search.json',
+  searchResultTemplate: '<div class="pl-1 pr-1 pl-sm-2 pr-sm-2 pl-lg-4 pr-lg-4 pl-xl-0 pr-xl-0">  <a href="{url}">{title}</a>  <div class="post-meta d-flex flex-column flex-sm-row text-muted mt-1 mb-1">    {categories}    {tags}  </div>  <p>{snippet}</p></div>',
+  noResultsText: '<p class="mt-5">Oops! No results found.</p>',
+  templateMiddleware: function(prop, value, template) {
+    if (prop === 'categories') {
+      if (value === '') {
+        return `${value}`;
+      } else {
+        return `<div class="mr-sm-4"><i class="far fa-folder fa-fw"></i>${value}</div>`;
+      }
+    }
+
+    if (prop === 'tags') {
+      if (value === '') {
+        return `${value}`;
+      } else {
+        return `<div><i class="fa fa-tag fa-fw"></i>${value}</div>`;
+      }
+    }
+  }
+});
+</script>
+
+        <!-- layout specified -->
+
+    
+    <!-- pv-report needs countup.js -->
+        <script async src="https://cdn.jsdelivr.net/npm/countup.js@1.9.3/dist/countUp.min.js"></script>
+        <script defer src="/assets/js/dist/pvreport.min.js"></script>
+    
+
+
+
+    <!-- image lazy-loading & popup & clipboard -->
+    
+    
+
+
+
+
+
+
+
+  
+    
+
+    
+
+  
+
+
+
+  
+
+    <script src="/assets/lib/lozad-1.16.0/lozad.min.js"></script>
+
+  
+
+
+
+  
+
+    <script src="/assets/lib/clipboard-2.0.9/clipboard.min.js"></script>
+
+  
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/combine/npm/magnific-popup@1/dist/jquery.magnific-popup.min.js"></script>
+
+
+
+
+
+    
+    
+    
+
+
+
+
+
+
+
+  
+
+    <script src="/assets/lib/dayjs-1.10.7/dayjs.min.js"></script>
+
+  
+
+
+
+  
+
+    <script src="/assets/lib/dayjs-1.10.7/locale/en.min.js"></script>
+
+  
+
+
+
+  
+
+    <script src="/assets/lib/dayjs-1.10.7/plugin/relativeTime.min.js"></script>
+
+  
+
+
+
+  
+
+    <script src="/assets/lib/dayjs-1.10.7/plugin/localizedFormat.min.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+<script defer src="/assets/js/dist/post.min.js"></script>
+
+
+
+<!-- commons -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    </body>
+</html>
+

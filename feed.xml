@@ -4,7 +4,7 @@
   <id>http://localhost:4000/</id>
   <title>Blingblogs</title>
   <subtitle>A site with blogs involve backend, big data, or other daily programming records.</subtitle>
-  <updated>2024-02-01T23:43:47+08:00</updated>
+  <updated>2024-02-06T00:02:46+08:00</updated>
   <author>
     <name>Lynn Chen</name>
     <uri>http://localhost:4000/</uri>
@@ -20,74 +20,14 @@
 
   
   <entry>
-    <title>Git</title>
-    <link href="http://localhost:4000/posts/Git/" rel="alternate" type="text/html" title="Git" />
-    <published>2023-04-22T22:30:00+08:00</published>
+    <title>HDFS ShellCmd&amp;API</title>
+    <link href="http://localhost:4000/posts/HDFS-ShellCmd&amp;API/" rel="alternate" type="text/html" title="HDFS ShellCmd&amp;API" />
+    <published>2024-02-01T22:35:00+08:00</published>
   
-    <updated>2023-04-22T22:30:00+08:00</updated>
+    <updated>2024-02-01T22:35:00+08:00</updated>
   
-    <id>http://localhost:4000/posts/Git/</id>
-    <content src="http://localhost:4000/posts/Git/" />
-    <author>
-      <name>Lynn</name>
-    </author>
-
-  
-    
-    <category term="HuaweiNEO" />
-    
-    <category term="Java" />
-    
-  
-
-  
-    <summary>
-      
-
-
-
-
-
-      Git安装
-
-Linux
-
-  包管理器安装
-    # Ubuntu 10.10 or upper
-sudo aptitude install git
-sudo aptitude install git-doc git-svn git-email gitk
-  
-# RHEL CentOs
-yum install git
-yum install git-svn git-email gitk
-    
-  
-  源码安装
-    # decompress git pkg
-tar -jxvf git-xxxx
-cd git-xxxx
-  
-# install git to /usr/local/bin
-make prefix = /usr/local all
-sudo make prefix = /usr/local install
-  
-# install git docs
-make...
-    </summary>
-  
-
-  </entry>
-
-  
-  <entry>
-    <title>Data Warehouse Design</title>
-    <link href="http://localhost:4000/posts/Data-Warehouse-Design/" rel="alternate" type="text/html" title="Data Warehouse Design" />
-    <published>2023-01-28T22:00:00+08:00</published>
-  
-    <updated>2023-01-28T22:00:00+08:00</updated>
-  
-    <id>http://localhost:4000/posts/Data-Warehouse-Design/</id>
-    <content src="http://localhost:4000/posts/Data-Warehouse-Design/" />
+    <id>http://localhost:4000/posts/HDFS-ShellCmd&amp;API/</id>
+    <content src="http://localhost:4000/posts/HDFS-ShellCmd&amp;API/" />
     <author>
       <name>Lynn</name>
     </author>
@@ -96,7 +36,7 @@ make...
     
     <category term="Bigdata" />
     
-    <category term="DataWarehouse" />
+    <category term="Hadoop" />
     
   
 
@@ -108,22 +48,17 @@ make...
 
 
 
-      数据仓库设计
+      HDFS 命令
 
-数据仓库分层规划
+hadoop fs -xxx和hdfs dfs -xxx 最终效果和命令都是一样的 两个都可以使用
 
-  使数据体系更加清洗，简单化复杂问题（one data理论分层）
-  
-  ODS:
-  operation data store:业务系统的原始数据，未经处理的数据，放在HDFS以文件形式的存储，从HDFS原路径load(底层是剪切操作)到ODS层。
-  DWD:
-  data warehouse detail:基于维度建模理论进行构建，保存各业务过程中最小粒度的操作记录，存放事实表。
-  DIM:
-  dimension:基于维度建模理论进行构建，存放维度表，保存一致性维度信息。
-  DWS:
-  data warehouse summary:需求驱动来建立对应的表，以分析的主题对象作为建模驱动构建公共统计粒度（不同需求之间通用的计算结果，减少重复计算）的汇总表。
-  ADS:
-  application data service:存放各项统...
+hadoop fs -moveFromLocal /local /remote	从本地剪切粘贴到 HDFS
+hadoop fs -copyFromLocal /local /remote 	从本地文件系统中拷贝文件到 HDFS 路径去
+hadoop fs -put /local /remote	-put：等同于 -copyFromLocal
+hadoop fs -appendToFile /local /remote	追加一个文件到已经存在的文件末尾
+hadoop fs -copyToLocal /remote	从 HDFS 拷贝到本地
+hadoop fs -get /remote	等同于 copyToLocal
+hadoop fs -ls /remote	显示目录...
     </summary>
   
 
@@ -131,14 +66,14 @@ make...
 
   
   <entry>
-    <title>Data Warehouse Model</title>
-    <link href="http://localhost:4000/posts/Data-Warehouse-Model/" rel="alternate" type="text/html" title="Data Warehouse Model" />
-    <published>2023-01-28T21:30:00+08:00</published>
+    <title>HDFS DataNode</title>
+    <link href="http://localhost:4000/posts/HDFS-DataNode/" rel="alternate" type="text/html" title="HDFS DataNode" />
+    <published>2024-02-01T22:34:00+08:00</published>
   
-    <updated>2023-01-28T21:35:00+08:00</updated>
+    <updated>2024-02-01T22:34:00+08:00</updated>
   
-    <id>http://localhost:4000/posts/Data-Warehouse-Model/</id>
-    <content src="http://localhost:4000/posts/Data-Warehouse-Model/" />
+    <id>http://localhost:4000/posts/HDFS-DataNode/</id>
+    <content src="http://localhost:4000/posts/HDFS-DataNode/" />
     <author>
       <name>Lynn</name>
     </author>
@@ -147,7 +82,7 @@ make...
     
     <category term="Bigdata" />
     
-    <category term="DataWarehouse" />
+    <category term="Hadoop" />
     
   
 
@@ -159,30 +94,11 @@ make...
 
 
 
-      数据仓库介绍
-
-数据仓库
-
-  用于存储分析报告的数据系统
-    
-      并不产生数据（数据来自于外部系统） 也不消费数据（其结果开放给外部应用使用）
-    
-  
-  构建面向分析的集成化数据环境，分析结构提供决策
-  对比OLAP和OLTP
-    
-      各类型的数据库保存相关数据（关系型数据库是OLTP的典型应用） 但不会在数据库上直接分析数据
-      数据仓库是OLAP的一种实现 （OLAP 联机分析处理系统 面向分析 支持分析）
-    
-  
+      DataNode
 
 
-数据仓库特点
 
-  面向主题subject oriented 主题抽象概念，在较高层次上数据综合、归类并分析利用的抽象
-  集成性integrated 主题相关的数据通常会分布在多个操作系统中，彼此分散独立异构，需要集成在数仓主题下
-    
-      数据进入数据仓库前需要经过统一和综合，对数据进行抽取...
+
     </summary>
   
 
@@ -190,14 +106,14 @@ make...
 
   
   <entry>
-    <title>Data Warehouse DWS&amp;ADS Develop</title>
-    <link href="http://localhost:4000/posts/Data-Warehouse-DWS&amp;ADS-Develop/" rel="alternate" type="text/html" title="Data Warehouse DWS&amp;ADS Develop" />
-    <published>2023-01-27T13:30:00+08:00</published>
+    <title>Read&amp;Write Process</title>
+    <link href="http://localhost:4000/posts/HDFS-Read&amp;Write-Process/" rel="alternate" type="text/html" title="Read&amp;Write Process" />
+    <published>2024-02-01T22:33:00+08:00</published>
   
-    <updated>2023-01-27T13:35:00+08:00</updated>
+    <updated>2024-02-01T22:33:00+08:00</updated>
   
-    <id>http://localhost:4000/posts/Data-Warehouse-DWS&amp;ADS-Develop/</id>
-    <content src="http://localhost:4000/posts/Data-Warehouse-DWS&amp;ADS-Develop/" />
+    <id>http://localhost:4000/posts/HDFS-Read&amp;Write-Process/</id>
+    <content src="http://localhost:4000/posts/HDFS-Read&amp;Write-Process/" />
     <author>
       <name>Lynn</name>
     </author>
@@ -206,7 +122,7 @@ make...
     
     <category term="Bigdata" />
     
-    <category term="DataWarehouse" />
+    <category term="Hadoop" />
     
   
 
@@ -218,32 +134,29 @@ make...
 
 
 
-      DWS层
-汇总数据层，由明细数据汇总而来的数据，基于上层的指标需求，构建公用的中间的统计结果，为了减少重复计算。
+      写入数据的流程：
 
-设计过程
-
-  DWS层的设计参考指标体系。
+  客户端创建分布式文件系统DistributedFileSystem
+  向NameNode请求上传文件
     
-      原子指标，派生指标，衍生指标
-    
-  
-  DWS层的数据存储格式为orc列式存储+snappy压缩。
-  DWS层表名的命名规范为dws_数据域_统计粒度_业务过程_统计周期（1d/nd/td）注：1d表示最近1日，nd表示最近n日，td表示历史至今。
-    
-      统计粒度：通俗点就是表里的用来分组的字段（字段数并不固定）
+      NameNode检查权限
+      NameNode检查目录结构（目录是否存在）
     
   
-
-
-ADS层
-根据具体业务需求来获取对应的数据，存放各项统计指标标准
-
-开窗函数：
-区分开窗函数和聚合函数
-
-  聚合函数：按照字段进行分组(group by)进行shuffle，将相同码的数据进行聚合，然后得到每一组的KV键值（多行聚合一行）
-  ...
+  NameNode响应可以上传文件
+  客户端请求上传第一个Block(0-128M)，请求NameNode返回DataNode
+  NameNode返回多个DataNode表示这三个节点存储数据
+    
+      选择策略(节点距离最近，负载均衡)：
+        
+          本地节点
+          其他机架的一个节点
+          其他机架的另一个节点
+        
+      
+    
+  
+  客户端创建FSDataOutputStream上传数据，向一个DN请求建立Block传输通道，之后再由...
     </summary>
   
 
@@ -251,14 +164,14 @@ ADS层
 
   
   <entry>
-    <title>Data Warehouse DWD Develop</title>
-    <link href="http://localhost:4000/posts/Data-Warehouse-DWD-Develop/" rel="alternate" type="text/html" title="Data Warehouse DWD Develop" />
-    <published>2023-01-27T11:30:00+08:00</published>
+    <title>HDFS NameNode&amp;SecondaryNameNode</title>
+    <link href="http://localhost:4000/posts/HDFS-NameNode&amp;SecondaryNameNode/" rel="alternate" type="text/html" title="HDFS NameNode&amp;SecondaryNameNode" />
+    <published>2024-02-01T22:33:00+08:00</published>
   
-    <updated>2023-01-27T11:35:00+08:00</updated>
+    <updated>2024-02-01T22:33:00+08:00</updated>
   
-    <id>http://localhost:4000/posts/Data-Warehouse-DWD-Develop/</id>
-    <content src="http://localhost:4000/posts/Data-Warehouse-DWD-Develop/" />
+    <id>http://localhost:4000/posts/HDFS-NameNode&amp;SecondaryNameNode/</id>
+    <content src="http://localhost:4000/posts/HDFS-NameNode&amp;SecondaryNameNode/" />
     <author>
       <name>Lynn</name>
     </author>
@@ -267,7 +180,7 @@ ADS层
     
     <category term="Bigdata" />
     
-    <category term="DataWarehouse" />
+    <category term="Hadoop" />
     
   
 
@@ -279,24 +192,98 @@ ADS层
 
 
 
-      DWD层
-
-DWD层设计要点
-
-  DWD层的设计依据是维度建模理论，该层存储维度模型的维度表（重点）
-  DWD层的数据存储格式为orc列式存储+snappy压缩
+      
+  
+    fslmage 镜像文件：存储数据
+HDFS文件系统元数据的一个永久性的检查点，其中包含HDFS文件系统的所有目录和文件inode的序列化信息。
+  
+  
+    Edits 记录变化的步骤
+存放HDFS文件系统的所有更新操作的路径，文件系统客户端执行的所有写操作首先会被记录到Edits文件当中
     
-      DWD层表名的命名规范为dwd_数据域_表名_单分区全量增量标识（full/inc）
-      数据域：对数据进行纵向的分类，方便数据管理和使用，每一类称为一个域，通常是按照业务过程来划分数据域，业务过程其实就是事实表，其实就是对事实表进行划分。
+      seen_txid:记录当前最新的Edits(即最后一个Edits的数字
+      VERSION：记录集群ID
     
   
 
 
-事实表设计：
+每次NameNode启动的时候都会将Fsimage文件读入内存，加载Edits的更新操作，保证数据是最新的同步的，可以看作NameNode启动的时候就将Fsimage和Edits文件进行了合并
 
-  根据业务总线矩阵（确认业务，声明粒度，确认维度，确认事实），明确业务过程和哪个维度有关系并不是需求决定的，而是根据数仓的具体业务逻辑决定的，维度的确定是比较灵活的，尽可能多的确定与业务过程相关的维度即可。
-  增量分区都是每天一个分区，每个分区存放当天新增的数据（增量表逻辑相同）
-  首日假设根据之前数据都是一次操...
+
+  上线后内存的中出现的是fslmage和执行完Edits后的结果
+
+    
+      差别在inprogress这个...
+    </summary>
+  
+
+  </entry>
+
+  
+  <entry>
+    <title>Hadoop HDFS Structure</title>
+    <link href="http://localhost:4000/posts/HDFS-Structure/" rel="alternate" type="text/html" title="Hadoop HDFS Structure" />
+    <published>2024-02-01T22:31:00+08:00</published>
+  
+    <updated>2024-02-01T22:31:00+08:00</updated>
+  
+    <id>http://localhost:4000/posts/HDFS-Structure/</id>
+    <content src="http://localhost:4000/posts/HDFS-Structure/" />
+    <author>
+      <name>Lynn</name>
+    </author>
+
+  
+    
+    <category term="Bigdata" />
+    
+    <category term="Hadoop" />
+    
+  
+
+  
+    <summary>
+      
+
+
+
+
+
+      NameNode：master 主管管理者
+
+  管理HDFS的名称空间（原数据）
+  配置副本策略
+    
+      设置不同数据的副本的数量
+    
+  
+  管理数据块的映射信息
+    
+      比较大的文件分块存储，而且块和块之间的存储没有关系
+    
+  
+  处理客户端的读写请求
+
+
+DataNode
+就是slave worker，NameNode下达命令由DataNode执行实际的操作
+
+  存储实际的数据块
+  执行数据块的读写操作
+
+
+
+
+SecondaryNameNode 2NN
+
+  并非NameNode的热备，当NN挂掉的时候它并不能马上替换NN提供服务
+  辅助NN分担工作：比如定期合并镜像文件和编辑日志(Fsimage&amp;amp;Edits)并推送给NN
+  紧急情况下可以恢复部分数据（不是所有数据都给了2NN）
+
+
+Client 客户端
+
+ ...
     </summary>
   
 

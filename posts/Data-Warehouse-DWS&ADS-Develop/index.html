@@ -1114,27 +1114,27 @@
       
       
       
-      <li><a href="/posts/Git/">Git</a></li>
+      <li><a href="/posts/HDFS-ShellCmd&API/">HDFS ShellCmd&API</a></li>
       
       
       
       
-      <li><a href="/posts/Data-Warehouse-Design/">Data Warehouse Design</a></li>
+      <li><a href="/posts/HDFS-DataNode/">HDFS DataNode</a></li>
       
       
       
       
-      <li><a href="/posts/Data-Warehouse-Model/">Data Warehouse Model</a></li>
+      <li><a href="/posts/HDFS-NameNode&SecondaryNameNode/">HDFS NameNode&SecondaryNameNode</a></li>
       
       
       
       
-      <li><a href="/posts/Data-Warehouse-DWS&ADS-Develop/">Data Warehouse DWS&ADS Develop</a></li>
+      <li><a href="/posts/HDFS-Read&Write-Process/">Read&Write Process</a></li>
       
       
       
       
-      <li><a href="/posts/Data-Warehouse-DWD-Develop/">Data Warehouse DWD Develop</a></li>
+      <li><a href="/posts/HDFS-Structure/">Hadoop HDFS Structure</a></li>
       
     </ul>
   </div> <!-- #access-lastmod -->
@@ -1179,6 +1179,35 @@
     
     
     
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
   
     
     
@@ -1213,10 +1242,6 @@
     
     
     
-      
-        
-        
-
   
     
     
@@ -1242,6 +1267,25 @@
     
     
       
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
     
   
     
@@ -1252,6 +1296,51 @@
         
         
 
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
   
     
     
@@ -1301,10 +1390,16 @@
     <a class="post-tag" href="/tags/data-warehouse/">data warehouse</a>
     
     
+    <a class="post-tag" href="/tags/hdfs/">hdfs</a>
+    
+    
     <a class="post-tag" href="/tags/spark/">spark</a>
     
     
     <a class="post-tag" href="/tags/markdown/">markdown</a>
+    
+    
+    <a class="post-tag" href="/tags/hadoop/">hadoop</a>
     
     
     <a class="post-tag" href="/tags/java/">Java</a>
@@ -1405,7 +1500,79 @@
   
 
   
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
     
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
   
 
   
@@ -1545,93 +1712,6 @@
     
     
     <div class="card">
-      <a href="/posts/Data-Warehouse-ODS-Develop/">
-        <div class="card-body">
-          
-
-
-
-<em class="small"
-    data-ts="1674783000"
-    data-df="ll"
-    >
-    Jan 27, 2023
-</em>
-          <h3 class="pt-0 mt-1 mb-3" data-toc-skip>Data Warehouse ODS Develop</h3>
-          <div class="text-muted small">
-            <p>
-              
-
-
-
-
-
-              ODS层
-
-  表结构设计依托于从业务系统同步过来的数据结构
-  ODS层要保存全部的历史数据，数据量较大，使用压缩程度较高的格式gzip
-  ODS层的命名规范为ods_表名_单分区增量全量标识(inc或者full)
-
-
-Hive数仓启动
-
-  启动Hive服务
-    nohup ./hive --service metastore &amp;amp;
-nohup ./hive --servic...
-            </p>
-          </div>
-        </div>
-      </a>
-    </div>
-    
-    
-    
-    <div class="card">
-      <a href="/posts/Data-Warehouse-DIM-Develop/">
-        <div class="card-body">
-          
-
-
-
-<em class="small"
-    data-ts="1674786600"
-    data-df="ll"
-    >
-    Jan 27, 2023
-</em>
-          <h3 class="pt-0 mt-1 mb-3" data-toc-skip>Data Warehouse DIM Develop</h3>
-          <div class="text-muted small">
-            <p>
-              
-
-
-
-
-
-              DIM层
-
-DIM层设计要点
-
-  DIM层的设计一句是维度建模理论，该层存储维度模型的维度表（重点）
-  DIM层的数据存储格式为orc列式存储+snappy压缩（相较于ODS的存储格式和压缩更快）
-    
-      ODS在乎的是减少存储空间，其他层在乎的是查询更快
-    
-  
-  DIM层表名的命名规范为dim_表名_全量表或者拉链表标识（full/zip）
-
-
-维度表设计：
-...
-            </p>
-          </div>
-        </div>
-      </a>
-    </div>
-    
-    
-    
-    <div class="card">
       <a href="/posts/Data-Warehouse-DWD-Develop/">
         <div class="card-body">
           
@@ -1662,6 +1742,90 @@ DWD层设计要点
     
       DWD层表名的命名规范为dwd_数据域_表名_单分区全量增量标识（full/inc）
       数据域：对数据进行纵向的分类，方便数据管理和使用，每一类称为一个域，通常是按照业务过程来划分数据域，业务过程...
+            </p>
+          </div>
+        </div>
+      </a>
+    </div>
+    
+    
+    
+    <div class="card">
+      <a href="/posts/Data-Warehouse-Model/">
+        <div class="card-body">
+          
+
+
+
+<em class="small"
+    data-ts="1674912600"
+    data-df="ll"
+    >
+    Jan 28, 2023
+</em>
+          <h3 class="pt-0 mt-1 mb-3" data-toc-skip>Data Warehouse Model</h3>
+          <div class="text-muted small">
+            <p>
+              
+
+
+
+
+
+              数据仓库介绍
+
+数据仓库
+
+  用于存储分析报告的数据系统
+    
+      并不产生数据（数据来自于外部系统） 也不消费数据（其结果开放给外部应用使用）
+    
+  
+  构建面向分析的集成化数据环境，分析结构提供决策
+  对比OLAP和OLTP
+    
+      各类型的数据库保存相关数据（关系型数据库是OLTP的典型应用） 但不会在数据库上直接分析数据
+      数据仓库是...
+            </p>
+          </div>
+        </div>
+      </a>
+    </div>
+    
+    
+    
+    <div class="card">
+      <a href="/posts/Data-Warehouse-Design/">
+        <div class="card-body">
+          
+
+
+
+<em class="small"
+    data-ts="1674914400"
+    data-df="ll"
+    >
+    Jan 28, 2023
+</em>
+          <h3 class="pt-0 mt-1 mb-3" data-toc-skip>Data Warehouse Design</h3>
+          <div class="text-muted small">
+            <p>
+              
+
+
+
+
+
+              数据仓库设计
+
+数据仓库分层规划
+
+  使数据体系更加清洗，简单化复杂问题（one data理论分层）
+  
+  ODS:
+  operation data store:业务系统的原始数据，未经处理的数据，放在HDFS以文件形式的存储，从HDFS原路径load(底层是剪切操作)到ODS层。
+  DWD:
+  data warehouse detail:基于维度建模理论进行构建，保存各业务过程...
             </p>
           </div>
         </div>
@@ -1746,6 +1910,35 @@ DWD层设计要点
     
     
     
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
   
     
     
@@ -1780,10 +1973,6 @@ DWD层设计要点
     
     
     
-      
-        
-        
-
   
     
     
@@ -1809,6 +1998,25 @@ DWD层设计要点
     
     
       
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
     
   
     
@@ -1819,6 +2027,51 @@ DWD层设计要点
         
         
 
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
+  
+    
+    
+    
+    
+      
+        
+        
+
+  
+    
+    
+    
+    
+  
+    
+    
+    
+    
+      
+    
   
     
     
@@ -1868,10 +2121,16 @@ DWD层设计要点
     <a class="post-tag" href="/tags/data-warehouse/">data warehouse</a>
     
     
+    <a class="post-tag" href="/tags/hdfs/">hdfs</a>
+    
+    
     <a class="post-tag" href="/tags/spark/">spark</a>
     
     
     <a class="post-tag" href="/tags/markdown/">markdown</a>
+    
+    
+    <a class="post-tag" href="/tags/hadoop/">hadoop</a>
     
     
     <a class="post-tag" href="/tags/java/">Java</a>
